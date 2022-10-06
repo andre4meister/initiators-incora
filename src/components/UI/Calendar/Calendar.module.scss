@@ -1,0 +1,95 @@
+.container {
+    width: 350px;
+    height: 350px;
+    user-select: none;
+
+    .monthAndYear {
+        display: flex;
+        gap: 0 20px;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+        .monthPanel {
+            width: 80%;
+            justify-content: space-between;
+
+            .arrows {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        .currentMonth .monthName {
+            color: orange;
+        }
+
+        .yearPanel {
+            width: 20%;
+            justify-content: center;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+
+            border-radius: 20px;
+            box-shadow: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
+        }
+    }
+
+    .daysPanel {
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
+
+        .weekDays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            font-weight: 900;
+        }
+
+        .days {
+            display: grid;
+            place-items: center;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+
+            .day {
+                width: 20px;
+                height: 20px;
+                padding: 10px;
+                border-radius: 50%;
+                transition: 0.2s linear;
+                cursor: pointer;
+            }
+
+            .dayGrey {
+                opacity: 0.5;
+            }
+
+            .dayToday {
+                width: 24px;
+                height: 24px;
+                border: 1px solid orange;
+            }
+
+            .dayWeekend {
+                color: orangered;
+            }
+
+            @media (any-hover: hover) {
+                .day:hover {
+                    background-color: rgba(128, 128, 128, 0.5);
+                }
+
+                .dayToday:hover {
+                    background-color: orange;
+                }
+            }
+        }
+    }
+}
