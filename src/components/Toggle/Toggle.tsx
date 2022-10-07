@@ -5,11 +5,16 @@ interface ToggleProps {
   isChecked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
-export const Toggle: FC<ToggleProps> = ({ isChecked, onChange }) => {
+export const Toggle: FC<ToggleProps> = ({ isChecked, onChange, ...rest }) => {
   return (
     <>
       <label className={style.switch}>
-        <input checked={isChecked} onChange={onChange} type="checkbox" />
+        <input
+          checked={isChecked}
+          onChange={onChange}
+          type="checkbox"
+          {...rest}
+        />
         <span className={style.slider}></span>
       </label>
     </>
