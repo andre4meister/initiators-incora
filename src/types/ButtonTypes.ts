@@ -1,5 +1,5 @@
-export interface ButtonType {
-  classNames: string;
-  text: string;
-  onButtonClick: () => void;
+import { UIPropsType } from "./CommonTypes";
+
+export interface ButtonType extends UIPropsType {
+  handleOnClick: () => void;
 }

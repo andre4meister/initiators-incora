@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { InputType } from "../types/InputTypes";
 
-const Input: FC<InputType> = ({ classNames, onInputChange, type, required }) => {
+const Input: FC<InputType> = ({ classes, handleOnChange, type, required }) => {
   return (
     <>
-      <input type={type} required={required} className={classNames} onChange={(e) => onInputChange(e.target.value)} />
+      <input type={type} required={required} className={classes} onChange={(e) => handleOnChange(e.target.value)} />
     </>
   );
 };

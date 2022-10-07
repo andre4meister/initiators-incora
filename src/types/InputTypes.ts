@@ -1,6 +1,6 @@
-export interface InputType {
-  classNames: string;
-  onInputChange: (inputValue: string) => void;
+import { UIPropsType } from "./CommonTypes";
+
+export interface InputType extends UIPropsType {
   type: "email" | "text" | "password";
   required?: boolean;
 }

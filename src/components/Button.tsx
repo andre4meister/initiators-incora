@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { ButtonType } from "../types/ButtonTypes";
 
-const Button: FC<ButtonType> = ({ classNames, onButtonClick, text }) => {
+const Button: FC<ButtonType> = ({ classes, handleOnClick, children }) => {
   return (
     <>
-      <button className={classNames} onClick={() => onButtonClick()}>
-        {text}
+      <button className={classes} onClick={() => handleOnClick()}>
+        {children}
       </button>
     </>
   );
