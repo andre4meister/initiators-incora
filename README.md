@@ -1,5 +1,12 @@
 # asm-incora
 
+-auth(login/ forgor password/ registration complete)
+
+- settings()
+- calendar(month( time/camera/...) / week / day)
+- process booking( maybe like a modal, + all time in any page), (now!/later), adding users via email, info about room(board, tv, max attendants)
+- user( change photo, password, email, tech stack)
+
 The best team ever)
 
 # Getting Started with Create React App
