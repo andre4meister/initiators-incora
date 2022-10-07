@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ButtonType } from "../types/ButtonTypes";
+import { ButtonType } from "../../types/ButtonTypes";
 
 const Button: FC<ButtonType> = ({ classes, handleOnClick, children }) => {
   return (

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { InputType } from "../types/InputTypes";
+import { InputType } from "../../types/InputTypes";
 
 const Input: FC<InputType> = ({ classes, handleOnChange, type, required }) => {
   return (
