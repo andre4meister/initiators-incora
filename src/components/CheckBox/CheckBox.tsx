@@ -1,15 +1,14 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 interface CheckBoxProps {
   isChecked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
-export const CheckBox: FC<CheckBoxProps> = ({
+const CheckBox: FC<CheckBoxProps> = ({
   isChecked,
   onChange,
-  ...rest
-}) => {
-  return (
-    <input type="checkbox" checked={isChecked} onChange={onChange} {...rest} />
-  );
-};
+}) => (
+  <input type="checkbox" checked={isChecked} onChange={onChange} />
+);
+
+export default CheckBox;

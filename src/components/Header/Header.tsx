@@ -1,7 +1,5 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-const Header: FC = ({}) => {
-  return <footer>Header</footer>;
-};
+const Header: FC = () => <footer>Header</footer>;
 
 export default Header;
