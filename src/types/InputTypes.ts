@@ -1,6 +1,6 @@
-import { UIPropsType } from "./CommonTypes";
+import { UIPropsType } from './CommonTypes';
 
 export interface InputType extends UIPropsType {
-  type: "email" | "text" | "password";
+  type: 'email' | 'text' | 'password';
   required?: boolean;
 }
