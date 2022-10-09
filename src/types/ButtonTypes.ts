@@ -1,5 +1,5 @@
 import { UIPropsType } from './CommonTypes';
 
-export interface ButtonType extends UIPropsType {
+export interface ButtonType extends Partial<UIPropsType> {
   handleOnClick: () => void;
 }
