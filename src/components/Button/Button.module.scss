@@ -1,0 +1,14 @@
+@import "../../styles//variables.scss";
+
+.button {
+    font-weight: $fontWeight-bold;
+    border-radius: $borderRadius;
+    box-shadow: $boxShadow;
+    padding: $indent-small;
+    border: none;
+    cursor: pointer;
+}
+
+.button:active {
+    box-shadow: $boxShadowInset;
+}

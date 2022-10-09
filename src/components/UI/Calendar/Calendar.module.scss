@@ -1,13 +1,16 @@
+@import "../../../styles/variables.scss";
+
+$dayWidth: 40px;
+$dayHeight: 40px;
+
 .container {
-    width: 350px;
-    height: 350px;
     user-select: none;
 
     .monthAndYear {
         display: flex;
-        gap: 0 20px;
+        gap: 0 $indent-medium;
         justify-content: space-between;
-        margin-bottom: 20px;
+        margin-bottom: $indent-large;
 
         .monthPanel {
             width: 80%;
@@ -23,7 +26,18 @@
         }
 
         .currentMonth .monthName {
-            color: orange;
+            position: relative;
+        }
+
+        .currentMonth .monthName::after {
+            content: "";
+            position: absolute;
+            top: 0px;
+            right: -8px;
+            width: 6px;
+            height: 6px;
+            background-color: $color-yellow;
+            border-radius: 50%;
         }
 
         .yearPanel {
@@ -34,36 +48,41 @@
         div {
             display: flex;
             align-items: center;
-            padding: 20px;
+            padding: $indent-medium;
 
-            border-radius: 20px;
-            box-shadow: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
+            border-radius: $borderRadius;
+            box-shadow: $boxShadow;
         }
     }
 
     .daysPanel {
-        padding: 20px;
-        border-radius: 20px;
-        box-shadow: 10px 10px 20px #bebebe, -10px -10px 20px #ffffff;
+        padding: $indent-medium;
+        border-radius: $borderRadius;
+        box-shadow: $boxShadow;
 
         .weekDays {
             display: grid;
+            place-items: center;
             grid-template-columns: repeat(7, 1fr);
-            font-weight: 900;
+            font-weight: $fontWeight-bold;
         }
 
         .days {
             display: grid;
             place-items: center;
+            gap: 4px;
             grid-template-columns: repeat(7, 1fr);
             grid-template-rows: repeat(6, 1fr);
 
             .day {
-                width: 20px;
-                height: 20px;
-                padding: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: $dayWidth;
+                height: $dayHeight;
+                padding: $indent-small;
                 border-radius: 50%;
-                transition: 0.2s linear;
+                transition: $transition;
                 cursor: pointer;
             }
 
@@ -71,23 +90,23 @@
                 opacity: 0.5;
             }
 
-            .dayToday {
-                width: 24px;
-                height: 24px;
-                border: 1px solid orange;
+            .dayWeekend {
+                color: $color-orange;
             }
 
-            .dayWeekend {
-                color: orangered;
+            .dayToday {
+                width: $dayWidth - 1px;
+                height: $dayHeight - 1px;
+                border: 1px solid $color-yellow;
             }
 
             @media (any-hover: hover) {
-                .day:hover {
-                    background-color: rgba(128, 128, 128, 0.5);
+                .day:hover:not(.dayToday) {
+                    background-color: $color-grey1;
                 }
 
                 .dayToday:hover {
-                    background-color: orange;
+                    background-color: $color-yellow;
                 }
             }
         }

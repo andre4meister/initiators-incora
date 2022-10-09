@@ -1,0 +1,13 @@
+@import "../../styles/variables.scss";
+
+.input {
+    outline: none;
+    border-radius: $borderRadius;
+    box-shadow: $boxShadowInset;
+    padding: $indent-small;
+    border: none;
+}
+
+.input::placeholder {
+    font-weight: $fontWeight-bold;
+}
