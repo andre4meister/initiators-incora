@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Calendar from 'components/UI/Calendar/Calendar';
 import App from './App';
 import './styles/index.scss';
 

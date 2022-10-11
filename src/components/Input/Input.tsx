@@ -4,11 +4,19 @@ import { ColorModeType } from 'types/CommonTypes';
 import { InputType } from '../../types/InputTypes';
 import s from './Input.module.scss';
 
-const Input: FC<InputType> = ({ type, required }) => {
+const Input: FC<InputType> = ({
+  type,
+  classes,
+  handleOnChange,
+  required,
+  placeholder,
+  value,
+}) => {
   const [text, setText] = useState<string>('');
   const [colorMode, setColorMode] = useState<ColorModeType>('light');
   return (
     <input
+      placeholder={placeholder}
       value={text}
       type={type}
       required={required}
@@ -21,19 +29,5 @@ const Input: FC<InputType> = ({ type, required }) => {
     />
   );
 };
-
-
-{/* const Input: FC<InputType> = ({
-  classes, handleOnChange, type, required, placeholder, value,
-}) => (
-  <input
-    value={value}
-    type={type}
-    required={required}
-    className={cn(styles.input, classes)}
-    onChange={handleOnChange}
-    placeholder={placeholder}
-  />
-); */}
 
 export default Input;

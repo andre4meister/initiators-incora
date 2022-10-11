@@ -1,49 +1,43 @@
 @import "../../styles//variables.scss";
 
 .button {
-    border-radius: .5rem;
-    border: 1px transparent;
-    padding: 0.55rem 0.95rem;
-    color: #2D4CC8;
-    cursor: pointer;
-    letter-spacing: .025em;
-    font-size: 1rem;
-    margin: 0.5rem;
+  cursor: pointer;
+  letter-spacing: .025em;
+  margin: 0.5rem;
+  font-weight: $fontWeight-bold;
+  border-radius: $borderRadius;
+  padding: $indent-small;
+  border: none;
 }
+
 .buttonLight {
-  transition: all 0.9s ease;
-  background-color: #e6e7ee;
-  box-shadow: 3px 3px 4px #b8b9be, -3px -3px 4px #fff;
+  // background-color: #e6e7ee;
+  // box-shadow: 3px 3px 4px #b8b9be, -3px -3px 4px #fff;
+
+  // &:hover {
+  //   box-shadow: inset 3px 3px 4px #b8b9be, inset -3px -3px 4px #fff;
+  //     color: orangered;
+  // }
+  box-shadow: $boxShadow;
+  &:active {
+    box-shadow: $boxShadowInset;
+  }
+}
+
+.buttonDark {
+  background: #262731;
+  box-shadow: 3px 3px 4px #1c1c24,
+  -3px -3px 4px #30323e;
 
   &:hover {
-    box-shadow: inset 3px 3px 4px #b8b9be, inset -3px -3px 4px #fff;
+      box-shadow: inset 3px 3px 4px #1c1c24,
+      inset -3px -3px 4px #30323e;
       color: orangered;
   }
 }
-.buttonDark {
-    background: #262731;
-    box-shadow: 3px 3px 4px #1c1c24,
-    -3px -3px 4px #30323e;
-
-    &:hover {
-        box-shadow: inset 3px 3px 4px #1c1c24,
-        inset -3px -3px 4px #30323e;
-        color: orangered;
-    }
-}
 .buttonPill {
-  border-radius: 2rem;
+  border-radius: $pill-radius;
 }
 
-.buttonCorrect {
-    font-weight: $fontWeight-bold;
-    border-radius: $borderRadius;
-    box-shadow: $boxShadow;
-    padding: $indent-small;
-    border: none;
-    cursor: pointer;
-}
 
-.button:active {
-    box-shadow: $boxShadowInset;
-}
+

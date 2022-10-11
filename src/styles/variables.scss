@@ -15,15 +15,18 @@ $color-text: #001f3f;
 
 // FOR NEUMORPHISM
 $blur: 20px;
-$borderRadius: 10px;
-$boxShadow: 10px 10px $blur $color-grey1, -10px -10px $blur $color-grey2;
-$boxShadowInset: inset 10px 10px 20px $color-grey1,
-    inset -10px -10px 20px $color-grey2;
+$borderRadius: 3px;
+$pill-radius: 2rem;
+$boxShadow: 3px 3px $blur $color-grey1, -3px -3px $blur $color-grey2;
+$boxShadowInset: inset 3px 3px 6px $color-grey1,
+    inset -3px -3px 6px $color-grey2;
 
 // ANIMATION
-$transition: 0.2s linear;
+$transition: all 0.2s linear;
+$transition-slow: all 0.6s linear;
 
 // MARGIN & PADDING
 $indent-small: 10px;
 $indent-medium: 20px;
 $indent-large: 30px;
+
