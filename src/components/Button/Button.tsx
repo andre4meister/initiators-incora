@@ -1,13 +1,26 @@
+import { FC, useState } from 'react';
 import cn from 'classnames';
-import { FC } from 'react';
+import { ColorModeType } from 'types/CommonTypes';
 import { ButtonType } from '../../types/ButtonTypes';
+import s from './Button.module.scss';
 
-import styles from './Button.module.scss';
+const Button: FC<ButtonType> = ({ handleOnClick, children }) => {
+  const [colorMode, setColorMode] = useState<ColorModeType>('dark');
 
-const Button: FC<ButtonType> = ({ classes, handleOnClick, children }) => (
-  <button onClick={handleOnClick} type="button" className={cn(styles.button, classes)}>
-    {children}
-  </button>
-);
+  return (
+    <button
+      type="button"
+      className={cn({
+        [s.button]: true,
+        [s.buttonLight]: colorMode === 'light',
+        [s.buttonDark]: colorMode === 'dark',
+        [s.buttonPill]: false,
+      })}
+      onClick={() => handleOnClick()}
+    >
+      {children}
+    </button>
+  );
+};
 
 export default Button;
