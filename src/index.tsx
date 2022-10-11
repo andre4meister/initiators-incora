@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Calendar from 'components/UI/Calendar/Calendar';
 import App from './App';
-import './styles/Index.css';
+import './styles/index.scss';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <App Calendar={Calendar} />
+    <App />
   </React.StrictMode>,
 );

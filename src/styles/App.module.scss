@@ -30,4 +30,15 @@
   &:active {
     transform: scale(1.2);
   }
+  
+.app {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    main {
+        display: flex;
+        flex-direction: column;
+        gap: 50px 0;
+    }
 }

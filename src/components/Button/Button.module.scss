@@ -1,3 +1,5 @@
+@import "../../styles//variables.scss";
+
 .button {
     border-radius: .5rem;
     border: 1px transparent;
@@ -31,4 +33,17 @@
 }
 .buttonPill {
   border-radius: 2rem;
+}
+
+.buttonCorrect {
+    font-weight: $fontWeight-bold;
+    border-radius: $borderRadius;
+    box-shadow: $boxShadow;
+    padding: $indent-small;
+    border: none;
+    cursor: pointer;
+}
+
+.button:active {
+    box-shadow: $boxShadowInset;
 }

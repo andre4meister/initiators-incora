@@ -22,4 +22,18 @@ const Input: FC<InputType> = ({ type, required }) => {
   );
 };
 
+
+{/* const Input: FC<InputType> = ({
+  classes, handleOnChange, type, required, placeholder, value,
+}) => (
+  <input
+    value={value}
+    type={type}
+    required={required}
+    className={cn(styles.input, classes)}
+    onChange={handleOnChange}
+    placeholder={placeholder}
+  />
+); */}
+
 export default Input;
