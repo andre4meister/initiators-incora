@@ -7,8 +7,7 @@ import { ColorModeType } from './types/CommonTypes';
 import Sidebar from './components/Sidebar/Sidebar';
 import RoundMenu from './components/RoundMenu/RoundMenu';
 
-
-const App: FC<AppType> = () => {
+const App: FC = () => {
   const [colorMode, setColorMode] = useState<ColorModeType>('light');
   const [sidebarMenu, setSidebarMenu] = useState<boolean>(true);
 
@@ -29,7 +28,7 @@ const App: FC<AppType> = () => {
       </main>
       <Sidebar sidebarMenu={sidebarMenu} />
 
-{/* const App: FC = () => {
+      {/* const App: FC = () => {
   return (
     <div className={styles.app}>
       <Header />

@@ -8,11 +8,23 @@ const LoginPage: FC = () => (
   <form>
     <div>
       <span>Email</span>
-      <Input type="text" classes="textInput" />
+      <Input
+        type="text"
+        classes="textInput"
+        placeholder="Emails"
+        value=""
+        handleOnChange={console.log}
+      />
     </div>
     <div>
       <span>Password</span>
-      <Input type="text" classes="textInput" />
+      <Input
+        type="password"
+        classes="textInput"
+        placeholder="Password"
+        value=""
+        handleOnChange={console.log}
+      />
     </div>
     <div>
       <CheckBox isChecked={false} onChange={console.log} />
