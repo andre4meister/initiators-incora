@@ -7,19 +7,33 @@ $fontWeight-bold: 700;
 
 // COLORS
 $color-mainLight: #c3cadc;
-$color-grey1: #a6acbb;
-$color-grey2: #e0e8fd;
+$color-light1: #a6acbb;
+$color-light2: #e0e8fd;
+
+$color-mainDark: #333333;
+$color-dark1: #2b2b2b;
+$color-dark2: #3b3b3b;
+$color-textDark: #a6acbb;
+
 $color-orange: #ba2d0b;
 $color-yellow: #fec602;
 $color-text: #001f3f;
 
 // FOR NEUMORPHISM
-$blur: 20px;
-$borderRadius: 3px;
+$blur: 6px;
+$blur-m: 10px;
+$blur-l: 20px;
+$borderRadius: 10px;
 $pill-radius: 2rem;
-$boxShadow: 3px 3px $blur $color-grey1, -3px -3px $blur $color-grey2;
-$boxShadowInset: inset 3px 3px 6px $color-grey1,
-    inset -3px -3px 6px $color-grey2;
+$circle: 50%;
+
+$boxShadowLight: 3px 3px $blur $color-light1, -3px -3px $blur $color-light2;
+$boxShadowLightInset: inset 3px 3px $blur $color-light1,
+    inset -3px -3px 6px $color-light2;
+
+$boxShadowDark: 3px 3px $blur $color-dark1, -3px -3px $blur $color-dark2;
+$boxShadowDarkInset: inset 3px 3px $blur $color-dark1,
+    inset -3px -3px 6px $color-dark2;
 
 // ANIMATION
 $transition: all 0.2s linear;

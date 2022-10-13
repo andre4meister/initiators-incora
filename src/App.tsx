@@ -1,6 +1,6 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { FC, useState } from 'react';
 import cn from 'classnames';
-import { MenuOutlined } from '@ant-design/icons';
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import s from './styles/App.module.scss';
 import LoginPage from './pages/LoginPage/LoginPage';
 import { ColorModeType } from './types/CommonTypes';
@@ -16,37 +16,26 @@ const App: FC = () => {
       className={cn({
         [s.appContainer]: true,
         [s.largeAppContainer]: !sidebarMenu,
+        [s.appContainerLight]: colorMode === 'light',
+        [s.appContainerDark]: colorMode === 'dark',
       })}
     >
       <main className={s.pageContainer}>
-        <MenuOutlined
-          className={s.menuIcon}
-          onClick={() => setSidebarMenu(!sidebarMenu)}
-        />
+        {sidebarMenu ? (
+          <MenuUnfoldOutlined
+            className={s.menuIcon}
+            onClick={() => setSidebarMenu(!sidebarMenu)}
+          />
+        ) : (
+          <MenuFoldOutlined
+            className={s.menuIcon}
+            onClick={() => setSidebarMenu(!sidebarMenu)}
+          />
+        )}
         <LoginPage />
         <RoundMenu />
       </main>
       <Sidebar sidebarMenu={sidebarMenu} />
-
-      {/* const App: FC = () => {
-  return (
-    <div className={styles.app}>
-      <Header />
-      <main>
-        <Input
-          placeholder="Input"
-          value={input}
-          type="text"
-          handleOnChange={(event: ChangeEvent<HTMLInputElement>) => setInput(event.target.value)}
-        />
-        <Button
-          handleOnClick={() => setInput('')}
-        >
-          Clean Input
-        </Button>
-        <Calendar />
-      </main>
-      <Footer /> */}
     </div>
   );
 };

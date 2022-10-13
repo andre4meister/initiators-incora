@@ -11,28 +11,18 @@
 }
 
 .buttonLight {
-  // background-color: #e6e7ee;
-  // box-shadow: 3px 3px 4px #b8b9be, -3px -3px 4px #fff;
-
-  // &:hover {
-  //   box-shadow: inset 3px 3px 4px #b8b9be, inset -3px -3px 4px #fff;
-  //     color: orangered;
-  // }
-  box-shadow: $boxShadow;
-  &:active {
-    box-shadow: $boxShadowInset;
+  box-shadow: $boxShadowLight;
+  &:hover {
+    box-shadow: $boxShadowLightInset;
   }
 }
 
 .buttonDark {
-  background: #262731;
-  box-shadow: 3px 3px 4px #1c1c24,
-  -3px -3px 4px #30323e;
+  background: $color-mainDark;
+  box-shadow: $boxShadowDark;
 
   &:hover {
-      box-shadow: inset 3px 3px 4px #1c1c24,
-      inset -3px -3px 4px #30323e;
-      color: orangered;
+      box-shadow: $boxShadowDarkInset
   }
 }
 .buttonPill {
