@@ -1,0 +1,19 @@
+@import "./variables.scss";
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: $color-mainLight;
+    color: $color-text;
+    font-family: $fontFamily;
+    transition: all ease .2s;
+}
+
+#root {
+    height: 100vh;
+    width: 100vw;
+    background-color: white;
+}

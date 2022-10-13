@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap");
+
+// FONT
+$fontFamily: "Mulish", sans-serif;
+$fontWeight-normal: 400;
+$fontWeight-bold: 700;
+
+// COLORS
+$color-mainLight: #c3cadc;
+$color-grey1: #a6acbb;
+$color-grey2: #e0e8fd;
+$color-orange: #ba2d0b;
+$color-yellow: #fec602;
+$color-text: #001f3f;
+
+// FOR NEUMORPHISM
+$blur: 20px;
+$borderRadius: 3px;
+$pill-radius: 2rem;
+$boxShadow: 3px 3px $blur $color-grey1, -3px -3px $blur $color-grey2;
+$boxShadowInset: inset 3px 3px 6px $color-grey1,
+    inset -3px -3px 6px $color-grey2;
+
+// ANIMATION
+$transition: all 0.2s linear;
+$transition-slow: all 0.6s linear;
+
+// MARGIN & PADDING
+$indent-small: 10px;
+$indent-medium: 20px;
+$indent-large: 30px;
+
