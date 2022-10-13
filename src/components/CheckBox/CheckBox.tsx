@@ -4,10 +4,7 @@ interface CheckBoxProps {
   isChecked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
-const CheckBox: FC<CheckBoxProps> = ({
-  isChecked,
-  onChange,
-}) => (
+const CheckBox: FC<CheckBoxProps> = ({ isChecked, onChange }) => (
   <input type="checkbox" checked={isChecked} onChange={onChange} />
 );
 
