@@ -16,7 +16,7 @@ const Toggle: FC<ToggleProps> = ({ isToggle, onChange }) => (
       type="checkbox"
     />
     <label
-      style={{ background: isToggle ? 'green' : '#E9EDF0' }}
+      style={{ background: isToggle ? '#fec602' : '#c3cadc' }}
       className={style.switch_label}
       htmlFor="switch-new"
     >

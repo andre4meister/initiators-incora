@@ -11,12 +11,12 @@
   transition: $transition-slow;
 }
 .largeAppContainer {
-    grid-template-columns: 100% 0;
+  grid-template-columns: 100% 0;
 }
 .pageContainer {
-    position: relative;
-    background-color: blue;
-    padding: 10px;
+  position: relative;
+  background-color: #c3cadc;
+  padding: 10px;
 }
 
 .menuIcon {
@@ -33,15 +33,15 @@
     transform: scale(1.2);
   }
 }
-  
-.app {
-    width: fit-content;
-    margin: 0 auto;
-    padding: 0 15px;
 
-    main {
-        display: flex;
-        flex-direction: column;
-        gap: 50px 0;
-    }
+.app {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0 15px;
+
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 50px 0;
+  }
 }
