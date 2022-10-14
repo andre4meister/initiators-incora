@@ -1,43 +1,5 @@
 @import '../../src/styles/variables.scss';
 
-.appContainer {
-  padding: 0 15px;
-  margin: 0 auto;
-  min-width: 100%;
-  min-height: 100%;
-  display: grid;
-  grid-template-columns: 80% 20%;
-  overflow-x: hidden;
-  transition: $transition-slow;
-}
-
-.appContainerLight {
-  background-color: $color-mainLight;
-}
-
-.appContainerDark {
-  background-color: $color-mainDark;
-}
-
-.largeAppContainer {
-    grid-template-columns: 100% 0;
-}
-.pageContainer {
-    position: relative;
-    padding: 10px;
-}
-
-.menuIcon {
-  background-color: $color-orange;
-  border-radius: 10px;
-  padding: 5px;
-  position: absolute;
-  left: calc(100% - 16px);
-  cursor: pointer;
-  font-size: 24px;
-  z-index: 10;
-
-  &:active {
-    transform: scale(1.2);
-  }
+.container {
+  min-height: 100vh;
 }

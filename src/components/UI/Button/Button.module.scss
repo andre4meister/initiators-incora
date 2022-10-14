@@ -1,8 +1,8 @@
-@import "../../styles//variables.scss";
+@import '../../../styles//variables.scss';
 
 .button {
   cursor: pointer;
-  letter-spacing: .025em;
+  letter-spacing: 0.025em;
   margin: 0.5rem;
   font-weight: $fontWeight-bold;
   border-radius: $borderRadius;
@@ -22,12 +22,9 @@
   box-shadow: $boxShadowDark;
 
   &:hover {
-      box-shadow: $boxShadowDarkInset
+    box-shadow: $boxShadowDarkInset;
   }
 }
 .buttonPill {
   border-radius: $pill-radius;
 }
-
-
-
