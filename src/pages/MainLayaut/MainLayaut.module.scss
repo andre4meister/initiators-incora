@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+
+.container {
+  min-height: 100vh;
+  margin-right: $size-sidebarWidth;
+
+  .content {
+    box-shadow: $boxShadow;
+    border-radius: $borderRadius;
+    margin: $indent-small $indent-medium;
+    padding: $indent-small $indent-medium;
+    min-height: calc(100vh - $size-headerHeight - ($indent-small * 2));
+  }
+}
