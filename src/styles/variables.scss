@@ -10,6 +10,8 @@ $fontSize-large: 30px;
 
 // COLORS
 $color-mainLight: #c3cadc;
+$color-grey1: #a6acbb;
+$color-grey2: #e0e8fd;
 $color-light1: #a6acbb;
 $color-light2: #e0e8fd;
 $color-mainDark: #333333;
@@ -31,6 +33,9 @@ $borderRadius: 10px;
 $pill-radius: 2rem;
 $circle: 50%;
 
+$boxShadow: 3px 3px $blur $color-grey1, -3px -3px $blur $color-grey2;
+$boxShadowInset: inset 3px 3px $blur $color-grey1,
+  inset -3px -3px $blur $color-grey2;
 $boxShadowLight: 3px 3px $blur $color-light1, -3px -3px $blur $color-light2;
 $boxShadowLightInset: inset 3px 3px $blur $color-light1,
   inset -3px -3px $blur $color-light2;

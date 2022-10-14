@@ -15,7 +15,10 @@
         "project": "./tsconfig.json"
     },
     "rules": {
-        // "@typescript-eslint/no-unsafe-member-access": "off",
+        "linebreak-style": [
+            "warn",
+            "windows"
+        ],
         "react/react-in-jsx-scope": "off",
         "react/function-component-definition": [
             "error",
