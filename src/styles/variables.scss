@@ -1,32 +1,41 @@
-@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap');
 
 // FONT
-$fontFamily: "Mulish", sans-serif;
+$fontFamily: 'Mulish', sans-serif;
 $fontWeight-normal: 400;
 $fontWeight-bold: 700;
+$fontSize-small: 18px;
+$fontSize-medium: 24px;
+$fontSize-large: 30px;
 
 // COLORS
 $color-mainLight: #c3cadc;
 $color-grey1: #a6acbb;
 $color-grey2: #e0e8fd;
+$color-mainDark: #333333;
+$color-grey3: #2b2b2b;
+$color-grey4: #3b3b3b;
 $color-orange: #ba2d0b;
 $color-yellow: #fec602;
 $color-text: #001f3f;
 
 // FOR NEUMORPHISM
-$blur: 20px;
-$borderRadius: 3px;
+$blur: 6px;
+$borderRadius: 10px;
 $pill-radius: 2rem;
 $boxShadow: 3px 3px $blur $color-grey1, -3px -3px $blur $color-grey2;
-$boxShadowInset: inset 3px 3px 6px $color-grey1,
-    inset -3px -3px 6px $color-grey2;
+$boxShadowInset: inset 3px 3px $blur $color-grey1,
+  inset -3px -3px $blur $color-grey2;
 
 // ANIMATION
-$transition: all 0.2s linear;
-$transition-slow: all 0.6s linear;
+$transition: all 0.2s ease-in-out;
+$transition-slow: all 0.6s ease-in-out;
 
 // MARGIN & PADDING
 $indent-small: 10px;
 $indent-medium: 20px;
 $indent-large: 30px;
 
+// SIZES
+$size-sidebarWidth: 300px;
+$size-headerHeight: 100px;

@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { FC, useState } from 'react';
 import { ColorModeType } from 'types/CommonTypes';
-import { InputType } from '../../types/InputTypes';
+import { InputType } from '../../../types/InputTypes';
 import s from './Input.module.scss';
 
 const Input: FC<InputType> = ({

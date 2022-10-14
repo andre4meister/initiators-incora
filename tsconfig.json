@@ -8,12 +8,24 @@
     ],
     "baseUrl": "src",
     "paths": {
-      "@app/*": ["app/*"],
-      "@config/*": ["app/_config/*"],
-      "@environment/*": ["environments/*"],
-      "@shared/*": ["app/_shared/*"],
-      "@helpers/*": ["helpers/*"],
-      "@tests/*": ["tests/*"]
+      "@app/*": [
+        "app/*"
+      ],
+      "@config/*": [
+        "app/_config/*"
+      ],
+      "@environment/*": [
+        "environments/*"
+      ],
+      "@shared/*": [
+        "app/_shared/*"
+      ],
+      "@helpers/*": [
+        "helpers/*"
+      ],
+      "@tests/*": [
+        "tests/*"
+      ]
     },
     "allowJs": true,
     "skipLibCheck": true,

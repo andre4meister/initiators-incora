@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import cn from 'classnames';
 import { ColorModeType } from 'types/CommonTypes';
-import { ButtonType } from '../../types/ButtonTypes';
+import { ButtonType } from '../../../types/ButtonTypes';
 import s from './Button.module.scss';
 
 const Button: FC<ButtonType> = ({ handleOnClick, children }) => {

@@ -1,54 +1,25 @@
-import { ChangeEvent, FC, useState } from 'react';
-import cn from 'classnames';
-import { MenuOutlined } from '@ant-design/icons';
-import s from './styles/App.module.scss';
+import { FC } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import MainLayaut from 'pages/MainLayaut/MainLayaut';
+import ForgotPasswordPage from 'pages/ForgotPasswordPage/ForgotPasswordPage';
+import SettingsPage from 'pages/SettingsPage/SettingsPage';
 import LoginPage from './pages/LoginPage/LoginPage';
-import { ColorModeType } from './types/CommonTypes';
-import Sidebar from './components/Sidebar/Sidebar';
-import RoundMenu from './components/RoundMenu/RoundMenu';
 
-const App: FC = () => {
-  const [colorMode, setColorMode] = useState<ColorModeType>('light');
-  const [sidebarMenu, setSidebarMenu] = useState<boolean>(true);
+import styles from './styles/App.module.scss';
 
-  return (
-    <div
-      className={cn({
-        [s.appContainer]: true,
-        [s.largeAppContainer]: !sidebarMenu,
-      })}
-    >
-      <main className={s.pageContainer}>
-        <MenuOutlined
-          className={s.menuIcon}
-          onClick={() => setSidebarMenu(!sidebarMenu)}
-        />
-        <LoginPage />
-        <RoundMenu />
-      </main>
-      <Sidebar sidebarMenu={sidebarMenu} />
-
-      {/* const App: FC = () => {
-  return (
-    <div className={styles.app}>
-      <Header />
-      <main>
-        <Input
-          placeholder="Input"
-          value={input}
-          type="text"
-          handleOnChange={(event: ChangeEvent<HTMLInputElement>) => setInput(event.target.value)}
-        />
-        <Button
-          handleOnClick={() => setInput('')}
-        >
-          Clean Input
-        </Button>
-        <Calendar />
-      </main>
-      <Footer /> */}
-    </div>
-  );
-};
+const App: FC = () => (
+  <div className={styles.container}>
+    <Routes>
+      <Route path="/" element={<MainLayaut />}>
+        <Route index element={<h1 style={{ textAlign: 'center' }}>Home</h1>} />
+        <Route path="booking" element={<h1 style={{ textAlign: 'center' }}>booking</h1>} />
+        <Route path="map" element={<h1 style={{ textAlign: 'center' }}>map</h1>} />
+        <Route path="settings" element={<SettingsPage />} />
+      </Route>
+      <Route path="login" element={<LoginPage />} />
+      <Route path="forgot" element={<ForgotPasswordPage />} />
+    </Routes>
+  </div>
+);
 
 export default App;
