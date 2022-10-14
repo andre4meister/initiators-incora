@@ -1,0 +1,65 @@
+@import '../../styles/variables.scss';
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: $indent-small 0;
+  opacity: 0.5;
+  transition: opacity $transition;
+
+  .menuItem {
+    font-weight: $fontWeight-bold;
+    text-decoration: none;
+    font-size: $fontSize-medium;
+    letter-spacing: 4px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 44px;
+    overflow: hidden;
+    transition: $transition;
+
+    svg {
+      width: 44px;
+      height: 44px;
+      padding: $indent-small;
+      transition: $transition;
+    }
+  }
+
+  .menuItem::before {
+    transition: $transition;
+  }
+
+  .menuItem_active svg {
+    fill: $color-orange;
+  }
+
+  .menuItem_active:before {
+    color: $color-orange;
+  }
+
+  .menuItemHome::before {
+    content: 'Home';
+  }
+  .menuItemBooking::before {
+    content: 'Booking';
+  }
+  .menuItemMap::before {
+    content: 'Map';
+  }
+
+  @media (any-hover: hover) {
+    .menuItem:hover {
+      width: 100%;
+    }
+  }
+}
+
+@media (any-hover: hover) {
+  .menu:hover {
+    opacity: 1;
+  }
+}
