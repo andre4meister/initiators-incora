@@ -26,10 +26,7 @@ const LoginPage: FC = () => (
         handleOnChange={console.log}
       />
     </div>
-    <div>
-      <CheckBox isChecked={false} onChange={console.log} />
-      <span>Remember me</span>
-    </div>
+
     <Button handleOnClick={console.log}>neoButton</Button>
   </form>
 );

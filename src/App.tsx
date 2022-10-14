@@ -12,8 +12,14 @@ const App: FC = () => (
     <Routes>
       <Route path="/" element={<MainLayaut />}>
         <Route index element={<h1 style={{ textAlign: 'center' }}>Home</h1>} />
-        <Route path="booking" element={<h1 style={{ textAlign: 'center' }}>booking</h1>} />
-        <Route path="map" element={<h1 style={{ textAlign: 'center' }}>map</h1>} />
+        <Route
+          path="booking"
+          element={<h1 style={{ textAlign: 'center' }}>booking</h1>}
+        />
+        <Route
+          path="map"
+          element={<h1 style={{ textAlign: 'center' }}>map</h1>}
+        />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
       <Route path="login" element={<LoginPage />} />
