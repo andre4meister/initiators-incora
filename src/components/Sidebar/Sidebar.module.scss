@@ -1,50 +1,74 @@
-@import "../../styles//variables.scss";
+@import '../../styles//variables.scss';
 
-.sidebarContainer {
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: $size-sidebarWidth;
+  padding: $indent-small;
+
+  .user {
     position: relative;
-    background-color: green;
-    padding: 10px;
-    min-width: 100%;
+    box-shadow: $boxShadow;
+    border-radius: $borderRadius;
+    padding: $indent-small;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    transition: $transition-slow;
-}
-.sidebarHidden {
-    left: 300px;
-}
-
-.userInfo {
-    display: flex;
     align-items: center;
-    background-color: aquamarine;
-    border-radius: .5rem;
-    padding: 0 10px;
-}
 
-.userPhoto {
-    min-width: 32px;
-    max-width: 48px;
-    img {
-        margin: auto;
-        width: 32px;
-        border-radius: 50%;
+    margin-bottom: $indent-medium; // for mockPanel
+
+    .settings {
+      position: absolute;
+      top: $indent-small;
+      right: $indent-small;
+      box-shadow: $boxShadow;
+      border-radius: 50%;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        margin: 10px;
+        transition: $transition;
+      }
     }
-}
 
-.sidebarRooms {
-    display: flex;
-    flex-direction: column;
-    background-color: darkcyan;
-    border-radius: 1rem;
-    list-style: none;
-    min-width: 100%;
-}
+    .settings_active svg {
+      fill: $color-orange;
+    }
 
-.sidebarLoginButton{
-    min-width: fit-content;
-    // position: absolute;
-    // bottom: 10px;
-    align-self: center;
-    justify-self: flex-end;
+    .avatar {
+      background-color: $color-grey1;
+      margin-bottom: $indent-small;
+      border-radius: 50%;
+      padding: $indent-large;
+
+      svg {
+        background-color: $color-grey1;
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    .name {
+      font-size: $fontSize-medium;
+      font-weight: $fontWeight-bold;
+    }
+
+    @media (any-hover: hover) {
+      .settings:hover {
+        svg {
+          fill: $color-orange;
+        }
+      }
+    }
+  }
+
+  .mockPanel {
+    padding: $indent-small;
+    box-shadow: $boxShadow;
+    border-radius: $borderRadius;
+    height: 200px;
+  }
 }

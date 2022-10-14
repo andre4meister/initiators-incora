@@ -1,49 +1,21 @@
-import React, { FC, useState } from 'react';
 import cn from 'classnames';
-import Button from 'components/Button/Button';
-import s from './Sidebar.module.scss';
-import { ColorModeType } from '../../types/CommonTypes';
+import { FC } from 'react';
+import { NavLink } from 'react-router-dom';
+import { UserOutlined, SettingOutlined } from '@ant-design/icons';
+import styles from './Sidebar.module.scss';
 
-interface SidebarProps {
-  sidebarMenu: boolean;
-}
-
-const Sidebar: FC<SidebarProps> = ({ sidebarMenu }) => {
-  const [colorMode, setColorMode] = useState<ColorModeType>('light');
-  const [authorize, setAuthorize] = useState<boolean>(true);
-  return (
-    <div
-      className={cn({
-        [s.sidebarContainer]: true,
-        [s.sidebarHidden]: !sidebarMenu,
-      })}
-    >
-      <div className={s.userInfo}>
-        <div className={s.userPhoto}>
-          <img
-            alt=""
-            src="https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg"
-          />
-        </div>
-        <div>
-          <span>User`s name</span>
-        </div>
-      </div>
-      <ul className={s.sidebarRooms}>
-        <li>room1</li>
-        <li>room2</li>
-        <li>room3</li>
-        <li>room4</li>
-        <li>room5</li>
-        <li>room6</li>
-      </ul>
-      <div className={s.sidebarLoginButton}>
-        <Button handleOnClick={() => setAuthorize(!authorize)}>
-          {authorize ? 'Logout' : 'Login'}
-        </Button>
-      </div>
+const Sidebar: FC = () => (
+  <div className={styles.container}>
+    <div className={styles.user}>
+      {/* <div className={styles.settings}> */}
+      <NavLink className={({ isActive }) => cn(styles.settings, isActive && styles.settings_active)} to="settings"><SettingOutlined /></NavLink>
+      {/* </div> */}
+      <div className={styles.avatar}><UserOutlined /></div>
+      <h2 className={styles.name}>Firstname Lastname</h2>
     </div>
-  );
-};
+
+    <div className={styles.mockPanel} style={{ textAlign: 'center' }}>There will be some info</div>
+  </div>
+);
 
 export default Sidebar;

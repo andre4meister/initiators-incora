@@ -11,24 +11,21 @@
     transition: all 0.3s ease-in-out;
     outline: none;
     border: none;
+    border-radius: $borderRadius;
+    padding: 15px;
 }
 .input::placeholder {
     font-weight: $fontWeight-bold;
 }
 
 .inputLight {
-    // box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
-    // color: #44476A;
-    // background-color: #e6e7ee;
-    border-radius: $borderRadius;
-    box-shadow: $boxShadowInset;
+    box-shadow: $boxShadowLightInset;
     padding: $indent-small;
 }
 
 .inputDark {
     color: #8a8a8d;
-    background: #262731;
-    box-shadow:  inset 2px 2px 5px #20212a,
-    inset -3px -3px 7px #2c2d38;
+    background: $color-mainDark;
+    box-shadow:  $boxShadowDarkInset;
 }
 

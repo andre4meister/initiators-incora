@@ -1,0 +1,30 @@
+@import '../../../styles//variables.scss';
+
+.button {
+  cursor: pointer;
+  letter-spacing: 0.025em;
+  margin: 0.5rem;
+  font-weight: $fontWeight-bold;
+  border-radius: $borderRadius;
+  padding: $indent-small;
+  border: none;
+}
+
+.buttonLight {
+  box-shadow: $boxShadowLight;
+  &:hover {
+    box-shadow: $boxShadowLightInset;
+  }
+}
+
+.buttonDark {
+  background: $color-mainDark;
+  box-shadow: $boxShadowDark;
+
+  &:hover {
+    box-shadow: $boxShadowDarkInset;
+  }
+}
+.buttonPill {
+  border-radius: $pill-radius;
+}

@@ -1,30 +1,31 @@
-import { FC, useState } from 'react';
-import cn from 'classnames';
-import { MenuOutlined } from '@ant-design/icons';
-import s from './styles/App.module.scss';
-import Sidebar from './components/Sidebar/Sidebar';
-import RoundMenu from './components/RoundMenu/RoundMenu';
+import { FC } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import MainLayaut from 'pages/MainLayaut/MainLayaut';
+import ForgotPasswordPage from 'pages/ForgotPasswordPage/ForgotPasswordPage';
+import SettingsPage from 'pages/SettingsPage/SettingsPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 
-const App: FC = () => {
-  const [sidebarMenu, setSidebarMenu] = useState<boolean>(true);
+import styles from './styles/App.module.scss';
 
-  return (
-    <div
-      className={cn({
-        [s.appContainer]: true,
-        [s.largeAppContainer]: !sidebarMenu,
-      })}
-    >
-      <main className={s.pageContainer}>
-        <MenuOutlined
-          className={s.menuIcon}
-          onClick={() => setSidebarMenu(!sidebarMenu)}
+const App: FC = () => (
+  <div className={styles.container}>
+    <Routes>
+      <Route path="/" element={<MainLayaut />}>
+        <Route index element={<h1 style={{ textAlign: 'center' }}>Home</h1>} />
+        <Route
+          path="booking"
+          element={<h1 style={{ textAlign: 'center' }}>booking</h1>}
         />
-        <RoundMenu />
-      </main>
-      <Sidebar sidebarMenu={sidebarMenu} />
-    </div>
-  );
-};
+        <Route
+          path="map"
+          element={<h1 style={{ textAlign: 'center' }}>map</h1>}
+        />
+        <Route path="settings" element={<SettingsPage />} />
+      </Route>
+      <Route path="login" element={<LoginPage />} />
+      <Route path="forgot" element={<ForgotPasswordPage />} />
+    </Routes>
+  </div>
+);
 
 export default App;
