@@ -1,10 +1,170 @@
+@import '../../styles/variables.scss';
+*::after, *::before {
+    background-color: transparent;
+}
 .roundMenuBody {
     position: fixed;
-    bottom: 5px;
+    bottom: 25px;
     left: 20px;
     min-width: 50px;
     min-height: 50px;
-    border-radius: 50%;
-    background: yellow;
+    border-radius: $circle;
+    background: $color-yellow;
     cursor: pointer;
+}
+.circleMenuItem {
+    font-size: 32px;
+    margin: 9px;
+    border-radius: $circle;
+}
+
+.menuToggler {
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.menuToggler:hover+label,
+.menuToggler:hover+label:before,
+.menuToggler:hover+label:after {
+    background: white;
+}
+
+.menuToggler:checked+label {
+    background: transparent;
+}
+
+.menuToggler:checked+label:before,
+.menuToggler:checked+label:after {
+    top: 0;
+    width: 40px;
+    transform-origin: 50% 50%;
+}
+
+.menuToggler:checked+label:before {
+    transform: rotate(45deg) translateY(-15px) translateX(-15px);
+}
+
+.menuToggler:checked+label:after {
+    transform: rotate(-45deg);
+}
+
+.menuToggler:checked~ul .menuItem {
+    opacity: 1;
+}
+
+
+
+.menuToggler:checked~ul .menuItem:nth-child(1) {
+    transform: rotate(90deg) translateX(-80px);
+}
+
+.menuToggler:checked~ul .menuItem:nth-child(2) {
+    transform: rotate(135deg) translateX(-80px);
+}
+
+.menuToggler:checked~ul .menuItem:nth-child(3) {
+    transform: rotate(180deg) translateX(-80px);
+}
+
+.menuToggler:checked~ul .menuItem a {
+    pointer-events: auto;
+}
+
+.menuToggler+label {
+    width: 40px;
+    height: 5px;
+    display: block;
+    z-index: 1;
+    border-radius: 2.5px;
+    background: rgba(230, 239, 250, 0.9);
+    transition: transform 0.5s top 0.5s;
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.menuToggler+label:before,
+.menuToggler+label:after {
+    width: 40px;
+    height: 5px;
+    display: block;
+    z-index: 1;
+    border-radius: 2.5px;
+    background: rgba(255, 255, 255, 0.7);
+    transition: transform 0.5s top 0.5s;
+    content: "";
+    position: absolute;
+    display: block;
+    left: 0;
+}
+
+.menuToggler+label:before {
+    top: 10px;
+}
+
+.menuToggler+label:after {
+    top: -10px;
+}
+
+.menuItem:nth-child(1) a {
+    transform: rotate(-90deg);
+}
+
+.menuItem:nth-child(2) a {
+    transform: rotate(-135deg);
+}
+
+.menuItem:nth-child(3) a {
+    transform: rotate(-180deg);
+}
+
+
+.menuItem {
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.menuItem a {
+    display: block;
+    width: inherit;
+    height: inherit;
+    line-height: 40px;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(230, 230, 250, 0.7);
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    font-size: 32px;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+.menuItem a:hover {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+    color: white;
+    background: rgba(255, 255, 255, 0.3);
+    font-size: 36px;
 }
