@@ -15,6 +15,10 @@
         "project": "./tsconfig.json"
     },
     "rules": {
+        "linebreak-style": [
+            "warn",
+            "windows"
+        ],
         "react/react-in-jsx-scope": "off",
         "react/function-component-definition": [
             "error",

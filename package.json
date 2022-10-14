@@ -1,6 +1,5 @@
 {
   "name": "asm-incora",
-  "homepage": "https://andre4meister.github.io/asm-incora",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,6 +18,7 @@
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
     "sass": "^1.55.0",
     "typescript": "^4.8.4",
@@ -27,6 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start8000": "set PORT=8000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

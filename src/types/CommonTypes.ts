@@ -1,5 +1,5 @@
 export interface UIPropsType {
-  classes: string;
+  classes?: string;
   children?: string | React.ReactNode;
-  handleOnChange: (inputValue: string) => void;
 }
+export type ColorModeType = 'light' | 'dark';
