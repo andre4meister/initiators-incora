@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-indent */
 /* eslint-disable arrow-body-style */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -13,11 +12,10 @@ export default {
   component: Button,
 } as ComponentMeta<typeof Button>;
 
-export const Template: ComponentStory<typeof Button> = (args: ButtonType) => (
-  <Button {...args} handleOnClick={() => console.log('I was pushed')}>
-    {args.children}
-  </Button>
-);
+export const Template: ComponentStory<typeof Button> = (args: ButtonType) => {
+  return <Button {...args} />;
+};
+
 Template.args = {
   handleOnClick: () => console.log('I was pushed'),
   children: 'Button',
@@ -26,18 +24,11 @@ Template.args = {
 <Story
   name="Button"
   argTypes={{
-    colorMode: {
-      description: 'Changes button`s styles',
-      defaultValue: 'light',
-      options: ['light', 'dark'],
-      control: { type: 'radio' },
+    children: {
+      control: { type: 'text' },
     },
     handleOnClick: {
       control: '',
-    },
-    children: {
-      control: { type: 'text' },
-      options: ['Button'],
     },
   }}
 />;
