@@ -1,5 +1,5 @@
-/* eslint-disable object-curly-newline */
 /* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable object-curly-newline */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';

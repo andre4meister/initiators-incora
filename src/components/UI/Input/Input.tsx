@@ -3,7 +3,6 @@ import { FC, useState } from 'react';
 import { ColorModeType } from 'types/CommonTypes';
 import { InputType } from '../../../types/InputTypes';
 import s from './Input.module.scss';
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 const Input: FC<InputType> = ({
   type,
