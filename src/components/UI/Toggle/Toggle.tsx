@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import style from './Toggle.module.scss';
 
-interface ToggleProps {
+export interface ToggleProps {
   isToggle: boolean;
-  onChange: () => void;
+  handleOnChange: () => void;
 }
 
-const Toggle: FC<ToggleProps> = ({ isToggle, onChange }) => (
+const Toggle: FC<ToggleProps> = ({ isToggle, handleOnChange }) => (
   <div>
     <input
       checked={isToggle}
-      onChange={onChange}
+      onChange={handleOnChange}
       className={style.switch_checkbox}
       id="switch-new"
       type="checkbox"
