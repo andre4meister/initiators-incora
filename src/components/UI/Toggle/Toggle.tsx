@@ -7,7 +7,7 @@ interface ToggleProps {
 }
 
 const Toggle: FC<ToggleProps> = ({ isToggle, onChange }) => (
-  <>
+  <div>
     <input
       checked={isToggle}
       onChange={onChange}
@@ -22,7 +22,7 @@ const Toggle: FC<ToggleProps> = ({ isToggle, onChange }) => (
     >
       <span className={style.switch_button} />
     </label>
-  </>
+  </div>
 );
 
 export default Toggle;

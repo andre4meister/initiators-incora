@@ -1,10 +1,10 @@
-@import '../../styles//variables.scss';
+@import '../../../styles/variables.module.scss';
 
 .container {
   display: block;
   position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
   font-size: 22px;
   -webkit-user-select: none;
@@ -29,28 +29,22 @@
   left: 0;
   height: 30px;
   width: 30px;
-  background-color: $color-mainLight;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2),
-    -2px -2px 6px rgb(255, 255, 255, 0.5), inset 0 0 0 rgba(0, 0, 0, 0.2),
-    inset 0 0 0 rgba(255, 255, 255, 0.2);
+  background-color: var(--currentTheme);
+  box-shadow: var(--currentBoxShadowOutline);
   border-radius: 20%;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: $transition;
 }
 
 /* On mouse-over, add a grey background color */
 .container:hover input ~ .checkmark {
-  background-color: $color-mainLight;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 rgb(255, 255, 255, 0.5),
-    inset 2px 2px 6px rgba(0, 0, 0, 0.2),
-    inset -2px -2px 6px rgba(255, 255, 255, 0.2);
+  background-color: var(--currentTheme);
+  box-shadow: var(--currentBoxShadowInset);
 }
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 rgb(255, 255, 255, 0.5),
-    inset 2px 2px 6px rgba(0, 0, 0, 0.2),
-    inset -2px -2px 6px rgba(255, 255, 255, 0.2);
+  box-shadow: var(--currentBoxShadowInset);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */

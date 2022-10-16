@@ -1,4 +1,4 @@
-@import '../../styles//variables.scss';
+@import '../../styles/variables.module.scss';
 
 .container {
   position: fixed;
@@ -10,7 +10,7 @@
 
   .user {
     position: relative;
-    box-shadow: $boxShadow;
+    box-shadow: var(--currentBoxShadowOutline);
     border-radius: $borderRadius;
     padding: $indent-small;
     display: flex;
@@ -23,7 +23,7 @@
       position: absolute;
       top: $indent-small;
       right: $indent-small;
-      box-shadow: $boxShadow;
+      box-shadow: var(--currentBoxShadowOutline);
       border-radius: 50%;
 
       svg {
@@ -39,15 +39,16 @@
     }
 
     .avatar {
-      background-color: $color-grey1;
+      background-color: $color-light1;
       margin-bottom: $indent-small;
       border-radius: 50%;
       padding: $indent-large;
 
       svg {
-        background-color: $color-grey1;
+        background-color: $color-light1;
         width: 50px;
         height: 50px;
+        fill: $color-textLight;
       }
     }
 
@@ -67,7 +68,7 @@
 
   .mockPanel {
     padding: $indent-small;
-    box-shadow: $boxShadow;
+    box-shadow: var(--currentBoxShadowOutline);
     border-radius: $borderRadius;
     height: 200px;
   }
