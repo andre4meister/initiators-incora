@@ -1,4 +1,4 @@
-@import '../../../styles/variables.scss';
+@import '../../../styles/variables.module.scss';
 
 .switch_checkbox {
   height: 0;
@@ -14,9 +14,7 @@
   width: 60px;
   height: 30px;
   position: relative;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 rgb(255, 255, 255, 0.5),
-    inset 2px 2px 6px rgba(0, 0, 0, 0.2),
-    inset -2px -2px 6px rgba(255, 255, 255, 0.2);
+  box-shadow: var(--currentBoxShadowOutline);
   border-radius: 40px;
 }
 
