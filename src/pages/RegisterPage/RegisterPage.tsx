@@ -1,8 +1,16 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { FC } from 'react';
-import { InitialValues } from 'types/FormTypes';
+import { InitialRegValues } from 'types/FormTypes';
 import yupPattern from 'utils/yupPattern';
+import Input from 'components/UI/Input/Input';
+import Button from 'components/UI/Button/Button';
+import style from '../LoginPage/LoginPage.module.scss';
 
 const RegisterPage: FC = () => {
   const formik = useFormik({
@@ -18,89 +26,85 @@ const RegisterPage: FC = () => {
       password: yupPattern('password'),
       confirmPassword: yupPattern('confirmPassword'),
     }),
-    onSubmit: (values: InitialValues) => {
+    onSubmit: (values: InitialRegValues) => {
       console.log(JSON.stringify(values, null, 2));
     },
   });
-  // eslint-disable-next-line object-curly-newline
+
   const { handleSubmit, handleChange, values, errors, touched } = formik;
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Create account</h1>
-      <div className="form-item">
-        <label className="item" htmlFor="firstName">
+    <form className={style.form} onSubmit={handleSubmit}>
+      <h1 className={style.text}>Create account</h1>
+      <div className={style.form_item}>
+        <label className={style.item} htmlFor="firstName">
           Name
         </label>
-        <input
+        <Input
           placeholder="Enter your name"
-          className="input"
-          id="firstName"
+          classes="input"
           name="firstName"
           type="text"
-          onChange={handleChange}
+          handleOnChange={handleChange}
           value={values.firstName}
         />
         {touched.firstName && errors.firstName ? (
-          <div className="error">{errors.firstName}</div>
+          <div className={style.error}>{errors.firstName}</div>
         ) : null}
       </div>
 
-      <div className="form-item">
-        <label className="item" htmlFor="surname">
+      <div className={style.form_item}>
+        <label className={style.item} htmlFor="surname">
           Surname
         </label>
-        <input
+        <Input
           placeholder="Enter your surname"
-          className="input"
-          id="surname"
+          classes="input"
           name="surname"
           type="text"
-          onChange={handleChange}
+          handleOnChange={handleChange}
           value={values.surname}
         />
         {touched.surname && errors.surname ? (
-          <div className="error">{errors.surname}</div>
+          <div className={style.error}>{errors.surname}</div>
         ) : null}
       </div>
 
-      <div className="form-item">
-        <label className="item" htmlFor="password">
+      <div className={style.form_item}>
+        <label className={style.item} htmlFor="password">
           Password
         </label>
-        <input
+        <Input
           placeholder="Enter your password"
-          className="input"
-          id="password"
+          classes="input"
           name="password"
           type="password"
-          onChange={handleChange}
+          handleOnChange={handleChange}
           value={values.password}
         />
         {touched.password && errors.password ? (
-          <div className="error">{errors.password}</div>
+          <div className={style.error}>{errors.password}</div>
         ) : null}
       </div>
-      <div className="form-item">
-        <label className="item" htmlFor="confirmPassword">
+      <div className={style.form_item}>
+        <label className={style.item} htmlFor="confirmPassword">
           Confirm your passport
         </label>
-        <input
+        <Input
           placeholder="Confirm your password"
-          className="input"
-          id="confirmPassword"
+          classes="input"
           name="confirmPassword"
           type="password"
-          onChange={handleChange}
+          handleOnChange={handleChange}
           value={values.confirmPassword}
         />
         {touched.confirmPassword && errors.confirmPassword ? (
-          <div className="error">{errors.confirmPassword}</div>
+          <div className={style.error}>{errors.confirmPassword}</div>
         ) : null}
       </div>
 
-      <button className="sumbit-button" type="submit">
+      <Button classes="button-submit" handleOnClick={handleSubmit}>
         Submit
-      </button>
+      </Button>
     </form>
   );
 };

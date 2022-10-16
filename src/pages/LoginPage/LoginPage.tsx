@@ -1,8 +1,16 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';
-import { InitialValues } from 'types/FormTypes';
+import Input from 'components/UI/Input/Input';
+import Button from 'components/UI/Button/Button';
+import { InitialLoginValues } from 'types/FormTypes';
 import { FC } from 'react';
+import style from './LoginPage.module.scss';
 
 const LoginPage: FC = () => {
   const formik = useFormik({
@@ -14,53 +22,50 @@ const LoginPage: FC = () => {
       email: yupPattern('email'),
       password: yupPattern('password'),
     }),
-    onSubmit: (values: InitialValues) => {
+    onSubmit: (values: InitialLoginValues) => {
       console.log(JSON.stringify(values, null, 2));
     },
   });
 
-  // eslint-disable-next-line object-curly-newline
   const { handleSubmit, handleChange, values, errors, touched } = formik;
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Login</h1>
-      <div className="form-item">
-        <label className="item" htmlFor="email">
+    <form className={style.form} onSubmit={handleSubmit}>
+      <h1 className={style.text}>Login</h1>
+      <div className={style.form_item}>
+        <label className={style.item} htmlFor="email">
           Email
         </label>
-        <input
+        <Input
           placeholder="Enter your email"
-          className="input"
-          id="email"
           name="email"
+          classes="input"
           type="email"
-          onChange={handleChange}
+          handleOnChange={handleChange}
           value={values.email}
         />
         {touched.email && errors.email ? (
-          <div className="error">{errors.email}</div>
+          <div className={style.error}>{errors.email}</div>
         ) : null}
       </div>
-      <div className="form-item">
-        <label className="item" htmlFor="password">
+      <div className={style.form_item}>
+        <label className={style.item} htmlFor="password">
           Password
         </label>
-        <input
+        <Input
           placeholder="Enter your password"
-          className="input"
-          id="password"
           name="password"
+          classes="input"
           type="password"
-          onChange={handleChange}
+          handleOnChange={handleChange}
           value={values.password}
         />
         {touched.password && errors.password ? (
-          <div className="error">{errors.password}</div>
+          <div className={style.error}>{errors.password}</div>
         ) : null}
       </div>
-      <button className="sumbit-button" type="submit">
+      <Button classes="button-submit" handleOnClick={handleSubmit}>
         Submit
-      </button>
+      </Button>
     </form>
   );
 };

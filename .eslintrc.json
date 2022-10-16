@@ -1,31 +1,27 @@
 {
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-        "@typescript-eslint/eslint-plugin"
-    ],
-    "extends": [
-        "react-app",
-        "airbnb",
-        "airbnb-typescript",
-        "airbnb/hooks",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
-    ],
-    "parserOptions": {
-        "project": "./tsconfig.json"
-    },
-    "rules": {
-        "linebreak-style": [
-            "warn",
-            "windows"
-        ],
-        "react/react-in-jsx-scope": "off",
-        "react/function-component-definition": [
-            "error",
-            {
-                "namedComponents": "arrow-function",
-                "unnamedComponents": "arrow-function"
-            }
-        ]
-    }
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint/eslint-plugin"],
+  "extends": [
+    "react-app",
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "linebreak-style": ["warn", "windows"],
+
+    "react/react-in-jsx-scope": "off",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ]
+  }
 }

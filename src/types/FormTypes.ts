@@ -1,7 +1,14 @@
-export interface InitialValues {
-  firstName?: string;
-  surname?: string;
-  email?: string;
+export interface InitialLoginValues {
+  email: string;
   password: string;
-  confirmPassword?: string;
+}
+export interface InitialRegValues {
+  firstName: string;
+  surname: string;
+  password: string;
+  confirmPassword: string;
+}
+
+export interface InitialGetAccessValues {
+  email: string;
 }
