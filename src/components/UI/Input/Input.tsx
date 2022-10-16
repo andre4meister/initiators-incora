@@ -6,6 +6,7 @@ import s from './Input.module.scss';
 
 const Input: FC<InputType> = ({
   type,
+  name,
   classes,
   handleOnChange,
   required,
@@ -16,8 +17,9 @@ const Input: FC<InputType> = ({
   const [colorMode, setColorMode] = useState<ColorModeType>('light');
   return (
     <input
+      name={name}
       placeholder={placeholder}
-      value={text}
+      value={value}
       type={type}
       required={required}
       className={cn({
@@ -25,7 +27,7 @@ const Input: FC<InputType> = ({
         [s.inputLight]: colorMode === 'light',
         [s.inputDark]: colorMode === 'dark',
       })}
-      onChange={(e) => setText(e.target.value)}
+      onChange={handleOnChange}
     />
   );
 };

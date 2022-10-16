@@ -3,6 +3,7 @@ import { UIPropsType } from './CommonTypes';
 
 export interface InputType extends Partial<UIPropsType> {
   value: string;
+  name?: string;
   type: 'email' | 'text' | 'password';
   handleOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
