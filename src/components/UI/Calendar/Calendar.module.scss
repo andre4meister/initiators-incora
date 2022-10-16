@@ -1,114 +1,114 @@
-@import "../../../styles/variables.scss";
+@import '../../../styles/variables.module.scss';
 
 $dayWidth: 40px;
 $dayHeight: 40px;
 
 .container {
-    user-select: none;
+  user-select: none;
 
-    .monthAndYear {
+  .monthAndYear {
+    display: flex;
+    gap: 0 $indent-medium;
+    justify-content: space-between;
+    margin-bottom: $indent-large;
+
+    .monthPanel {
+      width: 80%;
+      justify-content: space-between;
+
+      .arrows {
         display: flex;
-        gap: 0 $indent-medium;
-        justify-content: space-between;
-        margin-bottom: $indent-large;
-
-        .monthPanel {
-            width: 80%;
-            justify-content: space-between;
-
-            .arrows {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 30px;
-                height: 30px;
-            }
-        }
-
-        .currentMonth .monthName {
-            position: relative;
-        }
-
-        .currentMonth .monthName::after {
-            content: "";
-            position: absolute;
-            top: 0px;
-            right: -8px;
-            width: 6px;
-            height: 6px;
-            background-color: $color-yellow;
-            border-radius: 50%;
-        }
-
-        .yearPanel {
-            width: 20%;
-            justify-content: center;
-        }
-
-        div {
-            display: flex;
-            align-items: center;
-            padding: $indent-medium;
-
-            border-radius: $borderRadius;
-            box-shadow: $boxShadow;
-        }
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+      }
     }
 
-    .daysPanel {
-        padding: $indent-medium;
-        border-radius: $borderRadius;
-        box-shadow: $boxShadow;
-
-        .weekDays {
-            display: grid;
-            place-items: center;
-            grid-template-columns: repeat(7, 1fr);
-            font-weight: $fontWeight-bold;
-        }
-
-        .days {
-            display: grid;
-            place-items: center;
-            gap: 4px;
-            grid-template-columns: repeat(7, 1fr);
-            grid-template-rows: repeat(6, 1fr);
-
-            .day {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: $dayWidth;
-                height: $dayHeight;
-                padding: $indent-small;
-                border-radius: 50%;
-                transition: $transition;
-                cursor: pointer;
-            }
-
-            .dayGrey {
-                opacity: 0.5;
-            }
-
-            .dayWeekend {
-                color: $color-orange;
-            }
-
-            .dayToday {
-                width: $dayWidth - 1px;
-                height: $dayHeight - 1px;
-                border: 1px solid $color-yellow;
-            }
-
-            @media (any-hover: hover) {
-                .day:hover:not(.dayToday) {
-                    background-color: $color-grey1;
-                }
-
-                .dayToday:hover {
-                    background-color: $color-yellow;
-                }
-            }
-        }
+    .currentMonth .monthName {
+      position: relative;
     }
+
+    .currentMonth .monthName::after {
+      content: '';
+      position: absolute;
+      top: 0px;
+      right: -8px;
+      width: 6px;
+      height: 6px;
+      background-color: $color-yellow;
+      border-radius: 50%;
+    }
+
+    .yearPanel {
+      width: 20%;
+      justify-content: center;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      padding: $indent-medium;
+
+      border-radius: $borderRadius;
+      box-shadow: var(--currentBoxShadowOutline);
+    }
+  }
+
+  .daysPanel {
+    padding: $indent-medium;
+    border-radius: $borderRadius;
+    box-shadow: var(--currentBoxShadowOutline);
+
+    .weekDays {
+      display: grid;
+      place-items: center;
+      grid-template-columns: repeat(7, 1fr);
+      font-weight: $fontWeight-bold;
+    }
+
+    .days {
+      display: grid;
+      place-items: center;
+      gap: 4px;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+
+      .day {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: $dayWidth;
+        height: $dayHeight;
+        padding: $indent-small;
+        border-radius: 50%;
+        transition: $transition;
+        cursor: pointer;
+      }
+
+      .dayGrey {
+        opacity: 0.5;
+      }
+
+      .dayWeekend {
+        color: $color-orange;
+      }
+
+      .dayToday {
+        width: $dayWidth - 1px;
+        height: $dayHeight - 1px;
+        border: 1px solid $color-yellow;
+      }
+
+      @media (any-hover: hover) {
+        .day:hover:not(.dayToday) {
+          background-color: var(--secondTheme);
+        }
+
+        .dayToday:hover {
+          background-color: $color-yellow;
+        }
+      }
+    }
+  }
 }

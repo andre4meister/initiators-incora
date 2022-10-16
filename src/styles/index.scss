@@ -1,4 +1,12 @@
-@import './variables.scss';
+@import './variables.module.scss';
+
+:root {
+  --currentTheme: #{$color-mainLight};
+  --secondTheme: #{$color-light1};
+  --currentText: #{$color-textLight};
+  --currentBoxShadowOutline: #{$boxShadowLightOutline};
+  --currentBoxShadowInset: #{$boxShadowLightInset};
+}
 
 *,
 *::after,
@@ -6,8 +14,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: $color-text;
-  scrollbar-color: $color-text;
+  color: var(--currentText);
+  scrollbar-color: var(--currentText);
   scrollbar-width: thin;
 }
 
@@ -15,7 +23,7 @@ body {
   font-family: $fontFamily;
   font-weight: $fontWeight-normal;
   font-size: $fontSize-small;
-  background-color: $color-mainLight;
+  background-color: var(--currentTheme);
 }
 
 ::-webkit-scrollbar {
@@ -24,7 +32,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $color-text;
+  background: var(--currentText);
   border-radius: 3px;
 }
 

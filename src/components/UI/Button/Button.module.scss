@@ -1,29 +1,33 @@
-@import '../../../styles//variables.scss';
+@import '../../../styles/variables.module.scss';
 
 .button {
   cursor: pointer;
   letter-spacing: 0.025em;
-  margin: 0.5rem;
   font-weight: $fontWeight-bold;
   border-radius: $borderRadius;
   padding: $indent-small;
   border: none;
+  background-color: var(--currentTheme);
+  box-shadow: var(--currentBoxShadowOutline);
+  transition: $transition;
+}
+
+.button:active {
+  box-shadow: var(--currentBoxShadowInset);
+}
+
+@media (any-hover: hover) {
+  .button:hover {
+    color: $color-orange;
+  }
 }
 
 .buttonLight {
-  box-shadow: $boxShadowLight;
-  &:hover {
-    box-shadow: $boxShadowLightInset;
-  }
+  box-shadow: var(--currentBoxShadowOutline);
 }
 
 .buttonDark {
-  background: $color-mainDark;
-  box-shadow: $boxShadowDark;
-
-  &:hover {
-    box-shadow: $boxShadowDarkInset;
-  }
+  box-shadow: var(--currentBoxShadowOutline);
 }
 .buttonPill {
   border-radius: $pill-radius;

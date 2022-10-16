@@ -1,16 +1,16 @@
-@import '../../../styles/variables.scss';
+@import '../../../styles/variables.module.scss';
 
 .input {
-  font-size: 1rem;
   display: block;
   width: 300px;
-  height: 1.2rem;
-  font-weight: 300;
-  line-height: 1.5;
+  font-weight: $fontWeight-normal;
+  // line-height: 1.5;
   background-clip: padding-box;
   transition: all 0.3s ease-in-out;
   outline: none;
   border: none;
+  background-color: var(--currentTheme);
+  padding: $indent-small $indent-medium;
 }
 .input::placeholder {
   font-weight: $fontWeight-bold;
@@ -18,8 +18,8 @@
 
 .inputLight {
   border-radius: $borderRadius;
-  box-shadow: $boxShadowInset;
-  padding: $indent-small;
+  box-shadow: var(--currentBoxShadowInset);
+  // padding: $indent-small;
 }
 
 .inputDark {

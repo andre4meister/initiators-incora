@@ -5,14 +5,13 @@ import ForgotPasswordPage from 'pages/ForgotPasswordPage/ForgotPasswordPage';
 import SettingsPage from 'pages/SettingsPage/SettingsPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
-
-import styles from './styles/App.module.scss';
+import TestPage from 'pages/TestPage/TestPage';
 
 const App: FC = () => (
   <div className={styles.container}>
     <Routes>
       <Route path="/" element={<MainLayaut />}>
-        <Route index element={<h1 style={{ textAlign: 'center' }}>Home</h1>} />
+        <Route index element={<TestPage />}>Home</h1>} />
         <Route
           path="booking"
           element={<h1 style={{ textAlign: 'center' }}>booking</h1>}

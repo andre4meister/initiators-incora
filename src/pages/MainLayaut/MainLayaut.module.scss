@@ -1,17 +1,15 @@
-@import '../../styles/variables.scss';
+@import '../../styles/variables.module.scss';
 
 .container {
-  min-height: 100vh;
   margin-right: $size-sidebarWidth;
 
   .content {
-    box-shadow: $boxShadow;
+    position: relative;
+    box-shadow: var(--currentBoxShadowOutline);
     border-radius: $borderRadius;
-    margin: $indent-small $indent-medium;
+    margin: $indent-small;
     padding: $indent-small $indent-medium;
     min-height: calc(100vh - ($indent-small * 2));
-
-    position: relative;
 
     .menu {
       position: absolute;
