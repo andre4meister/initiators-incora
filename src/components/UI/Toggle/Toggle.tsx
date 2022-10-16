@@ -1,20 +1,28 @@
 import { FC } from 'react';
 import style from './Toggle.module.scss';
 
-interface ToggleProps {
-  isChecked: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+export interface ToggleProps {
+  isToggle: boolean;
+  handleOnChange: () => void;
 }
-const Toggle: FC<ToggleProps> = ({ isChecked, onChange }) => (
-  <label htmlFor="toggle" className={style.switch}>
+
+const Toggle: FC<ToggleProps> = ({ isToggle, handleOnChange }) => (
+  <>
     <input
-      name="toggle"
-      checked={isChecked}
-      onChange={onChange}
+      checked={isToggle}
+      onChange={handleOnChange}
+      className={style.switch_checkbox}
+      id="switch-new"
       type="checkbox"
     />
-    <span className={style.slider} />
-  </label>
+    <label
+      style={{ background: isToggle ? '#fec602' : '#c3cadc' }}
+      className={style.switch_label}
+      htmlFor="switch-new"
+    >
+      <span className={style.switch_button} />
+    </label>
+  </>
 );
 
 export default Toggle;

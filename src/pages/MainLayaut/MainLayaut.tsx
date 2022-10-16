@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from 'components/Sidebar/Sidebar';
-import Header from 'components/Header/Header';
+import NavMenu from 'components/NavMenu/NavMenu';
 import styles from './MainLayaut.module.scss';
 
 const MainLayaut: FC = () => (
   <main className={styles.container}>
-    <Header />
     <section className={styles.content}>
       <Outlet />
+      <NavMenu classes={styles.menu} />
     </section>
     <Sidebar />
   </main>
