@@ -9,6 +9,15 @@
     border-radius: $borderRadius;
     margin: $indent-small $indent-medium;
     padding: $indent-small $indent-medium;
-    min-height: calc(100vh - $size-headerHeight - ($indent-small * 2));
+    min-height: calc(100vh - ($indent-small * 2));
+
+    position: relative;
+
+    .menu {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: $indent-small;
+    }
   }
 }
