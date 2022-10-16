@@ -1,5 +1,4 @@
 import Button from 'components/UI/Button/Button';
-import CheckBox from 'components/UI/CheckBox/CheckBox';
 import Input from 'components/UI/Input/Input';
 import { FC } from 'react';
 import cn from 'classnames';
