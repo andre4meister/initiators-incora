@@ -7,9 +7,14 @@ export interface CheckBoxProps {
   label?: string;
 }
 const CheckBox: FC<CheckBoxProps> = ({ isChecked, handleOnChange, label }) => (
-  <label className={style.container}>
+  <label htmlFor="checkbox" className={style.container}>
     {label}
-    <input type="checkbox" checked={isChecked} onChange={handleOnChange} />
+    <input
+      type="checkbox"
+      id="checkbox"
+      checked={isChecked}
+      onChange={handleOnChange}
+    />
     <span className={style.checkmark} />
   </label>
 );

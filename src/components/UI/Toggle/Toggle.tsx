@@ -7,7 +7,11 @@ export interface ToggleProps {
 }
 
 const Toggle: FC<ToggleProps> = ({ isToggle, handleOnChange }) => (
-  <div>
+  <label
+    style={{ background: isToggle ? '#fec602' : '#c3cadc' }}
+    className={style.switch_label}
+    htmlFor="switch-new"
+  >
     <input
       checked={isToggle}
       onChange={handleOnChange}
@@ -15,14 +19,8 @@ const Toggle: FC<ToggleProps> = ({ isToggle, handleOnChange }) => (
       id="switch-new"
       type="checkbox"
     />
-    <label
-      style={{ background: isToggle ? '#fec602' : '#c3cadc' }}
-      className={style.switch_label}
-      htmlFor="switch-new"
-    >
-      <span className={style.switch_button} />
-    </label>
-  </div>
+    <span className={style.switch_button} />
+  </label>
 );
 
 export default Toggle;
