@@ -23,12 +23,22 @@
 }
 
 .buttonLight {
-  box-shadow: var(--currentBoxShadowOutline);
+  background-color: $color-mainLight;
+  box-shadow: $boxShadowLightOutline;
+}
+.buttonLight:active {
+  box-shadow: $boxShadowLightInset;
+  color: $color-orange;
+}
+.buttonDark {
+  background-color: $color-mainDark;
+  box-shadow: $boxShadowDarkOutline;
+}
+.buttonDark:active {
+  box-shadow: $boxShadowDarkInset;
+  color: $color-orange;
 }
 
-.buttonDark {
-  box-shadow: var(--currentBoxShadowOutline);
-}
 .buttonPill {
   border-radius: $pill-radius;
 }

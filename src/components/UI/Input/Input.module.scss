@@ -18,12 +18,13 @@
 
 .inputLight {
   border-radius: $borderRadius;
-  box-shadow: var(--currentBoxShadowInset);
-  // padding: $indent-small;
+  box-shadow: $boxShadowLightInset;
+  background-color: $color-mainLight;
+    // padding: $indent-small;
 }
 
 .inputDark {
-  color: #8a8a8d;
-  background: #262731;
-  box-shadow: inset 2px 2px 5px #20212a, inset -3px -3px 7px #2c2d38;
+  border-radius: $borderRadius;
+  box-shadow: $boxShadowDarkInset;
+  background-color: $color-mainDark;
 }

@@ -1,4 +1,4 @@
-@import '../../styles//variables.scss';
+@import '../../styles//variables.module.scss';
 
 .form {
   margin-left: auto;
@@ -12,14 +12,14 @@
   height: 550px;
   background-color: $color-mainLight;
 
-  box-shadow: 13px 13px 20px $color-grey1, -13px -13px 20px $color-light2;
+  box-shadow: 13px 13px 20px $color-light1, -13px -13px 20px $color-light2;
   border-radius: 40px;
 }
 
 .text {
   margin-top: 5vh;
   font-family: $fontFamily;
-  color: $color-grey3;
+  color: $color-textLight;
   font-size: $fontSize-large;
   font-weight: $fontWeight-normal;
 }

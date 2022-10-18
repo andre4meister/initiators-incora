@@ -12,9 +12,17 @@ const TestPage: FC = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-      <Input type="text" handleOnChange={({ target }) => setInput(target.value)} value={input} placeholder="Input" />
+      <Input
+        type="text"
+        handleOnChange={({ target }) => setInput(target.value)}
+        value={input}
+        placeholder="Input"
+      />
       <Button handleOnClick={() => console.log('click')}>Button</Button>
-      <CheckBox isChecked={checkbox} onChange={() => setCheckbox((prev) => !prev)} />
+      <CheckBox
+        isChecked={checkbox}
+        handleOnChange={() => setCheckbox((prev) => !prev)}
+      />
       {/* <Toggle isToggle={toggle} onChange={() => setToggle((prev) => !prev)} /> */}
       <Calendar />
     </div>
