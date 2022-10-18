@@ -22,19 +22,30 @@ const Sidebar: FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.user}>
-        <NavLink className={({ isActive }) => cn(styles.settings, isActive && styles.settings_active)} to="settings"><SettingOutlined /></NavLink>
-        <div className={styles.avatar}><UserOutlined /></div>
+        <NavLink
+          className={({ isActive }) => cn(styles.settings, isActive && styles.settings_active)}
+          to="settings"
+        >
+          <SettingOutlined />
+        </NavLink>
+        <div className={styles.avatar}>
+          <UserOutlined />
+        </div>
         <h2 className={styles.name}>Firstname Lastname</h2>
       </div>
 
       <div
         className={styles.mockPanel}
         style={{
-          display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 10,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: 10,
         }}
       >
         Change theme
-        <Toggle isToggle={toggle} onChange={handleChangeTheme} />
+        <Toggle isToggle={toggle} handleOnChange={handleChangeTheme} />
       </div>
     </div>
   );

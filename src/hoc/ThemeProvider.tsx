@@ -1,5 +1,10 @@
 import {
-  FC, createContext, ReactNode, useContext, useState, useMemo,
+  FC,
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  useMemo,
 } from 'react';
 import changeTheme from '../utils/changeTheme';
 
@@ -10,30 +15,32 @@ interface ThemeProviderProps {
 
 const ThemeContext = createContext({
   theme: '',
-  handleChangeTheme: (newTheme: ThemeTypes) => { },
+  handleChangeTheme: (newTheme: ThemeTypes) => {},
 });
 
 export const useTheme = () => useContext(ThemeContext);
 
 const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<ThemeTypes>(JSON.parse(localStorage.getItem('theme') || '') as ThemeTypes || 'light');
+  const localTheme: string = localStorage.getItem('theme') || '';
+  const [theme, setTheme] = useState<ThemeTypes>(
+    (JSON.parse(localTheme) as ThemeTypes) || 'light',
+  );
 
   const handleChangeTheme = (newTheme: ThemeTypes) => {
     setTheme(newTheme);
     changeTheme(newTheme);
   };
 
-  const memo = useMemo(() => ({
-    theme,
-    handleChangeTheme,
-  }), [theme]);
+  const memo = useMemo(
+    () => ({
+      theme,
+      handleChangeTheme,
+    }),
+    [theme],
+  );
 
   changeTheme(theme);
 
-  return (
-    <ThemeContext.Provider value={memo}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={memo}>{children}</ThemeContext.Provider>;
 };
 export default ThemeProvider;

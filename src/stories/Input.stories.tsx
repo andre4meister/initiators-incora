@@ -23,6 +23,8 @@ Template.args = {
   handleOnChange: (e: ChangeEvent<HTMLInputElement>) => console.log(e),
   value: '',
   type: 'text',
+  colorMode: 'light',
+  forStorybook: true,
 };
 
 <Story
@@ -46,6 +48,10 @@ Template.args = {
     required: {
       control: { type: 'radio' },
       options: [true, false],
+    },
+    colorMode: {
+      options: ['light', 'dark'],
+      control: { type: 'radio' },
     },
   }}
 />;

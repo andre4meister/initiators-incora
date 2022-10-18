@@ -19,6 +19,8 @@ export const Template: ComponentStory<typeof Button> = (args: ButtonType) => {
 Template.args = {
   handleOnClick: () => console.log('I was pushed'),
   children: 'Button',
+  colorMode: 'light',
+  forStorybook: true,
 };
 
 <Story
@@ -29,6 +31,10 @@ Template.args = {
     },
     handleOnClick: {
       control: '',
+    },
+    colorMode: {
+      options: ['light', 'dark'],
+      control: { type: 'radio' },
     },
   }}
 />;

@@ -8,10 +8,10 @@ import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import TestPage from 'pages/TestPage/TestPage';
 
 const App: FC = () => (
-  <div className={styles.container}>
+  <div>
     <Routes>
       <Route path="/" element={<MainLayaut />}>
-        <Route index element={<TestPage />}>Home</h1>} />
+        <Route index element={<TestPage />} />
         <Route
           path="booking"
           element={<h1 style={{ textAlign: 'center' }}>booking</h1>}
