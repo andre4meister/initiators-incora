@@ -6,6 +6,7 @@ import SettingsPage from 'pages/SettingsPage/SettingsPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import TestPage from 'pages/TestPage/TestPage';
+import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 
 const App: FC = () => (
   <div>
@@ -26,6 +27,7 @@ const App: FC = () => (
       <Route path="register" element={<RegisterPage />} />
 
       <Route path="forgot" element={<ForgotPasswordPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   </div>
 );
