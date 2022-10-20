@@ -2,7 +2,7 @@ export interface InitialLoginValues {
   email: string;
   password: string;
 }
-export interface InitialRegValues {
+export interface InitialRegistrationFormValues {
   firstName: string;
   surname: string;
   password: string;
