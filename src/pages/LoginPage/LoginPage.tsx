@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable object-curly-newline */
+import { useAppDispatch } from 'hooks/reduxHooks';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';
@@ -7,9 +6,13 @@ import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
 import { InitialLoginValues } from 'types/FormTypes';
 import { FC } from 'react';
+import { loginUser } from 'store/user';
+import { useNavigate } from 'react-router-dom';
 import style from './LoginPage.module.scss';
 
 const LoginPage: FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -19,19 +22,22 @@ const LoginPage: FC = () => {
       email: yupPattern('email'),
       password: yupPattern('password'),
     }),
-    onSubmit: (values: InitialLoginValues) => {
-      console.log(JSON.stringify(values, null, 2));
+    onSubmit: async (values: InitialLoginValues) => {
+      await dispatch(loginUser(values))
+        .then(() => {
+          navigate('/', { replace: true });
+        });
     },
   });
 
-  const { handleSubmit, handleChange, values, errors, touched } = formik;
+  const {
+    handleSubmit, handleChange, values, errors, touched,
+  } = formik;
+
   return (
     <form className={style.form} onSubmit={handleSubmit}>
       <h1 className={style.text}>Login</h1>
       <div className={style.form_item}>
-        <label className={style.item} htmlFor="email">
-          Email
-        </label>
         <Input
           placeholder="Enter your email"
           name="email"
@@ -45,9 +51,6 @@ const LoginPage: FC = () => {
         ) : null}
       </div>
       <div className={style.form_item}>
-        <label className={style.item} htmlFor="password">
-          Password
-        </label>
         <Input
           placeholder="Enter your password"
           name="password"
@@ -60,7 +63,10 @@ const LoginPage: FC = () => {
           <div className={style.error}>{errors.password}</div>
         ) : null}
       </div>
-      <Button classes="button-submit" handleOnClick={handleSubmit}>
+      <Button
+        classes="button-submit"
+        handleOnClick={handleSubmit}
+      >
         Submit
       </Button>
     </form>

@@ -1,4 +1,4 @@
-@import '../../styles//variables.scss';
+@import '../../styles//variables.module.scss';
 
 .form {
   margin-left: auto;
@@ -10,16 +10,14 @@
   align-items: center;
   width: 400px;
   height: 550px;
-  background-color: $color-mainLight;
 
-  box-shadow: 13px 13px 20px $color-grey1, -13px -13px 20px $color-light2;
+  box-shadow: var(--currentBoxShadowOutline);
   border-radius: 40px;
 }
 
 .text {
   margin-top: 5vh;
   font-family: $fontFamily;
-  color: $color-grey3;
   font-size: $fontSize-large;
   font-weight: $fontWeight-normal;
 }
@@ -36,7 +34,7 @@
   font-size: 16px;
   line-height: 24px;
 
-  color: #000000;
+  color: var(--currentText);
 }
 
 .error {
@@ -46,5 +44,5 @@
   font-weight: 300;
   font-size: 14px;
   line-height: 21px;
-  color: #d12727;
+  color: $color-orange;
 }

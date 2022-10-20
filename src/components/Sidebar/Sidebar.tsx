@@ -1,13 +1,18 @@
 import cn from 'classnames';
 import { FC, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { UserOutlined, SettingOutlined } from '@ant-design/icons';
+import { useAppSelector } from 'hooks/reduxHooks';
+import AuthService from 'services/authService';
 import Toggle from 'components/UI/Toggle/Toggle';
+import Button from 'components/UI/Button/Button';
 import styles from './Sidebar.module.scss';
 import { useTheme } from '../../hoc/ThemeProvider';
 
 const Sidebar: FC = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const user = useAppSelector((state) => state.user);
   const [toggle, setToggle] = useState<boolean>(theme.theme !== 'light');
 
   const handleChangeTheme = () => {
@@ -19,22 +24,25 @@ const Sidebar: FC = () => {
     }
   };
 
+  const handleLogout = () => {
+    AuthService.logout();
+    navigate('login', { replace: true });
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.user}>
         <NavLink className={({ isActive }) => cn(styles.settings, isActive && styles.settings_active)} to="settings"><SettingOutlined /></NavLink>
         <div className={styles.avatar}><UserOutlined /></div>
-        <h2 className={styles.name}>Firstname Lastname</h2>
+        <h2 className={styles.name}>{`${user.userData.firstName} ${user.userData.lastName}`}</h2>
       </div>
 
-      <div
-        className={styles.mockPanel}
-        style={{
-          display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: 10,
-        }}
-      >
-        Change theme
-        <Toggle isToggle={toggle} onChange={handleChangeTheme} />
+      <div className={styles.mockPanel}>
+        <div>
+          Theme
+          <Toggle isToggle={toggle} handleOnChange={handleChangeTheme} />
+        </div>
+        <Button handleOnClick={handleLogout}>Logout</Button>
       </div>
     </div>
   );
