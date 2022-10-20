@@ -67,6 +67,11 @@
   }
 
   .mockPanel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $indent-medium;
     padding: $indent-small;
     box-shadow: var(--currentBoxShadowOutline);
     border-radius: $borderRadius;
