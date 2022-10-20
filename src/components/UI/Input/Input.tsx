@@ -1,13 +1,10 @@
-import cn from 'classnames';
 import { FC } from 'react';
 import { InputType } from '../../../types/InputTypes';
-import s from './Input.module.scss';
+import styles from './Input.module.scss';
 
 const Input: FC<InputType> = ({
   type,
   name,
-  forStorybook = false,
-  colorMode = 'light',
   classes,
   handleOnChange,
   required,
@@ -20,11 +17,7 @@ const Input: FC<InputType> = ({
     value={value}
     type={type}
     required={required}
-    className={cn({
-      [s.input]: true,
-      [s.inputLight]: colorMode === 'light' && forStorybook,
-      [s.inputDark]: colorMode === 'dark' && forStorybook,
-    })}
+    className={styles.input}
     onChange={handleOnChange}
   />
 );
