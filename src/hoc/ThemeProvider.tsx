@@ -21,9 +21,8 @@ const ThemeContext = createContext({
 export const useTheme = () => useContext(ThemeContext);
 
 const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const localTheme: string = localStorage.getItem('theme') || '';
   const [theme, setTheme] = useState<ThemeTypes>(
-    (JSON.parse(localTheme) as ThemeTypes) || 'light',
+    JSON.parse(localStorage.getItem('theme') as ThemeTypes) as ThemeTypes,
   );
 
   const handleChangeTheme = (newTheme: ThemeTypes) => {

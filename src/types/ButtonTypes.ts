@@ -1,4 +1,4 @@
-import { UIPropsType, ColorModeType } from './CommonTypes';
+import { UIPropsType } from './CommonTypes';
 
 export interface ButtonType extends Partial<UIPropsType> {
   handleOnClick: () => void;
