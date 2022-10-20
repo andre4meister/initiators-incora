@@ -48,3 +48,36 @@
   line-height: 21px;
   color: #d12727;
 }
+
+.forgot {
+  text-decoration: none;
+  transform: translateY(1000%);
+}
+
+.forgot:hover {
+  color: rgb(0, 0, 0);
+}
+
+.forgot_page {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 160px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  height: 300px;
+  background-color: $color-mainLight;
+
+  box-shadow: 13px 13px 20px $color-light1, -13px -13px 20px $color-light2;
+  border-radius: 40px;
+}
+
+.forgot_page_text {
+  margin: 12px 0 16px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 200;
+  color: $color-textLight;
+}

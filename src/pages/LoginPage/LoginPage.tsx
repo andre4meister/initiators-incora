@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable object-curly-newline */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
 import { InitialLoginValues } from 'types/FormTypes';
+import { NavLink } from 'react-router-dom';
 import { FC } from 'react';
 import style from './LoginPage.module.scss';
 
@@ -24,7 +24,9 @@ const LoginPage: FC = () => {
     },
   });
 
-  const { handleSubmit, handleChange, values, errors, touched } = formik;
+  const {
+    handleSubmit, handleChange, values, errors, touched,
+  } = formik;
   return (
     <form className={style.form} onSubmit={handleSubmit}>
       <h1 className={style.text}>Login</h1>
@@ -63,6 +65,9 @@ const LoginPage: FC = () => {
       <Button classes="button-submit" handleOnClick={handleSubmit}>
         Submit
       </Button>
+      <NavLink className={style.forgot} to="/forgot">
+        Forgot your password?
+      </NavLink>
     </form>
   );
 };

@@ -22,9 +22,7 @@ export const useTheme = () => useContext(ThemeContext);
 
 const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
   const localTheme: string = localStorage.getItem('theme') || '';
-  const [theme, setTheme] = useState<ThemeTypes>(
-    (JSON.parse(localTheme) as ThemeTypes) || 'light',
-  );
+  const [theme, setTheme] = useState<ThemeTypes>(localTheme as ThemeTypes);
 
   const handleChangeTheme = (newTheme: ThemeTypes) => {
     setTheme(newTheme);
