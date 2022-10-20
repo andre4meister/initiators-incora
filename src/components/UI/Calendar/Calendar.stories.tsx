@@ -3,32 +3,22 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-props-no-spreading */
 import { Story } from '@storybook/addon-docs/blocks';
-import { ChangeEvent } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { InputType } from 'types/InputTypes';
-import Input from '../components/UI/Input/Input';
+import Calendar from './Calendar';
 
 export default {
-  title: 'Input',
-  component: Input,
-} as ComponentMeta<typeof Input>;
+  title: 'Calendar',
+  component: Calendar,
+} as ComponentMeta<typeof Calendar>;
 
-export const Template: ComponentStory<typeof Input> = (args: InputType) => {
-  return <Input {...args} />;
+export const Template: ComponentStory<typeof Calendar> = (args) => {
+  return <Calendar {...args} />;
 };
 
-Template.args = {
-  placeholder: 'Input placeholder',
-  required: false,
-  handleOnChange: (e: ChangeEvent<HTMLInputElement>) => console.log(e),
-  value: '',
-  type: 'text',
-  colorMode: 'light',
-  forStorybook: true,
-};
+Template.args = {};
 
 <Story
-  name="Input"
+  name="Calendar"
   argTypes={{
     value: {
       options: 'input field',
@@ -43,15 +33,11 @@ Template.args = {
     },
     placeholder: {
       control: { type: 'text' },
-      options: 'Input placeholder',
+      options: 'Calendar placeholder',
     },
     required: {
       control: { type: 'radio' },
       options: [true, false],
-    },
-    colorMode: {
-      options: ['light', 'dark'],
-      control: { type: 'radio' },
     },
   }}
 />;

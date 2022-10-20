@@ -1,4 +1,5 @@
 @import '../../../styles/variables.module.scss';
+@import '../../../styles//index.scss';
 
 .button {
   cursor: pointer;
@@ -20,25 +21,4 @@
   .button:hover {
     color: $color-orange;
   }
-}
-
-.buttonLight {
-  background-color: $color-mainLight;
-  box-shadow: $boxShadowLightOutline;
-}
-.buttonLight:active {
-  box-shadow: $boxShadowLightInset;
-  color: $color-orange;
-}
-.buttonDark {
-  background-color: $color-mainDark;
-  box-shadow: $boxShadowDarkOutline;
-}
-.buttonDark:active {
-  box-shadow: $boxShadowDarkInset;
-  color: $color-orange;
-}
-
-.buttonPill {
-  border-radius: $pill-radius;
 }

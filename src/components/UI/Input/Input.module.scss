@@ -4,27 +4,16 @@
   display: block;
   width: 300px;
   font-weight: $fontWeight-normal;
-  // line-height: 1.5;
   background-clip: padding-box;
   transition: all 0.3s ease-in-out;
   outline: none;
   border: none;
   background-color: var(--currentTheme);
   padding: $indent-small $indent-medium;
+  box-shadow: var(--currentBoxShadowInset);
+  border-radius: $borderRadius;
 }
 .input::placeholder {
   font-weight: $fontWeight-bold;
 }
 
-.inputLight {
-  border-radius: $borderRadius;
-  box-shadow: $boxShadowLightInset;
-  background-color: $color-mainLight;
-    // padding: $indent-small;
-}
-
-.inputDark {
-  border-radius: $borderRadius;
-  box-shadow: $boxShadowDarkInset;
-  background-color: $color-mainDark;
-}

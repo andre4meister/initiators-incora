@@ -3,7 +3,7 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { FC } from 'react';
-import { InitialRegValues } from 'types/FormTypes';
+import { InitialRegistrationFormValues } from 'types/FormTypes';
 import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
@@ -23,7 +23,7 @@ const RegisterPage: FC = () => {
       password: yupPattern('password'),
       confirmPassword: yupPattern('confirmPassword'),
     }),
-    onSubmit: (values: InitialRegValues) => {
+    onSubmit: (values: InitialRegistrationFormValues) => {
       console.log(JSON.stringify(values, null, 2));
     },
   });

@@ -6,9 +6,10 @@ import SettingsPage from 'pages/SettingsPage/SettingsPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import TestPage from 'pages/TestPage/TestPage';
+import styles from './styles/App.module.scss';
 
 const App: FC = () => (
-  <div>
+  <div id="app" className={styles.app}>
     <Routes>
       <Route path="/" element={<MainLayaut />}>
         <Route index element={<TestPage />} />
