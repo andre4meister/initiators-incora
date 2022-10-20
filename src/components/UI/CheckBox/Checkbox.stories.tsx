@@ -5,28 +5,32 @@
 import { Story } from '@storybook/addon-docs/blocks';
 import { ChangeEvent } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Toggle, { ToggleProps } from '../components/UI/Toggle/Toggle';
+import Checkbox, { CheckBoxProps } from './CheckBox';
 
 export default {
-  title: 'Toggle',
-  component: Toggle,
-} as ComponentMeta<typeof Toggle>;
+  title: 'Checkbox',
+  component: Checkbox,
+} as ComponentMeta<typeof Checkbox>;
 
-export const Template: ComponentStory<typeof Toggle> = (args: ToggleProps) => (
-  <Toggle {...args} />
-);
+export const Template: ComponentStory<typeof Checkbox> = (
+  args: CheckBoxProps,
+) => <Checkbox {...args} />;
 
 Template.args = {
-  isToggle: false,
-  handleOnChange: () => console.log('toggled'),
+  isChecked: false,
+  handleOnChange: (e: ChangeEvent<HTMLInputElement>) => console.log(e),
+  label: '',
 };
 
 <Story
-  name="Toggle"
+  name="Checkbox"
   argTypes={{
-    isToggle: {
+    isChecked: {
       options: [true, false],
       control: { type: 'toggle' },
+    },
+    label: {
+      control: { type: 'text' },
     },
     handleOnChange: {
       control: '',

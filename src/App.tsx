@@ -7,27 +7,30 @@ import LoginPage from 'pages/LoginPage/LoginPage';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import TestPage from 'pages/TestPage/TestPage';
 import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
+import styles from './styles/App.module.scss';
 
 const App: FC = () => (
-  <Routes>
-    <Route path="/" element={<MainLayaut />}>
-      <Route index element={<TestPage />} />
-      <Route
-        path="booking"
-        element={<h1 style={{ textAlign: 'center' }}>booking</h1>}
-      />
-      <Route
-        path="map"
-        element={<h1 style={{ textAlign: 'center' }}>map</h1>}
-      />
-      <Route path="settings" element={<SettingsPage />} />
-    </Route>
-    <Route path="login" element={<LoginPage />} />
-    <Route path="register" element={<RegisterPage />} />
+  <div id="app" className={styles.app}>
+    <Routes>
+      <Route path="/" element={<MainLayaut />}>
+        <Route index element={<TestPage />} />
+        <Route
+          path="booking"
+          element={<h1 style={{ textAlign: 'center' }}>booking</h1>}
+        />
+        <Route
+          path="map"
+          element={<h1 style={{ textAlign: 'center' }}>map</h1>}
+        />
+        <Route path="settings" element={<SettingsPage />} />
+      </Route>
+      <Route path="login" element={<LoginPage />} />
+      <Route path="register" element={<RegisterPage />} />
 
-    <Route path="forgot" element={<ForgotPasswordPage />} />
-    <Route path="*" element={<NotFoundPage />} />
-  </Routes>
+      <Route path="forgot" element={<ForgotPasswordPage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
+  </div>
 );
 
 export default App;

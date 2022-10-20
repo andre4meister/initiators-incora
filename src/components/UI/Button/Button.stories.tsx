@@ -5,7 +5,7 @@
 import { Story } from '@storybook/addon-docs/blocks';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ButtonType } from 'types/ButtonTypes';
-import Button from '../components/UI/Button/Button';
+import Button from './Button';
 
 export default {
   title: 'Button',
@@ -19,8 +19,6 @@ export const Template: ComponentStory<typeof Button> = (args: ButtonType) => {
 Template.args = {
   handleOnClick: () => console.log('I was pushed'),
   children: 'Button',
-  colorMode: 'light',
-  forStorybook: true,
 };
 
 <Story
@@ -31,10 +29,6 @@ Template.args = {
     },
     handleOnClick: {
       control: '',
-    },
-    colorMode: {
-      options: ['light', 'dark'],
-      control: { type: 'radio' },
     },
   }}
 />;

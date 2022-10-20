@@ -15,13 +15,17 @@ interface ThemeProviderProps {
 
 const ThemeContext = createContext({
   theme: '',
-  handleChangeTheme: (newTheme: ThemeTypes) => { },
+  handleChangeTheme: (newTheme: ThemeTypes) => {},
 });
 
 export const useTheme = () => useContext(ThemeContext);
 
 const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<ThemeTypes>(JSON.parse(localStorage.getItem('theme') || JSON.stringify('light')) as ThemeTypes);
+  const [theme, setTheme] = useState<ThemeTypes>(
+    JSON.parse(
+      localStorage.getItem('theme') || JSON.stringify('light'),
+    ) as ThemeTypes,
+  );
 
   const handleChangeTheme = (newTheme: ThemeTypes) => {
     setTheme(newTheme);
@@ -38,6 +42,8 @@ const ThemeProvider: FC<ThemeProviderProps> = ({ children }) => {
 
   changeTheme(theme);
 
-  return <ThemeContext.Provider value={context}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={context}>{children}</ThemeContext.Provider>
+  );
 };
 export default ThemeProvider;
