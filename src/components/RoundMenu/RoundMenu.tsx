@@ -1,40 +1,33 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { SettingOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
-import s from './RoundMenu.module.scss';
-import { ColorModeType } from '../../types/CommonTypes';
+import { PlusOutlined } from '@ant-design/icons';
+import Modal from 'components/Modal/Modal';
+import { FC } from 'react';
+import styles from './RoundMenu.module.scss';
 
-const RoundMenu = () => {
-  const [colorMode, setColorMode] = useState<ColorModeType>('light');
-  const [menuChecked, setMenuChecked] = useState<boolean>(false);
+export interface RoundMenuProps {
+  isOpen: boolean;
+  isLocked: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}
 
+const RoundMenu: FC<RoundMenuProps> = ({ isOpen, isLocked, setIsOpen }) => {
+  const onClose = () => {
+    setIsOpen(false);
+    const appNode = document.getElementById('app') as HTMLDivElement | null;
+    if (appNode) {
+      appNode.style.opacity = '1';
+    }
+  };
   return (
-    <div className={s.roundMenuBody}>
-      <nav className={s.menu}>
-        <input
-          checked={menuChecked}
-          onChange={() => setMenuChecked(!menuChecked)}
-          className={s.menuToggler}
-          type="checkbox"
-        />
-        <ul>
-          <li className={s.menuItem}>
-            <NavLink to="/settings">
-              <SettingOutlined />
-            </NavLink>
-          </li>
-          <li className={s.menuItem}>
-            <NavLink to="/calendar">
-              <PlusOutlined />
-            </NavLink>
-          </li>
-          <li className={s.menuItem}>
-            <NavLink to="profile">
-              <UserOutlined />
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
+    <div className={styles.roundMenuBody}>
+      <PlusOutlined
+        className={styles.plusIcon}
+        onClick={() => setIsOpen(!isOpen)}
+      />
+      {isOpen && (
+        <Modal open={isOpen} locked={isLocked} onClose={onClose}>
+          <div>Modal Temporary</div>
+        </Modal>
+      )}
     </div>
   );
 };

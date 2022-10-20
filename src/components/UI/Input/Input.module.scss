@@ -16,15 +16,3 @@
 .input::placeholder {
   font-weight: $fontWeight-bold;
 }
-
-.inputLight {
-  border-radius: $borderRadius;
-  box-shadow: $boxShadowLightInset;
-  background-color: $color-mainLight;
-}
-
-.inputDark {
-  border-radius: $borderRadius;
-  box-shadow: $boxShadowDarkInset;
-  background-color: $color-mainDark;
-}

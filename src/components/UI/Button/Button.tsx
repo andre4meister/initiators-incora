@@ -1,23 +1,12 @@
 import { FC } from 'react';
 import cn from 'classnames';
 import { ButtonType } from '../../../types/ButtonTypes';
-import s from './Button.module.scss';
+import styles from './Button.module.scss';
 
-const Button: FC<ButtonType> = ({
-  handleOnClick,
-  children,
-  forStorybook = false,
-  colorMode = 'light',
-  classes,
-}) => (
+const Button: FC<ButtonType> = ({ handleOnClick, children, classes }) => (
   <button
     type="button"
-    className={cn({
-      [s.button]: true,
-      [s.buttonLight]: colorMode === 'light' && forStorybook,
-      [s.buttonDark]: colorMode === 'dark' && forStorybook,
-      [s.buttonPill]: false,
-    }, classes)}
+    className={cn(styles.button, classes)}
     onClick={() => handleOnClick()}
   >
     {children}

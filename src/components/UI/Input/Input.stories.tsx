@@ -5,21 +5,28 @@
 import { Story } from '@storybook/addon-docs/blocks';
 import { ChangeEvent } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Calendar from '../components/UI/Calendar/Calendar';
+import { InputType } from 'types/InputTypes';
+import Input from './Input';
 
 export default {
-  title: 'Calendar',
-  component: Calendar,
-} as ComponentMeta<typeof Calendar>;
+  title: 'Input',
+  component: Input,
+} as ComponentMeta<typeof Input>;
 
-export const Template: ComponentStory<typeof Calendar> = (args) => {
-  return <Calendar {...args} />;
+export const Template: ComponentStory<typeof Input> = (args: InputType) => {
+  return <Input {...args} />;
 };
 
-Template.args = {};
+Template.args = {
+  placeholder: 'Input placeholder',
+  required: false,
+  handleOnChange: (e: ChangeEvent<HTMLInputElement>) => console.log(e),
+  value: '',
+  type: 'text',
+};
 
 <Story
-  name="Calendar"
+  name="Input"
   argTypes={{
     value: {
       options: 'input field',
@@ -34,7 +41,7 @@ Template.args = {};
     },
     placeholder: {
       control: { type: 'text' },
-      options: 'Calendar placeholder',
+      options: 'Input placeholder',
     },
     required: {
       control: { type: 'radio' },
