@@ -6,10 +6,6 @@
     "@ant-design/icons": "^4.7.0",
     "@reduxjs/toolkit": "^1.8.5",
     "@storybook/react": "^6.5.12",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
     "@types/node": "^16.11.64",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
@@ -19,11 +15,12 @@
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
+    "redux": "^4.2.0",
     "sass": "^1.55.0",
     "typescript": "^4.8.4",
-    "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
   "scripts": {
@@ -37,7 +34,8 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lintfix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "server": "nodemon ./src/mockServer/index.js"
   },
   "browserslist": {
     "production": [
@@ -72,9 +70,10 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-storybook": "^0.6.6",
+    "express": "^4.18.2",
+    "express-cors": "^0.0.3",
     "gh-pages": "^4.0.0",
-    "prop-types": "^15.8.1",
-    "webpack": "^5.74.0"
+    "nodemon": "^2.0.20"
   },
   "eslintConfig": {
     "overrides": [

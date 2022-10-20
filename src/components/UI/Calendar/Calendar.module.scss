@@ -5,6 +5,7 @@ $dayHeight: 40px;
 
 .container {
   user-select: none;
+  width: 400px;
 
   .monthAndYear {
     display: flex;
@@ -60,19 +61,19 @@ $dayHeight: 40px;
     border-radius: $borderRadius;
     box-shadow: var(--currentBoxShadowOutline);
 
-    .weekDays {
-      display: grid;
-      place-items: center;
-      grid-template-columns: repeat(7, 1fr);
-      font-weight: $fontWeight-bold;
-    }
-
     .days {
       display: grid;
       place-items: center;
       gap: 4px;
       grid-template-columns: repeat(7, 1fr);
-      grid-template-rows: repeat(6, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+
+      .weekDays {
+        display: grid;
+        place-items: center;
+        grid-template-columns: repeat(7, 1fr);
+        font-weight: $fontWeight-bold;
+      }
 
       .day {
         display: flex;
@@ -82,7 +83,7 @@ $dayHeight: 40px;
         height: $dayHeight;
         padding: $indent-small;
         border-radius: 50%;
-        transition: $transition;
+        transition: background-color $transition;
         cursor: pointer;
       }
 

@@ -1,6 +1,8 @@
 {
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint/eslint-plugin"],
+  "plugins": [
+    "@typescript-eslint/eslint-plugin"
+  ],
   "extends": [
     "react-app",
     "airbnb",
@@ -13,13 +15,28 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "linebreak-style": ["warn", "windows"],
+    "linebreak-style": [
+      "warn",
+      "windows"
+    ],
     "react/react-in-jsx-scope": "off",
     "react/function-component-definition": [
       "error",
       {
         "namedComponents": "arrow-function",
         "unnamedComponents": "arrow-function"
+      }
+    ],
+    "no-restricted-imports": "off",
+    "@typescript-eslint/no-restricted-imports": [
+      "warn",
+      {
+        "name": "react-redux",
+        "importNames": [
+          "useSelector",
+          "useDispatch"
+        ],
+        "message": "Use typed hooks `useAppDispatch` and `useAppSelector` instead."
       }
     ]
   }

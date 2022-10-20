@@ -1,6 +1,7 @@
 @import '../../../styles/variables.module.scss';
 
 .button {
+  width: fit-content;
   cursor: pointer;
   letter-spacing: 0.025em;
   font-weight: $fontWeight-bold;
@@ -9,7 +10,7 @@
   border: none;
   background-color: var(--currentTheme);
   box-shadow: var(--currentBoxShadowOutline);
-  transition: $transition;
+  transition: color $transition;
 }
 
 .button:active {

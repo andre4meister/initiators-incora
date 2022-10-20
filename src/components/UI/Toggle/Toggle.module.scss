@@ -16,6 +16,7 @@
   position: relative;
   box-shadow: var(--currentBoxShadowOutline);
   border-radius: 40px;
+  user-select: none;
 }
 
 .switch_label .switch_button {

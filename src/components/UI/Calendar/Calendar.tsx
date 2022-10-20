@@ -50,10 +50,10 @@ const Calendar: React.FunctionComponent = React.memo(() => {
       </div>
 
       <div className={styles.daysPanel}>
-        <div className={styles.weekDays}>
-          {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => <span key={day}>{day}</span>)}
-        </div>
         <div className={styles.days}>
+          {/* <div className={styles.weekDays}> */}
+          {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => <span key={day}>{day}</span>)}
+          {/* </div> */}
           {calendar.map((day) => (
             <div
               className={
