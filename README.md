@@ -6,10 +6,6 @@ To setup over web application you should complete next steps:
 
    ### git clone https://github.com/andre4meister/asm-incora.git
 
-   or
-
-   ### git clone git@github.com:andre4meister/asm-incora.git
-
 2. Install all dependencies using a command:
 
    ### npm install
@@ -30,7 +26,12 @@ To setup over web application you should complete next steps:
 
    ### npm run start8000
 
-5. For using storybook to check how our UI components look likes, use the command:
+5. Start the temporary server for log in:
+   Use such data:
+   email: test@incorainc.com
+   password: 12345678
+   ### npm run server
+6. For using storybook to check how our UI components look likes, use the command:
    ### npm run storybook
 
 If the app doesn`t work, please be patient and write on email darknes1237893@gmail.com.
