@@ -1,0 +1,84 @@
+@import '../../styles/variables.module.scss';
+
+
+.container {
+    display: grid;
+    margin: 10px auto;
+    justify-content: center;
+}
+.containerTile {
+    grid-template-columns: 24% 24% 24% 24%;
+    grid-gap: 10px;
+}
+
+.containerList {
+    grid-template-columns: 90%;
+    grid-row-gap: 15px;
+}
+
+.changeDisplayMethodButton {
+    margin: -15px -15px 0 0;
+    position: absolute;
+    justify-self: end;
+    min-width: max-content;
+}
+.changeButton {
+    font-size: 26px;
+    margin: 0 5px;
+    color: var(--currentText);
+    opacity: 0.5;
+    transition: $transition;
+    &:hover {
+        transform: scale(1.04);
+        opacity: 1;
+    }
+}
+.activeButton {
+    svg {
+    fill: $color-orange;
+    }
+    color: $color-orange;
+}
+
+.room {
+    border-radius: $borderRadius;
+    box-shadow: var(--currentBoxShadowOutline);
+    background-color: var(--currentTheme);
+    padding: 5px;
+    min-height: 100px;
+    font-size: 0.8em;
+    transition: all 0.2s linear;
+    //WIP: there are some problems, but it`ll be improved later
+    &:hover {
+        transform: scale(1.04);
+        // box-shadow: var(--currentBoxShadowInset);
+    }
+}
+.name {
+    margin: 0 auto;
+}
+.features {
+    display: flex;
+    justify-content: flex-start;
+}
+.featureIcon {
+    margin: 3px;
+}
+
+@media screen and (max-width: 1100px) {
+    .containerTile {
+        grid-template-columns: 33% 33% 33%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .containerTile {
+        grid-template-columns: 45% 45%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .containerTile {
+        grid-template-columns: 100%;
+    }
+}

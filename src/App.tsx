@@ -6,6 +6,7 @@ import SettingsPage from 'pages/SettingsPage/SettingsPage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import TestPage from 'pages/TestPage/TestPage';
+import Dashboard from 'pages/Dashboard/Dashboard';
 import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 import styles from './styles/App.module.scss';
 
@@ -13,7 +14,8 @@ const App: FC = () => (
   <div id="app" className={styles.app}>
     <Routes>
       <Route path="/" element={<MainLayaut />}>
-        <Route index element={<TestPage />} />
+        <Route path="test" element={<TestPage />} />
+        <Route index element={<Dashboard />} />
         <Route
           path="booking"
           element={<h1 style={{ textAlign: 'center' }}>booking</h1>}
