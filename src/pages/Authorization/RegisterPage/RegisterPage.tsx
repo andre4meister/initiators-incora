@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable object-curly-newline */
 import { useFormik } from 'formik';
@@ -7,7 +8,7 @@ import { InitialRegistrationFormValues } from 'types/FormTypes';
 import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
-import styles from '../LoginPage/LoginPage.module.scss';
+import styles from '../Authorization.module.scss';
 
 const RegisterPage: FC = () => {
   const formik = useFormik({
@@ -31,7 +32,15 @@ const RegisterPage: FC = () => {
   const { handleSubmit, handleChange, values, errors, touched } = formik;
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleSubmit();
+          }
+        }}
+        onSubmit={handleSubmit}
+        className={styles.form}
+      >
         <h1 className={styles.text}>Create account</h1>
         <div className={styles.form_items}>
           <div className={styles.form_item}>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable object-curly-newline */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -11,7 +12,7 @@ import { InitialLoginValues } from 'types/FormTypes';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FC } from 'react';
 import { loginUser } from 'store/user';
-import style from './LoginPage.module.scss';
+import style from '../Authorization.module.scss';
 
 const LoginPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +36,15 @@ const LoginPage: FC = () => {
   const { handleSubmit, handleChange, values, errors, touched } = formik;
   return (
     <div className={style.container}>
-      <form className={style.form} onSubmit={handleSubmit}>
+      <form
+        className={style.form}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleSubmit();
+          }
+        }}
+        onSubmit={handleSubmit}
+      >
         <h1 className={style.text}>Login</h1>
         <div className={style.form_items}>
           <div className={style.form_item}>
