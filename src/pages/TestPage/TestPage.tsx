@@ -2,6 +2,7 @@ import Button from 'components/UI/Button/Button';
 import Calendar from 'components/UI/Calendar/Calendar';
 import CheckBox from 'components/UI/CheckBox/CheckBox';
 import Input from 'components/UI/Input/Input';
+import Upload from 'components/UI/Upload/Upload';
 import { FC, useState } from 'react';
 
 const TestPage: FC = () => {
@@ -19,6 +20,7 @@ const TestPage: FC = () => {
       <Button handleOnClick={() => console.log('click')}>Button</Button>
       <CheckBox isChecked={checkbox} handleOnChange={() => setCheckbox((prev) => !prev)} />
       <Calendar />
+      <Upload />
     </div>
   );
 };
