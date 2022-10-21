@@ -7,6 +7,7 @@ import LoginPage from 'pages/LoginPage/LoginPage';
 import RegisterPage from 'pages/RegisterPage/RegisterPage';
 import TestPage from 'pages/TestPage/TestPage';
 import Dashboard from 'pages/Dashboard/Dashboard';
+import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 import styles from './styles/App.module.scss';
 
 const App: FC = () => (
@@ -29,6 +30,7 @@ const App: FC = () => (
       <Route path="register" element={<RegisterPage />} />
 
       <Route path="forgot" element={<ForgotPasswordPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   </div>
 );

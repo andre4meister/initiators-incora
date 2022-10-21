@@ -46,7 +46,6 @@ const user = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.userData = action.payload;
         state.status = true;
-        localStorage.setItem('isAuth', JSON.stringify(true));
       });
   },
 });

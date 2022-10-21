@@ -25,10 +25,14 @@ export default class AuthService {
       throw new Error(respose.statusText);
     }
 
+    localStorage.setItem('isAuth', JSON.stringify(true));
+    localStorage.setItem('userData', JSON.stringify(respose.parsedBody));
+
     return respose;
   }
 
   static logout() {
     localStorage.setItem('isAuth', JSON.stringify(false));
+    localStorage.setItem('userData', JSON.stringify({}));
   }
 }

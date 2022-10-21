@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable object-curly-newline */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';
@@ -22,7 +21,9 @@ const GetAccessPage: FC = () => {
     },
   });
 
-  const { handleSubmit, handleChange, values, errors, touched } = formik;
+  const {
+    handleSubmit, handleChange, values, errors, touched,
+  } = formik;
   return (
     <form className={style.form} onSubmit={handleSubmit}>
       <h1 className={style.text}>Login</h1>

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable object-curly-newline */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -5,9 +8,9 @@ import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
 import { InitialLoginValues } from 'types/FormTypes';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { FC } from 'react';
 import { loginUser } from 'store/user';
-import { useNavigate } from 'react-router-dom';
 import style from './LoginPage.module.scss';
 
 const LoginPage: FC = () => {
@@ -23,17 +26,13 @@ const LoginPage: FC = () => {
       password: yupPattern('password'),
     }),
     onSubmit: async (values: InitialLoginValues) => {
-      await dispatch(loginUser(values))
-        .then(() => {
-          navigate('/', { replace: true });
-        });
+      await dispatch(loginUser(values)).then(() => {
+        navigate('/', { replace: true });
+      });
     },
   });
 
-  const {
-    handleSubmit, handleChange, values, errors, touched,
-  } = formik;
-
+  const { handleSubmit, handleChange, values, errors, touched } = formik;
   return (
     <div className={style.container}>
       <form className={style.form} onSubmit={handleSubmit}>
@@ -66,12 +65,12 @@ const LoginPage: FC = () => {
             ) : null}
           </div>
         </div>
-        <Button
-          classes={style.button_submit}
-          handleOnClick={handleSubmit}
-        >
+        <Button classes={style.button_submit} handleOnClick={handleSubmit}>
           Submit
         </Button>
+        <NavLink className={style.forgot} to="/forgot">
+          Forgot your password?
+        </NavLink>
       </form>
     </div>
   );

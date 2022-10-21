@@ -33,7 +33,7 @@ const RegisterPage: FC = () => {
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={styles.text}>Create account</h1>
-        <div className={styles.form_Items}>
+        <div className={styles.form_items}>
           <div className={styles.form_item}>
             <label className={styles.item} htmlFor="firstName">
               Name
