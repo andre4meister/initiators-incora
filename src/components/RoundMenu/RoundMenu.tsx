@@ -1,4 +1,4 @@
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined } from '@ant-design/icons';
 import Modal from 'components/Modal/Modal';
 import { FC } from 'react';
 import styles from './RoundMenu.module.scss';
@@ -19,7 +19,7 @@ const RoundMenu: FC<RoundMenuProps> = ({ isOpen, isLocked, setIsOpen }) => {
   };
   return (
     <div className={styles.roundMenuBody}>
-      <PlusOutlined
+      <PlusCircleOutlined
         className={styles.plusIcon}
         onClick={() => setIsOpen(!isOpen)}
       />

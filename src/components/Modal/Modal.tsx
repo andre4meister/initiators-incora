@@ -1,7 +1,7 @@
 import React, {
   FC, ReactNode, useCallback, useRef, useEffect,
 } from 'react';
-
+import { CloseOutlined } from '@ant-design/icons';
 import styles from './Modal.module.scss';
 import ReactPortal from './ReactPortal';
 
@@ -12,7 +12,7 @@ interface ModalProps {
   children: ReactNode;
 }
 
-export const Modal: FC<ModalProps> = ({
+const Modal: FC<ModalProps> = ({
   open,
   locked,
   onClose,
@@ -34,36 +34,40 @@ export const Modal: FC<ModalProps> = ({
     if (!open && el) el.close();
   }, [open]);
 
+  const onClickOutsideClose = (e: React.MouseEvent<Element, MouseEvent>) => {
+    const dial = document.getElementById('dialog');
+    if (e.target === dial) onClose();
+  };
+
   useEffect(() => {
     const closeOnEscapeKey = (e: KeyboardEvent) => (e.key === 'Escape' ? onClose() : null);
-    const appNode = document.getElementById('app') as HTMLDivElement | null;
-
-    appNode?.addEventListener('click', () => onClose());
     document.body.addEventListener('keydown', closeOnEscapeKey);
-    if (appNode) {
-      appNode.style.opacity = '0.4';
-    }
+
     return () => {
       document.body.removeEventListener('keydown', closeOnEscapeKey);
-      appNode?.removeEventListener('click', () => onClose());
-      if (appNode) {
-        appNode.style.opacity = '1';
-      }
     };
   }, [onClose, open]);
 
   return (
     <ReactPortal>
-      <dialog
-        ref={modalRef}
+      <div
+        id="dialog"
         className={styles.modal}
-        onClose={onClose}
-        onCancel={onCancel}
-        onAnimationEnd={onAnimEnd}
-        open={open}
+        onClick={(e: React.MouseEvent<Element, MouseEvent>) => onClickOutsideClose(e)}
+        role="none"
       >
-        <div className={styles.modal__container}>{children}</div>
-      </dialog>
+        <dialog
+          className={styles.modal__container}
+          ref={modalRef}
+          onClose={onClose}
+          onCancel={onCancel}
+          onAnimationEnd={onAnimEnd}
+          open={open}
+        >
+          <CloseOutlined className={styles.closeIcon} onClick={onClose} />
+          {children}
+        </dialog>
+      </div>
     </ReactPortal>
   );
 };

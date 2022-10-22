@@ -7,12 +7,12 @@
   min-width: 50px;
   min-height: 50px;
   border-radius: $circle;
-  background: var(--currentTheme);
   cursor: pointer;
-  box-shadow: var(--currentBoxShadowOutline);
-  z-index: 1000;
-  &:active {
-    box-shadow: var(--currentBoxShadowInset);
+  z-index: 39;
+  opacity: 0.5;
+  transition: $transition;
+  &:hover {
+    opacity: 1;
   }
 }
 
