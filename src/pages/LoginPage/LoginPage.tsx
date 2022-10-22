@@ -26,9 +26,8 @@ const LoginPage: FC = () => {
       password: yupPattern('password'),
     }),
     onSubmit: async (values: InitialLoginValues) => {
-      await dispatch(loginUser(values)).then(() => {
-        navigate('/', { replace: true });
-      });
+      await dispatch(loginUser((values)));
+      navigate('/');
     },
   });
 
