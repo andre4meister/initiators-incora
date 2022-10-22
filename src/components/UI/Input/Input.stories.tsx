@@ -5,7 +5,7 @@
 import { Story } from '@storybook/addon-docs/blocks';
 import { ChangeEvent } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { InputType } from 'types/InputTypes';
+import { InputProps } from 'types/InputTypes';
 import Input from './Input';
 
 export default {
@@ -13,7 +13,7 @@ export default {
   component: Input,
 } as ComponentMeta<typeof Input>;
 
-export const Template: ComponentStory<typeof Input> = (args: InputType) => {
+export const Template: ComponentStory<typeof Input> = (args: InputProps) => {
   return <Input {...args} />;
 };
 

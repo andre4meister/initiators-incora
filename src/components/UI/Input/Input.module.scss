@@ -1,5 +1,9 @@
 @import '../../../styles/variables.module.scss';
 
+.inputContainer {
+  position: relative;
+  display: flex;
+}
 .input {
   display: block;
   width: 300px;
@@ -15,4 +19,10 @@
 
 .input::placeholder {
   font-weight: $fontWeight-bold;
+}
+
+.showPasswordButton {
+  position: absolute;
+  left: 275px;
+  top: 10px;
 }

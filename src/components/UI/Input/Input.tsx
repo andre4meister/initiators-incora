@@ -1,8 +1,9 @@
-import { FC } from 'react';
-import { InputType } from '../../../types/InputTypes';
+import { FC, useState } from 'react';
+import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import { InputProps, InputTypes } from '../../../types/InputTypes';
 import styles from './Input.module.scss';
 
-const Input: FC<InputType> = ({
+const Input: FC<InputProps> = ({
   type,
   name,
   classes,
@@ -10,16 +11,33 @@ const Input: FC<InputType> = ({
   required,
   placeholder,
   value,
-}) => (
-  <input
-    name={name}
-    placeholder={placeholder}
-    value={value}
-    type={type}
-    required={required}
-    className={styles.input}
-    onChange={handleOnChange}
-  />
-);
+}) => {
+  const [inputType, setInputType] = useState<InputTypes>('password');
+  return (
+    <div className={styles.inputContainer}>
+      <input
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        type={type === 'password' ? inputType : type}
+        required={required}
+        className={styles.input}
+        onChange={handleOnChange}
+      />
+      {type === 'password'
+        && (inputType === 'password' ? (
+          <EyeOutlined
+            className={styles.showPasswordButton}
+            onClick={() => setInputType('text')}
+          />
+        ) : (
+          <EyeInvisibleOutlined
+            className={styles.showPasswordButton}
+            onClick={() => setInputType('password')}
+          />
+        ))}
+    </div>
+  );
+};
 
 export default Input;
