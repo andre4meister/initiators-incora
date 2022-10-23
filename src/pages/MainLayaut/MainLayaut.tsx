@@ -9,9 +9,6 @@ const MainLayaut: FC = () => {
   const isAuth = JSON.parse(
     localStorage.getItem('isAuth') || 'false',
   ) as boolean;
-  // WIP, these useState`s will be deleted when we have redux
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isLocked, setIsLocked] = useState<boolean>(false);
 
   if (!isAuth) {
     return <Navigate to="login" />;
@@ -21,7 +18,7 @@ const MainLayaut: FC = () => {
       <section className={styles.content}>
         <Outlet />
         <NavMenu classes={styles.menu} />
-        <RoundMenu isOpen={isOpen} isLocked={isLocked} setIsOpen={setIsOpen} />
+        <RoundMenu />
       </section>
       <Sidebar />
     </main>

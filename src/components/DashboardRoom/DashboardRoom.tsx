@@ -22,11 +22,14 @@ const DashboardRoom: FC<RoomType> = ({
   tv,
 }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
+  const onHover = () => {
+    setIsHovered(true);
+  };
 
   return (
     <div
       className={styles.room}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={onHover}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div>
