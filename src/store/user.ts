@@ -1,7 +1,6 @@
 // This rule disabled for changing extraredusers states
 /* eslint-disable no-param-reassign */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { InitialLoginValues } from 'types/FormTypes';
 import { User } from 'types/dataTypes';
 import AuthService from 'services/authService';
 
@@ -10,6 +9,11 @@ interface FetchUser {
   status: boolean
   error: string
 }
+
+type LoginValues = {
+  email: string
+  password: string
+};
 
 const initialState: FetchUser = {
   userData: {
@@ -26,14 +30,14 @@ const initialState: FetchUser = {
 
 export const loginUser = createAsyncThunk(
   'user/loginUser',
-  async (data: InitialLoginValues, { rejectWithValue }) => {
-    const res = await AuthService.login(data.email, data.password);
+  async (values: LoginValues, { rejectWithValue }) => {
+    const res = await AuthService.login(values.email, values.password);
 
-    if (!res.ok) {
+    if (res.statusText !== 'OK') {
       return rejectWithValue(res.statusText);
     }
 
-    return res.parsedBody as User;
+    return res.data;
   },
 );
 
