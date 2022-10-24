@@ -1,34 +1,33 @@
 import { User } from 'types/dataTypes';
-
-interface FetchResponse<T> extends Response {
-  parsedBody?: T
-  status: number
-}
+import axios, { AxiosResponse } from 'axios';
 
 export default class AuthService {
-  static async login(email: string, password: string): Promise<FetchResponse<User>> {
-    const respose: FetchResponse<User> = await fetch('http://localhost:5000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
+  static async login(email: string, password: string): Promise<AxiosResponse<User>> {
     try {
-      respose.parsedBody = await respose.json() as User;
+      const respose = await axios({
+        method: 'POST',
+        url: 'http://localhost:5000/login',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        data: JSON.stringify({ email, password }),
+      });
+
+      if (respose.statusText !== 'OK') {
+        throw new Error(respose.statusText);
+      }
+
+      localStorage.setItem('isAuth', JSON.stringify(true));
+      localStorage.setItem('userData', JSON.stringify(respose.data));
+
+      return respose;
     } catch (err) {
-      console.error(err);
+      if (axios.isAxiosError(err)) {
+        throw new Error('Axios error', err);
+      } else {
+        throw new Error('Unexpected error', err as Error);
+      }
     }
-
-    if (!respose.ok) {
-      throw new Error(respose.statusText);
-    }
-
-    localStorage.setItem('isAuth', JSON.stringify(true));
-    localStorage.setItem('userData', JSON.stringify(respose.parsedBody));
-
-    return respose;
   }
 
   static logout() {
