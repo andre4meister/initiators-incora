@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import Sidebar from 'components/Sidebar/Sidebar';
 import NavMenu from 'components/NavMenu/NavMenu';
@@ -17,7 +17,7 @@ const MainLayaut: FC = () => {
     <main className={styles.container}>
       <section className={styles.content}>
         <Outlet />
-        <RoundMenu isOpen={isOpen} isLocked={isLocked} setIsOpen={setIsOpen} />
+        <RoundMenu />
       </section>
       <div className={styles.menuContainer}>
         <NavMenu classes={styles.menu} />

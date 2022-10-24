@@ -17,7 +17,6 @@ const Modal: FC<ModalProps> = ({
   locked,
   onClose,
   children,
-  ...props
 }) => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
 

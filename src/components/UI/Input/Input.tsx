@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { FC, useState } from 'react';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { InputProps, InputTypes } from '../../../types/InputTypes';
@@ -14,7 +15,7 @@ const Input: FC<InputProps> = ({
 }) => {
   const [inputType, setInputType] = useState<InputTypes>('password');
   return (
-    <div className={styles.inputContainer}>
+    <div className={cn(styles.inputContainer, classes)}>
       <input
         name={name}
         placeholder={placeholder}

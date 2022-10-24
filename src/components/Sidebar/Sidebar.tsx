@@ -3,7 +3,6 @@ import { FC, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { UserOutlined, SettingOutlined } from '@ant-design/icons';
 import { User } from 'types/dataTypes';
-import { useAppSelector } from 'hooks/reduxHooks';
 import AuthService from 'services/authService';
 import Toggle from 'components/UI/Toggle/Toggle';
 import Button from 'components/UI/Button/Button';
@@ -13,7 +12,6 @@ import { useTheme } from '../../hoc/ThemeProvider';
 const Sidebar: FC = () => {
   const themeContext = useTheme();
   const navigate = useNavigate();
-  // const user = useAppSelector((state) => state.user.userData);
   const user = JSON.parse(localStorage.getItem('userData') || JSON.stringify({})) as User;
   const [toggle, setToggle] = useState<boolean>(themeContext.theme !== 'light');
 

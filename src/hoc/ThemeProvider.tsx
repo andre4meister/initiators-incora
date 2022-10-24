@@ -15,7 +15,8 @@ interface ThemeProviderProps {
 
 const ThemeContext = createContext({
   theme: '',
-  handleChangeTheme: (newTheme: ThemeTypes) => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  handleChangeTheme: (newTheme: ThemeTypes) => { },
 });
 
 export const useTheme = () => useContext(ThemeContext);
