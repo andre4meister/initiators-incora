@@ -1,19 +1,30 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import { FC, useState } from 'react';
-import { useAppSelector } from 'hooks/reduxHooks';
+import {
+  FC, Suspense, useState,
+} from 'react';
+import {
+  Await, defer, useLoaderData,
+} from 'react-router-dom';
 import DashboardRoom from 'components/DashboardRoom/DashboardRoom';
 import cn from 'classnames';
 import {
   UnorderedListOutlined,
   InsertRowBelowOutlined,
 } from '@ant-design/icons';
+import Loader from 'components/UI/Loader/Loader';
+import getRequest from 'utils/getRequest';
+import { RoomType } from 'types/CommonTypes';
 import styles from './Dashboard.module.scss';
 
 export type DisplayDashboardMethodType = 'tile' | 'list';
 
+interface DeferedData {
+  rooms: RoomType[]
+}
+
 const Dashboard: FC = () => {
-  const { rooms } = useAppSelector((state) => state.dashboard);
   const [displayMethod, setDisplayMethod] = useState<DisplayDashboardMethodType>('list');
+  const { rooms } = useLoaderData() as DeferedData;
+
   return (
     <div
       className={cn({
@@ -38,11 +49,32 @@ const Dashboard: FC = () => {
           onClick={() => setDisplayMethod('tile')}
         />
       </div>
-      {rooms.map((room) => (
-        <DashboardRoom {...room} key={Math.floor(Math.random() * 10001)} />
-      ))}
+      <Suspense fallback={<Loader />}>
+        <Await resolve={rooms}>
+          {(resovedRooms: RoomType[]) => (
+            <>
+              {
+                resovedRooms.map((room) => (
+                  <DashboardRoom room={room} key={Math.floor(Math.random() * 10001)} />
+                ))
+              }
+            </>
+          )}
+        </Await>
+      </Suspense>
     </div>
   );
 };
+
+const getRooms = async () => {
+  const response = await getRequest<RoomType[]>('http://localhost:5000/rooms');
+  const body = response.data;
+
+  return body;
+};
+
+export const dashboardLoader = () => defer({
+  rooms: getRooms(),
+});
 
 export default Dashboard;

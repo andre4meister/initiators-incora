@@ -1,70 +1,68 @@
 @import '../../styles/variables.module.scss';
 
-
 .container {
-    display: grid;
-    grid-template-rows: repeat(6, 100px);
-    margin: 10px auto;
-    justify-content: center;
+  display: grid;
+  grid-template-rows: repeat(6, 100px);
+  margin: 10px auto;
+  justify-content: center;
 }
 .containerTile {
-    grid-template-columns: repeat(auto-fit, 200px);
-    grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, 200px);
+  grid-gap: 10px;
 }
 
 .containerList {
-    grid-template-columns: 90%;
-    grid-row-gap: 15px;
+  grid-template-columns: 90%;
+  grid-row-gap: 15px;
 }
 
 .changeDisplayMethodButton {
-    margin: -15px -15px 0 0;
-    position: absolute;
-    z-index: 20;
-    justify-self: end;
-    min-width: max-content;
+  margin: -15px -15px 0 0;
+  position: absolute;
+  z-index: 20;
+  justify-self: end;
+  min-width: max-content;
 }
 .changeButton {
-    font-size: 26px;
-    margin: 0 5px;
-    color: var(--currentText);
-    opacity: 0.5;
-    transition: $transition;
-    &:hover {
-        transform: scale(1.04);
-        opacity: 1;
-    }
+  font-size: 26px;
+  margin: 0 5px;
+  color: var(--currentText);
+  opacity: 0.5;
+  transition: $transition;
+  &:hover {
+    transform: scale(1.04);
+    opacity: 1;
+  }
 }
 .activeButton {
-    svg {
+  svg {
     fill: $color-orange;
-    }
-    color: $color-orange;
+  }
+  color: $color-orange;
 }
 
 .room {
-    position: relative;
-    z-index: 5;
-    border-radius: $borderRadius;
-    box-shadow: var(--currentBoxShadowOutline);
-    background-color: var(--currentTheme);
-    padding: 5px;
-    max-height: 90px;
-    font-size: 0.8em;
-    transition: $transition;
-    cursor: pointer;
+  position: relative;
+  border-radius: $borderRadius;
+  box-shadow: var(--currentBoxShadowOutline);
+  background-color: var(--currentTheme);
+  padding: 5px;
+  max-height: 90px;
+  font-size: 0.8em;
+  transition: $transition;
+  cursor: pointer;
 }
 .activeRoom {
-    z-index: 9;
-    min-height: 200px;
+  z-index: 9;
+  min-height: 200px;
 }
 .name {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 .features {
-    display: flex;
-    justify-content: flex-start;
+  display: flex;
+  justify-content: flex-start;
 }
 .featureIcon {
-    margin: 3px;
+  margin: 3px;
 }

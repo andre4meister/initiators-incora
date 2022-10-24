@@ -10,18 +10,11 @@ import {
 } from '@ant-design/icons';
 import styles from '../../pages/Dashboard/Dashboard.module.scss';
 
-const DashboardRoom: FC<RoomType> = ({
-  camera,
-  desciption,
-  floor,
-  id,
-  maxPeople,
-  minPeople,
-  name,
-  officeId,
-  projector,
-  tv,
-}) => {
+interface DashboardRoomProps {
+  room: RoomType
+}
+
+const DashboardRoom: FC<DashboardRoomProps> = ({ room }) => {
   const [isFullInfoOpen, setisFullInfoOpen] = useState<boolean>(false);
 
   return (
@@ -37,38 +30,38 @@ const DashboardRoom: FC<RoomType> = ({
       <div>
         <h1 className={styles.name}>
           <NumberOutlined className={styles.featureIcon} />
-          {id}
+          {room.id}
         </h1>
-        <h2>{name}</h2>
-        {isFullInfoOpen && <div>{desciption}</div>}
+        <h2>{room.name}</h2>
+        {isFullInfoOpen && <div>{room.desciption}</div>}
       </div>
       {isFullInfoOpen && (
         <div>
           <div>
             Floor:
             {' '}
-            {floor}
+            {room.floor}
           </div>
           <div>
             <UserOutlined className={styles.featureIcon} />
             <span>
               {' '}
-              {minPeople}
+              {room.minPeople}
               -
-              {maxPeople}
+              {room.maxPeople}
             </span>
           </div>
         </div>
       )}
       <div className={styles.features}>
-        <div>{camera && <CameraOutlined className={styles.featureIcon} />}</div>
+        <div>{room.camera && <CameraOutlined className={styles.featureIcon} />}</div>
         <div>
-          {tv && (
+          {room.tv && (
             <FundProjectionScreenOutlined className={styles.featureIcon} />
           )}
         </div>
         <div>
-          {projector && <VideoCameraOutlined className={styles.featureIcon} />}
+          {room.projector && <VideoCameraOutlined className={styles.featureIcon} />}
         </div>
       </div>
     </div>
