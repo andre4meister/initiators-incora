@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import user from './user';
+import dashboard from './dashboard';
+import modal from './modal';
 
 const store = configureStore({
   reducer: {
     user,
+    dashboard,
+    modal,
   },
 });
 

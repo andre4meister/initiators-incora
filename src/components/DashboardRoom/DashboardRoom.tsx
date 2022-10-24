@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { RoomType } from 'types/CommonTypes';
+import cn from 'classnames';
 import {
   FundProjectionScreenOutlined,
   VideoCameraOutlined,
@@ -21,13 +22,17 @@ const DashboardRoom: FC<RoomType> = ({
   projector,
   tv,
 }) => {
-  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [isFullInfoOpen, setisFullInfoOpen] = useState<boolean>(false);
 
   return (
     <div
-      className={styles.room}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      id="room-item"
+      role="none"
+      className={cn({
+        [styles.room]: true,
+        [styles.activeRoom]: isFullInfoOpen,
+      })}
+      onClick={() => setisFullInfoOpen(!isFullInfoOpen)}
     >
       <div>
         <h1 className={styles.name}>
@@ -35,9 +40,9 @@ const DashboardRoom: FC<RoomType> = ({
           {id}
         </h1>
         <h2>{name}</h2>
-        {isHovered && <div>{desciption}</div>}
+        {isFullInfoOpen && <div>{desciption}</div>}
       </div>
-      {isHovered && (
+      {isFullInfoOpen && (
         <div>
           <div>
             Floor:

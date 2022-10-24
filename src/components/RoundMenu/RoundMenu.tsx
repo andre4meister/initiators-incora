@@ -1,17 +1,17 @@
 import { PlusCircleOutlined } from '@ant-design/icons';
 import Modal from 'components/Modal/Modal';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { FC } from 'react';
+import { toggleModal } from 'store/modal';
+import { RootState } from 'store/store';
 import styles from './RoundMenu.module.scss';
 
-export interface RoundMenuProps {
-  isOpen: boolean;
-  isLocked: boolean;
-  setIsOpen: (isOpen: boolean) => void;
-}
+const RoundMenu: FC = () => {
+  const { modalIsOpen, modalIsLocked } = useAppSelector((state: RootState) => state.modal);
+  const dispatch = useAppDispatch();
 
-const RoundMenu: FC<RoundMenuProps> = ({ isOpen, isLocked, setIsOpen }) => {
   const onClose = () => {
-    setIsOpen(false);
+    dispatch(toggleModal(false));
     const appNode = document.getElementById('app') as HTMLDivElement | null;
     if (appNode) {
       appNode.style.opacity = '1';
@@ -21,10 +21,10 @@ const RoundMenu: FC<RoundMenuProps> = ({ isOpen, isLocked, setIsOpen }) => {
     <div className={styles.roundMenuBody}>
       <PlusCircleOutlined
         className={styles.plusIcon}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => dispatch(toggleModal(true))}
       />
-      {isOpen && (
-        <Modal open={isOpen} locked={isLocked} onClose={onClose}>
+      {modalIsOpen && (
+        <Modal open={modalIsOpen} locked={modalIsLocked} onClose={onClose}>
           <div>Modal Temporary</div>
         </Modal>
       )}

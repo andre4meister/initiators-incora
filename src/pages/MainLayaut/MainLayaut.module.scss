@@ -13,6 +13,7 @@
 
     .menu {
       position: absolute;
+      z-index: 20;
       top: 50%;
       transform: translateY(-50%);
       right: $indent-small;

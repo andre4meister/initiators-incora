@@ -1,10 +1,11 @@
 import { ChangeEvent } from 'react';
 import { UIPropsType } from './CommonTypes';
 
-export interface InputType extends Partial<UIPropsType> {
+export type InputTypes = 'email' | 'text' | 'password';
+export interface InputProps extends Partial<UIPropsType> {
   value: string;
   name?: string;
-  type: 'email' | 'text' | 'password';
+  type: InputTypes;
   handleOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   required?: boolean;
