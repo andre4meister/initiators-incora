@@ -1,21 +1,30 @@
 @import '../../styles/variables.module.scss';
 
+$menuContainerWidth: 44px;
+
 .container {
   margin-right: $size-sidebarWidth;
+  display: flex;
 
   .content {
-    position: relative;
-    box-shadow: var(--currentBoxShadowOutline);
-    border-radius: $borderRadius;
-    margin: $indent-small;
     padding: $indent-small $indent-medium;
-    min-height: calc(100vh - ($indent-small * 2));
+    width: 100%;
+    margin-right: $menuContainerWidth;
+  }
+
+  .menuContainer {
+    width: $menuContainerWidth;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: $size-sidebarWidth;
+    display: flex;
+    justify-content: flex-end;
 
     .menu {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      right: $indent-small;
     }
   }
 }
