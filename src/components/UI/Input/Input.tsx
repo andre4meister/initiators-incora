@@ -26,12 +26,12 @@ const Input: FC<InputProps> = ({
       />
       {type === 'password'
         && (inputType === 'password' ? (
-          <EyeOutlined
+          <EyeInvisibleOutlined
             className={styles.showPasswordButton}
             onClick={() => setInputType('text')}
           />
         ) : (
-          <EyeInvisibleOutlined
+          <EyeOutlined
             className={styles.showPasswordButton}
             onClick={() => setInputType('password')}
           />

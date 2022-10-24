@@ -2,11 +2,12 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 import Modal from 'components/Modal/Modal';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { FC } from 'react';
-import { toggleModal } from 'store/app';
+import { toggleModal } from 'store/modal';
+import { RootState } from 'store/store';
 import styles from './RoundMenu.module.scss';
 
 const RoundMenu: FC = () => {
-  const { modalIsOpen, modalIsLocked } = useAppSelector((state) => state.app);
+  const { modalIsOpen, modalIsLocked } = useAppSelector((state: RootState) => state.modal);
   const dispatch = useAppDispatch();
 
   const onClose = () => {

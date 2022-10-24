@@ -6,8 +6,8 @@ const initialState = {
   modalIsLocked: false,
 };
 
-const app = createSlice({
-  name: 'app',
+const modal = createSlice({
+  name: 'modal',
   initialState,
   reducers: {
     toggleModal: (state, action: PayloadAction<boolean>) => {
@@ -19,5 +19,5 @@ const app = createSlice({
   },
 });
 
-export const { toggleModal, toggleLockModal } = app.actions;
-export default app.reducer;
+export const { toggleModal, toggleLockModal } = modal.actions;
+export default modal.reducer;
