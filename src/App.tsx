@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainLayaut from 'pages/MainLayaut/MainLayaut';
-import ForgotPasswordPage from 'pages/ForgotPasswordPage/ForgotPasswordPage';
+import ForgotPasswordPage from 'pages/Authorization/ForgotPasswordPage/ForgotPasswordPage';
 import SettingsPage from 'pages/SettingsPage/SettingsPage';
-import LoginPage from 'pages/LoginPage/LoginPage';
-import RegisterPage from 'pages/RegisterPage/RegisterPage';
+import LoginPage from 'pages/Authorization/LoginPage/LoginPage';
+import RegisterPage from 'pages/Authorization/RegisterPage/RegisterPage';
 import TestPage from 'pages/TestPage/TestPage';
 import Dashboard from 'pages/Dashboard/Dashboard';
 import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';

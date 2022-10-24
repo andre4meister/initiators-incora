@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -6,7 +7,7 @@ import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
 import { InitialGetAccessValues } from 'types/FormTypes';
 import { FC } from 'react';
-import style from '../LoginPage/LoginPage.module.scss';
+import style from '../Authorization.module.scss';
 
 const GetAccessPage: FC = () => {
   const formik = useFormik({
@@ -25,7 +26,15 @@ const GetAccessPage: FC = () => {
     handleSubmit, handleChange, values, errors, touched,
   } = formik;
   return (
-    <form className={style.form} onSubmit={handleSubmit}>
+    <form
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          handleSubmit();
+        }
+      }}
+      onSubmit={handleSubmit}
+      className={style.form}
+    >
       <h1 className={style.text}>Login</h1>
       <div className={style.form_item}>
         <label className={style.item} htmlFor="email">

@@ -1,4 +1,4 @@
-/* eslint-disable object-curly-newline */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';
@@ -7,7 +7,7 @@ import Button from 'components/UI/Button/Button';
 import { InitialGetAccessValues } from 'types/FormTypes';
 import { FC } from 'react';
 import { FrownOutlined } from '@ant-design/icons';
-import style from '../LoginPage/LoginPage.module.scss';
+import style from '../Authorization.module.scss';
 
 const ForgotPasswordPage: FC = () => {
   const formik = useFormik({
@@ -22,16 +22,26 @@ const ForgotPasswordPage: FC = () => {
     },
   });
 
-  const { handleSubmit, handleChange, values, errors, touched } = formik;
+  const {
+    handleSubmit, handleChange, values, errors, touched,
+  } = formik;
   return (
     <div className={style.container}>
-      <form className={style.form} onSubmit={handleSubmit}>
+      <form
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleSubmit();
+          }
+        }}
+        className={style.form}
+        onSubmit={handleSubmit}
+      >
         <h1 className={style.text}>
           Forgot your password
           <FrownOutlined />
         </h1>
         <h5 className={style.forgot_page_text}>
-          Please enter your working email adress,where we can sent password
+          Please enter your working email adress, where we can sent password
           reset informatin
         </h5>
         <div className={style.forgot_page_item}>
