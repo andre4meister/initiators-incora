@@ -17,9 +17,11 @@ const MainLayaut: FC = () => {
     <main className={styles.container}>
       <section className={styles.content}>
         <Outlet />
-        <NavMenu classes={styles.menu} />
-        <RoundMenu />
+        <RoundMenu isOpen={isOpen} isLocked={isLocked} setIsOpen={setIsOpen} />
       </section>
+      <div className={styles.menuContainer}>
+        <NavMenu classes={styles.menu} />
+      </div>
       <Sidebar />
     </main>
   );
