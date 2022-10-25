@@ -24,6 +24,13 @@ $color-dark2: #3b3b3b;
 $color-orange: #ba2d0b;
 $color-yellow: #fec602;
 
+$colorDashboardLight: #ffffff;
+$colorDashboardDark: #292929;
+
+// BOX SHADOWS
+$boxShadowDashboardLight: 0 0 6px 1px rgb(164 164 164);
+$boxShadowDashboardDark : 0 0 6px 1px rgb(23 23 23);
+
 // FOR NEUMORPHISM
 $blur: 6px;
 $borderRadius: 10px;
@@ -62,4 +69,8 @@ $size-sidebarWidth: 300px;
   boxShadowLightInset: $boxShadowLightInset;
   boxShadowDarkOutline: $boxShadowDarkOutline;
   boxShadowDarkInset: $boxShadowDarkInset;
+  colorDashboardLight: $colorDashboardLight;
+  colorDashboardDark:$colorDashboardDark;
+  boxShadowDashboardLight: $boxShadowDashboardLight;
+  boxShadowDashboardDark: $boxShadowDashboardDark;
 }

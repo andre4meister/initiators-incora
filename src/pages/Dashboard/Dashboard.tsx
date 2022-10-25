@@ -39,7 +39,7 @@ const Dashboard: FC = () => {
         />
       </div>
       {rooms.map((room) => (
-        <DashboardRoom {...room} key={Math.floor(Math.random() * 10001)} />
+        <DashboardRoom {...room} key={room.id} />
       ))}
     </div>
   );
