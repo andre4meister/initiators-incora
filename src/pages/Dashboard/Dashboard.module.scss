@@ -1,23 +1,21 @@
 @import '../../styles/variables.module.scss';
 
 .container {
-  display: grid;
-  grid-template-rows: repeat(6, 100px);
-  margin: 10px auto;
-  justify-content: center;
+    display: grid;
+    justify-content: center;
+    grid-gap: 20px;
 }
 .containerTile {
-  grid-template-columns: repeat(auto-fit, 200px);
-  grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-rows: auto;
 }
 
 .containerList {
-  grid-template-columns: 90%;
-  grid-row-gap: 15px;
+    grid-template-columns: minmax(220px, 90%);
 }
 
 .changeDisplayMethodButton {
-  margin: -15px -15px 0 0;
+  margin: -5px -55px 0 0;
   position: absolute;
   z-index: 20;
   justify-self: end;
@@ -34,30 +32,74 @@
     opacity: 1;
   }
 }
-.activeButton {
-  svg {
+.activeButton > svg {
     fill: $color-orange;
-  }
-  color: $color-orange;
+    transition: $transition;
 }
 
 .room {
-  position: relative;
-  border-radius: $borderRadius;
-  box-shadow: var(--currentBoxShadowOutline);
-  background-color: var(--currentTheme);
-  padding: 5px;
-  max-height: 90px;
-  font-size: 0.8em;
-  transition: $transition;
-  cursor: pointer;
+    position: relative;
+    box-shadow: var(--currentDashboardBoxShadow);
+    background-color: var(--currentDashboardTheme);
+    padding: 10px;
+    min-height: 135px;
+    height: 135px;
+    font-size: 0.9em;
+    transition: $transition;
+    cursor: pointer;
+
+    .roomFeatures {
+        margin-top: 10px;
+        transition: 0.2s ease-in-out;
+    }
 }
 .activeRoom {
-  z-index: 9;
-  min-height: 200px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    
+    .roomFeatures {
+        display: flex;
+        & > div {
+            margin-right: 10px;
+        }
+    }
 }
-.name {
-  margin: 0 auto;
+
+.nameIdContainer {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+    min-width: 100%;
+    & > div {
+        background-color: $color-orange;
+        border-radius: $circle;
+        padding: 4px;
+        min-width: 40px;
+        min-height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: $fontSize-medium;
+        font-weight: $fontWeight-bold;
+    }
+
+    & > h2 {
+        margin: auto 0 auto 5px;
+    }
+}
+
+.desciption {
+    height: fit-content;
+    opacity: 1;
+    transition: $transition;
+    min-width: 100%;
+    margin: 10px 0;
+}
+.hiddenDesciption {
+    height: 0px;
+    opacity: 0;
+    min-width: 100%;
 }
 .features {
   display: flex;

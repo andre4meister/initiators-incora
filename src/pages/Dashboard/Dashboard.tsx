@@ -1,9 +1,5 @@
-import {
-  FC, Suspense, useState,
-} from 'react';
-import {
-  Await, defer, useLoaderData,
-} from 'react-router-dom';
+import { FC, Suspense, useState } from 'react';
+import { Await, defer, useLoaderData } from 'react-router-dom';
 import DashboardRoom from 'components/DashboardRoom/DashboardRoom';
 import cn from 'classnames';
 import {
@@ -18,7 +14,7 @@ import styles from './Dashboard.module.scss';
 export type DisplayDashboardMethodType = 'tile' | 'list';
 
 interface DeferedData {
-  rooms: RoomType[]
+  rooms: RoomType[];
 }
 
 const Dashboard: FC = () => {
@@ -53,11 +49,12 @@ const Dashboard: FC = () => {
         <Await resolve={rooms}>
           {(resovedRooms: RoomType[]) => (
             <>
-              {
-                resovedRooms.map((room) => (
-                  <DashboardRoom room={room} key={Math.floor(Math.random() * 10001)} />
-                ))
-              }
+              {resovedRooms.map((room) => (
+                <DashboardRoom
+                  room={room}
+                  key={room.id}
+                />
+              ))}
             </>
           )}
         </Await>

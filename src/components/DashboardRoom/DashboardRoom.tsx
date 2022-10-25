@@ -6,7 +6,7 @@ import {
   VideoCameraOutlined,
   CameraOutlined,
   UserOutlined,
-  NumberOutlined,
+  GroupOutlined,
 } from '@ant-design/icons';
 import styles from '../../pages/Dashboard/Dashboard.module.scss';
 
@@ -27,41 +27,46 @@ const DashboardRoom: FC<DashboardRoomProps> = ({ room }) => {
       })}
       onClick={() => setisFullInfoOpen(!isFullInfoOpen)}
     >
-      <div>
-        <h1 className={styles.name}>
-          <NumberOutlined className={styles.featureIcon} />
-          {room.id}
-        </h1>
+      <div className={styles.nameIdContainer}>
+        <div>
+          <div>{room.id}</div>
+        </div>
         <h2>{room.name}</h2>
-        {isFullInfoOpen && <div>{room.desciption}</div>}
       </div>
-      {isFullInfoOpen && (
+      <div
+        className={isFullInfoOpen ? styles.desciption : styles.hiddenDesciption}
+      >
+        {room.desciption}
+      </div>
+      <div className={styles.roomFeatures}>
         <div>
-          <div>
-            Floor:
+          <GroupOutlined className={styles.featureIcon} />
+          {' '}
+          {room.floor}
+        </div>
+        <div>
+          <UserOutlined className={styles.featureIcon} />
+          <span>
             {' '}
-            {room.floor}
+            {room.minPeople}
+            -
+            {room.maxPeople}
+          </span>
+        </div>
+        <div className={styles.features}>
+          <div>
+            {room.camera && <CameraOutlined className={styles.featureIcon} />}
           </div>
           <div>
-            <UserOutlined className={styles.featureIcon} />
-            <span>
-              {' '}
-              {room.minPeople}
-              -
-              {room.maxPeople}
-            </span>
+            {room.tv && (
+              <FundProjectionScreenOutlined className={styles.featureIcon} />
+            )}
           </div>
-        </div>
-      )}
-      <div className={styles.features}>
-        <div>{room.camera && <CameraOutlined className={styles.featureIcon} />}</div>
-        <div>
-          {room.tv && (
-            <FundProjectionScreenOutlined className={styles.featureIcon} />
-          )}
-        </div>
-        <div>
-          {room.projector && <VideoCameraOutlined className={styles.featureIcon} />}
+          <div>
+            {room.projector && (
+              <VideoCameraOutlined className={styles.featureIcon} />
+            )}
+          </div>
         </div>
       </div>
     </div>
