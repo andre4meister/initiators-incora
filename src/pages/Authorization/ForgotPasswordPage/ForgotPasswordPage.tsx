@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';
@@ -27,15 +26,7 @@ const ForgotPasswordPage: FC = () => {
   } = formik;
   return (
     <div className={style.container}>
-      <form
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            handleSubmit();
-          }
-        }}
-        className={style.form}
-        onSubmit={handleSubmit}
-      >
+      <form className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.text}>
           Forgot your password
           <FrownOutlined />

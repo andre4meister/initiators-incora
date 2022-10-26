@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';
@@ -26,36 +24,27 @@ const GetAccessPage: FC = () => {
     handleSubmit, handleChange, values, errors, touched,
   } = formik;
   return (
-    <form
-      onKeyDown={(e) => {
-        if (e.key === 'Enter') {
-          handleSubmit();
-        }
-      }}
-      onSubmit={handleSubmit}
-      className={style.form}
-    >
-      <h1 className={style.text}>Login</h1>
-      <div className={style.form_item}>
-        <label className={style.item} htmlFor="email">
-          Email
-        </label>
-        <Input
-          placeholder="Enter your email"
-          name="email"
-          classes="input"
-          type="email"
-          handleOnChange={handleChange}
-          value={values.email}
-        />
-        {touched.email && errors.email ? (
-          <div className={style.error}>{errors.email}</div>
-        ) : null}
-      </div>
-      <Button classes="button-submit" handleOnClick={handleSubmit}>
-        Submit
-      </Button>
-    </form>
+    <div className={style.container}>
+      <form className={style.form} onSubmit={handleSubmit}>
+        <h1 className={style.text}>Submit your email</h1>
+        <div className={style.form_item}>
+          <Input
+            placeholder="Enter your email"
+            name="email"
+            classes="input"
+            type="email"
+            handleOnChange={handleChange}
+            value={values.email}
+          />
+          {touched.email && errors.email ? (
+            <div className={style.error}>{errors.email}</div>
+          ) : null}
+        </div>
+        <Button classes="button-submit" handleOnClick={handleSubmit}>
+          Request reset link
+        </Button>
+      </form>
+    </div>
   );
 };
 

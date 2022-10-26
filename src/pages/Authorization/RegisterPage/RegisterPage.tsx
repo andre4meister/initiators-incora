@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable object-curly-newline */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { FC } from 'react';
@@ -29,18 +26,12 @@ const RegisterPage: FC = () => {
     },
   });
 
-  const { handleSubmit, handleChange, values, errors, touched } = formik;
+  const {
+    handleSubmit, handleChange, values, errors, touched,
+  } = formik;
   return (
     <div className={styles.container}>
-      <form
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            handleSubmit();
-          }
-        }}
-        onSubmit={handleSubmit}
-        className={styles.form}
-      >
+      <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.text}>Create account</h1>
         <div className={styles.form_items}>
           <div className={styles.form_item}>
