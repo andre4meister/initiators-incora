@@ -1,7 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable object-curly-newline */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -27,23 +23,16 @@ const LoginPage: FC = () => {
       password: yupPattern('password'),
     }),
     onSubmit: async (values: InitialLoginValues) => {
-      await dispatch(loginUser((values)));
+      await dispatch(loginUser(values));
       navigate('/');
     },
   });
-
-  const { handleSubmit, handleChange, values, errors, touched } = formik;
+  const {
+    handleSubmit, handleChange, values, errors, touched,
+  } = formik;
   return (
     <div className={style.container}>
-      <form
-        className={style.form}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            handleSubmit();
-          }
-        }}
-        onSubmit={handleSubmit}
-      >
+      <form className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.text}>Login</h1>
         <div className={style.form_items}>
           <div className={style.form_item}>
