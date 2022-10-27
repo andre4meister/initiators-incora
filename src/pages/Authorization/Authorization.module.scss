@@ -29,6 +29,14 @@
       gap: $indent-small 0;
     }
 
+    .form_item {
+      .label {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: $indent-small;
+      }
+    }
+
     .button_submit {
       margin-top: $indent-medium;
     }

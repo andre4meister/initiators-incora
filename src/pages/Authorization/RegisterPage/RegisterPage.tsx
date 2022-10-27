@@ -35,7 +35,7 @@ const RegisterPage: FC = () => {
         <h1 className={styles.text}>Create account</h1>
         <div className={styles.form_items}>
           <div className={styles.form_item}>
-            <label className={styles.item} htmlFor="firstName">
+            <label className={styles.label} htmlFor="firstName">
               Name
             </label>
             <Input
@@ -52,7 +52,7 @@ const RegisterPage: FC = () => {
           </div>
 
           <div className={styles.form_item}>
-            <label className={styles.item} htmlFor="surname">
+            <label className={styles.label} htmlFor="surname">
               Surname
             </label>
             <Input
@@ -69,7 +69,7 @@ const RegisterPage: FC = () => {
           </div>
 
           <div className={styles.form_item}>
-            <label className={styles.item} htmlFor="password">
+            <label className={styles.label} htmlFor="password">
               Password
             </label>
             <Input
@@ -85,7 +85,7 @@ const RegisterPage: FC = () => {
             ) : null}
           </div>
           <div className={styles.form_item}>
-            <label className={styles.item} htmlFor="confirmPassword">
+            <label className={styles.label} htmlFor="confirmPassword">
               Confirm your passport
             </label>
             <Input
