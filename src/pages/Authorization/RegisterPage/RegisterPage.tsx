@@ -46,9 +46,11 @@ const RegisterPage: FC = () => {
               handleOnChange={handleChange}
               value={values.firstName}
             />
-            {touched.firstName && errors.firstName ? (
-              <div className={styles.error}>{errors.firstName}</div>
-            ) : null}
+            <div className={styles.error_container}>
+              {touched.firstName && errors.firstName ? (
+                <div className={styles.error}>{errors.firstName}</div>
+              ) : null}
+            </div>
           </div>
 
           <div className={styles.form_item}>
@@ -63,9 +65,11 @@ const RegisterPage: FC = () => {
               handleOnChange={handleChange}
               value={values.surname}
             />
-            {touched.surname && errors.surname ? (
-              <div className={styles.error}>{errors.surname}</div>
-            ) : null}
+            <div className={styles.error_container}>
+              {touched.surname && errors.surname ? (
+                <div className={styles.error}>{errors.surname}</div>
+              ) : null}
+            </div>
           </div>
 
           <div className={styles.form_item}>
@@ -80,14 +84,13 @@ const RegisterPage: FC = () => {
               handleOnChange={handleChange}
               value={values.password}
             />
-            {touched.password && errors.password ? (
-              <div className={styles.error}>{errors.password}</div>
-            ) : null}
+            <div className={styles.error_container}>
+              {touched.password && errors.password ? (
+                <div className={styles.error}>{errors.password}</div>
+              ) : null}
+            </div>
           </div>
           <div className={styles.form_item}>
-            <label className={styles.label} htmlFor="confirmPassword">
-              Confirm your passport
-            </label>
             <Input
               placeholder="Confirm your password"
               classes="input"
@@ -96,9 +99,11 @@ const RegisterPage: FC = () => {
               handleOnChange={handleChange}
               value={values.confirmPassword}
             />
-            {touched.confirmPassword && errors.confirmPassword ? (
-              <div className={styles.error}>{errors.confirmPassword}</div>
-            ) : null}
+            <div className={styles.error_container}>
+              {touched.confirmPassword && errors.confirmPassword ? (
+                <div className={styles.error}>{errors.confirmPassword}</div>
+              ) : null}
+            </div>
           </div>
         </div>
         <Button classes={styles.button_submit} handleOnClick={handleSubmit}>

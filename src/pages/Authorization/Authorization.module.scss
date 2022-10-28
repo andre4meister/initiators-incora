@@ -41,6 +41,10 @@
       margin-top: $indent-medium;
     }
 
+    .error_container {
+      height: 1.5vh;
+    }
+
     .error {
       display: flex;
       align-items: flex-start;

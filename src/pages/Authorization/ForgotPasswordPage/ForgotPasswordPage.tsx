@@ -44,9 +44,11 @@ const ForgotPasswordPage: FC = () => {
             handleOnChange={handleChange}
             value={values.email}
           />
-          {touched.email && errors.email ? (
-            <div className={style.error}>{errors.email}</div>
-          ) : null}
+          <div className={style.error_container}>
+            {touched.email && errors.email ? (
+              <div className={style.error}>{errors.email}</div>
+            ) : null}
+          </div>
         </div>
         <Button classes="button-submit" handleOnClick={handleSubmit}>
           Request reset link
