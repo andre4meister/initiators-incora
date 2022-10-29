@@ -1,7 +1,4 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable object-curly-newline */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -11,7 +8,7 @@ import Button from 'components/UI/Button/Button';
 import { InitialLoginValues } from 'types/FormTypes';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FC } from 'react';
-import { loginUser } from 'store/user';
+import { loginPending } from 'store/user';
 import style from '../Authorization.module.scss';
 
 const LoginPage: FC = () => {
@@ -26,13 +23,14 @@ const LoginPage: FC = () => {
       email: yupPattern('email'),
       password: yupPattern('password'),
     }),
-    onSubmit: async (values: InitialLoginValues) => {
-      await dispatch(loginUser((values)));
-      navigate('/');
+    onSubmit: (values: InitialLoginValues) => {
+      dispatch(loginPending({ values, navigate }));
     },
   });
 
-  const { handleSubmit, handleChange, values, errors, touched } = formik;
+  const {
+    handleSubmit, handleChange, values, errors, touched,
+  } = formik;
   return (
     <div className={style.container}>
       <form
