@@ -7,16 +7,21 @@ import {
 } from 'redux-saga/effects';
 import AuthService from 'services/authService';
 import { loginSuccess, loginFailure, LoginValues } from 'store/user';
-import { User } from 'types/dataTypes';
+
+interface LoginData {
+  token: string
+}
 
 function* watchUserLogin({ payload }: PayloadAction<LoginValues>) {
   try {
-    const { data }: AxiosResponse<User> = yield call(
+    const { data }: AxiosResponse<LoginData> = yield call(
       AuthService.login,
       payload.values.email,
       payload.values.password,
     );
-    yield put(loginSuccess(data));
+
+    localStorage.setItem('token', JSON.stringify(data.token));
+    yield put(loginSuccess()); // USER DATA IT MUST BE HERE
     yield payload.navigate('/');
   } catch (err) {
     const result = (err as Error).message;

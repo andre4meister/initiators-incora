@@ -6,7 +6,7 @@ const yupPattern = (validate: string) => {
       return Yup.string()
         .email('Invalid email address')
         .required('Required')
-        .matches(/@incorainc.com$/, 'Please use your working mail.');
+        .matches(/@incorainc.com$|@gmail.com$/, 'Please use your working mail.');
     case 'firstName':
       return Yup.string()
         .max(15, 'Must be under 15 symbols')

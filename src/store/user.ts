@@ -31,8 +31,9 @@ const user = createSlice({
     loginPending: (state, action) => {
       state.loading = true;
     },
-    loginSuccess: (state, action: PayloadAction<User>) => {
-      state.userData = action.payload;
+    // action: PayloadAction<User>
+    loginSuccess: (state) => {
+      // state.userData = action.payload;
       state.loading = false;
     },
     loginFailure: (state, action: PayloadAction<string>) => {
