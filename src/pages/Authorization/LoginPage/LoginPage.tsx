@@ -66,7 +66,7 @@ const LoginPage: FC = () => {
             </div>
           </div>
         </div>
-        <Button classes={style.button_submit} handleOnClick={handleSubmit}>
+        <Button type="submit" classes={style.button_submit} handleOnClick={handleSubmit}>
           Submit
         </Button>
         <NavLink className={style.forgot} to="/forgot">

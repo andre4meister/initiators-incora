@@ -106,7 +106,7 @@ const RegisterPage: FC = () => {
             </div>
           </div>
         </div>
-        <Button classes={styles.button_submit} handleOnClick={handleSubmit}>
+        <Button type="submit" classes={styles.button_submit} handleOnClick={handleSubmit}>
           Submit
         </Button>
       </form>

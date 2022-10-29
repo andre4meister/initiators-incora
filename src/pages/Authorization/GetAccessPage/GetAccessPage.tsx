@@ -42,7 +42,11 @@ const GetAccessPage: FC = () => {
             ) : null}
           </div>
         </div>
-        <Button classes="button-submit" handleOnClick={handleSubmit}>
+        <Button
+          type="submit"
+          classes="button-submit"
+          handleOnClick={handleSubmit}
+        >
           Request reset link
         </Button>
       </form>
