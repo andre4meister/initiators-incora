@@ -1,9 +1,33 @@
 @import '../../styles//variables.module.scss';
 
+@media screen and (max-width: 800px), screen and (max-height: 650px) {
+  div.container {
+    .form {
+      padding: 10px 15px;
+
+      .text {
+        margin-bottom: 15px;
+        font-size: 25px;
+      }
+
+      .error {
+        font-size: 11px;
+      }
+
+      .forgot {
+        transform: none;
+        margin-top: $indent-small;
+        font-size: 15px;
+      }
+    }
+  }
+}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
   width: 100vw;
   height: 100vh;
 
@@ -54,16 +78,15 @@
       line-height: 21px;
       color: $color-orange;
     }
+    .forgot {
+      text-decoration: none;
+      transform: translateY(900%);
+    }
+
+    .forgot:hover {
+      color: rgb(0, 0, 0);
+    }
   }
-}
-
-.forgot {
-  text-decoration: none;
-  transform: translateY(900%);
-}
-
-.forgot:hover {
-  color: rgb(0, 0, 0);
 }
 
 .forgot_page_text {
