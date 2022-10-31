@@ -1,4 +1,3 @@
-/* eslint-disable react/button-has-type */
 import { FC } from 'react';
 import cn from 'classnames';
 import { ButtonType } from '../../../types/ButtonTypes';
