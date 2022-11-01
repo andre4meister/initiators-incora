@@ -3,21 +3,21 @@
 @media screen and (max-width: 800px), screen and (max-height: 650px) {
   div.container {
     .form {
-      padding: 10px 15px;
+      padding: $indent-small;
 
       .text {
-        margin-bottom: 15px;
-        font-size: 25px;
+        margin-bottom: $indent-smedium;
+        font-size: $fontSize-medium;
       }
 
       .error {
-        font-size: 11px;
+        font-size: $fontSize-xxsmall;
       }
 
       .forgot {
         transform: none;
         margin-top: $indent-small;
-        font-size: 15px;
+        font-size: $fontSize-xsmall;
       }
     }
   }
@@ -37,7 +37,7 @@
     align-items: center;
     padding: $indent-medium $indent-large;
     box-shadow: var(--currentBoxShadowOutline);
-    border-radius: 40px;
+    border-radius: $borderRadiusBigger;
 
     .text {
       font-family: $fontFamily;
@@ -74,7 +74,7 @@
       align-items: flex-start;
       font-style: normal;
       font-weight: 300;
-      font-size: 14px;
+      font-size: $fontSize-xsmall;
       line-height: 21px;
       color: $color-orange;
     }
@@ -92,10 +92,10 @@
 .forgot_page_text {
   margin-bottom: 7px;
   text-align: left;
-  width: 300px;
-  font-size: 10px;
+  width: $size-sidebarWidth;
+  font-size: $fontSize-xxsmall;
 }
 
 .forgot_page_item {
-  margin-bottom: 30px;
+  margin-bottom: $indent-large;
 }
