@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable object-curly-newline */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { FC } from 'react';
@@ -29,22 +26,16 @@ const RegisterPage: FC = () => {
     },
   });
 
-  const { handleSubmit, handleChange, values, errors, touched } = formik;
+  const {
+    handleSubmit, handleChange, values, errors, touched,
+  } = formik;
   return (
     <div className={styles.container}>
-      <form
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            handleSubmit();
-          }
-        }}
-        onSubmit={handleSubmit}
-        className={styles.form}
-      >
+      <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.text}>Create account</h1>
         <div className={styles.form_items}>
           <div className={styles.form_item}>
-            <label className={styles.item} htmlFor="firstName">
+            <label className={styles.label} htmlFor="firstName">
               Name
             </label>
             <Input
@@ -55,13 +46,15 @@ const RegisterPage: FC = () => {
               handleOnChange={handleChange}
               value={values.firstName}
             />
-            {touched.firstName && errors.firstName ? (
-              <div className={styles.error}>{errors.firstName}</div>
-            ) : null}
+            <div className={styles.error_container}>
+              {touched.firstName && errors.firstName ? (
+                <div className={styles.error}>{errors.firstName}</div>
+              ) : null}
+            </div>
           </div>
 
           <div className={styles.form_item}>
-            <label className={styles.item} htmlFor="surname">
+            <label className={styles.label} htmlFor="surname">
               Surname
             </label>
             <Input
@@ -72,13 +65,15 @@ const RegisterPage: FC = () => {
               handleOnChange={handleChange}
               value={values.surname}
             />
-            {touched.surname && errors.surname ? (
-              <div className={styles.error}>{errors.surname}</div>
-            ) : null}
+            <div className={styles.error_container}>
+              {touched.surname && errors.surname ? (
+                <div className={styles.error}>{errors.surname}</div>
+              ) : null}
+            </div>
           </div>
 
           <div className={styles.form_item}>
-            <label className={styles.item} htmlFor="password">
+            <label className={styles.label} htmlFor="password">
               Password
             </label>
             <Input
@@ -89,14 +84,13 @@ const RegisterPage: FC = () => {
               handleOnChange={handleChange}
               value={values.password}
             />
-            {touched.password && errors.password ? (
-              <div className={styles.error}>{errors.password}</div>
-            ) : null}
+            <div className={styles.error_container}>
+              {touched.password && errors.password ? (
+                <div className={styles.error}>{errors.password}</div>
+              ) : null}
+            </div>
           </div>
           <div className={styles.form_item}>
-            <label className={styles.item} htmlFor="confirmPassword">
-              Confirm your passport
-            </label>
             <Input
               placeholder="Confirm your password"
               classes="input"
@@ -105,12 +99,14 @@ const RegisterPage: FC = () => {
               handleOnChange={handleChange}
               value={values.confirmPassword}
             />
-            {touched.confirmPassword && errors.confirmPassword ? (
-              <div className={styles.error}>{errors.confirmPassword}</div>
-            ) : null}
+            <div className={styles.error_container}>
+              {touched.confirmPassword && errors.confirmPassword ? (
+                <div className={styles.error}>{errors.confirmPassword}</div>
+              ) : null}
+            </div>
           </div>
         </div>
-        <Button classes={styles.button_submit} handleOnClick={handleSubmit}>
+        <Button type="submit" classes={styles.button_submit} handleOnClick={handleSubmit}>
           Submit
         </Button>
       </form>
