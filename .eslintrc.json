@@ -38,6 +38,7 @@
         ],
         "message": "Use typed hooks `useAppDispatch` and `useAppSelector` instead."
       }
-    ]
+    ],
+    "import/no-cycle": "off"
   }
 }

@@ -4,12 +4,12 @@ $menuContainerWidth: 44px;
 
 .container {
   margin-right: $size-sidebarWidth;
-  display: flex;
+  // display: flex;
 
   .content {
-    padding: $indent-small $indent-medium;
     width: 100%;
-    margin-right: $menuContainerWidth;
+    padding: $indent-small $indent-medium;
+    padding-right: $menuContainerWidth + $indent-medium;
   }
 
   .menuContainer {

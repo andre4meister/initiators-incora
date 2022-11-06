@@ -1,41 +1,35 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import cn from 'classnames';
 import moment from 'moment';
-import React, {
-  useCallback, useEffect, useState,
-} from 'react';
+import React, { FC } from 'react';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import useCalendar from 'hooks/useCalendar';
 
-import styles from './Calendar.module.scss';
+import styles from './DataPicker.module.scss';
 
-const Calendar: React.FunctionComponent = React.memo(() => {
-  moment.updateLocale('en', { week: { dow: 1 } });
+interface CalendarProps {
+  selectedDate: moment.Moment
+  setSelectedDate: React.Dispatch<React.SetStateAction<moment.Moment>>
+}
 
-  const [today, setToday] = useState<moment.Moment>(moment());
-  const [calendar, setCalendar] = useState<moment.Moment[]>([]);
-
-  const getMonth = useCallback((): moment.Moment[] => {
-    const newCalendar: moment.Moment[] = [];
-    const startDay = today.clone().startOf('month').startOf('week');
-    const endDay = startDay.clone().add(41, 'd');
-
-    while (!startDay.isAfter(endDay)) {
-      newCalendar.push(startDay.clone());
-      startDay.add(1, 'd');
-    }
-
-    return newCalendar;
-  }, [today]);
-
-  useEffect(() => {
-    setCalendar(() => getMonth());
-  }, [getMonth]);
+const DataPicker: FC<CalendarProps> = ({ selectedDate, setSelectedDate }) => {
+  const {
+    today,
+    getNextMonth,
+    getPrevMonth,
+    getMonthByDay,
+  } = useCalendar();
 
   const handleChangeNextMonth = (): void => {
-    setToday((prev) => prev.clone().add(1, 'M'));
+    getNextMonth();
   };
 
   const handleChangePrevMonth = (): void => {
-    setToday((prev) => prev.clone().subtract(1, 'M'));
+    getPrevMonth();
+  };
+
+  const handleSelectDate = (day: moment.Moment) => {
+    setSelectedDate(day);
   };
 
   return (
@@ -51,16 +45,18 @@ const Calendar: React.FunctionComponent = React.memo(() => {
 
       <div className={styles.daysPanel}>
         <div className={styles.days}>
-          {/* <div className={styles.weekDays}> */}
           {['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'].map((day) => <span key={day}>{day}</span>)}
-          {/* </div> */}
-          {calendar.map((day) => (
+          {getMonthByDay(today).map((day, ind) => (
             <div
+              onClick={() => handleSelectDate(day)}
+              role="button"
+              tabIndex={ind}
               className={
                 cn(
                   styles.day,
                   (day.isBefore(today.endOf('month'), 'month') || day.isAfter(today.startOf('month'), 'month')) && styles.dayGrey,
                   (day.weekday() === 6 || day.weekday() === 5) && styles.dayWeekend,
+                  (day.isSame(selectedDate, 'day') && styles.daySelected),
                   day.isSame(moment(), 'day') && styles.dayToday,
                 )
               }
@@ -74,6 +70,6 @@ const Calendar: React.FunctionComponent = React.memo(() => {
     </div>
 
   );
-});
+};
 
-export default Calendar;
+export default DataPicker;
