@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable consistent-return */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -70,11 +71,11 @@ router.post('/login', (req, res) => {
     const { email, password } = req.body;
 
     if (email !== 'test@incorainc.com') {
-      return res.json({ message: 'wrong email' });
+      return res.status(403).json({ message: 'wrong email' });
     }
 
     if (password !== '12345678') {
-      return res.json({ message: 'wrong password' });
+      return res.status(403).json({ message: 'wrong password' });
     }
 
     return res.json({

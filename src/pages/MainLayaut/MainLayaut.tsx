@@ -11,7 +11,7 @@ const MainLayaut: FC = () => {
   ) as boolean;
 
   if (!isAuth) {
-    return <Navigate to="login" />;
+    return <Navigate to="login" replace />;
   }
   return (
     <main className={styles.container}>

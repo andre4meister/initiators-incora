@@ -1,57 +1,48 @@
 // This rule disabled for changing extraredusers states
 /* eslint-disable no-param-reassign */
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from 'types/dataTypes';
-import AuthService from 'services/authService';
+import { NavigateFunction } from 'react-router-dom';
 
-interface FetchUser {
-  userData: User
-  status: boolean
+export interface FetchUser {
+  userData: User | null
+  loading: boolean
   error: string
 }
 
-type LoginValues = {
-  email: string
-  password: string
+export type LoginValues = {
+  values: {
+    email: string
+    password: string
+  }
+  navigate: NavigateFunction | (() => void)
 };
 
 const initialState: FetchUser = {
-  userData: {
-    id: 0,
-    role: 'guest',
-    password: '',
-    email: '',
-    firstName: '',
-    lastName: '',
-  },
-  status: false,
+  userData: JSON.parse(localStorage.getItem('userData') || 'null') as User,
+  loading: true,
   error: '',
 };
-
-export const loginUser = createAsyncThunk(
-  'user/loginUser',
-  async (values: LoginValues, { rejectWithValue }) => {
-    const res = await AuthService.login(values.email, values.password);
-
-    if (res.statusText !== 'OK') {
-      return rejectWithValue(res.statusText);
-    }
-
-    return res.data;
-  },
-);
 
 const user = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.userData = action.payload;
-        state.status = true;
-      });
+  reducers: {
+    loginPending: (state, action) => {
+      state.loading = true;
+    },
+    loginSuccess: (state, action: PayloadAction<User>) => {
+      state.userData = action.payload;
+      state.loading = false;
+    },
+    loginFailure: (state, action: PayloadAction<string>) => {
+      state.userData = null;
+      state.error = action.payload;
+      state.loading = false;
+    },
   },
 });
+
+export const { loginPending, loginSuccess, loginFailure } = user.actions;
 
 export default user.reducer;

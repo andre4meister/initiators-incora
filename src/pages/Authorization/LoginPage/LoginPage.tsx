@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -7,7 +8,7 @@ import Button from 'components/UI/Button/Button';
 import { InitialLoginValues } from 'types/FormTypes';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FC } from 'react';
-import { loginUser } from 'store/user';
+import { loginPending } from 'store/user';
 import style from '../Authorization.module.scss';
 
 const LoginPage: FC = () => {
