@@ -2,9 +2,10 @@ export interface InitialLoginValues {
   email: string;
   password: string;
 }
+
 export interface InitialRegistrationFormValues {
   firstName: string;
-  surname: string;
+  lastName: string;
   password: string;
   confirmPassword: string;
 }

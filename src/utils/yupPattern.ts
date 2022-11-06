@@ -13,7 +13,7 @@ const yupPattern = (validate: string) => {
         .min(2, 'Must be more than 2 symbols')
         .matches(/[a-zA-Z]/, 'Name can only contain Latin letters.')
         .required('Required');
-    case 'surname':
+    case 'lastName':
       return Yup.string()
         .max(15, 'Must be under 15 symbols')
         .min(2, 'Must be more than 2 symbols')
