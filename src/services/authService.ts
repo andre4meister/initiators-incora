@@ -3,31 +3,31 @@ import axios, { AxiosResponse } from 'axios';
 
 export default class AuthService {
   static async login(email: string, password: string): Promise<AxiosResponse<User>> {
-    try {
-      const respose = await axios({
-        method: 'POST',
-        url: 'http://localhost:5000/login',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: JSON.stringify({ email, password }),
-      });
+    // try {
+    const response = await axios({
+      method: 'POST',
+      url: 'http://localhost:5000/login',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: JSON.stringify({ email, password }),
+    });
 
-      if (respose.statusText !== 'OK') {
-        throw new Error(respose.statusText);
-      }
-
-      localStorage.setItem('isAuth', JSON.stringify(true));
-      localStorage.setItem('userData', JSON.stringify(respose.data));
-
-      return respose;
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        throw new Error('Axios error', err);
-      } else {
-        throw new Error('Unexpected error', err as Error);
-      }
+    if (response.statusText !== 'OK') {
+      throw new Error(response.statusText);
     }
+
+    localStorage.setItem('isAuth', JSON.stringify(true));
+    localStorage.setItem('userData', JSON.stringify(response.data));
+
+    return response;
+    // } catch (err) {
+    //   if (axios.isAxiosError(err)) {
+    //     throw new Error('Axios error', err);
+    //   } else {
+    //     throw new Error('Unexpected error', err as Error);
+    //   }
+    // }
   }
 
   static logout() {
