@@ -1,6 +1,27 @@
 @import '../../styles//variables.module.scss';
-.container {
-}
 
-.label {
+.container {
+  //   box-shadow: $boxShadowLightOutline;
+  //   border-radius: $borderRadiusBigger;
+  padding: $indent-large;
+
+  .text {
+    margin-bottom: $indent-large;
+  }
+
+  .block {
+    padding: $indent-large $indent-small;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: $indent-large;
+    grid-column-gap: $indent-medium;
+    margin-bottom: $indent-large;
+    border-bottom: 1px solid $color-textDark;
+
+    input {
+      width: 500px;
+      box-shadow: $boxShadowLightInset;
+    }
+  }
 }

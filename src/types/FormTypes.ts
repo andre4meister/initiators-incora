@@ -13,3 +13,10 @@ export interface InitialRegistrationFormValues {
 export interface InitialGetAccessValues {
   email: string;
 }
+
+export interface InitialSettingsValue {
+  firstName: string;
+  lastName: string;
+  password: string;
+  email: string;
+}
