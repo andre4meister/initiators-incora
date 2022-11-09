@@ -4,9 +4,10 @@ export interface InitialLoginValues {
 }
 export interface InitialRegistrationFormValues {
   firstName: string;
-  surname: string;
+  lastName: string;
   password: string;
-  confirmPassword: string;
+  // confirmPassword: string;
+  email: string
 }
 
 export interface InitialGetAccessValues {

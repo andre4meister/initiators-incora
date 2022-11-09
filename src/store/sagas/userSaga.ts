@@ -6,13 +6,16 @@ import {
   call, put, takeEvery,
 } from 'redux-saga/effects';
 import AuthService from 'services/authService';
-import { loginSuccess, loginFailure, LoginValues } from 'store/user';
+import {
+  loginSuccess, loginFailure, LoginValues, RegistrationValues,
+} from 'store/user';
+import { User } from 'types/dataTypes';
 
 interface LoginData {
   token: string
 }
 
-function* watchUserLogin({ payload }: PayloadAction<LoginValues>) {
+function* workerUserLogin({ payload }: PayloadAction<LoginValues>) {
   try {
     const { data }: AxiosResponse<LoginData> = yield call(
       AuthService.login,
@@ -21,7 +24,12 @@ function* watchUserLogin({ payload }: PayloadAction<LoginValues>) {
     );
 
     localStorage.setItem('token', JSON.stringify(data.token));
-    yield put(loginSuccess()); // USER DATA IT MUST BE HERE
+
+    const userProfile: AxiosResponse<User> = yield call(
+      AuthService.profile,
+    );
+
+    yield put(loginSuccess(userProfile.data));
     yield payload.navigate('/');
   } catch (err) {
     const result = (err as Error).message;
@@ -29,8 +37,27 @@ function* watchUserLogin({ payload }: PayloadAction<LoginValues>) {
   }
 }
 
-function* userSaga() {
-  yield takeEvery('user/loginPending', watchUserLogin);
+function* workerUserRegistration({ payload }: PayloadAction<RegistrationValues>) {
+  try {
+    const { data }: AxiosResponse<LoginData> = yield call(AuthService.registration, payload.values);
+
+    localStorage.setItem('token', JSON.stringify(data.token));
+
+    const userProfile: AxiosResponse<User> = yield call(
+      AuthService.profile,
+    );
+
+    yield put(loginSuccess(userProfile.data));
+    yield payload.navigate('/');
+  } catch (err) {
+    const result = (err as Error).message;
+    yield put(loginFailure(result));
+  }
 }
 
-export default userSaga;
+function* watchUserSaga() {
+  yield takeEvery('user/loginPending', workerUserLogin);
+  yield takeEvery('user/registration', workerUserRegistration);
+}
+
+export default watchUserSaga;

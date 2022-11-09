@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { useAppDispatch } from 'hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
+import Loader from 'components/UI/Loader/Loader';
 import { InitialLoginValues } from 'types/FormTypes';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FC } from 'react';
@@ -12,6 +13,7 @@ import { loginPending } from 'store/user';
 import style from '../Authorization.module.scss';
 
 const LoginPage: FC = () => {
+  const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const formik = useFormik({
@@ -33,6 +35,7 @@ const LoginPage: FC = () => {
   } = formik;
   return (
     <div className={style.container}>
+      {user.loading === 'pending' && <Loader />}
       <form
         className={style.form}
         onKeyDown={(e) => {

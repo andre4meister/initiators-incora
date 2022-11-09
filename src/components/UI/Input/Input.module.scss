@@ -3,10 +3,11 @@
 .inputContainer {
   position: relative;
   display: flex;
+  width: 100%;
 }
 .input {
   display: block;
-  width: 300px;
+  width: 100%;
   font-weight: $fontWeight-normal;
   background-clip: padding-box;
   outline: none;
@@ -23,6 +24,7 @@
 
 .showPasswordButton {
   position: absolute;
-  left: 275px;
-  top: 10px;
+  right: $indent-small;
+  top: 50%;
+  transform: translateY(-50%);
 }

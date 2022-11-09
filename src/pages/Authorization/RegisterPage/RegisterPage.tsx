@@ -4,34 +4,45 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { InitialRegistrationFormValues } from 'types/FormTypes';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
+import { registration } from 'store/user';
 import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
+import Loader from 'components/UI/Loader/Loader';
 import styles from '../Authorization.module.scss';
 
 const RegisterPage: FC = () => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
-      surname: '',
+      lastName: '',
       password: '',
-      confirmPassword: '',
+      // confirmPassword: '',
+      email: '',
     },
     validationSchema: Yup.object({
       firstName: yupPattern('firstName'),
-      surname: yupPattern('surname'),
+      lastName: yupPattern('surname'),
       password: yupPattern('password'),
-      confirmPassword: yupPattern('confirmPassword'),
+      // confirmPassword: yupPattern('confirmPassword'),
+      email: yupPattern('email'),
     }),
     onSubmit: (values: InitialRegistrationFormValues) => {
-      console.log(JSON.stringify(values, null, 2));
+      dispatch(registration({ values, navigate }));
     },
   });
 
   const { handleSubmit, handleChange, values, errors, touched } = formik;
   return (
     <div className={styles.container}>
+      {user.loading === 'pending' && <Loader />}
       <form
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
@@ -62,18 +73,18 @@ const RegisterPage: FC = () => {
 
           <div className={styles.form_item}>
             <label className={styles.item} htmlFor="surname">
-              Surname
+              lastName
             </label>
             <Input
-              placeholder="Enter your surname"
+              placeholder="Enter your lastName"
               classes="input"
-              name="surname"
+              name="lastName"
               type="text"
               handleOnChange={handleChange}
-              value={values.surname}
+              value={values.lastName}
             />
-            {touched.surname && errors.surname ? (
-              <div className={styles.error}>{errors.surname}</div>
+            {touched.lastName && errors.lastName ? (
+              <div className={styles.error}>{errors.lastName}</div>
             ) : null}
           </div>
 
@@ -93,7 +104,7 @@ const RegisterPage: FC = () => {
               <div className={styles.error}>{errors.password}</div>
             ) : null}
           </div>
-          <div className={styles.form_item}>
+          {/* <div className={styles.form_item}>
             <label className={styles.item} htmlFor="confirmPassword">
               Confirm your passport
             </label>
@@ -107,6 +118,22 @@ const RegisterPage: FC = () => {
             />
             {touched.confirmPassword && errors.confirmPassword ? (
               <div className={styles.error}>{errors.confirmPassword}</div>
+            ) : null}
+          </div> */}
+          <div className={styles.form_item}>
+            <label className={styles.item} htmlFor="email">
+              Confirm your email
+            </label>
+            <Input
+              placeholder="Enter your email"
+              classes="input"
+              name="email"
+              type="email"
+              handleOnChange={handleChange}
+              value={values.email}
+            />
+            {touched.email && errors.email ? (
+              <div className={styles.error}>{errors.email}</div>
             ) : null}
           </div>
         </div>
