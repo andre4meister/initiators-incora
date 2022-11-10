@@ -17,28 +17,28 @@ const PORT = 5000;
 
 const mockUsers = [
   {
-    id: 354,
+    id: 410,
     role: 'admin',
-    password: '123478',
+    password: '12345678',
     email: 'incorainc',
-    firstName: 'Lara',
-    lastName: 'Cool',
+    firstName: 'Admin',
+    lastName: 'Adminenko',
   },
   {
-    id: 210,
+    id: 580,
     role: 'user',
-    password: '235689',
+    password: 'qwerty123',
     email: 'incorainc',
-    firstName: 'Monkey',
-    lastName: 'Pineaple',
+    firstName: 'Bitch',
+    lastName: 'Stupid',
   },
   {
-    id: 124,
+    id: 360,
     role: 'admin',
-    password: 'qwert',
+    password: '235689147',
     email: 'incorainc',
-    firstName: 'Funny',
-    lastName: 'Bitch',
+    firstName: 'Debil',
+    lastName: 'Zzz',
   },
 ];
 
