@@ -1,21 +1,25 @@
-/* eslint-disable object-curly-newline */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { InitialSettingsValue } from 'types/FormTypes';
 import { FC } from 'react';
+import { UserOutlined } from '@ant-design/icons';
+import { User } from 'types/dataTypes';
 import Button from 'components/UI/Button/Button';
 import Input from 'components/UI/Input/Input';
-import Upload from 'components/UI/Upload/Upload';
 import yupPattern from 'utils/yupPattern';
+import UserSelect from './UserSelect';
 import style from './SettingsPage.module.scss';
 
 const SettingsPage: FC = () => {
+  const user = JSON.parse(
+    localStorage.getItem('userData') || JSON.stringify({}),
+  ) as User;
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
-      password: '',
-      email: '',
+      firstName: user.firstName,
+      lastName: user.lastName,
+      password: user.password,
+      email: user.email,
     },
     validationSchema: Yup.object({
       firstName: yupPattern('firstName'),
@@ -27,15 +31,20 @@ const SettingsPage: FC = () => {
       console.log(JSON.stringify(values, null, 2));
     },
   });
-  const { handleSubmit, handleChange, values, errors, touched } = formik;
+
+  const {
+    handleSubmit, handleChange, values, errors, touched,
+  } = formik;
   return (
     <div className={style.container}>
       <h1 className={style.text}>Account settings</h1>
-      <Upload />
+      <div className={style.avatar}>
+        <UserOutlined />
+      </div>
       <form className={style.block} onSubmit={handleSubmit}>
-        <div>
+        <div className={style.block_input}>
           <Input
-            placeholder="name"
+            placeholder=""
             classes="input"
             name="firstName"
             type="text"
@@ -48,9 +57,9 @@ const SettingsPage: FC = () => {
             ) : null}
           </div>
         </div>
-        <div>
+        <div className={style.block_input}>
           <Input
-            placeholder="last name"
+            placeholder=""
             classes="input"
             name="lastName"
             type="text"
@@ -63,9 +72,9 @@ const SettingsPage: FC = () => {
             ) : null}
           </div>
         </div>
-        <div>
+        <div className={style.block_input}>
           <Input
-            placeholder="password"
+            placeholder=""
             classes="input"
             name="password"
             type="password"
@@ -78,9 +87,9 @@ const SettingsPage: FC = () => {
             ) : null}
           </div>
         </div>
-        <div>
+        <div className={style.block_input}>
           <Input
-            placeholder="email"
+            placeholder=""
             name="email"
             classes="input"
             type="email"
@@ -93,14 +102,15 @@ const SettingsPage: FC = () => {
             ) : null}
           </div>
         </div>
+        <Button
+          type="submit"
+          classes={style.button_submit}
+          handleOnClick={handleSubmit}
+        >
+          Change
+        </Button>
       </form>
-      <Button
-        type="submit"
-        classes={style.button_submit}
-        handleOnClick={handleSubmit}
-      >
-        Save
-      </Button>
+      {user.role === 'admin' && <UserSelect />}
     </div>
   );
 };
