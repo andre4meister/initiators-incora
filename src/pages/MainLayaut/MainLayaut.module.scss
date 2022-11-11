@@ -5,6 +5,7 @@ $menuContainerWidth: 44px;
 .container {
   margin-right: $size-sidebarWidth;
   display: flex;
+  height: 100vh;
 
   .content {
     padding: $indent-small $indent-medium;

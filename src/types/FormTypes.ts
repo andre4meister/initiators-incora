@@ -1,3 +1,5 @@
+import { DateTimeType } from './CommonTypes';
+
 export interface InitialLoginValues {
   email: string;
   password: string;
@@ -11,4 +13,43 @@ export interface InitialRegistrationFormValues {
 
 export interface InitialGetAccessValues {
   email: string;
+}
+
+export enum DaysOfWeek {
+  Monday = 1,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday,
+}
+export interface BookingFormValues {
+  id: number | null;
+  accoundId: number;
+  roomId: number | null;
+  createdAt: DateTimeType;
+  startDate: DateTimeType;
+  endDate: DateTimeType;
+  startTime: DateTimeType;
+  endTime: DateTimeType;
+  daysOfWeek: DaysOfWeek | DaysOfWeek[];
+  meetingDate: DateTimeType;
+}
+
+// export type SubmitBookingFormValues =
+// | Omit<BookingFormValues, 'startDate' | 'endDate' | 'daysOfWeek'>
+// | Omit<BookingFormValues, 'meetingDate'>;
+// Doesn`t work
+export interface SubmitBookingFormValues {
+  id: number | null;
+  accoundId: number;
+  roomId: number | null;
+  createdAt: DateTimeType;
+  startDate?: DateTimeType;
+  endDate?: DateTimeType;
+  startTime: DateTimeType;
+  endTime: DateTimeType;
+  daysOfWeek?: DaysOfWeek | DaysOfWeek[];
+  meetingDate?: DateTimeType;
 }

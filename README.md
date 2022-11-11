@@ -36,3 +36,25 @@ To setup over web application you should complete next steps:
 
 If the app doesn`t work, please be patient and write on email darknes1237893@gmail.com.
 I'll do my best to help you)
+
+<!--
+User
+
+[get] /users - get all users registered in system
+[get] /users/:id - get user by id
+[get] /users/me - returns current user data (by token)
+[post/update] /users/:id - finish registration/update user info: name, photo etc.
+
+Office
+
+[get] /offices
+
+Room
+
+[get] /rooms?officeId=‘’”&soonestBookingsDays=“”
+
+Bookings
+
+[post] /bookings/own?page=""&limit=""
+[get/update/delete] /bookings/:id
+[get] /bookings?roomId=“”&userId=“”&startDate=“”&endDate=“” -->

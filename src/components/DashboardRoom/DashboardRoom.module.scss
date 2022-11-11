@@ -1,0 +1,170 @@
+@import '../../styles/variables.module.scss';
+
+.roomContainer {
+    height: 135px;
+    min-width: 220px;
+}
+.room {
+    position: relative;
+    box-shadow: var(--currentDashboardBoxShadow);
+    background-color: var(--currentTheme);
+    border-radius: $borderRadius;
+    padding: 10px;
+    min-height: 135px;
+    height: 135px;
+    min-width: 220px;
+    font-size: 0.9em;
+    transition: $transition;
+    cursor: pointer;
+
+    .roomFeatures {
+        margin-top: 10px;
+        transition: 0.2s ease-in-out;
+    }
+}
+
+.activeRoom {
+    width: 280px;
+    height: 310px;
+    z-index: 70;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(0);
+}
+.bluredRoom {
+    filter: blur(7px);
+    pointer-events: all;
+}
+
+.nameIdContainer {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+    min-width: 100%;
+
+    &>div {
+        background-color: $color-orange;
+        border-radius: $circle;
+        padding: 4px;
+        min-width: 40px;
+        min-height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: $fontSize-medium;
+        font-weight: $fontWeight-bold;
+    }
+
+    &>h2 {
+        margin: auto 0 auto 5px;
+    }
+}
+
+.features {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.featureIcon {
+    margin: 3px;
+}
+.featureCustomIcon {
+    margin: 3px;
+    display: inline-block;
+    color: inherit;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+
+    svg {
+        width: 16.2px;
+        height: 16.2px;
+        fill: var(--currentText);
+    }
+}
+.info {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+
+.fullRoomInfo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 175px;
+    width: 100%;
+    z-index: -1;
+    opacity: 0;
+    transition: $transition;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    cursor: default;
+    box-shadow: var(--currentDashboardBoxShadow);
+    border-radius: $borderRadius;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    pointer-events: none;
+}
+
+.activeFullInfo {
+    top: 135px;
+    z-index: 50;
+    opacity: 1;
+    background-color: var(--currentTheme);
+    width: 100%;
+    box-shadow: none;
+    pointer-events: all;
+}
+
+.fullInfoIcon {
+    margin: $indent-xsmall;
+}
+
+.soonestBookings {
+    max-height: 100%;
+    width: 100%;
+    padding: 0 10px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.bookingContainer {
+    min-width: 100%;
+    margin-bottom: 5px;
+}
+.firstLine {
+    display: flex;
+    min-width: 100%;
+    justify-content: space-between;
+    margin: 3px;
+    padding: 10px;
+    background-color: $color-yellow;
+    border-radius: $borderRadius;
+}
+
+.reserveRoomButton {
+    margin: 10px auto;
+}
+
+.availableicon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+}
