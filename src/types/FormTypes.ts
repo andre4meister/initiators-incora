@@ -7,7 +7,8 @@ export interface InitialRegistrationFormValues {
   firstName: string;
   lastName: string;
   password: string;
-  confirmPassword: string;
+  // confirmPassword: string;
+  email: string
 }
 
 export interface InitialGetAccessValues {

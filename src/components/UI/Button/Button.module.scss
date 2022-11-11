@@ -2,7 +2,7 @@
 @import '../../../styles//index.scss';
 
 .button {
-  width: fit-content;
+  min-width: fit-content;
   cursor: pointer;
   letter-spacing: 0.025em;
   font-weight: $fontWeight-bold;

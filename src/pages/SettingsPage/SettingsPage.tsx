@@ -2,18 +2,18 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { InitialSettingsValue } from 'types/FormTypes';
 import { FC } from 'react';
+import { useAppSelector } from 'hooks/reduxHooks';
 import { UserOutlined } from '@ant-design/icons';
 import { User } from 'types/dataTypes';
 import Button from 'components/UI/Button/Button';
 import Input from 'components/UI/Input/Input';
 import yupPattern from 'utils/yupPattern';
+import InviteUser from './InviteUser/InviteUser';
 import UserSelect from './UserSelect';
 import style from './SettingsPage.module.scss';
 
 const SettingsPage: FC = () => {
-  const user = JSON.parse(
-    localStorage.getItem('userData') || JSON.stringify({}),
-  ) as User;
+  const user = useAppSelector((state) => state.user);
   const formik = useFormik({
     initialValues: {
       firstName: user.firstName,
@@ -110,7 +110,12 @@ const SettingsPage: FC = () => {
           Change
         </Button>
       </form>
-      {user.role === 'admin' && <UserSelect />}
+      {user.userData?.role.toLocaleLowerCase() === 'admin' && (
+        <>
+          <UserSelect />
+          <InviteUser />
+        </>
+      )}
     </div>
   );
 };

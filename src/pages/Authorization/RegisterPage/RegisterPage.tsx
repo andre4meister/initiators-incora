@@ -1,28 +1,38 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { InitialRegistrationFormValues } from 'types/FormTypes';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
+import { registration } from 'store/user';
 import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
+import Loader from 'components/UI/Loader/Loader';
 import styles from '../Authorization.module.scss';
 
 const RegisterPage: FC = () => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
       password: '',
-      confirmPassword: '',
+      // confirmPassword: '',
+      email: '',
     },
     validationSchema: Yup.object({
       firstName: yupPattern('firstName'),
       lastName: yupPattern('lastName'),
       password: yupPattern('password'),
-      confirmPassword: yupPattern('confirmPassword'),
+      // confirmPassword: yupPattern('confirmPassword'),
+      email: yupPattern('email'),
     }),
     onSubmit: (values: InitialRegistrationFormValues) => {
-      console.log(JSON.stringify(values, null, 2));
+      dispatch(registration({ values, navigate }));
     },
   });
 
@@ -31,6 +41,7 @@ const RegisterPage: FC = () => {
   } = formik;
   return (
     <div className={styles.container}>
+      {user.loading === 'pending' && <Loader />}
       <form onSubmit={handleSubmit} className={styles.form}>
         <h1 className={styles.text}>Create account</h1>
         <div className={styles.form_items}>
@@ -90,7 +101,10 @@ const RegisterPage: FC = () => {
               ) : null}
             </div>
           </div>
-          <div className={styles.form_item}>
+          {/* <div className={styles.form_item}>
+            <label className={styles.item} htmlFor="confirmPassword">
+              Confirm your passport
+            </label>
             <Input
               placeholder="Confirm your password"
               classes="input"
@@ -99,11 +113,25 @@ const RegisterPage: FC = () => {
               handleOnChange={handleChange}
               value={values.confirmPassword}
             />
-            <div className={styles.error_container}>
-              {touched.confirmPassword && errors.confirmPassword ? (
-                <div className={styles.error}>{errors.confirmPassword}</div>
-              ) : null}
-            </div>
+            {touched.confirmPassword && errors.confirmPassword ? (
+              <div className={styles.error}>{errors.confirmPassword}</div>
+            ) : null}
+          </div> */}
+          <div className={styles.form_item}>
+            <label className={styles.item} htmlFor="email">
+              Confirm your email
+            </label>
+            <Input
+              placeholder="Enter your email"
+              classes="input"
+              name="email"
+              type="email"
+              handleOnChange={handleChange}
+              value={values.email}
+            />
+            {touched.email && errors.email ? (
+              <div className={styles.error}>{errors.email}</div>
+            ) : null}
           </div>
         </div>
         <Button

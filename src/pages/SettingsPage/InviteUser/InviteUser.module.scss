@@ -1,0 +1,68 @@
+@import '../../../styles/variables.module.scss';
+
+.container {
+  position: relative;
+  width: 50%;
+
+  .title {
+    margin-bottom: $indent-medium;
+  }
+
+  .inviteArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: $indent-small 0;
+
+    .inviteControl {
+      display: flex;
+      gap: 0 $indent-small;
+      justify-content: space-between;
+      height: fit-content;
+      width: 100%;
+
+      .input {
+        width: 100%;
+      }
+    }
+
+    .inviteList {
+      padding: $indent-small;
+      //   min-width: 250px;
+      //   max-width: 250px;
+      width: 100%;
+      min-height: 200px;
+      max-height: 200px;
+      border-radius: $borderRadius;
+      box-shadow: var(--currentBoxShadowInset);
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      .inviteListItem {
+        display: flex;
+        align-items: center;
+        gap: 0 $indent-small;
+        max-width: 100%;
+
+        p {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        svg {
+          cursor: pointer;
+          transition: $transition;
+        }
+
+        svg:hover {
+          fill: $color-orange;
+        }
+      }
+    }
+
+    .inviteList::-webkit-scrollbar-track {
+      margin: 10px 0;
+    }
+  }
+}

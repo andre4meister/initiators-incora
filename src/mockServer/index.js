@@ -391,6 +391,7 @@ router.post('/login', (req, res) => {
 
 router.get('/rooms', (req, res) => {
   try {
+    console.log(req);
     return res.json(mockRooms);
   } catch (err) {
     console.log(err);
@@ -417,6 +418,7 @@ app.use(
   cors({
     allowedOrigins: ['http://localhost:3000'],
   }),
+  allowedHeaders: 'Content-Type,Authorization',
 );
 app.use(express.json());
 app.use('/', router);

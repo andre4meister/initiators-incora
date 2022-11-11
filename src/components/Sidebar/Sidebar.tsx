@@ -6,13 +6,14 @@ import { User } from 'types/dataTypes';
 import AuthService from 'services/authService';
 import Toggle from 'components/UI/Toggle/Toggle';
 import Button from 'components/UI/Button/Button';
-import styles from './Sidebar.module.scss';
+import { useAppSelector } from 'hooks/reduxHooks';
 import { useTheme } from '../../hoc/ThemeProvider';
+import styles from './Sidebar.module.scss';
 
 const Sidebar: FC = () => {
   const themeContext = useTheme();
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem('userData') || JSON.stringify({})) as User;
+  const user = useAppSelector((state) => state.user.userData);
   const [toggle, setToggle] = useState<boolean>(themeContext.theme !== 'light');
 
   const handleChangeTheme = () => {
@@ -34,7 +35,7 @@ const Sidebar: FC = () => {
       <div className={styles.user}>
         <NavLink className={({ isActive }) => cn(styles.settings, isActive && styles.settings_active)} to="settings"><SettingOutlined /></NavLink>
         <div className={styles.avatar}><UserOutlined /></div>
-        <h2 className={styles.name}>{`${user.firstName} ${user.lastName}`}</h2>
+        <h2 className={styles.name}>{user && `${user.firstName} ${user.lastName}`}</h2>
       </div>
 
       <div className={styles.mockPanel}>

@@ -1,6 +1,7 @@
 @import '../../styles/variables.module.scss';
 
 .container {
+  position: relative;
   display: grid;
   grid-template-rows: repeat(6, 100px);
   margin: 10px auto;
