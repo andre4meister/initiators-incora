@@ -110,7 +110,6 @@ const SettingsPage: FC = () => {
           Change
         </Button>
       </form>
-
       {user.userData?.role.toLocaleLowerCase() === 'admin' && (
         <>
           <UserSelect />

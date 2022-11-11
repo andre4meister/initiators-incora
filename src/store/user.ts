@@ -27,7 +27,7 @@ export type RegistrationValues = {
 };
 
 const initialState: FetchUser = {
-  userData: JSON.parse(localStorage.getItem('user') || 'null') as User,
+  userData: JSON.parse(localStorage.getItem('userData') || 'null') as User,
   loading: null,
   error: '',
 };
