@@ -23,9 +23,8 @@ const LoginPage: FC = () => {
       email: yupPattern('email'),
       password: yupPattern('password'),
     }),
-    onSubmit: async (values: InitialLoginValues) => {
-      await dispatch(loginUser(values));
-      navigate('/');
+    onSubmit: (values: InitialLoginValues) => {
+      dispatch(loginPending({ values, navigate }));
     },
   });
   const {
@@ -67,7 +66,11 @@ const LoginPage: FC = () => {
             </div>
           </div>
         </div>
-        <Button type="submit" classes={style.button_submit} handleOnClick={handleSubmit}>
+        <Button
+          type="submit"
+          classes={style.button_submit}
+          handleOnClick={handleSubmit}
+        >
           Submit
         </Button>
         <NavLink className={style.forgot} to="/forgot">
