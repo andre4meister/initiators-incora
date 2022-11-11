@@ -11,13 +11,13 @@ const RegisterPage: FC = () => {
   const formik = useFormik({
     initialValues: {
       firstName: '',
-      surname: '',
+      lastName: '',
       password: '',
       confirmPassword: '',
     },
     validationSchema: Yup.object({
       firstName: yupPattern('firstName'),
-      surname: yupPattern('surname'),
+      lastName: yupPattern('lastName'),
       password: yupPattern('password'),
       confirmPassword: yupPattern('confirmPassword'),
     }),
@@ -54,20 +54,20 @@ const RegisterPage: FC = () => {
           </div>
 
           <div className={styles.form_item}>
-            <label className={styles.label} htmlFor="surname">
-              Surname
+            <label className={styles.label} htmlFor="lastName">
+              Last name
             </label>
             <Input
-              placeholder="Enter your surname"
+              placeholder="Enter your last name"
               classes="input"
-              name="surname"
+              name="lastName"
               type="text"
               handleOnChange={handleChange}
-              value={values.surname}
+              value={values.lastName}
             />
             <div className={styles.error_container}>
-              {touched.surname && errors.surname ? (
-                <div className={styles.error}>{errors.surname}</div>
+              {touched.lastName && errors.lastName ? (
+                <div className={styles.error}>{errors.lastName}</div>
               ) : null}
             </div>
           </div>
@@ -106,7 +106,11 @@ const RegisterPage: FC = () => {
             </div>
           </div>
         </div>
-        <Button type="submit" classes={styles.button_submit} handleOnClick={handleSubmit}>
+        <Button
+          type="submit"
+          classes={styles.button_submit}
+          handleOnClick={handleSubmit}
+        >
           Submit
         </Button>
       </form>

@@ -15,15 +15,40 @@ const router = express.Router();
 const app = express();
 const PORT = 5000;
 
+const mockUsers = [
+  {
+    id: 410,
+    role: 'admin',
+    password: '12345678',
+    email: 'incorainc',
+    firstName: 'Admin',
+    lastName: 'Adminenko',
+  },
+  {
+    id: 580,
+    role: 'user',
+    password: 'qwerty123',
+    email: 'incorainc',
+    firstName: 'Bitch',
+    lastName: 'Stupid',
+  },
+  {
+    id: 360,
+    role: 'admin',
+    password: '235689147',
+    email: 'incorainc',
+    firstName: 'Debil',
+    lastName: 'Zzz',
+  },
+];
+
 const booking = {
   rooms: [
     {
       id: 1,
       name: 'Nest26',
       floor: 2,
-      devices: [
-        'White board',
-      ],
+      devices: ['White board'],
       maxPeople: 5,
       minPeople: 2,
       soonestBookings: [
@@ -229,12 +254,7 @@ const booking = {
       id: 5,
       name: 'React13',
       floor: 2,
-      devices: [
-        'White board',
-        'Big screen',
-        'Water cooler',
-        'Tennis table',
-      ],
+      devices: ['White board', 'Big screen', 'Water cooler', 'Tennis table'],
       maxPeople: 5,
       minPeople: 2,
       soonestBookings: [],
@@ -260,12 +280,7 @@ const booking = {
       id: 4,
       name: 'React26',
       floor: 3,
-      devices: [
-        'White board',
-        'Big screen',
-        'Water cooler',
-        'Air conditioner',
-      ],
+      devices: ['White board', 'Big screen', 'Water cooler', 'Air conditioner'],
       maxPeople: 5,
       minPeople: 2,
       soonestBookings: [],
@@ -382,6 +397,14 @@ router.get('/rooms', (req, res) => {
   }
 });
 
+router.get('/users', (req, res) => {
+  try {
+    return res.json(mockUsers);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 router.get('/booking', (req, res) => {
   try {
     return res.json(booking);
@@ -390,11 +413,11 @@ router.get('/booking', (req, res) => {
   }
 });
 
-app.use(cors({
-  allowedOrigins: [
-    'http://localhost:3000',
-  ],
-}));
+app.use(
+  cors({
+    allowedOrigins: ['http://localhost:3000'],
+  }),
+);
 app.use(express.json());
 app.use('/', router);
 
