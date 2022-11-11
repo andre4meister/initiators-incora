@@ -29,22 +29,13 @@ const LoginPage: FC = () => {
       dispatch(loginPending({ values, navigate }));
     },
   });
-
   const {
     handleSubmit, handleChange, values, errors, touched,
   } = formik;
   return (
     <div className={style.container}>
       {user.loading === 'pending' && <Loader />}
-      <form
-        className={style.form}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            handleSubmit();
-          }
-        }}
-        onSubmit={handleSubmit}
-      >
+      <form className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.text}>Login</h1>
         <div className={style.form_items}>
           <div className={style.form_item}>
@@ -56,9 +47,11 @@ const LoginPage: FC = () => {
               handleOnChange={handleChange}
               value={values.email}
             />
-            {touched.email && errors.email ? (
-              <div className={style.error}>{errors.email}</div>
-            ) : null}
+            <div className={style.error_container}>
+              {touched.email && errors.email ? (
+                <div className={style.error}>{errors.email}</div>
+              ) : null}
+            </div>
           </div>
           <div className={style.form_item}>
             <Input
@@ -69,12 +62,18 @@ const LoginPage: FC = () => {
               handleOnChange={handleChange}
               value={values.password}
             />
-            {touched.password && errors.password ? (
-              <div className={style.error}>{errors.password}</div>
-            ) : null}
+            <div className={style.error_container}>
+              {touched.password && errors.password ? (
+                <div className={style.error}>{errors.password}</div>
+              ) : null}
+            </div>
           </div>
         </div>
-        <Button classes={style.button_submit} handleOnClick={handleSubmit}>
+        <Button
+          type="submit"
+          classes={style.button_submit}
+          handleOnClick={handleSubmit}
+        >
           Submit
         </Button>
         <NavLink className={style.forgot} to="/forgot">

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { FC } from 'react';
 import style from './Toggle.module.scss';
 
