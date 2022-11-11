@@ -9,6 +9,7 @@ import LoginPage from 'pages/Authorization/LoginPage/LoginPage';
 import RegisterPage from 'pages/Authorization/RegisterPage/RegisterPage';
 import TestPage from 'pages/TestPage/TestPage';
 import Dashboard, { dashboardLoader } from 'pages/Dashboard/Dashboard';
+import CalendarPage from 'pages/CalendarPage/CalendarPage';
 import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 import styles from './styles/App.module.scss';
 
@@ -18,8 +19,8 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path="test" element={<TestPage />} />
       <Route index element={<Dashboard />} loader={dashboardLoader} errorElement={<h2>Error</h2>} />
       <Route
-        path="booking"
-        element={<h1 style={{ textAlign: 'center' }}>booking</h1>}
+        path="calendar"
+        element={<CalendarPage />}
       />
       <Route
         path="map"
