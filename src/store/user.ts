@@ -52,6 +52,7 @@ const user = createSlice({
     registration: (state, action) => {
       state.loading = 'pending';
     },
+    getProfile: (_, action) => { },
   },
 });
 
@@ -60,6 +61,7 @@ export const {
   loginSuccess,
   loginFailure,
   registration,
+  getProfile,
 } = user.actions;
 
 export default user.reducer;
