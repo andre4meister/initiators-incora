@@ -1,9 +1,3 @@
-export interface UIPropsType {
-  classes?: string;
-  children?: string | React.ReactNode;
-}
-export type ColorModeType = 'light' | 'dark';
-
 export type DateTimeType = moment.Moment | string;
 export interface OfficeType {
   id: number;

@@ -1,20 +1,19 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable object-curly-newline */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { useAppDispatch } from 'hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
+import Loader from 'components/UI/Loader/Loader';
 import { InitialLoginValues } from 'types/FormTypes';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FC } from 'react';
-import { loginUser } from 'store/user';
+import { loginPending } from 'store/user';
 import style from '../Authorization.module.scss';
 
 const LoginPage: FC = () => {
+  const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const formik = useFormik({
@@ -26,24 +25,17 @@ const LoginPage: FC = () => {
       email: yupPattern('email'),
       password: yupPattern('password'),
     }),
-    onSubmit: async (values: InitialLoginValues) => {
-      await dispatch(loginUser((values)));
-      navigate('/');
+    onSubmit: (values: InitialLoginValues) => {
+      dispatch(loginPending({ values, navigate }));
     },
   });
-
-  const { handleSubmit, handleChange, values, errors, touched } = formik;
+  const {
+    handleSubmit, handleChange, values, errors, touched,
+  } = formik;
   return (
     <div className={style.container}>
-      <form
-        className={style.form}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            handleSubmit();
-          }
-        }}
-        onSubmit={handleSubmit}
-      >
+      {user.loading === 'pending' && <Loader />}
+      <form className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.text}>Login</h1>
         <div className={style.form_items}>
           <div className={style.form_item}>
@@ -55,9 +47,11 @@ const LoginPage: FC = () => {
               handleOnChange={handleChange}
               value={values.email}
             />
-            {touched.email && errors.email ? (
-              <div className={style.error}>{errors.email}</div>
-            ) : null}
+            <div className={style.error_container}>
+              {touched.email && errors.email ? (
+                <div className={style.error}>{errors.email}</div>
+              ) : null}
+            </div>
           </div>
           <div className={style.form_item}>
             <Input
@@ -68,12 +62,18 @@ const LoginPage: FC = () => {
               handleOnChange={handleChange}
               value={values.password}
             />
-            {touched.password && errors.password ? (
-              <div className={style.error}>{errors.password}</div>
-            ) : null}
+            <div className={style.error_container}>
+              {touched.password && errors.password ? (
+                <div className={style.error}>{errors.password}</div>
+              ) : null}
+            </div>
           </div>
         </div>
-        <Button classes={style.button_submit} handleOnClick={handleSubmit}>
+        <Button
+          type="submit"
+          classes={style.button_submit}
+          handleOnClick={handleSubmit}
+        >
           Submit
         </Button>
         <NavLink className={style.forgot} to="/forgot">

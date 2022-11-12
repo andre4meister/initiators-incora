@@ -4,11 +4,13 @@ export interface InitialLoginValues {
   email: string;
   password: string;
 }
+
 export interface InitialRegistrationFormValues {
   firstName: string;
-  surname: string;
+  lastName: string;
   password: string;
-  confirmPassword: string;
+  // confirmPassword: string;
+  email: string;
 }
 
 export interface InitialGetAccessValues {
@@ -36,11 +38,6 @@ export interface BookingFormValues {
   daysOfWeek: DaysOfWeek | DaysOfWeek[];
   meetingDate: DateTimeType;
 }
-
-// export type SubmitBookingFormValues =
-// | Omit<BookingFormValues, 'startDate' | 'endDate' | 'daysOfWeek'>
-// | Omit<BookingFormValues, 'meetingDate'>;
-// Doesn`t work
 export interface SubmitBookingFormValues {
   id: number | null;
   accoundId: number;
@@ -52,4 +49,10 @@ export interface SubmitBookingFormValues {
   endTime: DateTimeType;
   daysOfWeek?: DaysOfWeek | DaysOfWeek[];
   meetingDate?: DateTimeType;
+}
+export interface InitialSettingsValue {
+  firstName: string;
+  lastName: string;
+  password: string;
+  email: string;
 }

@@ -8,9 +8,9 @@ $menuContainerWidth: 44px;
   height: 100vh;
 
   .content {
-    padding: $indent-small $indent-medium;
     width: 100%;
-    margin-right: $menuContainerWidth;
+    padding: $indent-small $indent-medium;
+    padding-right: $menuContainerWidth + $indent-medium;
   }
 
   .menuContainer {

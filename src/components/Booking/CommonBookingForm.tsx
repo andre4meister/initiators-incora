@@ -59,10 +59,13 @@ const CommonBookingForm: FC = () => {
     validationSchema: Yup.object({
       startTime: yupPattern('startTime'),
       endTime: yupPattern('endTime'),
-      startDate: yupPattern('startDate'),
-      meetingDate: yupPattern('meetingDate'),
-      endDate: yupPattern('endDate'),
-      daysOfWeek: yupPattern('daysOfWeek'),
+      ...(isReccuring
+        ? {
+          startDate: yupPattern('startDate'),
+          endDate: yupPattern('endDate'),
+          daysOfWeek: yupPattern('daysOfWeek'),
+        }
+        : { meetingDate: yupPattern('meetingDate') }),
     }),
     onSubmit: (values: BookingFormValues) => {
       values.createdAt = moment(now()).format('YYYY-MM-DDTHH:mm:ss.SSSZ');

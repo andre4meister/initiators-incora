@@ -1,57 +1,67 @@
 // This rule disabled for changing extraredusers states
 /* eslint-disable no-param-reassign */
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from 'types/dataTypes';
-import AuthService from 'services/authService';
+import { NavigateFunction } from 'react-router-dom';
+import { InitialRegistrationFormValues } from 'types/FormTypes';
 
-interface FetchUser {
-  userData: User
-  status: boolean
+type LoadingType = 'pending' | 'succses' | 'failure' | null;
+
+export interface FetchUser {
+  userData: User | null
+  loading: LoadingType
   error: string
 }
 
-type LoginValues = {
-  email: string
-  password: string
+export type LoginValues = {
+  values: {
+    email: string
+    password: string
+  }
+  navigate: NavigateFunction | (() => void)
+};
+
+export type RegistrationValues = {
+  values: InitialRegistrationFormValues
+  navigate: NavigateFunction | (() => void)
 };
 
 const initialState: FetchUser = {
-  userData: {
-    id: 0,
-    role: 'guest',
-    password: '',
-    email: '',
-    firstName: '',
-    lastName: '',
-  },
-  status: false,
+  userData: JSON.parse(localStorage.getItem('userData') || 'null') as User,
+  loading: null,
   error: '',
 };
-
-export const loginUser = createAsyncThunk(
-  'user/loginUser',
-  async (values: LoginValues, { rejectWithValue }) => {
-    const res = await AuthService.login(values.email, values.password);
-
-    if (res.statusText !== 'OK') {
-      return rejectWithValue(res.statusText);
-    }
-
-    return res.data;
-  },
-);
 
 const user = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.userData = action.payload;
-        state.status = true;
-      });
+  reducers: {
+    loginPending: (state, action) => {
+      state.loading = 'pending';
+    },
+    loginSuccess: (state, action: PayloadAction<User>) => {
+      state.userData = action.payload;
+      state.loading = 'succses';
+      localStorage.setItem('user', JSON.stringify(action.payload));
+    },
+    loginFailure: (state, action: PayloadAction<string>) => {
+      state.userData = null;
+      state.error = action.payload;
+      state.loading = 'failure';
+    },
+    registration: (state, action) => {
+      state.loading = 'pending';
+    },
+    getProfile: (_, action) => { },
   },
 });
+
+export const {
+  loginPending,
+  loginSuccess,
+  loginFailure,
+  registration,
+  getProfile,
+} = user.actions;
 
 export default user.reducer;

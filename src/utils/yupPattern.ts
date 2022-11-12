@@ -7,14 +7,14 @@ const yupPattern = (validate: string) => {
       return Yup.string()
         .email('Invalid email address')
         .required('Required')
-        .matches(/@incorainc.com$/, 'Please use your working mail.');
+        .matches(/@incorainc.com$|@gmail.com$/, 'Please use your working mail.');
     case 'firstName':
       return Yup.string()
         .max(15, 'Must be under 15 symbols')
         .min(2, 'Must be more than 2 symbols')
         .matches(/[a-zA-Z]/, 'Name can only contain Latin letters.')
         .required('Required');
-    case 'surname':
+    case 'lastName':
       return Yup.string()
         .max(15, 'Must be under 15 symbols')
         .min(2, 'Must be more than 2 symbols')
@@ -23,7 +23,7 @@ const yupPattern = (validate: string) => {
     case 'password':
       return Yup.string()
         .required('No password provided.')
-        .min(8, 'password must contain 8 or more characters.');
+        .min(8, 'Password must contain 8 or more characters.');
     case 'confirmPassword':
       return Yup.string()
         .required('Required')

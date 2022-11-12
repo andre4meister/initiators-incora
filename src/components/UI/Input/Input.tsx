@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { FC, useState } from 'react';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
-import { InputProps, InputTypes } from '../../../types/InputTypes';
+import { InputProps, InputTypes } from '../../../types/typesForUI';
 import styles from './Input.module.scss';
 
 const Input: FC<InputProps> = ({

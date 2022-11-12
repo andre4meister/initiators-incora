@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { RoomType } from 'types/CommonTypes';
 import {
   UserOutlined,
@@ -33,9 +33,10 @@ const DashboardRoom: FC<DashboardRoomProps> = ({ room }) => {
     dispatch(toggleModalType('BookingFromDashboard'));
   };
 
-  const handleOnClick = () => {
-    dispatch(toggleChosenRoom(room.id));
+  const handleOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
     if (activeRoomId === null) {
+      dispatch(toggleChosenRoom(room.id));
       dispatch(toggleActiveRoomId(room.id));
     } else {
       dispatch(toggleActiveRoomId(null));
@@ -50,14 +51,20 @@ const DashboardRoom: FC<DashboardRoomProps> = ({ room }) => {
     () => room.id !== activeRoomId && activeRoomId !== null,
     [activeRoomId, room.id],
   );
+  useEffect(() => {
+    if (isActive === true) {
+      document.body.style.overflowY = 'hidden';
+    }
+    return () => {
+      document.body.style.overflowY = 'auto';
+    };
+  }, [isActive, dispatch]);
 
   return (
     <div
-      className={styles.roomContainer}
+      className={cn(styles.roomContainer, isActive && styles.roomActiveContainer)}
       role="none"
-      onClick={() => {
-        if (room.id === activeRoomId) dispatch(toggleActiveRoomId(null));
-      }}
+      onClick={handleOnClick}
     >
       <div
         id={`room-item${room.id}`}
