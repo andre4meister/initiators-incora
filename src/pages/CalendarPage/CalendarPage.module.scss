@@ -66,8 +66,27 @@
       flex-direction: column;
 
       .timelineRow {
+        position: relative;
         display: flex;
         height: 50px;
+
+        .nowFlag {
+          position: absolute;
+          width: 2px;
+          height: 100%;
+          background-color: $color-orange;
+        }
+
+        .nowFlag::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: -4px;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: $color-orange;
+        }
 
         .hour {
           position: relative;

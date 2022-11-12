@@ -8,7 +8,6 @@ import {
 import useCalendar from 'hooks/useCalendar';
 import { Booking, Room } from 'types/dataTypes';
 import getRequest from 'utils/getRequest';
-import Loader from 'components/UI/Loader/Loader';
 import TimelinePoint from '../TimelinePoint/TimelinePoint';
 
 import styles from '../CalendarPage.module.scss';
@@ -31,6 +30,7 @@ const WeekTimeline: FC<WeekTimelineProps> = ({ selectedDate }) => {
   const sundayRef = useRef<HTMLDivElement>(null);
 
   const weekRef = useRef<HTMLDivElement>(null);
+  const nowFlag = useRef<HTMLDivElement>(null);
   const hours = Array.from(Array(24).keys());
   const [fetchingBooking, setFetchingBooking] = useState<FetchBooking | null>(null);
   const { getWeekByDay } = useCalendar();
@@ -41,7 +41,6 @@ const WeekTimeline: FC<WeekTimelineProps> = ({ selectedDate }) => {
     setFetchingBooking(body);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-floating-promises
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     getBooking();
@@ -56,6 +55,23 @@ const WeekTimeline: FC<WeekTimelineProps> = ({ selectedDate }) => {
       weekRef.current.scrollLeft -= 100;
     }
   };
+
+  const setNowFlag = () => {
+    const hourWidth = 150;
+    if (!nowFlag.current) return;
+    nowFlag.current.style.left = `${((moment().hour() * 60) + moment().minute()) * (hourWidth / 60) - 1}px`;
+  };
+
+  useEffect(() => {
+    const nowFlagUpdateInterval = setInterval(
+      () => setNowFlag(),
+      60000,
+    );
+
+    return () => clearInterval(nowFlagUpdateInterval);
+  }, []);
+
+  setNowFlag();
 
   const renderPoint = (weekDay: number, room: number): React.ReactNode => {
     if (fetchingBooking === null) return;
@@ -145,6 +161,7 @@ const WeekTimeline: FC<WeekTimelineProps> = ({ selectedDate }) => {
       <div ref={weekRef} className={styles.calendar} onWheel={horizontalScroll}>
         <div className={styles.timeline}>
           <div className={styles.timelineRow}>
+            <div ref={nowFlag} className={styles.nowFlag} />
             {hours.map((hour) => (
               <div
                 key={hour}
