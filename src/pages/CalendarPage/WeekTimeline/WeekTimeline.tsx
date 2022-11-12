@@ -63,15 +63,18 @@ const WeekTimeline: FC<WeekTimelineProps> = ({ selectedDate }) => {
   };
 
   useEffect(() => {
+    setNowFlag();
     const nowFlagUpdateInterval = setInterval(
       () => setNowFlag(),
       60000,
     );
 
+    if (weekRef.current !== null && nowFlag.current !== null) {
+      weekRef.current.scrollLeft = +nowFlag.current.style.left.match(/\d*\.\d*|\d*/)![0] - (weekRef.current.clientWidth / 2);
+    }
+
     return () => clearInterval(nowFlagUpdateInterval);
   }, []);
-
-  setNowFlag();
 
   const renderPoint = (weekDay: number, room: number): React.ReactNode => {
     if (fetchingBooking === null) return;
