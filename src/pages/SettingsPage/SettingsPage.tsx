@@ -4,7 +4,6 @@ import { InitialSettingsValue } from 'types/FormTypes';
 import { FC } from 'react';
 import { useAppSelector } from 'hooks/reduxHooks';
 import { UserOutlined } from '@ant-design/icons';
-import { User } from 'types/dataTypes';
 import Button from 'components/UI/Button/Button';
 import Input from 'components/UI/Input/Input';
 import yupPattern from 'utils/yupPattern';
@@ -13,17 +12,19 @@ import UserSelect from './UserSelect';
 import style from './SettingsPage.module.scss';
 
 const SettingsPage: FC = () => {
-  const user = useAppSelector((state) => state.user);
+  const { userData } = useAppSelector(
+    (state) => state.user,
+  );
   const formik = useFormik({
     initialValues: {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      password: user.password,
-      email: user.email,
+      firstName: userData?.firstName || '',
+      lastName: userData?.lastName || '',
+      password: '',
+      email: userData?.email || '',
     },
     validationSchema: Yup.object({
       firstName: yupPattern('firstName'),
-      lastName: yupPattern('surname'),
+      lastName: yupPattern('lastName'),
       password: yupPattern('password'),
       email: yupPattern('email'),
     }),
@@ -110,7 +111,7 @@ const SettingsPage: FC = () => {
           Change
         </Button>
       </form>
-      {user.userData?.role.toLocaleLowerCase() === 'admin' && (
+      {userData?.role.toLocaleLowerCase() === 'admin' && (
         <>
           <UserSelect />
           <InviteUser />

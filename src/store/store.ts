@@ -2,6 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import user from './user';
 import modal from './modal';
+import booking from './booking';
+import dashboard from './dashboard';
 import rootSaga from './sagas/index';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -10,6 +12,8 @@ const store = configureStore({
   reducer: {
     user,
     modal,
+    booking,
+    dashboard,
   },
   middleware: [sagaMiddleware],
 });

@@ -1,33 +1,20 @@
 import { PlusCircleOutlined } from '@ant-design/icons';
-import Modal from 'components/Modal/Modal';
-import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
+import { useAppDispatch } from 'hooks/reduxHooks';
 import { FC } from 'react';
-import { toggleModal } from 'store/modal';
-import { RootState } from 'store/store';
+import { toggleModal, toggleModalType } from 'store/modal';
 import styles from './RoundMenu.module.scss';
 
 const RoundMenu: FC = () => {
-  const { modalIsOpen, modalIsLocked } = useAppSelector((state: RootState) => state.modal);
   const dispatch = useAppDispatch();
 
-  const onClose = () => {
-    dispatch(toggleModal(false));
-    const appNode = document.getElementById('app') as HTMLDivElement | null;
-    if (appNode) {
-      appNode.style.opacity = '1';
-    }
+  const onClick = () => {
+    dispatch(toggleModalType('RoundMenuBooking'));
+    dispatch(toggleModal(true));
   };
+
   return (
     <div className={styles.roundMenuBody}>
-      <PlusCircleOutlined
-        className={styles.plusIcon}
-        onClick={() => dispatch(toggleModal(true))}
-      />
-      {modalIsOpen && (
-        <Modal open={modalIsOpen} locked={modalIsLocked} onClose={onClose}>
-          <div>Modal Temporary</div>
-        </Modal>
-      )}
+      <PlusCircleOutlined className={styles.plusIcon} onClick={onClick} title="Book room" />
     </div>
   );
 };

@@ -1,9 +1,15 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+export type ModalType =
+  | 'BookingFromDashboard'
+  | 'RoundMenuBooking'
+  | 'BookingFromCalendar';
+
+export const initialState = {
   modalIsOpen: false,
   modalIsLocked: false,
+  modalType: 'BookingFromDashboard',
 };
 
 const modal = createSlice({
@@ -16,8 +22,11 @@ const modal = createSlice({
     toggleLockModal: (state, action: PayloadAction<boolean>) => {
       state.modalIsLocked = action.payload;
     },
+    toggleModalType: (state, action: PayloadAction<ModalType>) => {
+      state.modalType = action.payload;
+    },
   },
 });
 
-export const { toggleModal, toggleLockModal } = modal.actions;
+export const { toggleModal, toggleLockModal, toggleModalType } = modal.actions;
 export default modal.reducer;

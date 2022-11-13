@@ -39,13 +39,12 @@
 
       input {
         width: 450px;
-        box-shadow: $boxShadowLightInset;
         margin-bottom: $indent-medium;
-        box-shadow: $boxShadowLightOutline;
+        box-shadow: var(--currentBoxShadowOutline);
       }
 
       input:hover {
-        box-shadow: $boxShadowLightInset;
+        box-shadow: var(--currentBoxShadowInset);
       }
     }
   }

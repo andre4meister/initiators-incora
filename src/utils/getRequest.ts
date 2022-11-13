@@ -4,7 +4,8 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 const axiosInstance = axios.create();
 
 async function getRequest<T>(url: string): Promise<AxiosResponse<T>> {
-  const token = JSON.parse(localStorage.getItem('token') || '') as string;
+  const tokenFromLocalStorage = localStorage.getItem('token');
+  const token = tokenFromLocalStorage && (JSON.parse(tokenFromLocalStorage) as string);
 
   axiosInstance.interceptors.request.use(
     (config: AxiosRequestConfig): AxiosRequestConfig => {

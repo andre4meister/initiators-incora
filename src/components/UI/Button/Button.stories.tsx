@@ -4,7 +4,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Story } from '@storybook/addon-docs/blocks';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ButtonType } from 'types/ButtonTypes';
+import { ButtonType } from 'types/typesForUI';
 import Button from './Button';
 
 export default {

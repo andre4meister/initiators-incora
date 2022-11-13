@@ -21,6 +21,7 @@
   svg {
     font-size: 44px;
     fill: var(--currentText);
+    transition: $transition;
   }
 }
 @media (any-hover: hover) {
