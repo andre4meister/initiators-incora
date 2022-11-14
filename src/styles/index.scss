@@ -1,0 +1,47 @@
+@import './variables.module.scss';
+
+:root {
+  --currentTheme: #{$color-mainLight};
+  --secondTheme: #{$color-light1};
+  --currentText: #{$color-textLight};
+  --currentBoxShadowOutline: #{$boxShadowLightOutline};
+  --currentBoxShadowInset: #{$boxShadowLightInset};
+  --currentDashboardBoxShadow: #{$boxShadowDashboardLight};
+  --currentDashboardTheme: #{$colorDashboardLight};
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--currentText);
+  scrollbar-color: var(--currentText);
+  scrollbar-width: thin;
+}
+
+body {
+  font-family: $fontFamily;
+  font-weight: $fontWeight-normal;
+  font-size: $fontSize-small;
+  background-color: var(--currentTheme);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--currentText);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

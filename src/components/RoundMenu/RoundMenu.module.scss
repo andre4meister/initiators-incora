@@ -1,0 +1,31 @@
+@import '../../styles/variables.module.scss';
+
+.roundMenuBody {
+  position: fixed;
+  bottom: 25px;
+  left: 20px;
+  min-width: 50px;
+  min-height: 50px;
+  border-radius: $circle;
+  cursor: pointer;
+  z-index: 39;
+  opacity: 0.5;
+  transition: $transition;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.plusIcon {
+  margin: 3px;
+  svg {
+    font-size: 44px;
+    fill: var(--currentText);
+    transition: $transition;
+  }
+}
+@media (any-hover: hover) {
+  .plusIcon svg:hover {
+    fill: $color-orange;
+  }
+}

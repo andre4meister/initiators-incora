@@ -1,0 +1,36 @@
+@import '../../styles/variables.module.scss';
+
+.container {
+    display: grid;
+    justify-content: flex-start;
+    align-items: flex-start;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-rows: repeat(auto-fit, 135px);
+    position: relative;
+    min-height: 100%;
+}
+
+
+.changeDisplayMethodButton {
+  margin: -5px -55px 0 0;
+  position: absolute;
+  z-index: 20;
+  justify-self: end;
+  min-width: max-content;
+}
+.changeButton {
+  font-size: 26px;
+  margin: 0 5px;
+  color: var(--currentText);
+  opacity: 0.5;
+  transition: $transition;
+  &:hover {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+.activeButton > svg {
+    fill: $color-orange;
+    transition: $transition;
+}

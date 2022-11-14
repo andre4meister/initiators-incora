@@ -1,0 +1,25 @@
+@import '../../../styles/variables.module.scss';
+@import '../../../styles//index.scss';
+
+.button {
+  min-width: fit-content;
+  cursor: pointer;
+  letter-spacing: 0.025em;
+  font-weight: $fontWeight-bold;
+  border-radius: $borderRadius;
+  padding: $indent-small;
+  border: none;
+  background-color: var(--currentTheme);
+  box-shadow: var(--currentBoxShadowOutline);
+  transition: color $transition;
+}
+
+.button:active {
+  box-shadow: var(--currentBoxShadowInset);
+}
+
+@media (any-hover: hover) {
+  .button:hover {
+    color: $color-orange;
+  }
+}

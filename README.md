@@ -1,46 +1,60 @@
-# Getting Started with Create React App
+# Team initiators-incora
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To setup over web application you should complete next steps:
 
-## Available Scripts
+1. Get a local copy of our project from develop branch( it`s default branch)
 
-In the project directory, you can run:
+   ### git clone https://github.com/andre4meister/asm-incora.git
 
-### `npm start`
+2. Install all dependencies using a command:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+   ### npm install
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+   Check if the dev dependencies were installed, if not, use:
 
-### `npm test`
+   ### npm install --only=dev
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. If there are any errors from eslint, use the command
 
-### `npm run build`
+   ### npm run lintfix
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Start project using commands:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ### npm run start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   or if you need other port, use:
 
-### `npm run eject`
+   ### npm run start8000
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+5. Start the temporary server for log in:
+   Use such data:
+   email: test@incorainc.com
+   password: 12345678
+   ### npm run server
+6. For using storybook to check how our UI components look likes, use the command:
+   ### npm run storybook
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If the app doesn`t work, please be patient and write on email darknes1237893@gmail.com.
+I'll do my best to help you)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<!--
+User
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+[get] /users - get all users registered in system
+[get] /users/:id - get user by id
+[get] /users/me - returns current user data (by token)
+[post/update] /users/:id - finish registration/update user info: name, photo etc.
 
-## Learn More
+Office
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[get] /offices
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Room
+
+[get] /rooms?officeId=‘’”&soonestBookingsDays=“”
+
+Bookings
+
+[post] /bookings/own?page=""&limit=""
+[get/update/delete] /bookings/:id
+[get] /bookings?roomId=“”&userId=“”&startDate=“”&endDate=“” -->

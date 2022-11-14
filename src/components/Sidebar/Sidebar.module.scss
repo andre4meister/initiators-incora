@@ -1,0 +1,80 @@
+@import '../../styles/variables.module.scss';
+
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: $size-sidebarWidth;
+  padding: $indent-small;
+
+  .user {
+    position: relative;
+    box-shadow: var(--currentBoxShadowOutline);
+    border-radius: $borderRadius;
+    padding: $indent-small;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-bottom: $indent-medium; // for mockPanel
+
+    .settings {
+      position: absolute;
+      top: $indent-small;
+      right: $indent-small;
+      box-shadow: var(--currentBoxShadowOutline);
+      border-radius: 50%;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        margin: 10px;
+        transition: $transition;
+      }
+    }
+
+    .settings_active svg {
+      fill: $color-orange;
+    }
+
+    .avatar {
+      background-color: $color-light1;
+      margin-bottom: $indent-small;
+      border-radius: 50%;
+      padding: $indent-large;
+
+      svg {
+        background-color: $color-light1;
+        width: 50px;
+        height: 50px;
+        fill: $color-textLight;
+      }
+    }
+
+    .name {
+      font-size: $fontSize-medium;
+      font-weight: $fontWeight-bold;
+    }
+
+    @media (any-hover: hover) {
+      .settings:hover {
+        svg {
+          fill: $color-orange;
+        }
+      }
+    }
+  }
+
+  .mockPanel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: $indent-medium;
+    padding: $indent-small;
+    box-shadow: var(--currentBoxShadowOutline);
+    border-radius: $borderRadius;
+    height: 200px;
+  }
+}

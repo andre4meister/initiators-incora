@@ -1,0 +1,65 @@
+@import '../../styles//variables.module.scss';
+
+.container {
+  margin: $indent-large auto;
+  padding: $indent-large;
+  max-width: 1000px;
+
+  .text {
+    margin-bottom: $indent-large;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+    background-color: $color-light1;
+    border-radius: 50%;
+    position: relative;
+
+    svg {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      top: 25%;
+      left: 25%;
+    }
+  }
+
+  .block {
+    padding: $indent-large $indent-small;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: $indent-large;
+    grid-column-gap: $indent-small;
+    margin-bottom: $indent-large;
+
+    .block_input {
+      margin-right: $indent-large;
+
+      input {
+        width: 450px;
+        margin-bottom: $indent-medium;
+        box-shadow: var(--currentBoxShadowOutline);
+      }
+
+      input:hover {
+        box-shadow: var(--currentBoxShadowInset);
+      }
+    }
+  }
+
+  .button_submit {
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    .block {
+      display: block;
+      .block_input {
+        margin-right: none;
+      }
+    }
+  }
+}
