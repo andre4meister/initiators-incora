@@ -1,90 +1,119 @@
+@import '../../../styles/variables.module.scss';
+
+// @if html[theme='dark'] {
+//   --loader-color: $color-yellow;
+// } @else {
+//   --loader-color: $color-light2;
+// }
+
+// html[data-theme='dark'] {
+//   --loader: #fec602;
+// }
+// html[data-theme='light'] {
+//   --loader: $colorDashboardLight;
+// }
+
 .container {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(1.5px);
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 1;
 
-  .spinner {
-    color: official;
+  .loader {
+    backdrop-filter: blur(1.5px);
+    width: 48px;
+    height: 48px;
     display: inline-block;
     position: relative;
-    width: 80px;
-    height: 80px;
+    transform: rotate(45deg);
   }
-  .spinner div {
-    transform-origin: 40px 40px;
-    animation: spinner 1.2s linear infinite;
-  }
-  .spinner div:after {
-    content: ' ';
-    display: block;
+  .loader::before {
+    content: '';
+    box-sizing: border-box;
+    width: 24px;
+    height: 24px;
     position: absolute;
-    top: 3px;
-    left: 37px;
-    width: 6px;
-    height: 18px;
-    border-radius: 20%;
-    background: var(--currentText);
+    left: 0;
+    top: -24px;
+    animation: animloader 4s ease infinite;
   }
-  .spinner div:nth-child(1) {
-    transform: rotate(0deg);
-    animation-delay: -1.1s;
+  .loader::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    background: $color-yellow;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    animation: animloader2 2s ease infinite;
   }
-  .spinner div:nth-child(2) {
-    transform: rotate(30deg);
-    animation-delay: -1s;
-  }
-  .spinner div:nth-child(3) {
-    transform: rotate(60deg);
-    animation-delay: -0.9s;
-  }
-  .spinner div:nth-child(4) {
-    transform: rotate(90deg);
-    animation-delay: -0.8s;
-  }
-  .spinner div:nth-child(5) {
-    transform: rotate(120deg);
-    animation-delay: -0.7s;
-  }
-  .spinner div:nth-child(6) {
-    transform: rotate(150deg);
-    animation-delay: -0.6s;
-  }
-  .spinner div:nth-child(7) {
-    transform: rotate(180deg);
-    animation-delay: -0.5s;
-  }
-  .spinner div:nth-child(8) {
-    transform: rotate(210deg);
-    animation-delay: -0.4s;
-  }
-  .spinner div:nth-child(9) {
-    transform: rotate(240deg);
-    animation-delay: -0.3s;
-  }
-  .spinner div:nth-child(10) {
-    transform: rotate(270deg);
-    animation-delay: -0.2s;
-  }
-  .spinner div:nth-child(11) {
-    transform: rotate(300deg);
-    animation-delay: -0.1s;
-  }
-  .spinner div:nth-child(12) {
-    transform: rotate(330deg);
-    animation-delay: 0s;
-  }
-  @keyframes spinner {
+
+  @keyframes animloader {
     0% {
-      opacity: 1;
+      box-shadow: 0 24px rgba(255, 255, 255, 0),
+        24px 24px rgba(255, 255, 255, 0), 24px 48px rgba(255, 255, 255, 0),
+        0px 48px rgba(255, 255, 255, 0);
+    }
+    12% {
+      box-shadow: 0 24px $color-yellow, 24px 24px rgba(255, 255, 255, 0),
+        24px 48px rgba(255, 255, 255, 0), 0px 48px rgba(255, 255, 255, 0);
+    }
+    25% {
+      box-shadow: 0 24px $color-yellow, 24px 24px $color-yellow,
+        24px 48px rgba(255, 255, 255, 0), 0px 48px rgba(255, 255, 255, 0);
+    }
+    37% {
+      box-shadow: 0 24px $color-yellow, 24px 24px $color-yellow,
+        24px 48px $color-yellow, 0px 48px rgba(255, 255, 255, 0);
+    }
+    50% {
+      box-shadow: 0 24px $color-yellow,
+        24px 24px $color-yellow 24px 48px $color-yellow, 0px 48px $color-yellow;
+    }
+    62% {
+      box-shadow: 0 24px rgba(255, 255, 255, 0), 24px 24px $color-yellow,
+        24px 48px $color-yellow 0px 48px $color-yellow;
+    }
+    75% {
+      box-shadow: 0 24px rgba(255, 255, 255, 0),
+        24px 24px rgba(255, 255, 255, 0), 24px 48px $color-yellow,
+        0px 48px $color-yellow;
+    }
+    87% {
+      box-shadow: 0 24px rgba(255, 255, 255, 0),
+        24px 24px rgba(255, 255, 255, 0), 24px 48px rgba(255, 255, 255, 0),
+        0px 48px $color-yellow;
     }
     100% {
-      opacity: 0;
+      box-shadow: 0 24px rgba(255, 255, 255, 0),
+        24px 24px rgba(255, 255, 255, 0), 24px 48px rgba(255, 255, 255, 0),
+        0px 48px rgba(255, 255, 255, 0);
+    }
+  }
+
+  @keyframes animloader2 {
+    0% {
+      transform: translate(0, 0) rotateX(0) rotateY(0);
+    }
+    25% {
+      transform: translate(100%, 0) rotateX(0) rotateY(180deg);
+    }
+    50% {
+      transform: translate(100%, 100%) rotateX(-180deg) rotateY(180deg);
+    }
+    75% {
+      transform: translate(0, 100%) rotateX(-180deg) rotateY(360deg);
+    }
+    100% {
+      transform: translate(0, 0) rotateX(0) rotateY(360deg);
     }
   }
 }

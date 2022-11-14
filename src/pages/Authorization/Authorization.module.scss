@@ -59,6 +59,10 @@
         align-items: flex-start;
         margin-bottom: $indent-small;
       }
+
+      input {
+        width: 300px;
+      }
     }
 
     .button_submit {
@@ -98,4 +102,7 @@
 
 .forgot_page_item {
   margin-bottom: $indent-large;
+  input {
+    width: 300px;
+  }
 }
