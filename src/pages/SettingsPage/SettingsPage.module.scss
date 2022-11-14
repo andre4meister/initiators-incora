@@ -1,8 +1,7 @@
 @import '../../styles//variables.module.scss';
 
 .container {
-  margin: $indent-large auto;
-  padding: $indent-large;
+  margin: $indent-medium auto;
   max-width: 1000px;
 
   .text {
@@ -47,9 +46,6 @@
         box-shadow: var(--currentBoxShadowInset);
       }
     }
-  }
-
-  .button_submit {
   }
 }
 
