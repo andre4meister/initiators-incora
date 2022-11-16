@@ -60,6 +60,13 @@ const booking = {
           endTime: '09:00:00',
         },
         {
+          id: 665,
+          createdAt: '2022-10-29T16:21:58.000Z',
+          meetingDate: '2022-11-07',
+          startTime: '15:00:00',
+          endTime: '16:00:00',
+        },
+        {
           id: 4,
           createdAt: '2022-10-30T16:21:58.000Z',
           meetingDate: '2022-11-03',
@@ -159,6 +166,14 @@ const booking = {
           meetingDate: '2022-11-18',
           startTime: '10:00:00',
           endTime: '12:00:00',
+        },
+        {
+          id: '7954b5fc-4126-4f01-a046-73ebc735e354555',
+          generatedFromRecurrentBookingWithId: 3,
+          createdAt: '2022-10-28T16:21:58.000Z',
+          meetingDate: '2022-11-18',
+          startTime: '13:30:00',
+          endTime: '14:00:00',
         },
         {
           id: 'cb2d5eb1-042c-49be-9d01-d21ff3c66901',
@@ -417,8 +432,8 @@ router.get('/booking', (req, res) => {
 app.use(
   cors({
     allowedOrigins: ['http://localhost:3000'],
+    allowedHeaders: 'Content-Type,Authorization',
   }),
-  allowedHeaders: 'Content-Type,Authorization',
 );
 app.use(express.json());
 app.use('/', router);

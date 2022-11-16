@@ -1,0 +1,27 @@
+@import '../../../../styles/variables.module.scss';
+
+.bookingPoint {
+  position: absolute;
+  width: calc(100% - 4px);
+  left: 2px;
+  border: 1px solid var(--currentText);
+  background-color: var(--secondTheme);
+  border-radius: $borderRadius;
+  z-index: 1;
+  overflow: hidden;
+  font-size: $fontSize-xxsmall;
+
+  transition: border $transition;
+  cursor: pointer;
+  padding-left: 4px;
+
+  .roomName {
+    font-weight: $fontWeight-bold;
+  }
+}
+
+@media (any-hover: hover) {
+  .bookingPoint:hover {
+    border: 1px solid $color-orange;
+  }
+}

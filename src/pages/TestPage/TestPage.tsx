@@ -1,5 +1,5 @@
 import Button from 'components/UI/Button/Button';
-import DataPicker from 'components/UI/DataPicker/DataPicker';
+import DatePicker from 'components/UI/DatePicker/DatePicker';
 import CheckBox from 'components/UI/CheckBox/CheckBox';
 import Input from 'components/UI/Input/Input';
 import Upload from 'components/UI/Upload/Upload';
@@ -21,7 +21,7 @@ const TestPage: FC = () => {
       />
       <Button handleOnClick={() => console.log('click')}>Button</Button>
       <CheckBox isChecked={checkbox} handleOnChange={() => setCheckbox((prev) => !prev)} />
-      <DataPicker setSelectedDate={setSelectedDate} selectedDate={selectedDate} />
+      <DatePicker setSelectedDate={setSelectedDate} selectedDate={selectedDate} />
       <Upload />
     </div>
   );

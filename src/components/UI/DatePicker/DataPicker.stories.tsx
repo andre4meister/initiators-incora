@@ -4,7 +4,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Story } from '@storybook/addon-docs/blocks';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Calendar from './DataPicker';
+import Calendar from './DatePicker';
 
 export default {
   title: 'Calendar',

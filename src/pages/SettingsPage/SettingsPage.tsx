@@ -4,7 +4,6 @@ import { InitialSettingsValue } from 'types/FormTypes';
 import { FC } from 'react';
 import { useAppSelector } from 'hooks/reduxHooks';
 import { UserOutlined } from '@ant-design/icons';
-import { User } from 'types/dataTypes';
 import Button from 'components/UI/Button/Button';
 import Input from 'components/UI/Input/Input';
 import yupPattern from 'utils/yupPattern';
@@ -16,10 +15,10 @@ const SettingsPage: FC = () => {
   const user = useAppSelector((state) => state.user);
   const formik = useFormik({
     initialValues: {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      password: user.password,
-      email: user.email,
+      firstName: user.userData?.firstName || '',
+      lastName: user.userData?.lastName || '',
+      password: 'user.userData.password',
+      email: user.userData?.email || '',
     },
     validationSchema: Yup.object({
       firstName: yupPattern('firstName'),

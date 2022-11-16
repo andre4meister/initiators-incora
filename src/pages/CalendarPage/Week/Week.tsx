@@ -8,19 +8,19 @@ import {
 import useCalendar from 'hooks/useCalendar';
 import { Booking, Room } from 'types/dataTypes';
 import getRequest from 'utils/getRequest';
-import TimelinePoint from '../TimelinePoint/TimelinePoint';
+import WeekBookingPoint from './WeekBookingPoint/WeekBookingPoint';
 
-import styles from '../CalendarPage.module.scss';
+import styles from './Week.module.scss';
 
 interface FetchBooking {
   rooms: Room[]
 }
 
-interface WeekTimelineProps {
+interface WeekProps {
   selectedDate: moment.Moment
 }
 
-const WeekTimeline: FC<WeekTimelineProps> = ({ selectedDate }) => {
+const Week: FC<WeekProps> = ({ selectedDate }) => {
   const mondayRef = useRef<HTMLDivElement>(null);
   const tuesdayRef = useRef<HTMLDivElement>(null);
   const wednesdayRef = useRef<HTMLDivElement>(null);
@@ -89,7 +89,7 @@ const WeekTimeline: FC<WeekTimelineProps> = ({ selectedDate }) => {
 
     // eslint-disable-next-line consistent-return
     return bookingDuringTheDay.map((booking) => (
-      <TimelinePoint key={booking.id} room={roomProp} bookingDate={booking} />
+      <WeekBookingPoint key={booking.id} room={roomProp} bookingDate={booking} />
     ));
   };
 
@@ -99,7 +99,7 @@ const WeekTimeline: FC<WeekTimelineProps> = ({ selectedDate }) => {
 
     if (ref === null) return;
 
-    bookingsOnDay = ref.querySelectorAll('.bokingLine');
+    bookingsOnDay = ref.querySelectorAll('.timelinePoint');
 
     bookingsOnDay.forEach((checkableBooking, ind) => {
       const bookings: HTMLDivElement[] = [];
@@ -203,4 +203,4 @@ const WeekTimeline: FC<WeekTimelineProps> = ({ selectedDate }) => {
   );
 };
 
-export default WeekTimeline;
+export default Week;

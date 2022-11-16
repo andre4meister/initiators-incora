@@ -1,20 +1,16 @@
 import moment from 'moment';
 import cn from 'classnames';
-import {
-  FC, useCallback, useEffect, useRef,
-} from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { Booking, Room } from 'types/dataTypes';
 
-import styles from '../CalendarPage.module.scss';
+import styles from './WeekBookingPoint.module.scss';
 
-interface TimelinePointProps {
+interface WeekBookingPointProps {
   bookingDate: Booking
   room: Omit<Room, 'soonestBookings'>
 }
 
-const TimelinePoint: FC<TimelinePointProps> = ({ bookingDate, room }) => {
-  const pointRef = useRef<HTMLDivElement>(null);
-
+const WeekBookingPoint: FC<WeekBookingPointProps> = ({ bookingDate, room }) => {
   const horizontalPosition = useCallback(() => {
     const hourWidth = 150;
     const startHour = moment(`${bookingDate.meetingDate} ${bookingDate.startTime}`).hour();
@@ -35,7 +31,7 @@ const TimelinePoint: FC<TimelinePointProps> = ({ bookingDate, room }) => {
   }, [horizontalPosition]);
 
   return (
-    <div ref={pointRef} style={horizontalPosition()} className={cn('bokingLine', styles.bokingLine)}>
+    <div style={horizontalPosition()} className={cn('timelinePoint', styles.timelinePoint)}>
       <h3 className={styles.roomName}>{room.name}</h3>
       <div className={styles.period}>
         {bookingDate.startTime.substring(0, 5)}
@@ -46,4 +42,4 @@ const TimelinePoint: FC<TimelinePointProps> = ({ bookingDate, room }) => {
   );
 };
 
-export default TimelinePoint;
+export default WeekBookingPoint;
