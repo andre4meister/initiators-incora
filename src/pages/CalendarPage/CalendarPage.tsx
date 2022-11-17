@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { FC, Suspense, useState } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
-import Select, { SingleValue } from 'react-select';
+import Select, { SingleValue, StylesConfig } from 'react-select';
 import { Booking, FetchingBooking } from 'types/dataTypes';
 import useCalendar from 'hooks/useCalendar';
 import getRequest from 'utils/getRequest';
@@ -11,6 +11,44 @@ import Week from './Week/Week';
 import Month from './Month/Month';
 import Day from './Day/Day';
 import styles from './CalendarPage.module.scss';
+
+const selectStyles: StylesConfig<{ value: string, label: string }> = {
+  option: (provided, { isFocused, isSelected }) => ({
+    ...provided,
+    color: isSelected ? '#ba2d0b' : '#001f3f',
+    fontWeight: '700',
+    backgroundColor: isFocused ? '#cfcfcf' : 'transparent',
+  }),
+  control: (provided) => ({
+    ...provided,
+    fontWeight: '700',
+    borderRadius: '10px',
+    boxShadow: 'var(--currentBoxShadowInset)',
+    backgroundColor: 'var(--currentTheme)',
+    border: 'none',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: 'var(--currentText)',
+  }),
+  container: (provided) => ({
+    ...provided,
+    width: 'fit-content',
+  }),
+  indicatorSeparator: () => ({
+    display: 'none',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '12px',
+    backgroundColor: '#ffffff',
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    padding: '0px',
+    borderRadius: '10px',
+  }),
+};
 
 type ViewModeType = 'month' | 'week' | 'day';
 
@@ -35,8 +73,9 @@ const CalendarPage: FC = () => {
     { value: 'day', label: 'Day' },
   ];
 
-  const handleSetViewMode = (newValue: SingleValue<{ value: string, label: string }>) => {
-    if (newValue !== null) setViewMode(newValue.value as ViewModeType);
+  const handleSetViewMode = (option: SingleValue<{ value: string, label: string }>) => {
+    if (option !== null) setViewMode(option.value as ViewModeType);
+    console.log(viewMode);
   };
 
   return (
@@ -54,10 +93,12 @@ const CalendarPage: FC = () => {
                 todayProp={today}
               />
               <Select
+                isMulti={false}
                 isSearchable={false}
                 defaultValue={{ value: 'week', label: 'Week' }}
                 options={selecOptions}
                 onChange={handleSetViewMode}
+                styles={selectStyles}
               />
             </div>
             {viewMode === 'day' && <Day bookings={resolvedBookings} selectedDate={selectedDate} />}
