@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { AxiosPromise } from 'axios';
+/* eslint-disable @typescript-eslint/unbound-method */
+import { AxiosResponse } from 'axios';
 import { RoomType } from 'types/CommonTypes';
 import getRequest from 'utils/getRequest';
 
-interface FetchRoomsType {
+export interface FetchRoomsType {
   rooms: RoomType[];
 }
 export interface FetchRoomsProps {
@@ -14,14 +14,13 @@ export default class DashboardService {
   static async fetchRooms({
     officeId = 1,
     soonestBookingsDays = 5,
-  }: FetchRoomsProps) {
-    const response = await getRequest<AxiosPromise<FetchRoomsType>>(
+  }: FetchRoomsProps): Promise<AxiosResponse<FetchRoomsType>> {
+    const response = await getRequest<FetchRoomsType>(
       `https://initiators-ua.herokuapp.com/rooms?officeId=${officeId}&soonestBookingsDays=${soonestBookingsDays}`,
     );
 
     if (response.status === 200) {
-      const body: RoomType[] = (await response.data).data.rooms;
-      return body;
+      return response;
     }
     throw new Error('Error occured when rooms fetched');
   }

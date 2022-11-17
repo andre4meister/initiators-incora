@@ -11,7 +11,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     z-index: 1000;
 }
 
@@ -32,21 +32,24 @@
         margin-top: 10px;
         transition: 0.2s ease-in-out;
     }
-    &:hover {
-        box-shadow: var(--currentBoxShadowInset);
-    }
+    // &:hover {
+    //     box-shadow: var(--currentBoxShadowInset);
+    // }
 }
 
 .activeRoom {
-    width: 280px;
-    height: 310px;
+    min-width: 280px;
+    max-width: 750px;
+    width: 100%;
+    min-height: 310px;
+    height: 100%;
+    max-height: 600px;
     z-index: 70;
-    position: fixed;
     filter: blur(0);
     cursor: default;
-    &:hover {
-        box-shadow: var(--currentBoxShadowOutline);
-        }
+    // &:hover {
+    //     box-shadow: var(--currentBoxShadowOutline);
+    //     }
 }
 .bluredRoom {
     filter: blur(6px);
@@ -117,7 +120,9 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 175px;
+    min-height: 175px;
+    height: max-content;
+    max-height: 465px;
     width: 100%;
     z-index: -1;
     opacity: 0;
@@ -149,6 +154,7 @@
 }
 
 .soonestBookings {
+    height: fit-content;
     max-height: 100%;
     width: 100%;
     padding: 0 10px;
@@ -171,15 +177,22 @@
     padding: 10px;
     background-color: $color-yellow;
     border-radius: $borderRadius;
+    color: white;
+    .createdAt, .id {
+        color: white;
+    }
 }
 
 .reserveRoomButton {
     margin: 10px auto;
+    min-width: 115px;
+    width: 60%;
+    max-width: 300px;
 }
 
 .availableicon {
     position: absolute;
-    bottom: 10px;
+    top: 10px;
     right: 10px;
     svg {
         width: 24px;

@@ -34,6 +34,19 @@ $colorDashboardLight: #ffffff;
 $colorDashboardDark: #292929;
 $color-blue: #2664ff;
 
+// NOTIFICATIONS
+$successBackgroundColor: #eaf7ee;
+$successBorderColor: #d3e6d8;
+$successTextColor: #3bb65d;
+
+$infoBackgroundColor: #e5effa;
+$infoBorderColor: #c7d6e7;
+$infoTextColor: #016ce2;
+
+$errorBackgroundColor: #fcede9;
+$errorBorderColor: #edd4ce;
+$errorTextColor: #ea4e2c;
+
 // FOR NEUMORPHISM
 $blur: 6px;
 $borderRadius: 10px;
@@ -51,8 +64,8 @@ $boxShadowDarkInset: inset 3px 3px $blur $color-dark1,
   inset -3px -3px $blur $color-dark2;
 
 // BOX SHADOWS
-$boxShadowDashboardLight: $boxShadowLightOutline;
-$boxShadowDashboardDark : $boxShadowDarkOutline;
+$boxShadowDashboardLight: 0 0 8px 2px lightgray;
+$boxShadowDashboardDark : 0 0 8px 2px rgb(8, 8, 8);
 
 // ANIMATION
 $transition: 0.2s ease-in-out;

@@ -29,11 +29,11 @@ const ForgotPasswordPage: FC = () => {
       <form className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.text}>
           Forgot your password
-          <FrownOutlined />
+          <FrownOutlined className={style.sadSmileIcon} />
         </h1>
         <h5 className={style.forgot_page_text}>
-          Please enter your working email adress, where we can sent password
-          reset informatin
+          Please enter your working email adress, where we can send you reset
+          password information
         </h5>
         <div className={style.forgot_page_item}>
           <Input
@@ -50,7 +50,11 @@ const ForgotPasswordPage: FC = () => {
             ) : null}
           </div>
         </div>
-        <Button type="submit" classes="button-submit" handleOnClick={handleSubmit}>
+        <Button
+          type="submit"
+          classes="button-submit"
+          handleOnClick={handleSubmit}
+        >
           Request reset link
         </Button>
       </form>

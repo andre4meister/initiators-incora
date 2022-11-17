@@ -1,5 +1,7 @@
+/* eslint-disable no-debugger */
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { FetchRoomsProps } from 'services/DashboardService';
 
 export const initialState = {
   activeRoomId: null as number | null,
@@ -12,8 +14,11 @@ const dashboard = createSlice({
     toggleActiveRoomId: (state, action: PayloadAction<number | null>) => {
       state.activeRoomId = action.payload;
     },
+    getRooms: (_, action: PayloadAction<FetchRoomsProps>) => {
+      debugger;
+    },
   },
 });
 
-export const { toggleActiveRoomId } = dashboard.actions;
+export const { toggleActiveRoomId, getRooms } = dashboard.actions;
 export default dashboard.reducer;

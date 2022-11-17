@@ -2,29 +2,25 @@
 import CheckBox from 'components/UI/CheckBox/CheckBox';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { useEffect } from 'react';
-import { setRooms, toggleIsRecurring } from 'store/booking';
-import DashboardService from 'services/DashboardService';
+import { toggleIsRecurring } from 'store/booking';
+import { getRooms } from 'store/dashboard';
 import styles from './Booking.module.scss';
 import CommonBookingForm from './CommonBookingForm';
 
 const Booking = () => {
   const dispatch = useAppDispatch();
-  const { isReccuring } = useAppSelector((state) => state.booking);
+  const { isReccuring, rooms } = useAppSelector((state) => state.booking);
 
   useEffect(() => {
-    //  WIP: it`s temporary, i`m going to make the saga and rewrite it
-    try {
-      const response = DashboardService.fetchRooms({
-        officeId: 1,
-        soonestBookingsDays: 5,
-      }).then((rooms) => {
-        dispatch(setRooms(rooms));
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(getRooms({ officeId: 1, soonestBookingsDays: 5 }));
+
+    const fetchIntervalRooms = setInterval(() => {
+      dispatch(getRooms({ officeId: 1, soonestBookingsDays: 5 }));
+    }, 10000);
+
     return () => {
       dispatch(toggleIsRecurring(false));
+      clearInterval(fetchIntervalRooms);
     };
   }, []);
 

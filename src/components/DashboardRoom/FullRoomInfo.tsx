@@ -1,7 +1,6 @@
 import { CalendarOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { FC } from 'react';
-import cn from 'classnames';
 import { CommonMeetingType } from '../../types/CommonTypes';
 import styles from './DashboardRoom.module.scss';
 
@@ -20,10 +19,10 @@ const FullRoomInfo: FC<FullRoomInfoProps> = ({ booking, isActive }) => {
   return (
     <div className={styles.bookingContainer}>
       <div className={styles.firstLine}>
-        <div className={styles.id}>
-          <div>{`#${booking.id}`}</div>
+        <div>
+          <div className={styles.id}>{`#${booking.id}`}</div>
         </div>
-        <div>{editedCreatedAt}</div>
+        <div className={styles.createdAt}>{editedCreatedAt}</div>
       </div>
       <div>
         <CalendarOutlined className={styles.fullInfoIcon} />

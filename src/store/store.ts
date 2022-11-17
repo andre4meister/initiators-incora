@@ -4,6 +4,7 @@ import user from './user';
 import modal from './modal';
 import booking from './booking';
 import dashboard from './dashboard';
+import alert from './alert';
 import rootSaga from './sagas/index';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -14,6 +15,7 @@ const store = configureStore({
     modal,
     booking,
     dashboard,
+    alert,
   },
   middleware: [sagaMiddleware],
 });
