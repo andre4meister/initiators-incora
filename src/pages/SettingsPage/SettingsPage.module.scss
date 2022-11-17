@@ -39,10 +39,6 @@
       input {
         width: 450px;
         margin-bottom: $indent-medium;
-        box-shadow: var(--currentBoxShadowOutline);
-      }
-
-      input:hover {
         box-shadow: var(--currentBoxShadowInset);
       }
     }

@@ -1,18 +1,5 @@
 @import '../../../styles/variables.module.scss';
 
-// @if html[theme='dark'] {
-//   --loader-color: $color-yellow;
-// } @else {
-//   --loader-color: $color-light2;
-// }
-
-// html[data-theme='dark'] {
-//   --loader: #fec602;
-// }
-// html[data-theme='light'] {
-//   --loader: $colorDashboardLight;
-// }
-
 .container {
   position: absolute;
   display: flex;
@@ -51,7 +38,7 @@
     top: 0;
     width: 24px;
     height: 24px;
-    background: $color-yellow;
+    background: var(--currentLoader);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     animation: animloader2 2s ease infinite;
   }
@@ -63,34 +50,35 @@
         0px 48px rgba(255, 255, 255, 0);
     }
     12% {
-      box-shadow: 0 24px $color-yellow, 24px 24px rgba(255, 255, 255, 0),
+      box-shadow: 0 24px var(--currentLoader), 24px 24px rgba(255, 255, 255, 0),
         24px 48px rgba(255, 255, 255, 0), 0px 48px rgba(255, 255, 255, 0);
     }
     25% {
-      box-shadow: 0 24px $color-yellow, 24px 24px $color-yellow,
+      box-shadow: 0 24px var(--currentLoader), 24px 24px var(--currentLoader),
         24px 48px rgba(255, 255, 255, 0), 0px 48px rgba(255, 255, 255, 0);
     }
     37% {
-      box-shadow: 0 24px $color-yellow, 24px 24px $color-yellow,
-        24px 48px $color-yellow, 0px 48px rgba(255, 255, 255, 0);
+      box-shadow: 0 24px var(--currentLoader), 24px 24px var(--currentLoader),
+        24px 48px var(--currentLoader), 0px 48px rgba(255, 255, 255, 0);
     }
     50% {
-      box-shadow: 0 24px $color-yellow,
-        24px 24px $color-yellow 24px 48px $color-yellow, 0px 48px $color-yellow;
+      box-shadow: 0 24px var(--currentLoader),
+        24px 24px var(--currentLoader) 24px 48px var(--currentLoader),
+        0px 48px var(--currentLoader);
     }
     62% {
-      box-shadow: 0 24px rgba(255, 255, 255, 0), 24px 24px $color-yellow,
-        24px 48px $color-yellow 0px 48px $color-yellow;
+      box-shadow: 0 24px rgba(255, 255, 255, 0), 24px 24px var(--currentLoader),
+        24px 48px var(--currentLoader) 0px 48px var(--currentLoader);
     }
     75% {
       box-shadow: 0 24px rgba(255, 255, 255, 0),
-        24px 24px rgba(255, 255, 255, 0), 24px 48px $color-yellow,
-        0px 48px $color-yellow;
+        24px 24px rgba(255, 255, 255, 0), 24px 48px var(--currentLoader),
+        0px 48px var(--currentLoader);
     }
     87% {
       box-shadow: 0 24px rgba(255, 255, 255, 0),
         24px 24px rgba(255, 255, 255, 0), 24px 48px rgba(255, 255, 255, 0),
-        0px 48px $color-yellow;
+        0px 48px var(--currentLoader);
     }
     100% {
       box-shadow: 0 24px rgba(255, 255, 255, 0),

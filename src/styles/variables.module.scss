@@ -22,6 +22,9 @@ $color-mainDark: #18191a;
 $color-dark1: #0d0e0e;
 $color-dark2: #232526;
 
+$loader-light: #ffffff;
+$loader-dark: #fec602;
+
 // It`s our previous colours, for now I use new for testing
 // $color-mainDark: #333333;
 // $color-dark1: #2b2b2b;
@@ -52,7 +55,7 @@ $boxShadowDarkInset: inset 3px 3px $blur $color-dark1,
 
 // BOX SHADOWS
 $boxShadowDashboardLight: $boxShadowLightOutline;
-$boxShadowDashboardDark : $boxShadowDarkOutline;
+$boxShadowDashboardDark: $boxShadowDarkOutline;
 
 // ANIMATION
 $transition: 0.2s ease-in-out;
@@ -80,7 +83,9 @@ $size-sidebarWidth: 300px;
   boxShadowDarkOutline: $boxShadowDarkOutline;
   boxShadowDarkInset: $boxShadowDarkInset;
   colorDashboardLight: $colorDashboardLight;
-  colorDashboardDark:$colorDashboardDark;
+  colorDashboardDark: $colorDashboardDark;
   boxShadowDashboardLight: $boxShadowDashboardLight;
   boxShadowDashboardDark: $boxShadowDashboardDark;
+  loaderLight: $loader-light;
+  loaderDark: $loader-dark;
 }
