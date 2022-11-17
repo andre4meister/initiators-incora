@@ -1,26 +1,20 @@
-// Required to set styles for points
 /* eslint-disable no-param-reassign */
-
 import moment from 'moment';
 import {
-  FC, WheelEvent, useRef, useEffect, useState,
+  FC, WheelEvent, useRef, useEffect, useCallback,
 } from 'react';
 import useCalendar from 'hooks/useCalendar';
-import { Booking, Room } from 'types/dataTypes';
-import getRequest from 'utils/getRequest';
+import { Booking } from 'types/dataTypes';
 import WeekBookingPoint from './WeekBookingPoint/WeekBookingPoint';
 
 import styles from './Week.module.scss';
 
-interface FetchBooking {
-  rooms: Room[]
-}
-
 interface WeekProps {
   selectedDate: moment.Moment
+  bookings: Booking[]
 }
 
-const Week: FC<WeekProps> = ({ selectedDate }) => {
+const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
   const mondayRef = useRef<HTMLDivElement>(null);
   const tuesdayRef = useRef<HTMLDivElement>(null);
   const wednesdayRef = useRef<HTMLDivElement>(null);
@@ -28,23 +22,10 @@ const Week: FC<WeekProps> = ({ selectedDate }) => {
   const fridayRef = useRef<HTMLDivElement>(null);
   const saturdayRef = useRef<HTMLDivElement>(null);
   const sundayRef = useRef<HTMLDivElement>(null);
-
   const weekRef = useRef<HTMLDivElement>(null);
   const nowFlag = useRef<HTMLDivElement>(null);
   const hours = Array.from(Array(24).keys());
-  const [fetchingBooking, setFetchingBooking] = useState<FetchBooking | null>(null);
   const { getWeekByDay } = useCalendar();
-
-  const getBooking = async () => {
-    const response = await getRequest<FetchBooking>('http://localhost:5000/booking');
-    const body = response.data;
-    setFetchingBooking(body);
-  };
-
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    getBooking();
-  }, []);
 
   const horizontalScroll = (e: WheelEvent<HTMLDivElement>) => {
     if (weekRef.current === null) return;
@@ -63,10 +44,17 @@ const Week: FC<WeekProps> = ({ selectedDate }) => {
   };
 
   useEffect(() => {
+    let minute = moment().minute();
+
     setNowFlag();
     const nowFlagUpdateInterval = setInterval(
-      () => setNowFlag(),
-      60000,
+      () => {
+        if (minute !== moment().minute()) {
+          minute = moment().minute();
+          setNowFlag();
+        }
+      },
+      1000,
     );
 
     if (weekRef.current !== null && nowFlag.current !== null) {
@@ -76,24 +64,21 @@ const Week: FC<WeekProps> = ({ selectedDate }) => {
     return () => clearInterval(nowFlagUpdateInterval);
   }, []);
 
-  const renderPoint = (weekDay: number, room: number): React.ReactNode => {
-    if (fetchingBooking === null) return;
+  function renderPoint(weekDay: number): React.ReactNode {
     const bookingDuringTheDay: Booking[] = [];
-    const { soonestBookings, ...roomProp } = fetchingBooking.rooms[room];
 
-    soonestBookings.forEach((bookingDay) => {
+    bookings.forEach((bookingDay) => {
       if (getWeekByDay(selectedDate)[weekDay].format('DDD') === moment(bookingDay.meetingDate).format('DDD')) {
         bookingDuringTheDay.push(bookingDay);
       }
     });
 
-    // eslint-disable-next-line consistent-return
     return bookingDuringTheDay.map((booking) => (
-      <WeekBookingPoint key={booking.id} room={roomProp} bookingDate={booking} />
+      <WeekBookingPoint key={booking.id} booking={booking} />
     ));
-  };
+  }
 
-  const checkPosition = (ref: HTMLDivElement | null) => {
+  const checkPosition = useCallback((ref: HTMLDivElement | null) => {
     const checkedBookings: number[] = [];
     let bookingsOnDay: NodeListOf<HTMLDivElement> | null = null;
 
@@ -102,7 +87,7 @@ const Week: FC<WeekProps> = ({ selectedDate }) => {
     bookingsOnDay = ref.querySelectorAll('.timelinePoint');
 
     bookingsOnDay.forEach((checkableBooking, ind) => {
-      const bookings: HTMLDivElement[] = [];
+      const bookingPoints: HTMLDivElement[] = [];
 
       if (checkedBookings.includes(ind)) return;
       if (bookingsOnDay === null) return;
@@ -120,13 +105,13 @@ const Week: FC<WeekProps> = ({ selectedDate }) => {
           )
         ) {
           checkedBookings.push(index);
-          bookings.push(booking);
+          bookingPoints.push(booking);
         }
       });
 
-      if (bookings.length <= 1) return;
+      if (bookingPoints.length <= 1) return;
 
-      bookings.forEach((item, i) => {
+      bookingPoints.forEach((item, i) => {
         const oneBookingHeght = 100 / bookings.length;
 
         if (i === 0) {
@@ -136,7 +121,7 @@ const Week: FC<WeekProps> = ({ selectedDate }) => {
         item.style.height = `calc(${oneBookingHeght}% - 4px)`;
       });
     });
-  };
+  }, [bookings.length]);
 
   useEffect(() => {
     checkPosition(mondayRef.current);
@@ -146,7 +131,7 @@ const Week: FC<WeekProps> = ({ selectedDate }) => {
     checkPosition(fridayRef.current);
     checkPosition(saturdayRef.current);
     checkPosition(sundayRef.current);
-  }, [selectedDate, fetchingBooking]);
+  }, [selectedDate, bookings, checkPosition]);
 
   return (
     <>
@@ -176,25 +161,25 @@ const Week: FC<WeekProps> = ({ selectedDate }) => {
           </div>
           <div className={styles.dayRows}>
             <div ref={mondayRef} className={styles.dayRow}>
-              {renderPoint(0, 0)}
+              {renderPoint(0)}
             </div>
             <div ref={tuesdayRef} className={styles.dayRow}>
-              {renderPoint(1, 0)}
+              {renderPoint(1)}
             </div>
             <div ref={wednesdayRef} className={styles.dayRow}>
-              {renderPoint(2, 0)}
+              {renderPoint(2)}
             </div>
             <div ref={thursdayRef} className={styles.dayRow}>
-              {renderPoint(3, 0)}
+              {renderPoint(3)}
             </div>
             <div ref={fridayRef} className={styles.dayRow}>
-              {renderPoint(4, 0)}
+              {renderPoint(4)}
             </div>
             <div ref={saturdayRef} className={styles.dayRow}>
-              {renderPoint(5, 0)}
+              {renderPoint(5)}
             </div>
             <div ref={sundayRef} className={styles.dayRow}>
-              {renderPoint(6, 0)}
+              {renderPoint(6)}
             </div>
           </div>
         </div>

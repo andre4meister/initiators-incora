@@ -1,16 +1,15 @@
 import cn from 'classnames';
 import moment from 'moment';
 import { FC } from 'react';
-import { Booking, Room } from 'types/dataTypes';
+import { Booking } from 'types/dataTypes';
 
 import styles from './DayBookingPoint.module.scss';
 
 interface DayBookingPointProps {
   booking: Booking
-  room: Omit<Room, 'soonestBookings'>
 }
 
-const DayBookingPoint: FC<DayBookingPointProps> = ({ booking, room }) => {
+const DayBookingPoint: FC<DayBookingPointProps> = ({ booking }) => {
   const verticalPosition = () => {
     const start = moment(`${booking.meetingDate} ${booking.startTime}`);
     const end = moment(`${booking.meetingDate} ${booking.endTime}`);
@@ -31,7 +30,7 @@ const DayBookingPoint: FC<DayBookingPointProps> = ({ booking, room }) => {
       style={verticalPosition()}
       className={cn('bookingPoint', styles.bookingPoint)}
     >
-      <h3 className={styles.roomName}>{room.name}</h3>
+      <h3 className={styles.roomName}>{booking.room.name}</h3>
       <div className={styles.period}>
         {booking.startTime.substring(0, 5)}
         -

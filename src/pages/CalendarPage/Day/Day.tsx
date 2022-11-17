@@ -1,55 +1,34 @@
 /* eslint-disable no-param-reassign */
+import { FC, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import moment from 'moment';
-import {
-  FC, ReactNode, useEffect, useRef, useState,
-} from 'react';
-import { Booking, Room } from 'types/dataTypes';
-import getRequest from 'utils/getRequest';
+import { Booking } from 'types/dataTypes';
 import DayBookingPoint from './DayBookingPoint/DayBookingPoint';
 
 import styles from './Day.module.scss';
 
-interface FetchBooking {
-  rooms: Room[]
-}
-
 interface DayProps {
   selectedDate: moment.Moment
+  bookings: Booking[]
 }
 
-const Day: FC<DayProps> = ({ selectedDate }) => {
-  const [fetchingBooking, setFetchingBooking] = useState<FetchBooking>();
+const Day: FC<DayProps> = ({ selectedDate, bookings }) => {
   const hours = Array.from(Array(24).keys());
   const timelineRef = useRef<HTMLDivElement>(null);
 
-  const getBooking = async () => {
-    const response = await getRequest<FetchBooking>('http://localhost:5000/booking');
-    const body = response.data;
-    setFetchingBooking(body);
-  };
-
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    getBooking();
-  }, []);
-
-  const renderBookingsInLine = (room: number): ReactNode => {
-    if (!fetchingBooking) return;
-
+  function renderBookingsInLine(): JSX.Element[] {
     const bookingAtDay: Booking[] = [];
 
-    fetchingBooking.rooms[room].soonestBookings.forEach((booking) => {
+    bookings.forEach((booking) => {
       if (selectedDate.isSame(moment(booking.meetingDate), 'day')) {
         bookingAtDay.push(booking);
       }
     });
 
-    // eslint-disable-next-line array-callback-return, consistent-return
     return bookingAtDay.map((booking) => (
-      <DayBookingPoint booking={booking} room={fetchingBooking.rooms[room]} />
+      <DayBookingPoint booking={booking} />
     ));
-  };
+  }
 
   const checkPosition = () => {
     if (timelineRef.current == null) return;
@@ -95,7 +74,7 @@ const Day: FC<DayProps> = ({ selectedDate }) => {
 
   useEffect(() => {
     checkPosition();
-  }, [selectedDate, fetchingBooking]);
+  }, [selectedDate, bookings]);
 
   return (
     <div className={styles.container}>
@@ -114,7 +93,7 @@ const Day: FC<DayProps> = ({ selectedDate }) => {
           ))}
         </div>
         <div ref={timelineRef} className={styles.hourLines}>
-          {renderBookingsInLine(0)}
+          {renderBookingsInLine()}
           <div>
             {hours.map((hour) => (
               <div key={hour} className={styles.hourLine} />
