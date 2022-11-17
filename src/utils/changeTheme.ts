@@ -9,6 +9,8 @@ const currentShadowInset = '--currentBoxShadowInset';
 const currentDashboardBoxShadow = '--currentDashboardBoxShadow';
 const currentDashboardTheme = '--currentDashboardTheme';
 const currentLoader = '--currentLoader';
+const currentEditionalColor = '--currentEditionalColor';
+const currentExtraColor = '--currentExtraColor';
 
 const changeTheme = (newTheme: string) => {
   localStorage.setItem('theme', JSON.stringify(newTheme));
@@ -31,6 +33,8 @@ const changeTheme = (newTheme: string) => {
         variables.colorDashboardLight,
       );
       root.style.setProperty(currentLoader, variables.loaderLight);
+      root.style.setProperty(currentEditionalColor, variables.editionalViolet);
+      root.style.setProperty(currentExtraColor, variables.editionalBlue);
       break;
     case 'dark':
       root.style.setProperty(currentTheme, variables.mainDark);
@@ -50,6 +54,8 @@ const changeTheme = (newTheme: string) => {
         variables.colorDashboardDark,
       );
       root.style.setProperty(currentLoader, variables.loaderDark);
+      root.style.setProperty(currentEditionalColor, variables.editionalRed);
+      root.style.setProperty(currentExtraColor, variables.editionalYellow);
       break;
     default:
       break;

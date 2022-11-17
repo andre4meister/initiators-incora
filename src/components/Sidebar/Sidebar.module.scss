@@ -10,12 +10,11 @@
 
   .user {
     position: relative;
-    box-shadow: var(--currentBoxShadowOutline);
-    border-radius: $borderRadius;
-    padding: $indent-small;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: var(--currentBoxShadowOutline);
+    border-radius: $borderRadius;
 
     margin-bottom: $indent-medium; // for mockPanel
 
@@ -35,26 +34,31 @@
     }
 
     .settings_active svg {
-      fill: $color-orange;
+      fill: var(--currentEditionalColor);
     }
 
     .avatar {
-      background-color: $color-light1;
-      margin-bottom: $indent-small;
+      background-color: var(--currentTheme);
       border-radius: 50%;
-      padding: $indent-large;
+      display: flex;
+      align-items: center;
+      padding: $indent-small;
+      box-shadow: var(--currentBoxShadowOutline);
+      margin: $indent-large 0 $indent-small;
 
-      svg {
-        background-color: $color-light1;
-        width: 50px;
-        height: 50px;
-        fill: $color-textLight;
+      img {
+        background-color: var(--currentTheme);
+        border: 3px solid var(--currentEditionalColor);
+        max-width: 120px;
+        max-height: 120px;
+        border-radius: 50%;
       }
     }
 
     .name {
       font-size: $fontSize-medium;
       font-weight: $fontWeight-bold;
+      margin-bottom: $indent-medium;
     }
 
     @media (any-hover: hover) {
@@ -73,6 +77,7 @@
     justify-content: center;
     gap: $indent-medium;
     padding: $indent-small;
+
     box-shadow: var(--currentBoxShadowOutline);
     border-radius: $borderRadius;
     height: 200px;

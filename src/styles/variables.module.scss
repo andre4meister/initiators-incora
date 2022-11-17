@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 // FONT
 $fontFamily: 'Mulish', sans-serif;
+// $fontFamily: 'Alfa Slab One';
 $fontWeight-normal: 400;
 $fontWeight-bold: 700;
 $fontSize-xxsmall: 12px;
@@ -35,7 +36,8 @@ $color-yellow: #fec602;
 
 $colorDashboardLight: #ffffff;
 $colorDashboardDark: #292929;
-$color-blue: #2664ff;
+$color-blue: #00d7eb;
+$color-violet: #5d5fe6;
 
 // FOR NEUMORPHISM
 $blur: 6px;
@@ -69,7 +71,7 @@ $indent-medium: 20px;
 $indent-large: 30px;
 
 // SIZES
-$size-sidebarWidth: 300px;
+$size-sidebarWidth: 260px;
 
 :export {
   mainLight: $color-mainLight;
@@ -88,4 +90,8 @@ $size-sidebarWidth: 300px;
   boxShadowDashboardDark: $boxShadowDashboardDark;
   loaderLight: $loader-light;
   loaderDark: $loader-dark;
+  editionalViolet: $color-violet;
+  editionalYellow: $color-yellow;
+  editionalBlue: $color-blue;
+  editionalRed: $color-orange;
 }
