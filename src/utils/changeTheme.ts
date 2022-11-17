@@ -1,6 +1,6 @@
 import variables from '../styles/variables.module.scss';
 
-const root = (document.querySelector(':root') as HTMLFormElement);
+const root = document.querySelector(':root') as HTMLFormElement;
 const currentTheme = '--currentTheme';
 const secondTheme = '--secondTheme';
 const currentText = '--currentText';
@@ -8,6 +8,7 @@ const currentShadowOutline = '--currentBoxShadowOutline';
 const currentShadowInset = '--currentBoxShadowInset';
 const currentDashboardBoxShadow = '--currentDashboardBoxShadow';
 const currentDashboardTheme = '--currentDashboardTheme';
+const currentLoader = '--currentLoader';
 
 const changeTheme = (newTheme: string) => {
   localStorage.setItem('theme', JSON.stringify(newTheme));
@@ -16,21 +17,42 @@ const changeTheme = (newTheme: string) => {
       root.style.setProperty(currentTheme, variables.mainLight);
       root.style.setProperty(secondTheme, variables.secondLight);
       root.style.setProperty(currentText, variables.textLight);
-      root.style.setProperty(currentShadowOutline, variables.boxShadowLightOutline);
+      root.style.setProperty(
+        currentShadowOutline,
+        variables.boxShadowLightOutline,
+      );
       root.style.setProperty(currentShadowInset, variables.boxShadowLightInset);
-      root.style.setProperty(currentDashboardBoxShadow, variables.boxShadowDashboardLight);
-      root.style.setProperty(currentDashboardTheme, variables.colorDashboardLight);
+      root.style.setProperty(
+        currentDashboardBoxShadow,
+        variables.boxShadowDashboardLight,
+      );
+      root.style.setProperty(
+        currentDashboardTheme,
+        variables.colorDashboardLight,
+      );
+      root.style.setProperty(currentLoader, variables.loaderLight);
       break;
     case 'dark':
       root.style.setProperty(currentTheme, variables.mainDark);
       root.style.setProperty(secondTheme, variables.secondDark);
       root.style.setProperty(currentText, variables.textDark);
-      root.style.setProperty(currentShadowOutline, variables.boxShadowDarkOutline);
+      root.style.setProperty(
+        currentShadowOutline,
+        variables.boxShadowDarkOutline,
+      );
       root.style.setProperty(currentShadowInset, variables.boxShadowDarkInset);
-      root.style.setProperty(currentDashboardBoxShadow, variables.boxShadowDashboardDark);
-      root.style.setProperty(currentDashboardTheme, variables.colorDashboardDark);
+      root.style.setProperty(
+        currentDashboardBoxShadow,
+        variables.boxShadowDashboardDark,
+      );
+      root.style.setProperty(
+        currentDashboardTheme,
+        variables.colorDashboardDark,
+      );
+      root.style.setProperty(currentLoader, variables.loaderDark);
       break;
-    default: break;
+    default:
+      break;
   }
 };
 
