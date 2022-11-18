@@ -37,7 +37,7 @@ $dayHeight: 24px;
       right: -8px;
       width: 6px;
       height: 6px;
-      background-color: $color-yellow;
+      background-color: var(--currentEditionalColor);
       border-radius: 50%;
     }
 
@@ -92,7 +92,7 @@ $dayHeight: 24px;
       }
 
       .dayWeekend {
-        color: $color-orange;
+        color: var(--currentExtraColor);
       }
 
       .dayToday {
@@ -106,16 +106,16 @@ $dayHeight: 24px;
         right: 1px;
         bottom: 1px;
         left: 1px;
-        border: 1px solid $color-yellow;
+        border: 1px solid var(--currentEditionalColor);
         border-radius: 50%;
       }
 
       .daySelected:not(.dayToday) {
-        background-color: rgba(254, 198, 2, 0.5);
+        background-color: var(--currentDashboardTheme);
       }
 
       .daySelected.dayToday {
-        background-color: $color-yellow;
+        background-color: var(--currentEditionalColor);
       }
 
       @media (any-hover: hover) {
@@ -124,7 +124,7 @@ $dayHeight: 24px;
         }
 
         .dayToday:hover {
-          background-color: $color-yellow;
+          background-color: var(--currentEditionalColor);
         }
       }
     }

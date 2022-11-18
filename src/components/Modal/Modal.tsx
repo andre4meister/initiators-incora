@@ -1,37 +1,43 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {
-  FC, ReactNode, useCallback, useRef, useEffect,
+  FC, ReactNode, useCallback, useRef, useEffect, useState,
 } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
+import { toggleModal } from 'store/modal';
+import Booking from 'components/Booking/Booking';
+import TestPage from 'pages/TestPage/TestPage';
+import { CSSTransition } from 'react-transition-group';
 import styles from './Modal.module.scss';
-import ReactPortal from './ReactPortal';
+import ReactPortal from '../ReactPortal/ReactPortal';
+import 'animate.css';
 
 interface ModalProps {
-  open: boolean;
-  locked: boolean;
-  onClose: () => void;
   children: ReactNode;
+  headerText: string;
 }
 
-const Modal: FC<ModalProps> = ({
-  open,
-  locked,
-  onClose,
-  children,
-}) => {
+const Modal: FC<ModalProps> = ({ children, headerText }) => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
+  const dispatch = useAppDispatch();
+  const { modalIsOpen, modalIsLocked } = useAppSelector((state) => state.modal);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [enterModal, setEnterModal] = useState<boolean>(false);
+
+  const onClose = useCallback(() => {
+    setShowModal(false);
+    setTimeout(() => {
+      dispatch(toggleModal(false));
+    }, 800);
+  }, [dispatch]);
 
   const onCancel = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
-      if (!locked) onClose();
+      if (!modalIsLocked) onClose();
     },
-    [locked, onClose],
+    [modalIsLocked, onClose],
   );
-
-  const onAnimEnd = useCallback(() => {
-    const { current: el } = modalRef;
-    if (!open && el) el.close();
-  }, [open]);
 
   const onClickOutsideClose = (e: React.MouseEvent<Element, MouseEvent>) => {
     const dial = document.getElementById('dialog');
@@ -39,36 +45,102 @@ const Modal: FC<ModalProps> = ({
   };
 
   useEffect(() => {
+    if (modalIsOpen && !enterModal) {
+      setShowModal(true);
+    }
+  }, [modalIsOpen]);
+
+  useEffect(() => {
     const closeOnEscapeKey = (e: KeyboardEvent) => (e.key === 'Escape' ? onClose() : null);
     document.body.addEventListener('keydown', closeOnEscapeKey);
+    if (modalIsOpen) {
+      document.body.style.overflowY = 'hidden';
+      document.body.style.overflowX = 'hidden';
+    }
 
     return () => {
       document.body.removeEventListener('keydown', closeOnEscapeKey);
+      document.body.style.overflowY = 'auto';
+      setTimeout(() => {
+        document.body.style.overflowX = 'auto';
+      }, 500);
     };
-  }, [onClose, open]);
+  }, [modalIsOpen, onClose]);
+
+  if (!modalIsOpen) {
+    return null;
+  }
 
   return (
     <ReactPortal>
       <div
         id="dialog"
         className={styles.modal}
-        onClick={(e: React.MouseEvent<Element, MouseEvent>) => onClickOutsideClose(e)}
+        onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+          onClickOutsideClose(e);
+        }}
         role="none"
       >
-        <dialog
-          className={styles.modal__container}
-          ref={modalRef}
-          onClose={onClose}
-          onCancel={onCancel}
-          onAnimationEnd={onAnimEnd}
-          open={open}
+        <CSSTransition
+          timeout={800}
+          in={showModal}
+          onExit={() => setEnterModal(false)}
+          onEnter={() => setEnterModal(true)}
+          classNames={{
+            enterActive:
+              'animate__animated animate__backInRight animate__fast',
+            exitActive:
+              'animate__animated animate__backOutRight animate__fast',
+          }}
+          mountOnEnter
+          unmountOnExit
         >
-          <CloseOutlined className={styles.closeIcon} onClick={onClose} />
-          {children}
-        </dialog>
+          <dialog
+            className={styles.modal__container}
+            ref={modalRef}
+            onClose={onClose}
+            onCancel={onCancel}
+            open={modalIsOpen}
+          >
+            <div className={styles.modal_header}>
+              <h2>{headerText}</h2>
+              <CloseOutlined className={styles.closeIcon} onClick={onClose} />
+            </div>
+            {children}
+          </dialog>
+        </CSSTransition>
       </div>
     </ReactPortal>
   );
 };
 
-export default Modal;
+const GlobalModal = () => {
+  const { modalType } = useAppSelector(
+    (state) => state.modal,
+  );
+
+  switch (modalType) {
+    case 'BookingFromDashboard':
+      return (
+        <Modal headerText="Creating meeting">
+          <Booking />
+        </Modal>
+      );
+    case 'RoundMenuBooking':
+      return (
+        <Modal headerText="Testing">
+          <TestPage />
+        </Modal>
+      );
+    case 'BookingFromCalendar':
+      return (
+        <Modal headerText="Creating meeting">
+          <Booking />
+        </Modal>
+      );
+    default:
+      return <Modal headerText="Error">Something happen</Modal>;
+  }
+};
+
+export default GlobalModal;

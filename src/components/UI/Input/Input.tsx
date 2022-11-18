@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { FC, useState } from 'react';
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
-import { InputProps, InputTypes } from '../../../types/InputTypes';
+import { InputProps, InputTypes } from '../../../types/typesForUI';
 import styles from './Input.module.scss';
 
 const Input: FC<InputProps> = ({
@@ -17,6 +17,7 @@ const Input: FC<InputProps> = ({
   return (
     <div className={cn(styles.inputContainer, classes)}>
       <input
+        maxLength={type === 'password' ? 30 : 700}
         name={name}
         placeholder={placeholder}
         value={value}

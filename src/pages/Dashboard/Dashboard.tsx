@@ -1,63 +1,34 @@
-import {
-  FC, Suspense, useState,
-} from 'react';
-import {
-  Await, defer, useLoaderData,
-} from 'react-router-dom';
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { FC, Suspense } from 'react';
+import { Await, defer, useLoaderData } from 'react-router-dom';
 import DashboardRoom from 'components/DashboardRoom/DashboardRoom';
-import cn from 'classnames';
-import {
-  UnorderedListOutlined,
-  InsertRowBelowOutlined,
-} from '@ant-design/icons';
 import Loader from 'components/UI/Loader/Loader';
-import getRequest from 'utils/getRequest';
 import { RoomType } from 'types/CommonTypes';
+import { getRooms } from 'store/dashboard';
+import DashboardService, { FetchRoomsType } from 'services/DashboardService';
+import { AxiosPromise, AxiosResponse } from 'axios';
 import styles from './Dashboard.module.scss';
 
-export type DisplayDashboardMethodType = 'tile' | 'list';
-
 interface DeferedData {
-  rooms: RoomType[]
+  rooms: RoomType[];
 }
 
 const Dashboard: FC = () => {
-  const [displayMethod, setDisplayMethod] = useState<DisplayDashboardMethodType>('list');
   const { rooms } = useLoaderData() as DeferedData;
 
   return (
     <div
-      className={cn({
-        [styles.container]: true,
-        [styles.containerList]: displayMethod === 'list',
-        [styles.containerTile]: displayMethod === 'tile',
-      })}
+      id="dashboard"
+      className={styles.container}
     >
-      <div className={styles.changeDisplayMethodButton}>
-        <UnorderedListOutlined
-          className={cn({
-            [styles.changeButton]: true,
-            [styles.activeButton]: displayMethod === 'list',
-          })}
-          onClick={() => setDisplayMethod('list')}
-        />
-        <InsertRowBelowOutlined
-          className={cn({
-            [styles.changeButton]: true,
-            [styles.activeButton]: displayMethod === 'tile',
-          })}
-          onClick={() => setDisplayMethod('tile')}
-        />
-      </div>
       <Suspense fallback={<Loader />}>
         <Await resolve={rooms}>
-          {(resovedRooms: RoomType[]) => (
+          {(resolvedRooms: AxiosResponse<AxiosResponse<FetchRoomsType>>) => (
             <>
-              {
-                resovedRooms.map((room) => (
-                  <DashboardRoom room={room} key={Math.floor(Math.random() * 10001)} />
-                ))
-              }
+              {resolvedRooms.data.data.rooms.map((room) => (
+                <DashboardRoom room={room} key={room.id} />
+              ))}
             </>
           )}
         </Await>
@@ -66,15 +37,8 @@ const Dashboard: FC = () => {
   );
 };
 
-const getRooms = async () => {
-  const response = await getRequest<RoomType[]>('http://localhost:5000/rooms');
-  const body = response.data;
-
-  return body;
-};
-
 export const dashboardLoader = () => defer({
-  rooms: getRooms(),
+  rooms: DashboardService.fetchRooms({ officeId: 1, soonestBookingsDays: 5 }),
 });
 
 export default Dashboard;

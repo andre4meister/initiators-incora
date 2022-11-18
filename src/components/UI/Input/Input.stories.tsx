@@ -5,7 +5,7 @@
 import { Story } from '@storybook/addon-docs/blocks';
 import { ChangeEvent } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { InputProps } from 'types/InputTypes';
+import { InputProps } from 'types/typesForUI';
 import Input from './Input';
 
 export default {

@@ -6,6 +6,11 @@
   --currentText: #{$color-textLight};
   --currentBoxShadowOutline: #{$boxShadowLightOutline};
   --currentBoxShadowInset: #{$boxShadowLightInset};
+  --currentDashboardBoxShadow: #{$boxShadowDashboardLight};
+  --currentDashboardTheme: #{$colorDashboardLight};
+  --currentLoader: #{$loader-light};
+  --currentEditionalColor: #{$color-violet};
+  --currentExtraColor: #{$color-blue};
 }
 
 *,

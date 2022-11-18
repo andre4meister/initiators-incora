@@ -8,21 +8,20 @@ import Button from 'components/UI/Button/Button';
 import Input from 'components/UI/Input/Input';
 import yupPattern from 'utils/yupPattern';
 import InviteUser from './InviteUser/InviteUser';
-import UserSelect from './UserSelect';
 import style from './SettingsPage.module.scss';
 
 const SettingsPage: FC = () => {
-  const user = useAppSelector((state) => state.user);
+  const { userData } = useAppSelector((state) => state.user);
   const formik = useFormik({
     initialValues: {
-      firstName: user.userData?.firstName || '',
-      lastName: user.userData?.lastName || '',
-      password: 'user.userData.password',
-      email: user.userData?.email || '',
+      firstName: userData?.userData?.firstName || '' || '',
+      lastName: userData?.userData?.lastName || '' || '',
+      password: '', // ask abo'ut where to get userData.password'
+      email: userData?.userData?.email || '' || '',
     },
     validationSchema: Yup.object({
       firstName: yupPattern('firstName'),
-      lastName: yupPattern('surname'),
+      lastName: yupPattern('lastName'),
       password: yupPattern('password'),
       email: yupPattern('email'),
     }),
@@ -109,12 +108,7 @@ const SettingsPage: FC = () => {
           Change
         </Button>
       </form>
-      {user.userData?.role.toLocaleLowerCase() === 'admin' && (
-        <>
-          <UserSelect />
-          <InviteUser />
-        </>
-      )}
+      {userData?.role.toLocaleLowerCase() === 'admin' && <InviteUser />}
     </div>
   );
 };

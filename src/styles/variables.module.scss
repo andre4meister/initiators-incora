@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 // FONT
 $fontFamily: 'Mulish', sans-serif;
+// $fontFamily: 'Alfa Slab One';
 $fontWeight-normal: 400;
 $fontWeight-bold: 700;
 $fontSize-xxsmall: 12px;
@@ -12,18 +13,44 @@ $fontSize-large: 30px;
 
 // COLORS
 $color-textLight: #001f3f;
-$color-textDark: #a6acbb;
+$color-textDark: rgb(221, 221, 221);
 
 $color-mainLight: #f4f4f4;
 $color-light1: #cfcfcf;
 $color-light2: #ffffff;
 
-$color-mainDark: #333333;
-$color-dark1: #2b2b2b;
-$color-dark2: #3b3b3b;
+$color-mainDark: #18191a;
+$color-dark1: #0d0e0e;
+$color-dark2: #232526;
+
+$loader-light: #ffffff;
+$loader-dark: #fec602;
+
+// It`s our previous colours, for now I use new for testing
+// $color-mainDark: #333333;
+// $color-dark1: #2b2b2b;
+// $color-dark2: #3b3b3b;
 
 $color-orange: #ba2d0b;
 $color-yellow: #fec602;
+
+$colorDashboardLight: #ffffff;
+$colorDashboardDark: #292929;
+$color-blue: #00d7eb;
+$color-violet: #5d5fe6;
+
+// NOTIFICATIONS
+$successBackgroundColor: #eaf7ee;
+$successBorderColor: #d3e6d8;
+$successTextColor: #3bb65d;
+
+$infoBackgroundColor: #e5effa;
+$infoBorderColor: #c7d6e7;
+$infoTextColor: #016ce2;
+
+$errorBackgroundColor: #fcede9;
+$errorBorderColor: #edd4ce;
+$errorTextColor: #ea4e2c;
 
 // FOR NEUMORPHISM
 $blur: 6px;
@@ -41,18 +68,23 @@ $boxShadowDarkOutline: 3px 3px $blur $color-dark1, -3px -3px $blur $color-dark2;
 $boxShadowDarkInset: inset 3px 3px $blur $color-dark1,
   inset -3px -3px $blur $color-dark2;
 
+// BOX SHADOWS
+$boxShadowDashboardLight: $boxShadowLightOutline;
+$boxShadowDashboardDark: $boxShadowDarkOutline;
+
 // ANIMATION
 $transition: 0.2s ease-in-out;
 $transition-slow: 0.6s ease-in-out;
 
 // MARGIN & PADDING
+$indent-xsmall: 5px;
 $indent-small: 10px;
 $indent-smedium: 15px;
 $indent-medium: 20px;
 $indent-large: 30px;
 
 // SIZES
-$size-sidebarWidth: 300px;
+$size-sidebarWidth: 260px;
 
 :export {
   mainLight: $color-mainLight;
@@ -65,4 +97,14 @@ $size-sidebarWidth: 300px;
   boxShadowLightInset: $boxShadowLightInset;
   boxShadowDarkOutline: $boxShadowDarkOutline;
   boxShadowDarkInset: $boxShadowDarkInset;
+  colorDashboardLight: $colorDashboardLight;
+  colorDashboardDark: $colorDashboardDark;
+  boxShadowDashboardLight: $boxShadowDashboardLight;
+  boxShadowDashboardDark: $boxShadowDashboardDark;
+  loaderLight: $loader-light;
+  loaderDark: $loader-dark;
+  editionalViolet: $color-violet;
+  editionalYellow: $color-yellow;
+  editionalBlue: $color-blue;
+  editionalRed: $color-orange;
 }

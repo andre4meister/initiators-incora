@@ -4,7 +4,8 @@ $menuContainerWidth: 44px;
 
 .container {
   margin-right: $size-sidebarWidth;
-  // display: flex;
+  display: flex;
+  height: 100vh;
 
   .content {
     width: 100%;
