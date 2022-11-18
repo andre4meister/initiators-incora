@@ -72,7 +72,6 @@ const LoginPage: FC = () => {
         <Button
           type="submit"
           classes={style.button_submit}
-          handleOnClick={handleSubmit}
         >
           Submit
         </Button>

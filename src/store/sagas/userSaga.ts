@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/unbound-method */
 import { PayloadAction } from '@reduxjs/toolkit';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { NavigateFunction } from 'react-router-dom';
 import {
   call, put, takeEvery,
 } from 'redux-saga/effects';
 import AuthService from 'services/authService';
+import { addNotification } from 'store/alert';
 import {
   loginSuccess, loginFailure, LoginValues, RegistrationValues, getProfile,
 } from 'store/user';
@@ -27,22 +28,32 @@ function* workerUserLogin({ payload }: PayloadAction<LoginValues>) {
 
     yield put(getProfile({ token: data.token, navigate: payload.navigate }));
   } catch (err) {
-    const result = (err as Error).message;
-    yield put(loginFailure(result));
+    if (axios.isAxiosError(err)) {
+      const result = err as AxiosError<{ statusCode: number, message: string }>;
+      yield put(loginFailure(result.message));
+      if (result.response) {
+        yield put(addNotification({ message: result.response.data.message, type: 'error' }));
+      } else yield put(addNotification({ message: result.message, type: 'error' }));
+    }
   }
 }
 
 function* workerUserRegistration({ payload }: PayloadAction<RegistrationValues>) {
   try {
-    const { data }: AxiosResponse<TokenInterface> = yield call(
+    const response: AxiosResponse<TokenInterface> = yield call(
       AuthService.registration,
       payload.values,
     );
 
-    yield put(getProfile({ token: data.token, navigate: payload.navigate }));
+    yield put(getProfile({ token: response.data.token, navigate: payload.navigate }));
   } catch (err) {
-    const result = (err as Error).message;
-    yield put(loginFailure(result));
+    if (axios.isAxiosError(err)) {
+      const result = err as AxiosError<{ statusCode: number, message: string }>;
+      yield put(loginFailure(result.message));
+      if (result.response) {
+        yield put(addNotification({ message: result.response.data.message, type: 'error' }));
+      } else yield put(addNotification({ message: result.message, type: 'error' }));
+    }
   }
 }
 
@@ -60,8 +71,13 @@ function* workerGetProfile({ payload }: PayloadAction<TokenInterface>) {
       yield payload.navigate('/');
     }
   } catch (err) {
-    const result = (err as Error).message;
-    yield put(loginFailure(result));
+    if (axios.isAxiosError(err)) {
+      const result = err as AxiosError<{ statusCode: number, message: string }>;
+      yield put(loginFailure(result.message));
+      if (result.response) {
+        yield put(addNotification({ message: result.response.data.message, type: 'error' }));
+      } else yield put(addNotification({ message: result.message, type: 'error' }));
+    }
   }
 }
 
