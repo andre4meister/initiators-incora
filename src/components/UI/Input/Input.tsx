@@ -17,6 +17,7 @@ const Input: FC<InputProps> = ({
   return (
     <div className={cn(styles.inputContainer, classes)}>
       <input
+        maxLength={type === 'password' ? 30 : 700}
         name={name}
         placeholder={placeholder}
         value={value}

@@ -63,7 +63,7 @@
     min-width: 100%;
 
     &>div {
-        background-color: $color-orange;
+        background-color: var(--currentEditionalColor);
         border-radius: $circle;
         padding: 4px;
         min-width: 40px;
