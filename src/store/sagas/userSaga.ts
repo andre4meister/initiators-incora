@@ -47,16 +47,21 @@ function* workerUserRegistration({ payload }: PayloadAction<RegistrationValues>)
 }
 
 function* workerGetProfile({ payload }: PayloadAction<TokenInterface>) {
-  localStorage.setItem('token', JSON.stringify(payload.token));
+  try {
+    localStorage.setItem('token', JSON.stringify(payload.token));
 
-  const userProfile: AxiosResponse<User> = yield call(
-    AuthService.profile,
-  );
+    const userProfile: AxiosResponse<User> = yield call(
+      AuthService.profile,
+    );
 
-  yield put(loginSuccess(userProfile.data));
+    yield put(loginSuccess(userProfile.data));
 
-  if (payload.navigate) {
-    yield payload.navigate('/');
+    if (payload.navigate) {
+      yield payload.navigate('/');
+    }
+  } catch (err) {
+    const result = (err as Error).message;
+    yield put(loginFailure(result));
   }
 }
 
