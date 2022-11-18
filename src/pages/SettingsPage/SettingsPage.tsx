@@ -14,10 +14,10 @@ const SettingsPage: FC = () => {
   const { userData } = useAppSelector((state) => state.user);
   const formik = useFormik({
     initialValues: {
-      firstName: userData?.userData?.firstName || '' || '',
-      lastName: userData?.userData?.lastName || '' || '',
+      firstName: userData?.firstName || '',
+      lastName: userData?.lastName || '',
       password: '', // ask abo'ut where to get userData.password'
-      email: userData?.userData?.email || '' || '',
+      email: userData?.email || '',
     },
     validationSchema: Yup.object({
       firstName: yupPattern('firstName'),
