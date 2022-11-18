@@ -1,13 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {
-  FC, ReactNode, useCallback, useRef, useEffect,
+  FC, ReactNode, useCallback, useRef, useEffect, useState,
 } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { toggleModal } from 'store/modal';
 import Booking from 'components/Booking/Booking';
 import TestPage from 'pages/TestPage/TestPage';
+import { CSSTransition } from 'react-transition-group';
 import styles from './Modal.module.scss';
-import ReactPortal from './ReactPortal';
+import ReactPortal from '../ReactPortal/ReactPortal';
+import 'animate.css';
 
 interface ModalProps {
   children: ReactNode;
@@ -18,9 +21,14 @@ const Modal: FC<ModalProps> = ({ children, headerText }) => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
   const dispatch = useAppDispatch();
   const { modalIsOpen, modalIsLocked } = useAppSelector((state) => state.modal);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [enterModal, setEnterModal] = useState<boolean>(false);
 
   const onClose = useCallback(() => {
-    dispatch(toggleModal(false));
+    setShowModal(false);
+    setTimeout(() => {
+      dispatch(toggleModal(false));
+    }, 800);
   }, [dispatch]);
 
   const onCancel = useCallback(
@@ -31,26 +39,31 @@ const Modal: FC<ModalProps> = ({ children, headerText }) => {
     [modalIsLocked, onClose],
   );
 
-  const onAnimEnd = useCallback(() => {
-    const { current: el } = modalRef;
-    if (!modalIsOpen && el) el.close();
-  }, [modalIsOpen]);
-
   const onClickOutsideClose = (e: React.MouseEvent<Element, MouseEvent>) => {
     const dial = document.getElementById('dialog');
     if (e.target === dial) onClose();
   };
 
   useEffect(() => {
+    if (modalIsOpen && !enterModal) {
+      setShowModal(true);
+    }
+  }, [modalIsOpen]);
+
+  useEffect(() => {
     const closeOnEscapeKey = (e: KeyboardEvent) => (e.key === 'Escape' ? onClose() : null);
     document.body.addEventListener('keydown', closeOnEscapeKey);
     if (modalIsOpen) {
       document.body.style.overflowY = 'hidden';
+      document.body.style.overflowX = 'hidden';
     }
 
     return () => {
       document.body.removeEventListener('keydown', closeOnEscapeKey);
       document.body.style.overflowY = 'auto';
+      setTimeout(() => {
+        document.body.style.overflowX = 'auto';
+      }, 500);
     };
   }, [modalIsOpen, onClose]);
 
@@ -68,20 +81,34 @@ const Modal: FC<ModalProps> = ({ children, headerText }) => {
         }}
         role="none"
       >
-        <dialog
-          className={styles.modal__container}
-          ref={modalRef}
-          onClose={onClose}
-          onCancel={onCancel}
-          onAnimationEnd={onAnimEnd}
-          open={modalIsOpen}
+        <CSSTransition
+          timeout={800}
+          in={showModal}
+          onExit={() => setEnterModal(false)}
+          onEnter={() => setEnterModal(true)}
+          classNames={{
+            enterActive:
+              'animate__animated animate__backInRight animate__fast',
+            exitActive:
+              'animate__animated animate__backOutRight animate__fast',
+          }}
+          mountOnEnter
+          unmountOnExit
         >
-          <div className={styles.modal_header}>
-            <h2>{headerText}</h2>
-            <CloseOutlined className={styles.closeIcon} onClick={onClose} />
-          </div>
-          {children}
-        </dialog>
+          <dialog
+            className={styles.modal__container}
+            ref={modalRef}
+            onClose={onClose}
+            onCancel={onCancel}
+            open={modalIsOpen}
+          >
+            <div className={styles.modal_header}>
+              <h2>{headerText}</h2>
+              <CloseOutlined className={styles.closeIcon} onClick={onClose} />
+            </div>
+            {children}
+          </dialog>
+        </CSSTransition>
       </div>
     </ReactPortal>
   );

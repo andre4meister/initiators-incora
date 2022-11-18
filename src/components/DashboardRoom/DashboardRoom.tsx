@@ -94,7 +94,7 @@ const DashboardRoom: FC<DashboardRoomProps> = ({ room }) => {
           </div>
           <RoomFeatures devices={room.devices} />
           {isBusyNow ? (
-            <BusyRoomOutlined title="Room is free" />
+            <BusyRoomOutlined title="Room is busy" />
           ) : (
             <AvailableRoomOutlined title="Room is free" />
           )}

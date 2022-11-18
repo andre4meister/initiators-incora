@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom/client';
 import ThemeProvider from 'hoc/ThemeProvider';
+import GlobalAlert from 'components/Alert/GlobalAlert';
 import GlobalModal from 'components/Modal/Modal';
 import App from './App';
 import store from './store/store';
@@ -16,6 +17,7 @@ root.render(
       <ThemeProvider>
         <App />
         <GlobalModal />
+        <GlobalAlert />
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,

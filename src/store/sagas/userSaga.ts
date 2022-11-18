@@ -46,7 +46,7 @@ function* workerUserRegistration({ payload }: PayloadAction<RegistrationValues>)
   }
 }
 
-function* warkerGetProfile({ payload }: PayloadAction<TokenInterface>) {
+function* workerGetProfile({ payload }: PayloadAction<TokenInterface>) {
   localStorage.setItem('token', JSON.stringify(payload.token));
 
   const userProfile: AxiosResponse<User> = yield call(
@@ -63,7 +63,7 @@ function* warkerGetProfile({ payload }: PayloadAction<TokenInterface>) {
 function* watchUserSaga() {
   yield takeEvery('user/loginPending', workerUserLogin);
   yield takeEvery('user/registration', workerUserRegistration);
-  yield takeEvery('user/getProfile', warkerGetProfile);
+  yield takeEvery('user/getProfile', workerGetProfile);
 }
 
 export default watchUserSaga;
