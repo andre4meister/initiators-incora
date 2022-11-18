@@ -25,6 +25,8 @@ export interface Booking {
   startTime: string,
   endTime: string,
   room: Omit<Room, 'soonestBookings'>
+  guests: User[]
+  owner: User
 }
 
 export interface Room {
