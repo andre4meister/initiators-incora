@@ -27,10 +27,14 @@ const InviteUser: FC = () => {
 
   const handleSendInvute = async () => {
     setInviteStatus('pending');
-    await AuthService.invite(addedEmails);
-    setAddedEmails([]);
-    setInviteStatus('success');
-    alert('The invitations were sent');
+    try {
+      await AuthService.invite(addedEmails);
+      setAddedEmails([]);
+      setInviteStatus('success');
+      alert('The invitations were sent');
+    } catch (err) {
+      setInviteStatus('failure');
+    }
   };
 
   return (
