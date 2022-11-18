@@ -15,33 +15,6 @@ const router = express.Router();
 const app = express();
 const PORT = 5000;
 
-const mockUsers = [
-  {
-    id: 410,
-    role: 'admin',
-    password: '12345678',
-    email: 'incorainc',
-    firstName: 'Admin',
-    lastName: 'Adminenko',
-  },
-  {
-    id: 580,
-    role: 'user',
-    password: 'qwerty123',
-    email: 'incorainc',
-    firstName: 'Bitch',
-    lastName: 'Stupid',
-  },
-  {
-    id: 360,
-    role: 'admin',
-    password: '235689147',
-    email: 'incorainc',
-    firstName: 'Debil',
-    lastName: 'Zzz',
-  },
-];
-
 const booking = {
   rooms: [
     {
@@ -398,14 +371,6 @@ router.get('/rooms', (req, res) => {
   }
 });
 
-router.get('/users', (req, res) => {
-  try {
-    return res.json(mockUsers);
-  } catch (err) {
-    console.log(err);
-  }
-});
-
 router.get('/booking', (req, res) => {
   try {
     return res.json(booking);
@@ -417,8 +382,8 @@ router.get('/booking', (req, res) => {
 app.use(
   cors({
     allowedOrigins: ['http://localhost:3000'],
+    allowedHeaders: 'Content-Type,Authorization',
   }),
-  allowedHeaders: 'Content-Type,Authorization',
 );
 app.use(express.json());
 app.use('/', router);
