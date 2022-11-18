@@ -16,7 +16,7 @@ const SettingsPage: FC = () => {
     initialValues: {
       firstName: userData?.firstName || '',
       lastName: userData?.lastName || '',
-      password: '', // ask about where to get password
+      password: '', // ask abo'ut where to get userData.password'
       email: userData?.email || '',
     },
     validationSchema: Yup.object({

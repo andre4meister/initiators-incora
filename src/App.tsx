@@ -1,6 +1,9 @@
 import { FC } from 'react';
 import {
-  Route, createBrowserRouter, createRoutesFromElements, RouterProvider,
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
 } from 'react-router-dom';
 import MainLayaut from 'pages/MainLayaut/MainLayaut';
 import ForgotPasswordPage from 'pages/Authorization/ForgotPasswordPage/ForgotPasswordPage';
@@ -9,7 +12,7 @@ import LoginPage from 'pages/Authorization/LoginPage/LoginPage';
 import RegisterPage from 'pages/Authorization/RegisterPage/RegisterPage';
 import TestPage from 'pages/TestPage/TestPage';
 import Dashboard, { dashboardLoader } from 'pages/Dashboard/Dashboard';
-import CalendarPage from 'pages/CalendarPage/CalendarPage';
+import CalendarPage, { calendarLoader } from 'pages/CalendarPage/CalendarPage';
 import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 import styles from './styles/App.module.scss';
 
@@ -17,10 +20,17 @@ const router = createBrowserRouter(createRoutesFromElements(
   <Route>
     <Route path="/" element={<MainLayaut />}>
       <Route path="test" element={<TestPage />} />
-      <Route index element={<Dashboard />} loader={dashboardLoader} errorElement={<h2>Error</h2>} />
+      <Route
+        index
+        element={<Dashboard />}
+        loader={dashboardLoader}
+        errorElement={<h2>Error</h2>}
+      />
       <Route
         path="calendar"
         element={<CalendarPage />}
+        loader={calendarLoader}
+        errorElement={<h2>Error</h2>}
       />
       <Route
         path="map"
