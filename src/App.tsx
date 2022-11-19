@@ -9,7 +9,7 @@ import MainLayaut from 'pages/MainLayaut/MainLayaut';
 import ForgotPasswordPage from 'pages/Authorization/ForgotPasswordPage/ForgotPasswordPage';
 import SettingsPage from 'pages/SettingsPage/SettingsPage';
 import LoginPage from 'pages/Authorization/LoginPage/LoginPage';
-import RegisterPage from 'pages/Authorization/RegisterPage/RegisterPage';
+import RegistrationPage from 'pages/Authorization/RegistrationPage/RegistrationPage';
 import TestPage from 'pages/TestPage/TestPage';
 import Dashboard, { dashboardLoader } from 'pages/Dashboard/Dashboard';
 import CalendarPage, { calendarLoader } from 'pages/CalendarPage/CalendarPage';
@@ -40,7 +40,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     </Route>
 
     <Route path="login" element={<LoginPage />} />
-    <Route path="register" element={<RegisterPage />} />
+    <Route path="registration" element={<RegistrationPage />} />
     <Route path="forgot" element={<ForgotPasswordPage />} />
     <Route path="*" element={<NotFoundPage />} />
     ,

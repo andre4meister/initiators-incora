@@ -60,5 +60,7 @@ export default class AuthService {
 
   static logout() {
     localStorage.setItem('isAuth', JSON.stringify(false));
+    localStorage.setItem('user', '');
+    localStorage.setItem('token', '');
   }
 }
