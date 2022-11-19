@@ -64,7 +64,7 @@
     @media (any-hover: hover) {
       .settings:hover {
         svg {
-          fill: $color-orange;
+          fill: var(--currentEditionalColor);
         }
       }
     }
