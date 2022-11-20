@@ -5,7 +5,7 @@ import { loginFailure } from 'store/user';
 
 const axiosInstance = axios.create();
 
-async function postRequest<T, R>(url: string, data: R): Promise<AxiosResponse<T>> {
+async function postRequest<T>(url: string, data: string): Promise<AxiosResponse<T>> {
   const tokenFromLocalStorage = localStorage.getItem('token');
   const token = tokenFromLocalStorage && (JSON.parse(tokenFromLocalStorage) as string);
 
