@@ -81,7 +81,7 @@
 
   .today.selected {
     .dayNum {
-      background-color: $color-yellow;
+      background-color: var(--currentExtraColor);
     }
   }
 
@@ -89,13 +89,13 @@
     .dayNum {
       width: 23px;
       height: 23px;
-      border: 1px solid $color-yellow;
+      border: 1px solid var(--currentExtraColor);
     }
   }
 
   .selected {
     .dayNum {
-      background-color: rgba(254, 198, 2, 0.5);
+      background-color: var(--currentEditionalColor);
     }
   }
 }

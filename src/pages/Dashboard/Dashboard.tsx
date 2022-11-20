@@ -4,8 +4,10 @@ import { Await, defer, useLoaderData } from 'react-router-dom';
 import DashboardRoom from 'components/DashboardRoom/DashboardRoom';
 import Loader from 'components/UI/Loader/Loader';
 import { RoomType } from 'types/CommonTypes';
-import DashboardService, { FetchRoomsType } from 'services/RoomService';
-import { AxiosResponse } from 'axios';
+import Error from 'components/Error/Error';
+import { getRooms } from 'store/dashboard';
+import DashboardService, { FetchRoomsType } from 'services/DashboardService';
+import { AxiosPromise, AxiosResponse } from 'axios';
 import styles from './Dashboard.module.scss';
 
 interface DeferedData {
@@ -18,7 +20,7 @@ const Dashboard: FC = () => {
   return (
     <div id="dashboard" className={styles.container}>
       <Suspense fallback={<Loader />}>
-        <Await resolve={rooms}>
+        <Await resolve={rooms} errorElement={<Error />}>
           {(resolvedRooms: AxiosResponse<AxiosResponse<FetchRoomsType>>) => (
             <>
               {resolvedRooms.data.data.rooms.map((room) => (
