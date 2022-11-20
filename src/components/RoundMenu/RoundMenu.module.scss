@@ -26,6 +26,6 @@
 }
 @media (any-hover: hover) {
   .plusIcon svg:hover {
-    fill: $color-orange;
+    fill: var(--currentEditionalColor);
   }
 }

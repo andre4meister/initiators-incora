@@ -8,13 +8,25 @@ export interface User {
   createdAt: string
 }
 
+export interface FetchingBooking {
+  data: {
+    bookings: Booking[]
+    limit: number
+    page: number
+    totalCount: number
+  }
+}
+
 export interface Booking {
-  id: string | number
-  generatedFromRecurrentBookingWithId?: string | number
-  createdAt: string
-  meetingDate: string
-  startTime: string
-  endTime: string
+  id: number,
+  createdAt: string,
+  isRecurring: boolean,
+  meetingDate: string,
+  startTime: string,
+  endTime: string,
+  room: Omit<Room, 'soonestBookings'>
+  guests: User[]
+  owner: User
 }
 
 export interface Room {

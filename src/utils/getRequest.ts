@@ -1,5 +1,7 @@
 /* eslint-disable no-param-reassign */
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import store from 'store/store';
+import { loginFailure } from 'store/user';
 
 const axiosInstance = axios.create();
 
@@ -17,6 +19,15 @@ async function getRequest<T>(url: string): Promise<AxiosResponse<T>> {
       return config;
     },
     (error: AxiosError) => error,
+  );
+
+  axiosInstance.interceptors.response.use(
+    (response) => response,
+    (error: AxiosError) => {
+      if (error.response?.status === 401) {
+        store.dispatch(loginFailure('expire token'));
+      }
+    },
   );
 
   const response = await axiosInstance.get<T>(url);

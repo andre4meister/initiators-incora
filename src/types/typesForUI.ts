@@ -16,7 +16,7 @@ export interface InputProps extends Partial<UIPropsType> {
 }
 
 export interface ButtonType extends Partial<UIPropsType> {
-  handleOnClick: () => void;
+  handleOnClick?: () => void;
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
 }

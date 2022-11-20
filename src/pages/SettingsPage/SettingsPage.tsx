@@ -8,18 +8,15 @@ import Button from 'components/UI/Button/Button';
 import Input from 'components/UI/Input/Input';
 import yupPattern from 'utils/yupPattern';
 import InviteUser from './InviteUser/InviteUser';
-import UserSelect from './UserSelect';
 import style from './SettingsPage.module.scss';
 
 const SettingsPage: FC = () => {
-  const { userData } = useAppSelector(
-    (state) => state.user,
-  );
+  const { userData } = useAppSelector((state) => state.user);
   const formik = useFormik({
     initialValues: {
       firstName: userData?.firstName || '',
       lastName: userData?.lastName || '',
-      password: '',
+      password: '', // ask abo'ut where to get userData.password'
       email: userData?.email || '',
     },
     validationSchema: Yup.object({
@@ -111,12 +108,7 @@ const SettingsPage: FC = () => {
           Change
         </Button>
       </form>
-      {userData?.role.toLocaleLowerCase() === 'admin' && (
-        <>
-          <UserSelect />
-          <InviteUser />
-        </>
-      )}
+      {userData?.role.toLocaleLowerCase() === 'admin' && <InviteUser />}
     </div>
   );
 };

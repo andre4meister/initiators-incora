@@ -1,8 +1,7 @@
 @import '../../styles//variables.module.scss';
 
 .container {
-  margin: $indent-large auto;
-  padding: $indent-large;
+  margin: $indent-medium auto;
   max-width: 1000px;
 
   .text {
@@ -12,9 +11,12 @@
   .avatar {
     width: 100px;
     height: 100px;
-    background-color: $color-light1;
+    background-color: var(--currentTheme);
+    box-shadow: var(--currentBoxShadowInset);
     border-radius: 50%;
     position: relative;
+    outline: 2px solid var(--currentEditionalColor);
+    outline-offset: 10px;
 
     svg {
       width: 50px;
@@ -36,20 +38,17 @@
 
     .block_input {
       margin-right: $indent-large;
+      margin-bottom: $indent-medium;
 
       input {
         width: 450px;
-        margin-bottom: $indent-medium;
-        box-shadow: var(--currentBoxShadowOutline);
-      }
-
-      input:hover {
         box-shadow: var(--currentBoxShadowInset);
       }
     }
   }
 
   .button_submit {
+    max-width: 450px;
   }
 }
 
