@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, Suspense } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 import DashboardRoom from 'components/DashboardRoom/DashboardRoom';
@@ -19,10 +18,7 @@ const Dashboard: FC = () => {
   const { rooms } = useLoaderData() as DeferedData;
 
   return (
-    <div
-      id="dashboard"
-      className={styles.container}
-    >
+    <div id="dashboard" className={styles.container}>
       <Suspense fallback={<Loader />}>
         <Await resolve={rooms} errorElement={<Error />}>
           {(resolvedRooms: AxiosResponse<AxiosResponse<FetchRoomsType>>) => (

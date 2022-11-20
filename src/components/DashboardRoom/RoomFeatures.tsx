@@ -1,8 +1,10 @@
 import { FC } from 'react';
 import { DevicesType } from 'types/CommonTypes';
 import {
+  CameraFilled,
   CameraOutlined,
   FundProjectionScreenOutlined,
+  SoundFilled,
   SoundOutlined,
 } from '@ant-design/icons';
 import WaterCoolerOutlined from 'assets/Icons/WaterCoolerOutlined';
@@ -10,6 +12,7 @@ import BigScreenOutlined from 'assets/Icons/BigScreenOutlined';
 import AirConditionerOutlined from 'assets/Icons/AirConditioner';
 import PlaystationOutlined from 'assets/Icons/PlaystationOutlined';
 import TennisTableOutlined from 'assets/Icons/TennisTableOutlined';
+import WhiteboardOutlined from 'assets/Icons/Whiteboard';
 import styles from './DashboardRoom.module.scss';
 
 interface RoomFeaturesProps {
@@ -20,12 +23,12 @@ const RoomFeatures: FC<RoomFeaturesProps> = ({ devices }) => (
   <div className={styles.features}>
     <div>
       {devices.findIndex((d) => d === 'Camera') !== -1 && (
-        <CameraOutlined className={styles.featureIcon} title="Camera" />
+        <CameraFilled className={styles.featureIcon} title="Camera" />
       )}
     </div>
     <div>
       {devices.findIndex((d) => d === 'White board') !== -1 && (
-        <FundProjectionScreenOutlined className={styles.featureIcon} title="White board" />
+        <WhiteboardOutlined title="White board" />
       )}
     </div>
     <div>
@@ -35,7 +38,7 @@ const RoomFeatures: FC<RoomFeaturesProps> = ({ devices }) => (
     </div>
     <div>
       {devices.findIndex((d) => d === 'Sound system') !== -1 && (
-        <SoundOutlined className={styles.featureIcon} title="Sound system" />
+        <SoundFilled className={styles.featureIcon} title="Sound system" />
       )}
     </div>
     <div>
