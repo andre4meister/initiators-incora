@@ -3,18 +3,11 @@ import axios, { AxiosResponse } from 'axios';
 import { User } from 'types/dataTypes';
 import { InitialRegistrationFormValues } from 'types/FormTypes';
 import getRequest from 'utils/getRequest';
+import postRequest from 'utils/postRequest';
 
 export default class AuthService {
   static async login(email: string, password: string): Promise<AxiosResponse> {
-    const response = await axios({
-      method: 'POST',
-      url: `${process.env.REACT_APP_API_LOGIN}`,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: JSON.stringify({ email, password }),
-    });
-
+    const response = await postRequest(`${process.env.REACT_APP_API_LOGIN}`, JSON.stringify({ email, password }));
     if (response.statusText.toLocaleLowerCase() !== 'created') {
       throw new Error(response.statusText);
     }
@@ -32,29 +25,16 @@ export default class AuthService {
   static async invite(emails: string[]) {
     const token = JSON.parse(localStorage.getItem('token') || '') as string;
 
-    const response = await axios({
-      method: 'POST',
-      url: `${process.env.REACT_APP_API_INVITATION}`,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      data: JSON.stringify(emails),
-    });
+    const response = await postRequest(
+      `${process.env.REACT_APP_API_INVITATION}`,
+      JSON.stringify(emails),
+    );
 
     return response;
   }
 
   static async registration(values: InitialRegistrationFormValues) {
-    const response = await axios({
-      method: 'POST',
-      url: `${process.env.REACT_APP_API_REGISTRATION}`,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      data: JSON.stringify(values),
-    });
-
+    const response = await postRequest(`${process.env.REACT_APP_API_REGISTRATION}`, JSON.stringify(values));
     return response;
   }
 
