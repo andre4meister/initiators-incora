@@ -5,6 +5,7 @@ import { Await, defer, useLoaderData } from 'react-router-dom';
 import Select, { SingleValue, StylesConfig } from 'react-select';
 import { Booking, FetchingBooking } from 'types/dataTypes';
 import useCalendar from 'hooks/useCalendar';
+import Error from 'components/Error/Error';
 import getRequest from 'utils/getRequest';
 import Loader from 'components/UI/Loader/Loader';
 import DatePicker from 'components/UI/DatePicker/DatePicker';
@@ -80,7 +81,7 @@ const CalendarPage: FC = () => {
 
   return (
     <Suspense fallback={<Loader />}>
-      <Await resolve={bookings}>
+      <Await resolve={bookings} errorElement={<Error />}>
         {(resolvedBookings: Booking[]) => (
           <div className={styles.container}>
             <div className={styles.sidebar}>

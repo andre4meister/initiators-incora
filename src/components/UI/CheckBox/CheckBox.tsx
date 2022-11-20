@@ -14,6 +14,7 @@ const CheckBox: FC<CheckBoxProps> = ({ isChecked, handleOnChange, label }) => (
       type="checkbox"
       checked={isChecked}
       onChange={handleOnChange}
+      data-testid="checkbox_testId"
     />
     <span className={style.checkmark} />
   </label>
