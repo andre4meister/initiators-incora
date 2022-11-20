@@ -8,6 +8,7 @@ import { toggleModal } from 'store/modal';
 import Booking from 'components/Booking/Booking';
 import TestPage from 'pages/TestPage/TestPage';
 import { CSSTransition } from 'react-transition-group';
+import { toggleActiveRoomId } from 'store/dashboard';
 import styles from './Modal.module.scss';
 import ReactPortal from '../ReactPortal/ReactPortal';
 import 'animate.css';
@@ -54,8 +55,9 @@ const Modal: FC<ModalProps> = ({ children, headerText }) => {
     const closeOnEscapeKey = (e: KeyboardEvent) => (e.key === 'Escape' ? onClose() : null);
     document.body.addEventListener('keydown', closeOnEscapeKey);
     if (modalIsOpen) {
-      document.body.style.overflowY = 'hidden';
-      document.body.style.overflowX = 'hidden';
+      dispatch(toggleActiveRoomId(null));
+
+      document.body.style.overflow = 'hidden';
     }
 
     return () => {

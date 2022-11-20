@@ -1,18 +1,23 @@
 @import '../../styles/variables.module.scss';
 
 .roomContainer {
-    height: 135px;
-    min-width: 220px;
+    height: 410px;
+    min-width: 280px;
+    margin-bottom: 10px;
+    transition: $transition;
 }
 
 .roomActiveContainer {
     position: absolute;
     min-width: 100%;
+    width: 100%;
     height: 100%;
+    max-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    z-index: 1000;
+    align-items: center;
+    margin-bottom: 0;
+    z-index: 1;
 }
 
 .room {
@@ -20,21 +25,28 @@
     box-shadow: var(--currentDashboardBoxShadow);
     background-color: var(--currentTheme);
     border-radius: $borderRadius;
-    padding: 10px;
-    min-height: 135px;
-    height: 135px;
-    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 280px;
+    height: fit-content;
+    max-height: 400px;
     font-size: 0.9em;
     transition: $transition;
     cursor: pointer;
 
+    &:hover {
+        .imageContainer {
+            transition: $transition;
+            filter: grayscale(0.24);
+            transform: scale(1.01);
+        }
+    }
     .roomFeatures {
-        margin-top: 10px;
+        padding: 0 10px;
         transition: 0.2s ease-in-out;
     }
-    // &:hover {
-    //     box-shadow: var(--currentBoxShadowInset);
-    // }
 }
 
 .activeRoom {
@@ -42,14 +54,23 @@
     max-width: 750px;
     width: 100%;
     min-height: 310px;
-    height: 100%;
+    height: fit-content;
     max-height: 600px;
-    z-index: 70;
+    z-index: 49;
     filter: blur(0);
     cursor: default;
-    // &:hover {
-    //     box-shadow: var(--currentBoxShadowOutline);
-    //     }
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    &:hover {
+        .imageContainer {
+            transition: $transition;
+            filter: none;
+            transform: none;
+        }
+    }
 }
 .bluredRoom {
     filter: blur(6px);
@@ -59,30 +80,42 @@
     }
 }
 
-.nameIdContainer {
+.defaultRoomView {
     display: flex;
-    justify-content: flex-start;
+    min-width: 100%;
+    flex-direction: column;
+}
+
+.imageContainer {
+    width: 100%;
+    min-height: 143px;
+    height: 220px;
+    max-height: 240px;
+    border-top-right-radius: $borderRadius;
+    border-top-left-radius: $borderRadius;
+    background-image: url('../../assets/images/meeting-room.jpg');
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-size: cover;
+    background-position: center;
+}
+
+.nameContainer {
+    display: flex;
+    justify-content: center;
     margin-bottom: 5px;
     min-width: 100%;
-
-    &>div {
-        background-color: $color-orange;
-        border-radius: $circle;
-        padding: 4px;
-        min-width: 40px;
-        min-height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: $fontSize-medium;
-        font-weight: $fontWeight-bold;
-    }
-
     &>h2 {
         margin: auto 0 auto 5px;
     }
 }
 
+.buttonContainer {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
 .features {
     display: flex;
     justify-content: flex-start;
@@ -90,6 +123,12 @@
 
 .featureIcon {
     margin: 3px;
+    cursor: pointer;
+    svg {
+            width: 18.2px;
+            height: 18.2px;
+            fill: var(--currentText);
+        }
 }
 .featureCustomIcon {
     margin: 3px;
@@ -102,10 +141,10 @@
     vertical-align: -0.125em;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-
+    cursor: pointer;
     svg {
-        width: 16.2px;
-        height: 16.2px;
+        width: 18.2px;
+        height: 18.2px;
         fill: var(--currentText);
     }
 }
@@ -115,19 +154,18 @@
     right: 10px;
 }
 
+.mainInfoContainer {
+    width: 100%;
+    padding: $indent-small;
+}
 
 .fullRoomInfo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-height: 175px;
-    height: max-content;
-    max-height: 465px;
-    width: 100%;
+    display: flex;
+    height: 0;
+    width: 0;
     z-index: -1;
     opacity: 0;
     transition: $transition;
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
@@ -136,17 +174,16 @@
     border-radius: $borderRadius;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    pointer-events: none;
 }
 
 .activeFullInfo {
-    top: 135px;
-    z-index: 50;
+    min-height: 0;
+    height: fit-content;
+    max-height: 465px;
+    width: 100%;
     opacity: 1;
     background-color: var(--currentTheme);
-    width: 100%;
     box-shadow: none;
-    pointer-events: all;
 }
 
 .fullInfoIcon {
