@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import moment from 'moment';
 import { FC, Suspense, useState } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
@@ -76,7 +77,6 @@ const CalendarPage: FC = () => {
 
   const handleSetViewMode = (option: SingleValue<{ value: string, label: string }>) => {
     if (option !== null) setViewMode(option.value as ViewModeType);
-    console.log(viewMode);
   };
 
   return (
@@ -122,7 +122,7 @@ const CalendarPage: FC = () => {
 };
 
 const getBookings = async (): Promise<Booking[]> => {
-  const { data } = await getRequest<FetchingBooking>('https://initiators-ua.herokuapp.com/bookings/own');
+  const { data } = await getRequest<FetchingBooking>(`${process.env.REACT_APP_API_GET_OWN_BOOKINGS}`);
 
   return data.data.bookings;
 };

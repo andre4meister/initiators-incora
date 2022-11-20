@@ -15,7 +15,7 @@ const Button: FC<ButtonType> = ({
     disabled={disabled}
     type={type}
     className={cn(styles.button, classes)}
-    onClick={() => handleOnClick()}
+    onClick={handleOnClick}
   >
     {children}
   </button>

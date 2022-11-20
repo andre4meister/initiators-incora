@@ -1,4 +1,3 @@
-// This rule disabled for changing extraredusers states
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from 'types/dataTypes';
@@ -27,7 +26,7 @@ export type RegistrationValues = {
 };
 
 const initialState: FetchUser = {
-  userData: JSON.parse(localStorage.getItem('userData') || 'null') as User,
+  userData: JSON.parse(localStorage.getItem('user') || 'null') as User,
   loading: null,
   error: '',
 };
@@ -38,6 +37,7 @@ const user = createSlice({
   reducers: {
     loginPending: (state, action) => {
       state.loading = 'pending';
+      state.error = '';
     },
     loginSuccess: (state, action: PayloadAction<User>) => {
       state.userData = action.payload;
