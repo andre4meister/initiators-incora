@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 import {
   validateBookingTime,
 } from 'utils/bookingUtils';
-import weekDays from 'utils/commonConstants';
+import { weekDays } from 'utils/commonConstants';
 import styles from './Booking.module.scss';
 import './Booking.scss';
 
