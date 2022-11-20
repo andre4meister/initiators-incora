@@ -3,13 +3,15 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { NavigateFunction } from 'react-router-dom';
-import {
-  call, put, takeEvery,
-} from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import AuthService from 'services/authService';
 import { addNotification } from 'store/alert';
 import {
-  loginSuccess, loginFailure, LoginValues, RegistrationValues, getProfile,
+  loginSuccess,
+  loginFailure,
+  LoginValues,
+  RegistrationValues,
+  getProfile,
 } from 'store/user';
 import { User } from 'types/dataTypes';
 
@@ -26,41 +28,41 @@ function* workerUserLogin({ payload }: PayloadAction<LoginValues>) {
       payload.values.password,
     );
 
-    yield put(getProfile({ token: data.token, navigate: payload.navigate }));
+    localStorage.setItem('token', JSON.stringify(data.token));
+
+    yield put(getProfile({ navigate: payload.navigate }));
   } catch (err) {
+    const result = err as AxiosError<{ statusCode: number, message: string }>;
     if (axios.isAxiosError(err)) {
-      const result = err as AxiosError<{ statusCode: number, message: string }>;
-      yield put(loginFailure(result.message));
       if (result.response) {
         yield put(addNotification({ message: result.response.data.message, type: 'error' }));
       } else yield put(addNotification({ message: result.message, type: 'error' }));
     }
+    yield put(loginFailure(result.message));
+    yield put(addNotification({ message: 'Unaftorize', type: 'error' }));
   }
 }
 
 function* workerUserRegistration({ payload }: PayloadAction<RegistrationValues>) {
   try {
-    const response: AxiosResponse<TokenInterface> = yield call(
+    yield call(
       AuthService.registration,
       payload.values,
     );
-
-    yield put(getProfile({ token: response.data.token, navigate: payload.navigate }));
   } catch (err) {
+    const result = err as AxiosError<{ statusCode: number, message: string }>;
     if (axios.isAxiosError(err)) {
-      const result = err as AxiosError<{ statusCode: number, message: string }>;
-      yield put(loginFailure(result.message));
       if (result.response) {
         yield put(addNotification({ message: result.response.data.message, type: 'error' }));
       } else yield put(addNotification({ message: result.message, type: 'error' }));
     }
+    yield put(loginFailure(result.message));
+    yield put(addNotification({ message: 'Unaftorize', type: 'error' }));
   }
 }
 
 function* workerGetProfile({ payload }: PayloadAction<TokenInterface>) {
   try {
-    localStorage.setItem('token', JSON.stringify(payload.token));
-
     const userProfile: AxiosResponse<User> = yield call(
       AuthService.profile,
     );
@@ -71,13 +73,14 @@ function* workerGetProfile({ payload }: PayloadAction<TokenInterface>) {
       yield payload.navigate('/');
     }
   } catch (err) {
+    const result = err as AxiosError<{ statusCode: number, message: string }>;
     if (axios.isAxiosError(err)) {
-      const result = err as AxiosError<{ statusCode: number, message: string }>;
-      yield put(loginFailure(result.message));
       if (result.response) {
         yield put(addNotification({ message: result.response.data.message, type: 'error' }));
       } else yield put(addNotification({ message: result.message, type: 'error' }));
     }
+    yield put(loginFailure(result.message));
+    yield put(addNotification({ message: 'Unaftorize', type: 'error' }));
   }
 }
 
