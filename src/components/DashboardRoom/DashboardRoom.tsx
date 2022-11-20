@@ -114,11 +114,11 @@ const DashboardRoom: FC<DashboardRoomProps> = ({ room }) => {
           )}
         >
           <div className={styles.soonestBookings}>
-            {room.soonestBookings.map((b) => (
+            {room.soonestBookings.map((booking) => (
               <FullRoomInfo
                 isActive={isActive}
-                booking={b}
-                key={b.id * Math.floor(Math.random() * 10000)}
+                booking={booking}
+                key={booking.id * Math.floor(Math.random() * 10000)}
               />
             ))}
           </div>
