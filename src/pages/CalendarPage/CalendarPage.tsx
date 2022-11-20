@@ -81,7 +81,7 @@ const CalendarPage: FC = () => {
 
   return (
     <Suspense fallback={<Loader />}>
-      <Await resolve={bookings} errorElement={<Error/>}>
+      <Await resolve={bookings} errorElement={<Error />}>
         {(resolvedBookings: Booking[]) => (
           <div className={styles.container}>
             <div className={styles.sidebar}>
