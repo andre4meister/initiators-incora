@@ -122,7 +122,7 @@ const CalendarPage: FC = () => {
 };
 
 const getBookings = async (): Promise<Booking[]> => {
-  const { data } = await getRequest<FetchingBooking>(`${process.env.REACT_APP_API_GET_OWN_BOOKINGS}`);
+  const { data } = await getRequest<FetchingBooking>(`${process.env.REACT_APP_API_GET_OWN_BOOKINGS}?page=1&limit=100`);
 
   return data.data.bookings;
 };

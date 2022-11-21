@@ -112,7 +112,7 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
       if (bookingPoints.length <= 1) return;
 
       bookingPoints.forEach((item, i) => {
-        const oneBookingHeght = 100 / bookings.length;
+        const oneBookingHeght = 100 / bookingPoints.length;
 
         if (i === 0) {
           item.style.top = '3px';
@@ -121,7 +121,7 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
         item.style.height = `calc(${oneBookingHeght}% - 4px)`;
       });
     });
-  }, [bookings.length]);
+  }, []);
 
   useEffect(() => {
     checkPosition(mondayRef.current);

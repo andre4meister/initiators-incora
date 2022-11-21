@@ -1,0 +1,154 @@
+@import '../../../styles/variables.module.scss';
+
+.pointModalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.9);
+
+  .pointModal {
+    display: flex;
+    flex-direction: column;
+    gap: $indent-small 0;
+    width: 40%;
+    height: fit-content;
+    max-height: 80%;
+    background-color: var(--currentTheme);
+    border-radius: $borderRadius;
+    padding: $indent-large 0;
+    overflow-y: auto;
+
+    .pointModalHeader {
+      padding: 0 $indent-medium;
+
+      .bookingTitle {
+      }
+
+      .bookingDate {
+        // padding: 0 $indent-medium;
+
+        .bookingDateSeparator {
+          margin: 0 $indent-small;
+        }
+      }
+    }
+
+    // FOR OWNER AND GUESTS
+    .userData {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-right: $indent-large;
+      width: 100%;
+
+      .userDataLeft {
+        display: flex;
+        align-items: center;
+
+        .avatar {
+          margin-right: $indent-small;
+          background-color: var(--currentExtraColor);
+          border-radius: 50%;
+
+          svg {
+            fill: $color-textLight;
+            margin: 5px;
+            width: 20px;
+            height: 20px;
+          }
+        }
+
+        .fullNameAndEmail {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      .userDataMailLink svg {
+        transition: $transition;
+      }
+
+      @media (any-hover: hover) {
+        .userDataMailLink:hover svg {
+          fill: var(--currentExtraColor);
+        }
+      }
+    }
+    //
+
+    .modalPoint {
+      display: flex;
+      align-items: center;
+      padding: $indent-small $indent-medium;
+
+      &Icon {
+        margin-right: $indent-medium;
+
+        svg {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+
+    .guestsSelect {
+      .guestsSelectHeader {
+        padding: $indent-small $indent-medium;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        user-select: none;
+        cursor: pointer;
+        transition: $transition;
+
+        .guestsSelectHeaderLeft {
+          padding: 0;
+        }
+
+        .guestsSelectHeaderArrow {
+          transition: $transition;
+          transform: rotate(0.5turn);
+        }
+      }
+
+      .guestsSelectList {
+        display: flex;
+        flex-direction: column;
+        overflow-y: hidden;
+        transition: $transition;
+
+        .guestsSelectListItem {
+          padding-top: 4px;
+          padding-bottom: 4px;
+          padding-left: calc(40px + ($indent-medium * 2));
+          padding-right: $indent-medium;
+          transition: $transition;
+        }
+      }
+
+      @media (any-hover: hover) {
+        .guestsSelectHeader:hover,
+        .guestsSelectListItem:hover {
+          background-color: var(--secondTheme);
+        }
+      }
+    }
+
+    .guestsSelectOpen {
+      .guestsSelectList {
+        height: auto;
+        overflow-y: none;
+      }
+
+      .guestsSelectHeader .guestsSelectHeaderArrow {
+        transform: none;
+      }
+    }
+  }
+}

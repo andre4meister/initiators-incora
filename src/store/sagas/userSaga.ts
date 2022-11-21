@@ -45,10 +45,14 @@ function* workerUserLogin({ payload }: PayloadAction<LoginValues>) {
 
 function* workerUserRegistration({ payload }: PayloadAction<RegistrationValues>) {
   try {
-    yield call(
+    const { data }: AxiosResponse<TokenInterface> = yield call(
       AuthService.registration,
       payload.values,
     );
+
+    localStorage.setItem('token', JSON.stringify(data.token));
+
+    yield put(getProfile({ navigate: payload.navigate }));
   } catch (err) {
     const result = err as AxiosError<{ statusCode: number, message: string }>;
     if (axios.isAxiosError(err)) {

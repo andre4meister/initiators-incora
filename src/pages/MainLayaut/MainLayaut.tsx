@@ -18,7 +18,6 @@ const MainLayaut: FC = () => {
     if (user === 'expire token') {
       navigate('/login', { replace: true });
       AuthService.logout();
-      window.location.reload();
     }
 
     if (!isAuth) {

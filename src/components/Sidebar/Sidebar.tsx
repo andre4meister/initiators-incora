@@ -26,8 +26,8 @@ const Sidebar: FC = () => {
   };
 
   const handleLogout = () => {
-    AuthService.logout();
     navigate('login', { replace: true });
+    AuthService.logout();
   };
 
   return (
