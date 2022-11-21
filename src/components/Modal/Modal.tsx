@@ -6,6 +6,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { toggleModal } from 'store/modal';
 import Booking from 'components/Booking/Booking';
+import BookingPointModal from 'pages/CalendarPage/BookingPointModal/BookingPointModal';
 import TestPage from 'pages/TestPage/TestPage';
 import { CSSTransition } from 'react-transition-group';
 import { toggleActiveRoomId } from 'store/dashboard';
@@ -134,10 +135,10 @@ const GlobalModal = () => {
           <TestPage />
         </Modal>
       );
-    case 'BookingFromCalendar':
+    case 'BookingInfo':
       return (
-        <Modal headerText="Creating meeting">
-          <Booking />
+        <Modal headerText="Booking info">
+          <BookingPointModal />
         </Modal>
       );
     default:
