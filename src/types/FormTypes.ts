@@ -9,7 +9,6 @@ export interface InitialRegistrationFormValues {
   firstName: string;
   lastName: string;
   password: string;
-  // confirmPassword: string;
   email: string;
 }
 
@@ -55,4 +54,8 @@ export interface InitialSettingsValue {
   lastName: string;
   password: string;
   email: string;
+}
+
+export interface InitialConfirmPasswordValue {
+  password: string;
 }

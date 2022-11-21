@@ -1,14 +1,35 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable object-curly-newline */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
+import axios from 'axios';
+import Loader from 'components/UI/Loader/Loader';
+// import AuthService from 'services/authService';
 import { InitialGetAccessValues } from 'types/FormTypes';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { FrownOutlined } from '@ant-design/icons';
-import style from '../Authorization.module.scss';
+import style from '../ChangePassword.module.scss';
+
+const onSetRequestHandler = async (email: string) => {
+  const data = JSON.stringify(email);
+  try {
+    await axios.put(
+      'https://initiators-ua.herokuapp.com/auth/reset-password',
+      data,
+    );
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
+  }
+};
 
 const ForgotPasswordPage: FC = () => {
+  // const [requestCodeStatus, setRequestCodeStatus] = useState<string>('');
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -17,15 +38,13 @@ const ForgotPasswordPage: FC = () => {
       email: yupPattern('email'),
     }),
     onSubmit: (values: InitialGetAccessValues) => {
-      console.log(JSON.stringify(values, null, 2));
+      onSetRequestHandler(values.email);
     },
   });
-
-  const {
-    handleSubmit, handleChange, values, errors, touched,
-  } = formik;
+  const { handleSubmit, handleChange, values, errors, touched } = formik;
   return (
     <div className={style.container}>
+      {/* {requestCodeStatus === 'pending' && <Loader />} */}
       <form className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.text}>
           Forgot your password

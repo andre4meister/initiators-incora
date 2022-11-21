@@ -6,10 +6,11 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import MainLayaut from 'pages/MainLayaut/MainLayaut';
-import ForgotPasswordPage from 'pages/Authorization/ForgotPasswordPage/ForgotPasswordPage';
+import ForgotPasswordPage from 'pages/ChangePassword/ForgotPasswordPage/ForgotPasswordPage';
 import SettingsPage from 'pages/SettingsPage/SettingsPage';
 import LoginPage from 'pages/Authorization/LoginPage/LoginPage';
 import RegistrationPage from 'pages/Authorization/RegistrationPage/RegistrationPage';
+import ConfirmPasswordPage from 'pages/ChangePassword/ConfirmPasswordPage/ConfirmPasswordPage';
 import TestPage from 'pages/TestPage/TestPage';
 import Dashboard, { dashboardLoader } from 'pages/Dashboard/Dashboard';
 import CalendarPage, { calendarLoader } from 'pages/CalendarPage/CalendarPage';
@@ -42,6 +43,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path="login" element={<LoginPage />} />
     <Route path="registration" element={<RegistrationPage />} />
     <Route path="forgot" element={<ForgotPasswordPage />} />
+    <Route path="confirm" element={<ConfirmPasswordPage />} />
     <Route path="*" element={<NotFoundPage />} />
     ,
   </Route>,
