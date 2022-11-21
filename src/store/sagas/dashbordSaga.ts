@@ -3,7 +3,10 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import DashboardService, { FetchRoomsProps, FetchRoomsType } from 'services/DashboardService';
+import DashboardService, {
+  FetchRoomsProps,
+  FetchRoomsType,
+} from 'services/RoomService';
 import { addNotification } from 'store/alert';
 import { setRooms } from 'store/booking';
 

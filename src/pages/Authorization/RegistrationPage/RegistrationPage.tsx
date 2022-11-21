@@ -21,14 +21,12 @@ const RegisterPage: FC = () => {
       firstName: '',
       lastName: '',
       password: '',
-      // confirmPassword: '',
-      email: '',
+      email: user.userData?.email || '',
     },
     validationSchema: Yup.object({
       firstName: yupPattern('firstName'),
       lastName: yupPattern('lastName'),
       password: yupPattern('password'),
-      // confirmPassword: yupPattern('confirmPassword'),
       email: yupPattern('email'),
     }),
     onSubmit: (values: InitialRegistrationFormValues) => {
@@ -101,22 +99,6 @@ const RegisterPage: FC = () => {
               ) : null}
             </div>
           </div>
-          {/* <div className={styles.form_item}>
-            <label className={styles.item} htmlFor="confirmPassword">
-              Confirm your passport
-            </label>
-            <Input
-              placeholder="Confirm your password"
-              classes="input"
-              name="confirmPassword"
-              type="password"
-              handleOnChange={handleChange}
-              value={values.confirmPassword}
-            />
-            {touched.confirmPassword && errors.confirmPassword ? (
-              <div className={styles.error}>{errors.confirmPassword}</div>
-            ) : null}
-          </div> */}
           <div className={styles.form_item}>
             <label className={styles.item} htmlFor="email">
               Confirm your email
