@@ -5,19 +5,15 @@ import moment from 'moment';
 import {
   FC,
   MouseEvent,
-  useEffect,
-  useRef,
-  useState,
 } from 'react';
 import {
   EnvironmentOutlined,
   MailOutlined,
   SolutionOutlined,
-  TeamOutlined,
-  UpOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { Booking } from 'types/dataTypes';
+import GuestsSelect from 'components/UI/GuestsSelect/GuestsSelect';
 
 import styles from './BookingPointModal.module.scss';
 
@@ -27,28 +23,13 @@ interface BookingPointModalProps {
 }
 
 const BookingPointModal: FC<BookingPointModalProps> = ({ booking, setIsOpen }) => {
-  const [guestsSelectIsOpen, setGuestsSelectIsOpen] = useState<boolean>(false);
-  const guestsSelectListRef = useRef<HTMLDivElement>(null);
   const bookingStartMoment = moment(`${booking.meetingDate} ${booking.startTime}`);
   const bookingEndMoment = moment(`${booking.meetingDate} ${booking.endTime}`);
   const endDate = moment(`${booking.endDate} ${booking.endTime}`);
 
-  useEffect(() => {
-    if (guestsSelectListRef.current !== null) {
-      const height = guestsSelectListRef.current.scrollHeight;
-
-      if (guestsSelectIsOpen) guestsSelectListRef.current.style.height = `${height}px`;
-      if (!guestsSelectIsOpen) guestsSelectListRef.current.style.height = '0px';
-    }
-  }, [guestsSelectIsOpen]);
-
   const handleCloseBookingPoint = () => {
     document.body.style.overflow = 'unset';
     setIsOpen(false);
-  };
-
-  const handleToggleGuestsSelect = () => {
-    setGuestsSelectIsOpen((prev) => !prev);
   };
 
   return (
@@ -126,48 +107,7 @@ const BookingPointModal: FC<BookingPointModalProps> = ({ booking, setIsOpen }) =
             </div>
           </div>
         </abbr>
-        <div className={cn(
-          styles.guestsSelect,
-          guestsSelectIsOpen && styles.guestsSelectOpen,
-        )}
-        >
-          <div
-            onClick={handleToggleGuestsSelect}
-            className={styles.guestsSelectHeader}
-          >
-            <div className={cn(styles.guestsSelectHeaderLeft, styles.modalPoint)}>
-              <TeamOutlined className={styles.modalPointIcon} />
-              <div className={styles.guestsSelectHeaderInfo}>
-                {`${booking.guests.length} guests`}
-              </div>
-            </div>
-            <UpOutlined className={styles.guestsSelectHeaderArrow} />
-          </div>
-          <div ref={guestsSelectListRef} className={styles.guestsSelectList}>
-            {booking.guests.map((guest) => (
-              <div className={styles.guestsSelectListItem}>
-                <div key={guest.id} className={styles.userData}>
-                  <div className={styles.userDataLeft}>
-                    <div className={styles.avatar}>
-                      <UserOutlined />
-                    </div>
-                    <div className={styles.fullNameAndEmail}>
-                      <span>
-                        {`${guest.lastName} ${guest.firstName}`}
-                      </span>
-                      <span>
-                        {guest.email}
-                      </span>
-                    </div>
-                  </div>
-                  <a className={styles.userDataMailLink} href={`mailto: ${guest.email}`}>
-                    <MailOutlined />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <GuestsSelect guests={booking.guests} />
       </div>
     </div>
   );

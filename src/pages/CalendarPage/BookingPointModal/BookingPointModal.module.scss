@@ -31,15 +31,12 @@
       }
 
       .bookingDate {
-        // padding: 0 $indent-medium;
-
         .bookingDateSeparator {
           margin: 0 $indent-small;
         }
       }
     }
 
-    // FOR OWNER AND GUESTS
     .userData {
       display: flex;
       align-items: center;
@@ -80,7 +77,6 @@
         }
       }
     }
-    //
 
     .modalPoint {
       display: flex;
@@ -94,60 +90,6 @@
           width: 40px;
           height: 40px;
         }
-      }
-    }
-
-    .guestsSelect {
-      .guestsSelectHeader {
-        padding: $indent-small $indent-medium;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        user-select: none;
-        cursor: pointer;
-        transition: $transition;
-
-        .guestsSelectHeaderLeft {
-          padding: 0;
-        }
-
-        .guestsSelectHeaderArrow {
-          transition: $transition;
-          transform: rotate(0.5turn);
-        }
-      }
-
-      .guestsSelectList {
-        display: flex;
-        flex-direction: column;
-        overflow-y: hidden;
-        transition: $transition;
-
-        .guestsSelectListItem {
-          padding-top: 4px;
-          padding-bottom: 4px;
-          padding-left: calc(40px + ($indent-medium * 2));
-          padding-right: $indent-medium;
-          transition: $transition;
-        }
-      }
-
-      @media (any-hover: hover) {
-        .guestsSelectHeader:hover,
-        .guestsSelectListItem:hover {
-          background-color: var(--secondTheme);
-        }
-      }
-    }
-
-    .guestsSelectOpen {
-      .guestsSelectList {
-        height: auto;
-        overflow-y: none;
-      }
-
-      .guestsSelectHeader .guestsSelectHeaderArrow {
-        transform: none;
       }
     }
   }
