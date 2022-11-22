@@ -1,9 +1,10 @@
 /* eslint-disable consistent-return */
-import {
+import React, {
   FC, useEffect, useMemo, useRef,
 } from 'react';
 import { RoomType } from 'types/CommonTypes';
-import { toggleModal, toggleModalType } from 'store/modal';
+import { v4 as uuidv4 } from 'uuid';
+import { toggleModalType } from 'store/modal';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { toggleChosenRoom } from 'store/booking';
 import cn from 'classnames';
@@ -12,6 +13,7 @@ import { getIsBusyNow } from 'utils/bookingUtils';
 import AvailableRoomOutlined from 'assets/Icons/AvailableRoom';
 import BusyRoomOutlined from 'assets/Icons/BusyRoomOutlined';
 import { toggleActiveRoomId } from 'store/dashboard';
+import { CloseOutlined } from '@ant-design/icons';
 import styles from './DashboardRoom.module.scss';
 import FullRoomInfo from './FullRoomInfo';
 import RoomFeatures from './RoomFeatures';
@@ -38,16 +40,20 @@ const DashboardRoom: FC<DashboardRoomProps> = ({ room }) => {
     [activeRoomId, room.id],
   );
   const handleOnReserveRoom = () => {
-    dispatch(toggleModal(!modalIsOpen));
     dispatch(toggleModalType('BookingFromDashboard'));
   };
 
-  const handleOnCloseClick = () => {
+  const handleOnCloseClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
     if (isActive) {
       dispatch(toggleActiveRoomId(null));
     }
   };
-  const handleOnOpenClick = () => {
+
+  const handleOnOpenClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    e.stopPropagation();
     dispatch(toggleChosenRoom(room.id));
     dispatch(toggleActiveRoomId(room.id));
   };
@@ -72,6 +78,7 @@ const DashboardRoom: FC<DashboardRoomProps> = ({ room }) => {
       )}
       role="none"
       onClick={handleOnCloseClick}
+      id="room-container"
     >
       <div
         id={`room-item${room.id}`}
@@ -104,6 +111,15 @@ const DashboardRoom: FC<DashboardRoomProps> = ({ room }) => {
               ) : (
                 <AvailableRoomOutlined title="Room is free" />
               )}
+              {isActive && (
+              <div className={styles.closeContainer}>
+                <CloseOutlined
+                  className={styles.closeIcon}
+                  title="Close room"
+                  onClick={handleOnCloseClick}
+                />
+              </div>
+              )}
             </div>
           </div>
         </div>
@@ -116,9 +132,8 @@ const DashboardRoom: FC<DashboardRoomProps> = ({ room }) => {
           <div className={styles.soonestBookings}>
             {room.soonestBookings.map((booking) => (
               <FullRoomInfo
-                isActive={isActive}
                 booking={booking}
-                key={booking.id * Math.floor(Math.random() * 10000)}
+                key={uuidv4()}
               />
             ))}
           </div>

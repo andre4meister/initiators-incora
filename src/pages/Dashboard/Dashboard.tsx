@@ -5,22 +5,28 @@ import DashboardRoom from 'components/DashboardRoom/DashboardRoom';
 import Loader from 'components/UI/Loader/Loader';
 import { RoomType } from 'types/CommonTypes';
 import Error from 'components/Error/Error';
-import DashboardService, { FetchRoomsType } from 'services/RoomService';
+import RoomService, { FetchRoomsType } from 'services/roomService';
 import { AxiosResponse } from 'axios';
+import useGetRoomWithInterval from 'hooks/useGetRoomsInterval';
 import styles from './Dashboard.module.scss';
 
 interface DeferedData {
-  rooms: RoomType[];
+  data: {
+    data: {
+      rooms: RoomType[];
+    };
+  };
 }
 
 const Dashboard: FC = () => {
-  const { rooms } = useLoaderData() as DeferedData;
+  const { data } = useLoaderData() as DeferedData;
+  useGetRoomWithInterval();
 
   return (
     <div id="dashboard" className={styles.container}>
       <Suspense fallback={<Loader />}>
-        <Await resolve={rooms} errorElement={<Error />}>
-          {(resolvedRooms: AxiosResponse<AxiosResponse<FetchRoomsType>>) => (
+        <Await resolve={data} errorElement={<Error />}>
+          {(resolvedRooms: DeferedData) => (
             <>
               {resolvedRooms.data.data.rooms.map((room) => (
                 <DashboardRoom room={room} key={room.id} />
@@ -34,7 +40,7 @@ const Dashboard: FC = () => {
 };
 
 export const dashboardLoader = () => defer({
-  rooms: DashboardService.fetchRooms({ officeId: 1, soonestBookingsDays: 5 }),
+  data: RoomService.fetchRooms({ officeId: 1, soonestBookingsDays: 5 }),
 });
 
 export default Dashboard;

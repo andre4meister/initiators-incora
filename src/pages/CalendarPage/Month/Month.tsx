@@ -4,17 +4,17 @@
 import cn from 'classnames';
 import moment from 'moment';
 import { FC, WheelEvent } from 'react';
-import { Booking } from 'types/dataTypes';
+import { OneTimeBooking } from 'types/dataTypes';
 
 import styles from './Month.module.scss';
 
 interface MonthProps {
-  bookings: Booking[]
-  selectedDate: moment.Moment
-  setSelectedDate: React.Dispatch<React.SetStateAction<moment.Moment>>
-  getPrevMonth: () => moment.Moment[]
-  getNextMonth: () => moment.Moment[]
-  getMonthByDay: () => moment.Moment[]
+  bookings: OneTimeBooking[];
+  selectedDate: moment.Moment;
+  setSelectedDate: React.Dispatch<React.SetStateAction<moment.Moment>>;
+  getPrevMonth: () => moment.Moment[];
+  getNextMonth: () => moment.Moment[];
+  getMonthByDay: () => moment.Moment[];
 }
 
 const Month: FC<MonthProps> = ({

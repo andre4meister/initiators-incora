@@ -6,10 +6,9 @@ import styles from './DashboardRoom.module.scss';
 
 interface FullRoomInfoProps {
   booking: CommonMeetingType;
-  isActive: boolean;
 }
 
-const FullRoomInfo: FC<FullRoomInfoProps> = ({ booking, isActive }) => {
+const FullRoomInfo: FC<FullRoomInfoProps> = ({ booking }) => {
   const editedCreatedAt: string = moment(booking.createdAt).fromNow();
   const timeFromTo = `${booking.startTime.substring(
     0,
@@ -17,20 +16,29 @@ const FullRoomInfo: FC<FullRoomInfoProps> = ({ booking, isActive }) => {
   )}-${booking.endTime.substring(0, 5)}`;
 
   return (
-    <div className={styles.bookingContainer}>
+    <div
+      className={styles.bookingContainer}
+    >
       <div className={styles.firstLine}>
         <div>
-          <div className={styles.id}>{`#${booking.id}`}</div>
+          <div className={styles.id}>{booking.title}</div>
         </div>
         <div className={styles.createdAt}>{editedCreatedAt}</div>
       </div>
       <div>
         <CalendarOutlined className={styles.fullInfoIcon} />
-        {booking.meetingDate}
+        {`${moment.weekdays(booking.meetingDate).toString()}, ${moment(
+          booking.meetingDate,
+        )
+          .startOf('month')
+          .format('MMM')} ${moment(booking.meetingDate).get('date')}`}
       </div>
       <div>
         <ClockCircleOutlined className={styles.fullInfoIcon} />
         {timeFromTo}
+      </div>
+      <div>
+        guests here
       </div>
     </div>
   );

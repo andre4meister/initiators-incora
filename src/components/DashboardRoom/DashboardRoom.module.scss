@@ -40,7 +40,6 @@
         .imageContainer {
             transition: $transition;
             filter: grayscale(0.24);
-            transform: scale(1.01);
         }
     }
     .roomFeatures {
@@ -148,6 +147,33 @@
         fill: var(--currentText);
     }
 }
+
+.closeContainer {
+    background-color: var(--currentTheme);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.closeIcon {
+    cursor: pointer;
+    svg {
+        padding: 2px;
+        width: 25px;
+        height: 22px;
+        transition: $transition;
+        fill: var(--);
+        &:hover {
+            fill:var(--currentExtraColor);
+        }
+    }
+}
 .info {
     position: absolute;
     bottom: 10px;
@@ -230,7 +256,7 @@
 .availableicon {
     position: absolute;
     top: 10px;
-    right: 10px;
+    left: 10px;
     svg {
         width: 24px;
         height: 24px;

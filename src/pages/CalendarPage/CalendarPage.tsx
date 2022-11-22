@@ -3,7 +3,7 @@ import moment from 'moment';
 import { FC, Suspense, useState } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 import Select, { SingleValue, StylesConfig } from 'react-select';
-import { Booking, FetchingBooking } from 'types/dataTypes';
+import { OneTimeBooking, FetchingBooking } from 'types/dataTypes';
 import useCalendar from 'hooks/useCalendar';
 import Error from 'components/Error/Error';
 import getRequest from 'utils/getRequest';
@@ -55,7 +55,7 @@ const selectStyles: StylesConfig<{ value: string, label: string }> = {
 type ViewModeType = 'month' | 'week' | 'day';
 
 interface DeferedData {
-  bookings: Booking[]
+  bookings: OneTimeBooking[];
 }
 
 const CalendarPage: FC = () => {
@@ -82,7 +82,7 @@ const CalendarPage: FC = () => {
   return (
     <Suspense fallback={<Loader />}>
       <Await resolve={bookings} errorElement={<Error />}>
-        {(resolvedBookings: Booking[]) => (
+        {(resolvedBookings: OneTimeBooking[]) => (
           <div className={styles.container}>
             <div className={styles.sidebar}>
               <DatePicker
@@ -102,8 +102,12 @@ const CalendarPage: FC = () => {
                 styles={selectStyles}
               />
             </div>
-            {viewMode === 'day' && <Day bookings={resolvedBookings} selectedDate={selectedDate} />}
-            {viewMode === 'week' && <Week bookings={resolvedBookings} selectedDate={selectedDate} />}
+            {viewMode === 'day' && (
+              <Day bookings={resolvedBookings} selectedDate={selectedDate} />
+            )}
+            {viewMode === 'week' && (
+              <Week bookings={resolvedBookings} selectedDate={selectedDate} />
+            )}
             {viewMode === 'month' && (
               <Month
                 selectedDate={selectedDate}
@@ -121,8 +125,10 @@ const CalendarPage: FC = () => {
   );
 };
 
-const getBookings = async (): Promise<Booking[]> => {
-  const { data } = await getRequest<FetchingBooking>(`${process.env.REACT_APP_API_GET_OWN_BOOKINGS}`);
+const getBookings = async (): Promise<OneTimeBooking[]> => {
+  const { data } = await getRequest<FetchingBooking>(
+    `${process.env.REACT_APP_API_GET_OWN_BOOKINGS}`,
+  );
 
   return data.data.bookings;
 };

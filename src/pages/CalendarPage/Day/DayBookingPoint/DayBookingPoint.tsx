@@ -1,12 +1,12 @@
 import cn from 'classnames';
 import moment from 'moment';
 import { FC } from 'react';
-import { Booking } from 'types/dataTypes';
+import { OneTimeBooking } from 'types/dataTypes';
 
 import styles from './DayBookingPoint.module.scss';
 
 interface DayBookingPointProps {
-  booking: Booking
+  booking: OneTimeBooking;
 }
 
 const DayBookingPoint: FC<DayBookingPointProps> = ({ booking }) => {

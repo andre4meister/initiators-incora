@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
+import { SubmitBookingFormValues } from 'types/FormTypes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DateTimeType, RoomType } from '../types/CommonTypes';
+import { UpdateBookingType } from './sagas/bookingSaga';
 
 export const initialState = {
   chosenOffice: null as number | null,
@@ -50,6 +52,10 @@ const booking = createSlice({
     toggleIsRecurring: (state, action: PayloadAction<boolean>) => {
       state.isReccuring = action.payload;
     },
+    createOneTimeBooking: (state, action: PayloadAction<SubmitBookingFormValues>) => {},
+    createRecurringBooking: (state, action: PayloadAction<SubmitBookingFormValues>) => {},
+    updateBooking: (state, action: PayloadAction<UpdateBookingType>) => {},
+    deleteBooking: (state, action: PayloadAction<Pick<UpdateBookingType, 'isRecurring'>>) => {},
   },
 });
 
@@ -62,6 +68,10 @@ export const {
   toggleChosenStartTime,
   setRooms,
   toggleIsRecurring,
+  createOneTimeBooking,
+  createRecurringBooking,
+  deleteBooking,
+  updateBooking,
 } = booking.actions;
 
 export default booking.reducer;

@@ -16,20 +16,22 @@ export interface InitialRegistrationFormValues {
 export interface InitialGetAccessValues {
   email: string;
 }
-
+// fix from 0 is Sunday
 export enum DaysOfWeek {
-  Monday = 1,
+  Sunday = 0,
+  Monday,
   Tuesday,
   Wednesday,
   Thursday,
   Friday,
   Saturday,
-  Sunday,
 }
 export interface BookingFormValues {
   id: number | null;
   accoundId: number;
   roomId: number | null;
+  title: string;
+  guests: string[];
   createdAt: DateTimeType;
   startDate: DateTimeType;
   endDate: DateTimeType;
@@ -41,14 +43,27 @@ export interface BookingFormValues {
 export interface SubmitBookingFormValues {
   id: number | null;
   accoundId: number;
+  title: string;
   roomId: number | null;
-  createdAt: DateTimeType;
   startDate?: DateTimeType;
   endDate?: DateTimeType;
   startTime: DateTimeType;
   endTime: DateTimeType;
   daysOfWeek?: DaysOfWeek | DaysOfWeek[];
   meetingDate?: DateTimeType;
+  guests: string[];
+}
+
+export interface UpdateBookingFormValues {
+  title: string;
+  roomId: number | null;
+  startDate?: DateTimeType;
+  endDate?: DateTimeType;
+  startTime: DateTimeType;
+  endTime: DateTimeType;
+  daysOfWeek?: DaysOfWeek | DaysOfWeek[];
+  meetingDate?: DateTimeType;
+  guests: string[];
 }
 export interface InitialSettingsValue {
   firstName: string;

@@ -51,6 +51,7 @@
 }
 
 .picker, 
+.titleInput,
 input[type="date"], 
 input[type="time"] {
     width: 300px;
@@ -64,6 +65,7 @@ input[type="time"] {
     font-size: $fontSize-small;
 }
 
+.titleInput, 
 input[type="date"],
 input[type="time"] {
     padding: $indent-small;
@@ -75,8 +77,10 @@ input[type="time"] {
     }
 
     &:focus {
-        border: 1px solid $color-blue;
-        box-shadow: 0 0 0 1px $color-blue;
+        // border: 1px solid $color-blue;
+        // box-shadow: 0 0 0 1px $color-blue;
+        border: 1px solid #2684ff;
+        box-shadow: 0 0 0 1px#2684ff;
     }
 }
 .button_submit {
@@ -87,5 +91,4 @@ input[type="time"] {
 .users__value-container {
     max-height: 60px;
     overflow-y: scroll;
-    background-color: red !important;
 }

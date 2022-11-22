@@ -1,0 +1,26 @@
+@import '../../styles/variables.module.scss';
+
+.error_container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 300px;
+    text-align: start;
+
+    span {
+        padding: 0 $indent-small;
+        font-size: $fontSize-xsmall;
+        color: rgb(191, 38, 38);
+        max-width: 100%;
+    }
+}
+
+.error_icon {
+    margin: 3px;
+
+    svg {
+        fill: rgb(191, 38, 38);
+        width: 24px;
+        height: 24px;
+    }
+}

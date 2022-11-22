@@ -4,14 +4,14 @@ import {
   FC, WheelEvent, useRef, useEffect, useCallback,
 } from 'react';
 import useCalendar from 'hooks/useCalendar';
-import { Booking } from 'types/dataTypes';
+import { OneTimeBooking } from 'types/dataTypes';
 import WeekBookingPoint from './WeekBookingPoint/WeekBookingPoint';
 
 import styles from './Week.module.scss';
 
 interface WeekProps {
-  selectedDate: moment.Moment
-  bookings: Booking[]
+  selectedDate: moment.Moment;
+  bookings: OneTimeBooking[];
 }
 
 const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
@@ -65,7 +65,7 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
   }, []);
 
   function renderPoint(weekDay: number): React.ReactNode {
-    const bookingDuringTheDay: Booking[] = [];
+    const bookingDuringTheDay: OneTimeBooking[] = [];
 
     bookings.forEach((bookingDay) => {
       if (getWeekByDay(selectedDate)[weekDay].format('DDD') === moment(bookingDay.meetingDate).format('DDD')) {

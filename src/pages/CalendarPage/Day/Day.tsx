@@ -2,14 +2,14 @@
 import { FC, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import moment from 'moment';
-import { Booking } from 'types/dataTypes';
+import { OneTimeBooking } from 'types/dataTypes';
 import DayBookingPoint from './DayBookingPoint/DayBookingPoint';
 
 import styles from './Day.module.scss';
 
 interface DayProps {
-  selectedDate: moment.Moment
-  bookings: Booking[]
+  selectedDate: moment.Moment;
+  bookings: OneTimeBooking[];
 }
 
 const Day: FC<DayProps> = ({ selectedDate, bookings }) => {
@@ -17,7 +17,7 @@ const Day: FC<DayProps> = ({ selectedDate, bookings }) => {
   const timelineRef = useRef<HTMLDivElement>(null);
 
   function renderBookingsInLine(): JSX.Element[] {
-    const bookingAtDay: Booking[] = [];
+    const bookingAtDay: OneTimeBooking[] = [];
 
     bookings.forEach((booking) => {
       if (selectedDate.isSame(moment(booking.meetingDate), 'day')) {

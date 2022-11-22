@@ -1,3 +1,5 @@
+import { User } from './dataTypes';
+
 export type DateTimeType = moment.Moment | string;
 export interface OfficeType {
   id: number;
@@ -12,6 +14,9 @@ export interface CommonMeetingType {
   startTime: string;
   endTime: string;
   isRecurring?: boolean;
+  title: string;
+  guests: User[];
+  owner: User;
 }
 
 export type DevicesType =

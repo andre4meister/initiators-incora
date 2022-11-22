@@ -1,12 +1,12 @@
 import moment from 'moment';
 import cn from 'classnames';
 import { FC, useCallback, useEffect } from 'react';
-import { Booking } from 'types/dataTypes';
+import { OneTimeBooking } from 'types/dataTypes';
 
 import styles from './WeekBookingPoint.module.scss';
 
 interface WeekBookingPointProps {
-  booking: Booking
+  booking: OneTimeBooking;
 }
 
 const WeekBookingPoint: FC<WeekBookingPointProps> = ({ booking }) => {
