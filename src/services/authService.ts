@@ -4,6 +4,8 @@ import { User } from 'types/dataTypes';
 import {
   InitialRegistrationFormValues,
   ChangePasswordValues,
+  InitialNewPasswordLoginValues,
+  InitialGetAccessValues,
 } from 'types/FormTypes';
 import getRequest from 'utils/getRequest';
 
@@ -67,6 +69,38 @@ export default class AuthService {
 
     const response = axios.put(
       `${process.env.REACT_APP_API_CHANGE_PASSWORD}`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    return response;
+  }
+
+  static async resetPassword(values: InitialGetAccessValues) {
+    const data = JSON.stringify(values);
+    const response = axios.put(
+      `${process.env.REACT_APP_API_RESET_PASSWORD}`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    return response;
+  }
+
+  static async loginNewPassword(values: InitialNewPasswordLoginValues) {
+    const data = JSON.stringify(values);
+    const token = JSON.parse(localStorage.getItem('token') || '') as string;
+    const response = axios.put(
+      `${process.env.REACT_APP_API_RESET_PASSWORD_APPROVE}`,
       data,
       {
         headers: {
