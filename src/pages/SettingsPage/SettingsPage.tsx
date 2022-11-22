@@ -1,14 +1,13 @@
 /* eslint-disable object-curly-newline */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-// import { InitialSettingsValue } from 'types/FormTypes';
 import { FC } from 'react';
 import { useAppSelector } from 'hooks/reduxHooks';
 import { UserOutlined } from '@ant-design/icons';
 import Button from 'components/UI/Button/Button';
 import Input from 'components/UI/Input/Input';
 import yupPattern from 'utils/yupPattern';
-import ChangePassword from 'pages/ChangePassword/ChangePassword/ChangePassword';
+import ChangePassword from 'pages/SettingsPage/ChangePassword/ChangePassword';
 import InviteUser from './InviteUser/InviteUser';
 import style from './SettingsPage.module.scss';
 

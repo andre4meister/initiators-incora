@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable object-curly-newline */
@@ -6,30 +7,15 @@ import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
-import axios from 'axios';
-import Loader from 'components/UI/Loader/Loader';
-// import AuthService from 'services/authService';
+import AuthService from 'services/authService';
 import { InitialGetAccessValues } from 'types/FormTypes';
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FrownOutlined } from '@ant-design/icons';
-import style from '../ChangePassword.module.scss';
-
-const onSetRequestHandler = async (email: string) => {
-  const data = JSON.stringify(email);
-  try {
-    await axios.put(
-      'https://initiators-ua.herokuapp.com/auth/reset-password',
-      data,
-    );
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-    }
-  }
-};
+import style from './ForgotPasswordPage.module.scss';
 
 const ForgotPasswordPage: FC = () => {
-  // const [requestCodeStatus, setRequestCodeStatus] = useState<string>('');
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -37,14 +23,19 @@ const ForgotPasswordPage: FC = () => {
     validationSchema: Yup.object({
       email: yupPattern('email'),
     }),
-    onSubmit: (values: InitialGetAccessValues) => {
-      onSetRequestHandler(values.email);
+    onSubmit: async (values: InitialGetAccessValues) => {
+      try {
+        const data = await AuthService.resetPassword(values);
+        localStorage.setItem('token', JSON.stringify(data.data.token));
+        navigate('/new-password');
+      } catch (err) {
+        console.log(err);
+      }
     },
   });
   const { handleSubmit, handleChange, values, errors, touched } = formik;
   return (
     <div className={style.container}>
-      {/* {requestCodeStatus === 'pending' && <Loader />} */}
       <form className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.text}>
           Forgot your password

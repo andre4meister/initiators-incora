@@ -5,6 +5,11 @@ export interface InitialLoginValues {
   password: string;
 }
 
+export interface InitialNewPasswordLoginValues {
+  email: string;
+  newPassword: string;
+}
+
 export interface InitialRegistrationFormValues {
   firstName: string;
   lastName: string;
@@ -60,8 +65,4 @@ export interface ChangePasswordValues {
   email: string;
   oldPassword: string;
   newPassword: string;
-}
-
-export interface InitialConfirmPasswordValue {
-  password: string;
 }
