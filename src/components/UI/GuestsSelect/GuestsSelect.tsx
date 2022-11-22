@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { v4 as uuidv4 } from 'uuid';
 import cn from 'classnames';
 import {
   TeamOutlined, UpOutlined, UserOutlined, MailOutlined,
@@ -52,7 +53,7 @@ const GuestsSelect: FC<GuestsSelectProps> = ({ guests }) => {
       </div>
       <div ref={guestsSelectListRef} className={styles.guestsSelectList}>
         {guests.map((guest) => (
-          <div className={styles.guestsSelectListItem}>
+          <div key={uuidv4()} className={styles.guestsSelectListItem}>
             <div key={guest.id} className={styles.userData}>
               <div className={styles.userDataLeft}>
                 <div className={styles.avatar}>

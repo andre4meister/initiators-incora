@@ -1,4 +1,6 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable react-hooks/exhaustive-deps */
+import cn, { Argument } from 'classnames';
 import React, {
   FC, ReactNode, useCallback, useRef, useEffect, useState,
 } from 'react';
@@ -16,10 +18,11 @@ import 'animate.css';
 
 interface ModalProps {
   children: ReactNode;
-  headerText: string;
+  headerText?: string;
+  classes?: string
 }
 
-const Modal: FC<ModalProps> = ({ children, headerText }) => {
+const Modal: FC<ModalProps> = ({ children, headerText = '', classes }) => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
   const dispatch = useAppDispatch();
   const { modalIsOpen, modalIsLocked } = useAppSelector((state) => state.modal);
@@ -99,7 +102,7 @@ const Modal: FC<ModalProps> = ({ children, headerText }) => {
           unmountOnExit
         >
           <dialog
-            className={styles.modal__container}
+            className={cn(styles.modal__container, classes)}
             ref={modalRef}
             onClose={onClose}
             onCancel={onCancel}
@@ -107,8 +110,8 @@ const Modal: FC<ModalProps> = ({ children, headerText }) => {
           >
             <div className={styles.modal_header}>
               <h2>{headerText}</h2>
-              <CloseOutlined className={styles.closeIcon} onClick={onClose} />
             </div>
+            <CloseOutlined className={styles.closeIcon} onClick={onClose} />
             {children}
           </dialog>
         </CSSTransition>
@@ -125,7 +128,7 @@ const GlobalModal = () => {
   switch (modalType) {
     case 'BookingFromDashboard':
       return (
-        <Modal headerText="Creating meeting">
+        <Modal classes={styles.modalForm} headerText="Creating meeting">
           <Booking />
         </Modal>
       );
@@ -137,7 +140,7 @@ const GlobalModal = () => {
       );
     case 'BookingInfo':
       return (
-        <Modal headerText="Booking info">
+        <Modal>
           <BookingPointModal />
         </Modal>
       );

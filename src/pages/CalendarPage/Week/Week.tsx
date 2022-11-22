@@ -79,7 +79,8 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
     ));
   }
 
-  const checkPosition = useCallback((ref: HTMLDivElement | null) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const checkPosition = (ref: HTMLDivElement | null) => {
     const checkedBookings: number[] = [];
     let bookingsOnDay: NodeListOf<HTMLDivElement> | null = null;
 
@@ -122,7 +123,7 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
         item.style.height = `calc(${oneBookingHeght}% - 4px)`;
       });
     });
-  }, []);
+  };
 
   useEffect(() => {
     checkPosition(mondayRef.current);

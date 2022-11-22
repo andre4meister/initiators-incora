@@ -1,58 +1,50 @@
-@import '../../styles//variables.module.scss'; 
+@import '../../styles/variables.module.scss';
 
 .modal {
-    position: fixed;
-    margin: auto;
-    top: 0;
-    min-height: 100vh;
-    min-width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    z-index: 50;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    overflow: hidden;
+  position: fixed;
+  top: 0;
+  min-height: 100vh;
+  min-width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    & .modal__container {
-        background-color: var(--currentTheme);
-        border-radius: $borderRadius;
-        position: relative;
-        top: -20px;
-        color: var(--currentTheme) !important;
-        box-sizing: border-box;
-        min-height: 250px;
-        max-height: 650px;
-        overflow-y: scroll;
-        padding-left: 8px;
-        min-width: min(60%, 450px);
-        opacity: 1;
-        z-index: 99;
-    }
+  .modal__container {
+    position: relative;
+    border-radius: $borderRadius;
+    border: none;
+    height: fit-content;
+    max-height: 80vh;
+    overflow-y: auto;
+    min-width: 50%;
+  }
+
+  .modalForm {
+    min-width: fit-content;
+  }
 }
 
 .modal_header {
-    position: sticky;
-    top: 0;
-    box-sizing: border-box;
-    min-width: 100%;
-    background-color: var(--currentTheme);
-    z-index: 100;
-    padding: $indent-xsmall;
-    border-bottom: 1px solid grey;
+  text-align: center;
+  padding: $indent-xsmall;
 }
 
 .closeIcon {
-    display: block;
-    position: absolute;
-    color: var(--currentText);
-    right: 5px;
-    top: 10px;
-    z-index: 1000;
-    font-size: $fontSize-medium;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 
+  svg {
+    width: 24px;
+    height: 24px;
+    transition: $transition;
+  }
+
+  @media (any-hover: hover) {
     svg:hover {
-        fill: $color-orange;
+      fill: $color-orange;
     }
+  }
 }
