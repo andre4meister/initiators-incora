@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import moment from 'moment';
+import { v4 as uuidv4 } from 'uuid';
 import {
   FC, WheelEvent, useRef, useEffect, useCallback,
 } from 'react';
@@ -74,7 +75,7 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
     });
 
     return bookingDuringTheDay.map((booking) => (
-      <WeekBookingPoint key={booking.id} booking={booking} />
+      <WeekBookingPoint key={uuidv4()} booking={booking} />
     ));
   }
 
