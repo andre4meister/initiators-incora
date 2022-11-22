@@ -15,7 +15,7 @@ import {
 } from 'store/user';
 import { User } from 'types/dataTypes';
 
-interface TokenInterface {
+export interface TokenInterface {
   token: string
   navigate?: NavigateFunction | (() => void)
 }

@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FetchRoomsProps } from 'services/RoomService';
