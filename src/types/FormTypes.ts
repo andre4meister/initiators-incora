@@ -56,6 +56,12 @@ export interface InitialSettingsValue {
   email: string;
 }
 
+export interface ChangePasswordValues {
+  email: string;
+  oldPassword: string;
+  newPassword: string;
+}
+
 export interface InitialConfirmPasswordValue {
   password: string;
 }

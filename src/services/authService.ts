@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import axios, { AxiosResponse } from 'axios';
 import { User } from 'types/dataTypes';
-import { InitialRegistrationFormValues } from 'types/FormTypes';
+import {
+  InitialRegistrationFormValues,
+  ChangePasswordValues,
+} from 'types/FormTypes';
 import getRequest from 'utils/getRequest';
 
 export default class AuthService {
@@ -54,6 +57,24 @@ export default class AuthService {
       },
       data: JSON.stringify(values),
     });
+
+    return response;
+  }
+
+  static async changePassword(values: ChangePasswordValues) {
+    const data = JSON.stringify(values);
+    const token = JSON.parse(localStorage.getItem('token') || '') as string;
+
+    const response = axios.put(
+      `${process.env.REACT_APP_API_CHANGE_PASSWORD}`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
 
     return response;
   }

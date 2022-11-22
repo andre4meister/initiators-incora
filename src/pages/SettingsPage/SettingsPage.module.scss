@@ -34,7 +34,6 @@
     grid-template-rows: repeat(2, 1fr);
     grid-row-gap: $indent-large;
     grid-column-gap: $indent-small;
-    margin-bottom: $indent-large;
 
     .block_input {
       margin-right: $indent-large;
@@ -49,6 +48,7 @@
 
   .button_submit {
     max-width: 450px;
+    max-height: 35px;
   }
 }
 
