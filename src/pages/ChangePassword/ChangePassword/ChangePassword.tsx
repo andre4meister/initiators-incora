@@ -25,7 +25,7 @@ const ChangePassword = () => {
     onSubmit: async (values: ChangePasswordValues) => {
       try {
         await AuthService.changePassword(values);
-        // resetForm()
+        formik.resetForm();
         alert('Password was changed☻');
       } catch (err) {
         console.log(err);
