@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { TokenInterface } from 'store/sagas/userSaga';
 import { User } from 'types/dataTypes';
 import {
