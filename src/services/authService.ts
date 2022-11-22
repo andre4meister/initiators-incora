@@ -46,5 +46,6 @@ export default class AuthService {
     localStorage.setItem('isAuth', JSON.stringify(false));
     localStorage.setItem('user', '');
     localStorage.setItem('token', '');
+    window.location.reload();
   }
 }

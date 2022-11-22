@@ -34,7 +34,7 @@
     .bookingList {
       width: 100%;
       font-size: $fontSize-xxsmall;
-      overflow-y: scroll;
+      overflow-y: auto;
       list-style: none;
 
       .bookingListItem {
@@ -52,7 +52,7 @@
 
           .bookingListItemTime {
           }
-          .bookingListItemRoom {
+          .bookingListItemTitle {
             font-weight: $fontWeight-bold;
             white-space: nowrap;
           }
@@ -65,7 +65,7 @@
     }
 
     .bookingList::-webkit-scrollbar {
-      width: 4px;
+      width: 8px;
     }
 
     @media (any-hover: hover) {
