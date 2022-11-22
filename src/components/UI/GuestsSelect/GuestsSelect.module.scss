@@ -1,0 +1,111 @@
+@import '../../../styles/variables.module.scss';
+
+.modalPoint {
+  display: flex;
+  align-items: center;
+  padding: $indent-small $indent-medium;
+
+  &Icon {
+    margin-right: $indent-medium;
+
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+.userData {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: $indent-large;
+  width: 100%;
+
+  .userDataLeft {
+    display: flex;
+    align-items: center;
+
+    .avatar {
+      margin-right: $indent-small;
+      background-color: var(--currentExtraColor);
+      border-radius: 50%;
+
+      svg {
+        fill: $color-textLight;
+        margin: 5px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .fullNameAndEmail {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .userDataMailLink svg {
+    transition: $transition;
+  }
+
+  @media (any-hover: hover) {
+    .userDataMailLink:hover svg {
+      fill: var(--currentExtraColor);
+    }
+  }
+}
+
+.guestsSelect {
+  .guestsSelectHeader {
+    padding: $indent-small $indent-medium;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    cursor: pointer;
+    transition: $transition;
+
+    .guestsSelectHeaderLeft {
+      padding: 0;
+    }
+
+    .guestsSelectHeaderArrow {
+      transition: $transition;
+      transform: rotate(0.5turn);
+    }
+  }
+
+  .guestsSelectList {
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    transition: $transition;
+
+    .guestsSelectListItem {
+      padding-top: 4px;
+      padding-bottom: 4px;
+      padding-left: calc(40px + ($indent-medium * 2));
+      padding-right: $indent-medium;
+      transition: $transition;
+    }
+  }
+
+  @media (any-hover: hover) {
+    .guestsSelectHeader:hover,
+    .guestsSelectListItem:hover {
+      background-color: var(--secondTheme);
+    }
+  }
+}
+
+.guestsSelectOpen {
+  .guestsSelectList {
+    height: auto;
+    overflow-y: none;
+  }
+
+  .guestsSelectHeader .guestsSelectHeaderArrow {
+    transform: none;
+  }
+}

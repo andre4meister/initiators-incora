@@ -1,9 +1,8 @@
-import { FC, useEffect, useMemo } from 'react';
-import { RoomType } from 'types/CommonTypes';
+/* eslint-disable consistent-return */
 import {
-  UserOutlined,
-  GroupOutlined,
-} from '@ant-design/icons';
+  FC, useEffect, useMemo, useRef,
+} from 'react';
+import { RoomType } from 'types/CommonTypes';
 import { toggleModal, toggleModalType } from 'store/modal';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { toggleChosenRoom } from 'store/booking';
@@ -23,103 +22,114 @@ interface DashboardRoomProps {
 
 const DashboardRoom: FC<DashboardRoomProps> = ({ room }) => {
   const dispatch = useAppDispatch();
+
   const { modalIsOpen } = useAppSelector((state) => state.modal);
   const { activeRoomId } = useAppSelector((state) => state.dashboard);
 
+  const roomRef = useRef<HTMLDivElement | null>(null);
   const isBusyNow: boolean = getIsBusyNow(room.soonestBookings);
 
-  const handleOnReserveRoom = () => {
-    dispatch(toggleModal(!modalIsOpen));
-    dispatch(toggleModalType('BookingFromDashboard'));
-  };
-
-  const handleOnClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation();
-    if (activeRoomId === null) {
-      dispatch(toggleChosenRoom(room.id));
-      dispatch(toggleActiveRoomId(room.id));
-    } else {
-      dispatch(toggleActiveRoomId(null));
-    }
-  };
-
   const isActive = useMemo(
-    () => room.id === activeRoomId,
-    [activeRoomId, room.id],
+    () => room.id === activeRoomId && !modalIsOpen,
+    [activeRoomId, modalIsOpen, room.id],
   );
   const isBlured = useMemo(
     () => room.id !== activeRoomId && activeRoomId !== null,
     [activeRoomId, room.id],
   );
+  const handleOnReserveRoom = () => {
+    dispatch(toggleModal(!modalIsOpen));
+    dispatch(toggleModalType('BookingFromDashboard'));
+  };
+
+  const handleOnCloseClick = () => {
+    if (isActive) {
+      dispatch(toggleActiveRoomId(null));
+    }
+  };
+  const handleOnOpenClick = () => {
+    dispatch(toggleChosenRoom(room.id));
+    dispatch(toggleActiveRoomId(room.id));
+  };
+
   useEffect(() => {
+    const scrollY = roomRef.current;
     if (isActive === true) {
       document.body.style.overflowY = 'hidden';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return () => {
+        window.scrollTo({ top: scrollY?.offsetTop, behavior: 'smooth' });
+        document.body.style.overflowY = 'auto';
+      };
     }
-    return () => {
-      document.body.style.overflowY = 'auto';
-    };
-  }, [isActive, dispatch]);
+  }, [isActive]);
 
   return (
     <div
-      className={cn(styles.roomContainer, isActive && styles.roomActiveContainer)}
+      className={cn(
+        styles.roomContainer,
+        isActive && styles.roomActiveContainer,
+      )}
       role="none"
-      onClick={handleOnClick}
+      onClick={handleOnCloseClick}
     >
       <div
         id={`room-item${room.id}`}
+        ref={roomRef}
         role="none"
         className={cn({
           [styles.room]: true,
-          [styles.activeRoom]: isActive,
+          [styles.activeRoom]: isActive && !modalIsOpen,
           [styles.bluredRoom]: isBlured,
         })}
-        onClick={handleOnClick}
+        onClick={handleOnOpenClick}
       >
-        <div className={styles.nameIdContainer}>
-          <div>
-            <div>{room.id}</div>
+        <div className={styles.defaultRoomView}>
+          <div className={styles.imageContainer}>
+            {/* <img
+            src="https://assets.citizenm.com/images/Hero%20Image-CitizenM_CRP-159_high-3_10f065b4b04602805e495b26-1.jpg"
+            alt={`Room${room.id}`}
+          /> */}
           </div>
-          <h2>{room.name}</h2>
-        </div>
-        <div className={styles.roomFeatures}>
-          <div>
-            <GroupOutlined className={styles.featureIcon} title="Floor" />
-            {' '}
-            {room.floor}
-          </div>
-          <div>
-            <UserOutlined className={styles.featureIcon} title="Capacity" />
-            <span>{` ${room.minPeople}-${room.maxPeople}`}</span>
-          </div>
-          <RoomFeatures devices={room.devices} />
-          {isBusyNow ? (
-            <BusyRoomOutlined title="Room is busy" />
-          ) : (
-            <AvailableRoomOutlined title="Room is free" />
-          )}
-          <div
-            className={cn(
-              styles.fullRoomInfo,
-              isActive && !modalIsOpen && styles.activeFullInfo,
-            )}
-          >
-            <div className={styles.soonestBookings}>
-              {room.soonestBookings.map((b) => (
-                <FullRoomInfo
-                  isActive={isActive}
-                  booking={b}
-                  key={b.id * Math.floor(Math.random() * 10000)}
-                />
-              ))}
+          <div className={styles.mainInfoContainer}>
+            <div className={styles.nameContainer}>
+              <h2>{room.name}</h2>
             </div>
-            <Button
-              classes={styles.reserveRoomButton}
-              handleOnClick={handleOnReserveRoom}
-            >
-              Reserve room
-            </Button>
+            <div className={styles.roomFeatures}>
+              <div>{`Floor: ${room.floor}`}</div>
+              <div>{`Capacity: ${room.minPeople}-${room.maxPeople}`}</div>
+              <RoomFeatures devices={room.devices} />
+              {isBusyNow ? (
+                <BusyRoomOutlined title="Room is busy" />
+              ) : (
+                <AvailableRoomOutlined title="Room is free" />
+              )}
+            </div>
           </div>
+        </div>
+        <div
+          className={cn(
+            styles.fullRoomInfo,
+            isActive && !modalIsOpen && styles.activeFullInfo,
+          )}
+        >
+          <div className={styles.soonestBookings}>
+            {room.soonestBookings.map((booking) => (
+              <FullRoomInfo
+                isActive={isActive}
+                booking={booking}
+                key={booking.id * Math.floor(Math.random() * 10000)}
+              />
+            ))}
+          </div>
+        </div>
+        <div className={styles.buttonContainer} id="button-container">
+          <Button
+            classes={styles.reserveRoomButton}
+            handleOnClick={handleOnReserveRoom}
+          >
+            Reserve room
+          </Button>
         </div>
       </div>
     </div>

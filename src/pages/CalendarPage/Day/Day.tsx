@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import { v4 as uuidv4 } from 'uuid';
 import { FC, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import moment from 'moment';
@@ -26,7 +27,7 @@ const Day: FC<DayProps> = ({ selectedDate, bookings }) => {
     });
 
     return bookingAtDay.map((booking) => (
-      <DayBookingPoint booking={booking} />
+      <DayBookingPoint key={uuidv4()} booking={booking} />
     ));
   }
 

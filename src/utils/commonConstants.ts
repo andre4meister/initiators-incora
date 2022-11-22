@@ -1,4 +1,4 @@
-const weekDays = [
+export const weekDays = [
   { label: 'Monday', value: 1 },
   { label: 'Tuesday', value: 2 },
   { label: 'Wednesday', value: 3 },
@@ -8,4 +8,13 @@ const weekDays = [
   { label: 'Sunday', value: 7 },
 ];
 
-export default weekDays;
+export enum Devices {
+  WhiteBoard = 'White board',
+  BigScreen = 'Big screen',
+  WaterCooler = 'Water cooler',
+  PlayStation = 'PlayStation',
+  AirConditioner = 'Air conditioner',
+  SoundSystem = 'Sound system',
+  TennisTable = 'Tennis table',
+  Camera = 'Camera',
+}

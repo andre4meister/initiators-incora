@@ -7,22 +7,7 @@ export interface NotificationsType {
 }
 export const initialState = {
   alertIsOpen: false,
-  notifications: [
-    { message: 'Test this success message 1', type: 'success' },
-    {
-      message: 'End date should be bigger than startDate at least on 2 days',
-      type: 'success',
-    },
-    { message: 'Passwords must match', type: 'error' },
-    {
-      message: 'Booking period should be less than 3 month',
-      type: 'error',
-    },
-    {
-      message: 'Incorrect end time, it should be later than start time',
-      type: 'info',
-    },
-  ] as NotificationsType[],
+  notifications: [] as NotificationsType[],
 };
 
 const alert = createSlice({
@@ -33,7 +18,15 @@ const alert = createSlice({
       state.alertIsOpen = action.payload;
     },
     addNotification: (state, action: PayloadAction<NotificationsType>) => {
-      state.notifications.push(action.payload);
+      const isTheSameMessage = state.notifications.find(
+        (n) => n.message === action.payload.message,
+      );
+      if (isTheSameMessage) {
+        state.notifications = [...state.notifications
+          .filter((n) => n.message !== action.payload.message), action.payload];
+      } else {
+        state.notifications.push(action.payload);
+      }
     },
     deleteNotification: (state, action: PayloadAction<NotificationsType>) => {
       state.notifications = state.notifications.filter(

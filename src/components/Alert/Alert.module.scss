@@ -2,18 +2,19 @@
 
 .container { 
     position: fixed;
-    bottom: 0;
-    right: 0;
-    margin-right: 15px;
+    bottom: 10px;
+    right: 15px;
     height: 45vh;
     width: 300px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-end;    
     z-index: 49;
 }
 
+.notifications {
+    width: 300px;
+}
 .notification {
     display: flex;
     min-width: 100%;
@@ -22,7 +23,7 @@
     min-height: 40px;
     max-height: fit-content;
     max-width: 280px;
-    margin: $indent-small;
+    margin: $indent-small 0;
     border-radius: $borderRadius;
     position: relative;
 }

@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, Suspense } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 import DashboardRoom from 'components/DashboardRoom/DashboardRoom';
 import Loader from 'components/UI/Loader/Loader';
 import { RoomType } from 'types/CommonTypes';
 import Error from 'components/Error/Error';
-import { getRooms } from 'store/dashboard';
-import DashboardService, { FetchRoomsType } from 'services/DashboardService';
-import { AxiosPromise, AxiosResponse } from 'axios';
+import DashboardService, { FetchRoomsType } from 'services/RoomService';
+import { AxiosResponse } from 'axios';
 import styles from './Dashboard.module.scss';
 
 interface DeferedData {
@@ -19,10 +17,7 @@ const Dashboard: FC = () => {
   const { rooms } = useLoaderData() as DeferedData;
 
   return (
-    <div
-      id="dashboard"
-      className={styles.container}
-    >
+    <div id="dashboard" className={styles.container}>
       <Suspense fallback={<Loader />}>
         <Await resolve={rooms} errorElement={<Error />}>
           {(resolvedRooms: AxiosResponse<AxiosResponse<FetchRoomsType>>) => (

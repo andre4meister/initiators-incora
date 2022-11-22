@@ -18,6 +18,10 @@ export interface FetchingBooking {
 }
 
 export interface Booking {
+  title: string
+  daysOfWeek: number[]
+  startDate: string
+  endDate: string
   id: number,
   createdAt: string,
   isRecurring: boolean,

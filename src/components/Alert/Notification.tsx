@@ -63,7 +63,6 @@ const Notification: FC<NotificationProps> = ({
           [styles.error]: notification.type === 'error',
         })}
         ref={alertRef}
-        key={notification.message}
       >
         <div
           className={cn({
