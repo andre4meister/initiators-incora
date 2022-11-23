@@ -2,7 +2,7 @@
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import {
-  FC, WheelEvent, useRef, useEffect, useCallback,
+  FC, WheelEvent, useRef, useEffect,
 } from 'react';
 import useCalendar from 'hooks/useCalendar';
 import { Booking } from 'types/dataTypes';
@@ -11,11 +11,12 @@ import WeekBookingPoint from './WeekBookingPoint/WeekBookingPoint';
 import styles from './Week.module.scss';
 
 interface WeekProps {
-  selectedDate: moment.Moment;
-  bookings: Booking[];
+  selectedDate: moment.Moment
+  bookings: Booking[]
+  selectedRoom: string
 }
 
-const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
+const Week: FC<WeekProps> = ({ selectedDate, bookings, selectedRoom }) => {
   const mondayRef = useRef<HTMLDivElement>(null);
   const tuesdayRef = useRef<HTMLDivElement>(null);
   const wednesdayRef = useRef<HTMLDivElement>(null);
@@ -65,10 +66,18 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
     return () => clearInterval(nowFlagUpdateInterval);
   }, []);
 
+  function sortBookingsByRooms() {
+    return bookings.filter((booking) => {
+      if (selectedRoom === 'allRooms') return booking;
+      if (booking.room.name === selectedRoom) return booking;
+      return false;
+    });
+  }
+
   function renderPoint(weekDay: number): React.ReactNode {
     const bookingDuringTheDay: Booking[] = [];
 
-    bookings.forEach((bookingDay) => {
+    sortBookingsByRooms().forEach((bookingDay) => {
       if (getWeekByDay(selectedDate)[weekDay].format('DDD') === moment(bookingDay.meetingDate).format('DDD')) {
         bookingDuringTheDay.push(bookingDay);
       }
@@ -133,7 +142,7 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
     checkPosition(fridayRef.current);
     checkPosition(saturdayRef.current);
     checkPosition(sundayRef.current);
-  }, [selectedDate, bookings, checkPosition]);
+  }, [selectedDate, bookings, checkPosition, selectedRoom]);
 
   return (
     <>

@@ -18,11 +18,11 @@ import 'animate.css';
 
 interface ModalProps {
   children: ReactNode;
-  headerText?: string;
+  headerText?: string | null;
   classes?: string
 }
 
-const Modal: FC<ModalProps> = ({ children, headerText = '', classes }) => {
+const Modal: FC<ModalProps> = ({ children, headerText, classes }) => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
   const dispatch = useAppDispatch();
   const { modalIsOpen, modalIsLocked } = useAppSelector((state) => state.modal);
@@ -45,7 +45,7 @@ const Modal: FC<ModalProps> = ({ children, headerText = '', classes }) => {
   );
 
   const onClickOutsideClose = (e: React.MouseEvent<Element, MouseEvent>) => {
-    const dial = document.getElementById('dialog');
+    const dial = document.getElementById('modalBg');
     if (e.target === dial) onClose();
   };
 
@@ -79,14 +79,15 @@ const Modal: FC<ModalProps> = ({ children, headerText = '', classes }) => {
 
   return (
     <ReactPortal>
-      <div
-        id="dialog"
-        className={styles.modal}
-        onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-          onClickOutsideClose(e);
-        }}
-        role="none"
-      >
+      <div className={styles.modal}>
+        <div
+          className={styles.modalBg}
+          onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+            onClickOutsideClose(e);
+          }}
+          role="none"
+          id="modalBg"
+        />
         <CSSTransition
           timeout={500}
           in={showModal}
@@ -108,9 +109,11 @@ const Modal: FC<ModalProps> = ({ children, headerText = '', classes }) => {
             onCancel={onCancel}
             open={modalIsOpen}
           >
-            <div className={styles.modal_header}>
-              <h2>{headerText}</h2>
-            </div>
+            {headerText && (
+              <div className={styles.modal_header}>
+                <h2>{headerText}</h2>
+              </div>
+            )}
             <CloseOutlined className={styles.closeIcon} onClick={onClose} />
             {children}
           </dialog>

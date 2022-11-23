@@ -8,6 +8,7 @@ $menuContainerWidth: 44px;
   height: 100vh;
 
   .content {
+    position: relative;
     width: 100%;
     padding: $indent-small $indent-medium;
     padding-right: $menuContainerWidth + $indent-medium;
@@ -21,10 +22,10 @@ $menuContainerWidth: 44px;
     right: $size-sidebarWidth;
     display: flex;
     justify-content: flex-end;
+    z-index: 20;
 
     .menu {
       position: absolute;
-      z-index: 20;
       top: 50%;
       transform: translateY(-50%);
     }

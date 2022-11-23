@@ -5,7 +5,7 @@ import DashboardRoom from 'components/DashboardRoom/DashboardRoom';
 import Loader from 'components/UI/Loader/Loader';
 import { RoomType } from 'types/CommonTypes';
 import Error from 'components/Error/Error';
-import RoomService, { FetchRoomsType } from 'services/roomService';
+import RoomService, { FetchRoomsType } from 'services/RoomService';
 import { AxiosResponse } from 'axios';
 import useGetRoomWithInterval from 'hooks/useGetRoomsInterval';
 import styles from './Dashboard.module.scss';
@@ -14,8 +14,8 @@ interface DeferedData {
   data: {
     data: {
       rooms: RoomType[];
-    };
-  };
+    }
+  }
 }
 
 const Dashboard: FC = () => {
