@@ -9,6 +9,7 @@ import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
 import Loader from 'components/UI/Loader/Loader';
+import InputError from 'components/InputError/InputError';
 import styles from '../Authorization.module.scss';
 
 const RegisterPage: FC = () => {
@@ -37,6 +38,7 @@ const RegisterPage: FC = () => {
   const {
     handleSubmit, handleChange, values, errors, touched,
   } = formik;
+
   return (
     <div className={styles.container}>
       {user.loading === 'pending' && <Loader />}
@@ -55,11 +57,9 @@ const RegisterPage: FC = () => {
               handleOnChange={handleChange}
               value={values.firstName}
             />
-            <div className={styles.error_container}>
-              {touched.firstName && errors.firstName ? (
-                <div className={styles.error}>{errors.firstName}</div>
-              ) : null}
-            </div>
+            {touched.firstName && errors.firstName ? (
+              <InputError message={errors.firstName} />
+            ) : null}
           </div>
 
           <div className={styles.form_item}>
@@ -74,11 +74,9 @@ const RegisterPage: FC = () => {
               handleOnChange={handleChange}
               value={values.lastName}
             />
-            <div className={styles.error_container}>
-              {touched.lastName && errors.lastName ? (
-                <div className={styles.error}>{errors.lastName}</div>
-              ) : null}
-            </div>
+            {touched.lastName && errors.lastName ? (
+              <InputError message={errors.lastName} />
+            ) : null}
           </div>
 
           <div className={styles.form_item}>
@@ -93,11 +91,9 @@ const RegisterPage: FC = () => {
               handleOnChange={handleChange}
               value={values.password}
             />
-            <div className={styles.error_container}>
-              {touched.password && errors.password ? (
-                <div className={styles.error}>{errors.password}</div>
-              ) : null}
-            </div>
+            {touched.password && errors.password ? (
+              <InputError message={errors.password} />
+            ) : null}
           </div>
           <div className={styles.form_item}>
             <label className={styles.item} htmlFor="email">
@@ -112,14 +108,14 @@ const RegisterPage: FC = () => {
               value={values.email}
             />
             {touched.email && errors.email ? (
-              <div className={styles.error}>{errors.email}</div>
+              <InputError message={errors.email} />
             ) : null}
           </div>
         </div>
         <Button
           type="submit"
           classes={styles.button_submit}
-        // handleOnClick={handleSubmit}
+          // handleOnClick={handleSubmit}
         >
           Submit
         </Button>

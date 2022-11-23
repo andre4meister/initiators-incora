@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { v4 as uuidv4 } from 'uuid';
@@ -13,10 +14,11 @@ import { User } from 'types/dataTypes';
 import styles from './GuestsSelect.module.scss';
 
 interface GuestsSelectProps {
-  guests: User[]
+  guests: User[];
+  classes?: string;
 }
 
-const GuestsSelect: FC<GuestsSelectProps> = ({ guests }) => {
+const GuestsSelect: FC<GuestsSelectProps> = ({ guests, classes = '' }) => {
   const [guestsSelectIsOpen, setGuestsSelectIsOpen] = useState<boolean>(false);
   const guestsSelectListRef = useRef<HTMLDivElement>(null);
 
@@ -24,7 +26,7 @@ const GuestsSelect: FC<GuestsSelectProps> = ({ guests }) => {
     if (guestsSelectListRef.current !== null) {
       const height = guestsSelectListRef.current.scrollHeight;
 
-      if (guestsSelectIsOpen) guestsSelectListRef.current.style.height = `${height}px`;
+      if (guestsSelectIsOpen) { guestsSelectListRef.current.style.height = `${height}px`; }
       if (!guestsSelectIsOpen) guestsSelectListRef.current.style.height = '0px';
     }
   }, [guestsSelectIsOpen]);
@@ -34,17 +36,18 @@ const GuestsSelect: FC<GuestsSelectProps> = ({ guests }) => {
   };
 
   return (
-    <div className={cn(
-      styles.guestsSelect,
-      guestsSelectIsOpen && styles.guestsSelectOpen,
-    )}
+    <div
+      className={cn(
+        styles.guestsSelect,
+        guestsSelectIsOpen && styles.guestsSelectOpen,
+      )}
     >
       <div
         onClick={handleToggleGuestsSelect}
         className={styles.guestsSelectHeader}
       >
         <div className={cn(styles.guestsSelectHeaderLeft, styles.modalPoint)}>
-          <TeamOutlined className={styles.modalPointIcon} />
+          <TeamOutlined className={cn(styles.modalPointIcon, classes)} />
           <div className={styles.guestsSelectHeaderInfo}>
             {`${guests.length} guests`}
           </div>
@@ -60,15 +63,14 @@ const GuestsSelect: FC<GuestsSelectProps> = ({ guests }) => {
                   <UserOutlined />
                 </div>
                 <div className={styles.fullNameAndEmail}>
-                  <span>
-                    {`${guest.lastName} ${guest.firstName}`}
-                  </span>
-                  <span>
-                    {guest.email}
-                  </span>
+                  <span>{`${guest.lastName} ${guest.firstName}`}</span>
+                  <span>{guest.email}</span>
                 </div>
               </div>
-              <a className={styles.userDataMailLink} href={`mailto: ${guest.email}`}>
+              <a
+                className={styles.userDataMailLink}
+                href={`mailto: ${guest.email}`}
+              >
                 <MailOutlined />
               </a>
             </div>

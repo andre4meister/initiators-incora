@@ -143,8 +143,8 @@
     -webkit-font-smoothing: antialiased;
     cursor: pointer;
     svg {
-        width: 24px;
-        height: 24px;
+        width: $indent-medium;
+        height: $indent-medium;
         fill: var(--currentText);
     }
 }
@@ -213,18 +213,6 @@
     box-shadow: none;
 }
 
-.fullInfoIcon {
-    margin-right: $indent-medium;
-    svg {
-        width: 40px;
-        height: 40px;
-    }
-}
-.infoBookingBlock {
-    padding: $indent-small $indent-medium;
-    display: flex;
-    align-items: center;
-}
 .soonestBookings {
     height: fit-content;
     max-height: 100%;
@@ -235,24 +223,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-}
-
-.bookingContainer {
-    min-width: 100%;
-    margin-bottom: 5px;
-}
-.firstLine {
-    display: flex;
-    min-width: 100%;
-    justify-content: space-between;
-    margin: 3px;
-    padding: 10px;
-    background-color: $color-yellow;
-    border-radius: $borderRadius;
-    color: white;
-    .createdAt, .id {
-        color: white;
-    }
 }
 
 .reserveRoomButton {

@@ -15,7 +15,7 @@ import BusyRoomOutlined from 'assets/Icons/BusyRoomOutlined';
 import { toggleActiveRoomId } from 'store/dashboard';
 import { CloseOutlined } from '@ant-design/icons';
 import styles from './DashboardRoom.module.scss';
-import FullRoomInfo from './FullRoomInfo';
+import FullRoomInfo from './FullRoomInfo/FullRoomInfo';
 import RoomFeatures from './RoomFeatures';
 
 interface DashboardRoomProps {
