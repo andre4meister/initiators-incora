@@ -1,4 +1,3 @@
-/* eslint-disable object-curly-newline */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -43,7 +42,10 @@ const ResetPasswordPage: FC = () => {
       }
     },
   });
-  const { handleSubmit, handleChange, values, errors, touched } = formik;
+  const {
+    handleSubmit, handleChange, values, errors, touched,
+  } = formik;
+
   return (
     <div className={style.container}>
       {user.loading === 'pending' && <Loader />}

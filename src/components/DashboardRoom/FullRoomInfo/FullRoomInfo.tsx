@@ -2,8 +2,8 @@ import { CalendarOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import GuestsSelect from 'components/UI/GuestsSelect/GuestsSelect';
 import moment from 'moment';
 import { FC } from 'react';
-import { CommonMeetingType } from '../../types/CommonTypes';
-import styles from './DashboardRoom.module.scss';
+import { CommonMeetingType } from '../../../types/CommonTypes';
+import styles from './FullRoomInfo.module.scss';
 
 interface FullRoomInfoProps {
   booking: CommonMeetingType;
@@ -37,7 +37,7 @@ const FullRoomInfo: FC<FullRoomInfoProps> = ({ booking }) => {
         {timeFromTo}
       </div>
       <div>
-        <GuestsSelect guests={booking.guests} />
+        <GuestsSelect guests={booking.guests} classes={styles.dashboardIcon} />
       </div>
     </div>
   );

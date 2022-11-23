@@ -1,0 +1,41 @@
+@import '../../../styles/variables.module.scss';
+
+.bookingContainer {
+    min-width: 100%;
+    margin-bottom: 5px;
+}
+
+.firstLine {
+    display: flex;
+    min-width: 100%;
+    justify-content: space-between;
+    margin: 3px;
+    padding: 10px;
+    background-color: $color-yellow;
+    border-radius: $borderRadius;
+    color: white;
+
+    .createdAt {
+        color: white;
+    }
+}
+
+.infoBookingBlock {
+    padding: $indent-small $indent-medium;
+    display: flex;
+    align-items: center;
+}
+
+.fullInfoIcon {
+    margin-right: $indent-medium;
+
+    svg {
+        width: $indent-medium;
+        height: $indent-medium;
+    }
+}
+
+.dashboardIcon svg {
+    width: $indent-medium;
+    height: $indent-medium;
+}
