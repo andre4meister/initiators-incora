@@ -1,14 +1,23 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
+import AuthService from 'services/authService';
 import { InitialGetAccessValues } from 'types/FormTypes';
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FrownOutlined } from '@ant-design/icons';
-import style from '../Authorization.module.scss';
+import InputError from 'components/InputError/InputError';
+import { useAppDispatch } from 'hooks/reduxHooks';
+import { addNotification } from 'store/alert';
+import style from './ForgotPasswordPage.module.scss';
 
 const ForgotPasswordPage: FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -16,14 +25,26 @@ const ForgotPasswordPage: FC = () => {
     validationSchema: Yup.object({
       email: yupPattern('email'),
     }),
-    onSubmit: (values: InitialGetAccessValues) => {
-      console.log(JSON.stringify(values, null, 2));
+    onSubmit: async (values: InitialGetAccessValues) => {
+      try {
+        const data = await AuthService.resetPassword(values);
+        localStorage.setItem('token', JSON.stringify(data.data.token));
+        navigate('/new-password');
+      } catch (err) {
+        dispatch(
+          addNotification({
+            message: err?.toString() || 'Some error',
+            type: 'error',
+          }),
+        );
+      }
     },
   });
 
   const {
     handleSubmit, handleChange, values, errors, touched,
   } = formik;
+
   return (
     <div className={style.container}>
       <form className={style.form} onSubmit={handleSubmit}>
@@ -44,11 +65,9 @@ const ForgotPasswordPage: FC = () => {
             handleOnChange={handleChange}
             value={values.email}
           />
-          <div className={style.error_container}>
-            {touched.email && errors.email ? (
-              <div className={style.error}>{errors.email}</div>
-            ) : null}
-          </div>
+          {touched.email && errors.email ? (
+            <InputError message={errors.email} />
+          ) : null}
         </div>
         <Button
           type="submit"

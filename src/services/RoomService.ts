@@ -9,6 +9,7 @@ export interface FetchRoomsType {
     rooms: RoomType[];
   }
 }
+
 export interface FetchRoomsProps {
   officeId: number;
   soonestBookingsDays: number;
@@ -21,7 +22,6 @@ export default class RoomService {
     const response = await getRequest<FetchRoomsType>(
       `${process.env.REACT_APP_API_ROOMS}?officeId=${officeId}&soonestBookingsDays=${soonestBookingsDays}`,
     );
-
     if (response.status === 200) {
       return response;
     }

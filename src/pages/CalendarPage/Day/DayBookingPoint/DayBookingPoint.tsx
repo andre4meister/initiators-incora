@@ -11,7 +11,7 @@ import { Booking } from 'types/dataTypes';
 import styles from './DayBookingPoint.module.scss';
 
 interface DayBookingPointProps {
-  booking: Booking
+  booking: Booking;
 }
 
 const DayBookingPoint: FC<DayBookingPointProps> = ({ booking }) => {

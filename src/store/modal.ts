@@ -25,6 +25,7 @@ const modal = createSlice({
     toggleModalType: (state, action: PayloadAction<ModalType>) => {
       state.modalIsOpen = true;
       state.modalType = action.payload;
+      state.modalIsOpen = true;
     },
   },
 });

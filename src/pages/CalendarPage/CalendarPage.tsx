@@ -17,7 +17,7 @@ import Month from './Month/Month';
 import Day from './Day/Day';
 import styles from './CalendarPage.module.scss';
 
-const selectStyles: StylesConfig<{ value: string, label: string }> = {
+const selectStyles: StylesConfig<{ value: string; label: string }> = {
   option: (provided, { isFocused, isSelected }) => ({
     ...provided,
     color: isSelected ? '#ba2d0b' : '#var(--currentText)',
@@ -61,7 +61,7 @@ const selectStyles: StylesConfig<{ value: string, label: string }> = {
 type ViewModeType = 'month' | 'week' | 'day';
 
 interface DeferedData {
-  bookings: Booking[]
+  bookings: Booking[];
 }
 
 const CalendarPage: FC = () => {
@@ -71,10 +71,7 @@ const CalendarPage: FC = () => {
   const [selectedRoom, setSelectedRoom] = useState<string>('allRooms');
   const { bookings } = useLoaderData() as DeferedData;
   const {
-    getMonthByDay,
-    getNextMonth,
-    getPrevMonth,
-    today,
+    getMonthByDay, getNextMonth, getPrevMonth, today,
   } = useCalendar();
 
   const [viewMode, setViewMode] = useState<ViewModeType>('week');
@@ -163,7 +160,9 @@ const CalendarPage: FC = () => {
 };
 
 const getBookings = async (): Promise<Booking[]> => {
-  const { data } = await getRequest<FetchingBooking>(`${process.env.REACT_APP_API_GET_OWN_BOOKINGS}?page=1&limit=100`);
+  const { data } = await getRequest<FetchingBooking>(
+    `${process.env.REACT_APP_API_GET_OWN_BOOKINGS}?page=1&limit=100`,
+  );
 
   return data.data.bookings;
 };

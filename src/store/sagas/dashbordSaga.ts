@@ -3,17 +3,17 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import DashboardService, {
+import RoomService, {
   FetchRoomsProps,
   FetchRoomsType,
-} from 'services/RoomService';
+} from 'services/roomService';
 import { addNotification } from 'store/alert';
 import { setRooms } from 'store/booking';
 
 function* workerGetRooms({ payload }: PayloadAction<FetchRoomsProps>) {
   try {
-    const response: AxiosResponse<AxiosResponse<FetchRoomsType>> = yield call(
-      DashboardService.fetchRooms,
+    const response: AxiosResponse<FetchRoomsType> = yield call(
+      RoomService.fetchRooms,
       {
         officeId: payload.officeId,
         soonestBookingsDays: payload.soonestBookingsDays,

@@ -1,28 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import CheckBox from 'components/UI/CheckBox/CheckBox';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
-import { useEffect } from 'react';
+import useGetRoomWithInterval from 'hooks/useGetRoomsInterval';
 import { toggleIsRecurring } from 'store/booking';
-import { getRooms } from 'store/dashboard';
 import styles from './Booking.module.scss';
 import CommonBookingForm from './CommonBookingForm';
 
 const Booking = () => {
   const dispatch = useAppDispatch();
-  const { isReccuring, rooms } = useAppSelector((state) => state.booking);
-
-  useEffect(() => {
-    dispatch(getRooms({ officeId: 1, soonestBookingsDays: 5 }));
-
-    const fetchIntervalRooms = setInterval(() => {
-      dispatch(getRooms({ officeId: 1, soonestBookingsDays: 5 }));
-    }, 10000);
-
-    return () => {
-      dispatch(toggleIsRecurring(false));
-      clearInterval(fetchIntervalRooms);
-    };
-  }, []);
+  const { isReccuring } = useAppSelector((state) => state.booking);
+  useGetRoomWithInterval();
 
   return (
     <div className={styles.formContainer}>

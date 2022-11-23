@@ -11,7 +11,7 @@ import { toggleModalType } from 'store/modal';
 import styles from './WeekBookingPoint.module.scss';
 
 interface WeekBookingPointProps {
-  booking: Booking
+  booking: Booking;
 }
 
 const WeekBookingPoint: FC<WeekBookingPointProps> = ({ booking }) => {

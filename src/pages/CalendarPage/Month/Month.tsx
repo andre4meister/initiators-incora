@@ -53,7 +53,9 @@ const Month: FC<MonthProps> = ({
     return sortBookingsByRooms().map((booking) => {
       if (day.format('DDD') !== moment(booking.meetingDate).format('DDD')) return;
 
-      const start = moment(`${booking.meetingDate} ${booking.startTime}`).hour();
+      const start = moment(
+        `${booking.meetingDate} ${booking.startTime}`,
+      ).hour();
 
       const handleOpenBookingPoint = () => {
         dispatch(setSelectedBooking(booking));
@@ -67,7 +69,9 @@ const Month: FC<MonthProps> = ({
           onClick={handleOpenBookingPoint}
         >
           <div className={styles.bookingListItemInfo}>
-            <span className={styles.bookingListItemTime}>{start < 12 ? `${start}am` : `${start - 12}pm`}</span>
+            <span className={styles.bookingListItemTime}>
+              {start < 12 ? `${start}am` : `${start - 12}pm`}
+            </span>
             &nbsp;
             <span className={styles.bookingListItemTitle}>{booking.title}</span>
           </div>
@@ -91,8 +95,13 @@ const Month: FC<MonthProps> = ({
             day.isSame(selectedDate, 'day') && styles.selected,
           )}
         >
-          <h2 onClick={() => handleSelectDate(day)} className={styles.dayNum}>{day.date()}</h2>
-          <ul onWheel={(e) => e.stopPropagation()} className={styles.bookingList}>
+          <h2 onClick={() => handleSelectDate(day)} className={styles.dayNum}>
+            {day.date()}
+          </h2>
+          <ul
+            onWheel={(e) => e.stopPropagation()}
+            className={styles.bookingList}
+          >
             {setBookingAtDay(day)}
           </ul>
         </div>

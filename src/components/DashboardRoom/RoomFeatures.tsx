@@ -9,7 +9,7 @@ interface RoomFeaturesProps {
 
 const RoomFeatures: FC<RoomFeaturesProps> = ({ devices }) => (
   <div className={styles.features}>
-    {devices.map((feature) => (<div>{getIcon(feature)}</div>))}
+    {devices.map((feature) => (<div key={feature}>{getIcon(feature)}</div>))}
   </div>
 );
 

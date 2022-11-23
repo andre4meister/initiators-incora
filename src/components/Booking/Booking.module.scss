@@ -52,34 +52,38 @@ form {
   }
 }
 
-.picker,
-input[type='date'],
-input[type='time'] {
-  width: 300px;
-  height: 38px;
-  font-family: $fontFamily;
-  outline: none;
-  border-radius: 5px;
-  color: black;
-  transition: $transition;
-  text-align: start;
-  font-size: $fontSize-small;
+.picker, 
+.titleInput,
+input[type="date"], 
+input[type="time"] {
+    width: 300px;
+    height: 38px;
+    font-family: $fontFamily;
+    outline: none;
+    border-radius: 5px;
+    color: black;
+    transition: $transition;
+    text-align: start;
+    font-size: $fontSize-small;
 }
 
-input[type='date'],
-input[type='time'] {
-  padding: $indent-small;
-  border: 1px solid lightgray;
-  box-shadow: none;
+.titleInput, 
+input[type="date"],
+input[type="time"] {
+    padding: $indent-small;
+    border: 1px solid lightgray;
+    box-shadow: none;
 
   &:hover {
     border: 1px solid gray;
   }
 
-  &:focus {
-    border: 1px solid $color-blue;
-    box-shadow: 0 0 0 1px $color-blue;
-  }
+    &:focus {
+        // border: 1px solid $color-blue;
+        // box-shadow: 0 0 0 1px $color-blue;
+        border: 1px solid #2684ff;
+        box-shadow: 0 0 0 1px#2684ff;
+    }
 }
 .button_submit {
   margin: $indent-small 0;
@@ -87,7 +91,6 @@ input[type='time'] {
   font-size: $fontSize-small;
 }
 .users__value-container {
-  max-height: 60px;
-  overflow-y: scroll;
-  background-color: red !important;
+    max-height: 60px;
+    overflow-y: scroll;
 }
