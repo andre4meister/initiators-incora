@@ -1,17 +1,18 @@
 /* eslint-disable no-param-reassign */
 import moment from 'moment';
+import { v4 as uuidv4 } from 'uuid';
 import {
   FC, WheelEvent, useRef, useEffect, useCallback,
 } from 'react';
 import useCalendar from 'hooks/useCalendar';
-import { OneTimeBooking } from 'types/dataTypes';
+import { Booking } from 'types/dataTypes';
 import WeekBookingPoint from './WeekBookingPoint/WeekBookingPoint';
 
 import styles from './Week.module.scss';
 
 interface WeekProps {
   selectedDate: moment.Moment;
-  bookings: OneTimeBooking[];
+  bookings: Booking[];
 }
 
 const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
@@ -65,7 +66,7 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
   }, []);
 
   function renderPoint(weekDay: number): React.ReactNode {
-    const bookingDuringTheDay: OneTimeBooking[] = [];
+    const bookingDuringTheDay: Booking[] = [];
 
     bookings.forEach((bookingDay) => {
       if (getWeekByDay(selectedDate)[weekDay].format('DDD') === moment(bookingDay.meetingDate).format('DDD')) {
@@ -74,11 +75,12 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
     });
 
     return bookingDuringTheDay.map((booking) => (
-      <WeekBookingPoint key={booking.id} booking={booking} />
+      <WeekBookingPoint key={uuidv4()} booking={booking} />
     ));
   }
 
-  const checkPosition = useCallback((ref: HTMLDivElement | null) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const checkPosition = (ref: HTMLDivElement | null) => {
     const checkedBookings: number[] = [];
     let bookingsOnDay: NodeListOf<HTMLDivElement> | null = null;
 
@@ -112,7 +114,7 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
       if (bookingPoints.length <= 1) return;
 
       bookingPoints.forEach((item, i) => {
-        const oneBookingHeght = 100 / bookings.length;
+        const oneBookingHeght = 100 / bookingPoints.length;
 
         if (i === 0) {
           item.style.top = '3px';
@@ -121,7 +123,7 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
         item.style.height = `calc(${oneBookingHeght}% - 4px)`;
       });
     });
-  }, [bookings.length]);
+  };
 
   useEffect(() => {
     checkPosition(mondayRef.current);

@@ -3,7 +3,7 @@ import moment from 'moment';
 import { FC, Suspense, useState } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 import Select, { SingleValue, StylesConfig } from 'react-select';
-import { OneTimeBooking, FetchingBooking } from 'types/dataTypes';
+import { Booking, FetchingBooking } from 'types/dataTypes';
 import useCalendar from 'hooks/useCalendar';
 import Error from 'components/Error/Error';
 import getRequest from 'utils/getRequest';
@@ -14,7 +14,7 @@ import Month from './Month/Month';
 import Day from './Day/Day';
 import styles from './CalendarPage.module.scss';
 
-const selectStyles: StylesConfig<{ value: string, label: string }> = {
+const selectStyles: StylesConfig<{ value: string; label: string }> = {
   option: (provided, { isFocused, isSelected }) => ({
     ...provided,
     color: isSelected ? '#ba2d0b' : '#001f3f',
@@ -55,17 +55,16 @@ const selectStyles: StylesConfig<{ value: string, label: string }> = {
 type ViewModeType = 'month' | 'week' | 'day';
 
 interface DeferedData {
-  bookings: OneTimeBooking[];
+  bookings: Booking[];
 }
 
 const CalendarPage: FC = () => {
-  const [selectedDate, setSelectedDate] = useState<moment.Moment>(useCalendar().today);
+  const [selectedDate, setSelectedDate] = useState<moment.Moment>(
+    useCalendar().today,
+  );
   const { bookings } = useLoaderData() as DeferedData;
   const {
-    getMonthByDay,
-    getNextMonth,
-    getPrevMonth,
-    today,
+    getMonthByDay, getNextMonth, getPrevMonth, today,
   } = useCalendar();
 
   const [viewMode, setViewMode] = useState<ViewModeType>('week');
@@ -75,14 +74,16 @@ const CalendarPage: FC = () => {
     { value: 'day', label: 'Day' },
   ];
 
-  const handleSetViewMode = (option: SingleValue<{ value: string, label: string }>) => {
+  const handleSetViewMode = (
+    option: SingleValue<{ value: string; label: string }>,
+  ) => {
     if (option !== null) setViewMode(option.value as ViewModeType);
   };
 
   return (
     <Suspense fallback={<Loader />}>
       <Await resolve={bookings} errorElement={<Error />}>
-        {(resolvedBookings: OneTimeBooking[]) => (
+        {(resolvedBookings: Booking[]) => (
           <div className={styles.container}>
             <div className={styles.sidebar}>
               <DatePicker
@@ -125,9 +126,9 @@ const CalendarPage: FC = () => {
   );
 };
 
-const getBookings = async (): Promise<OneTimeBooking[]> => {
+const getBookings = async (): Promise<Booking[]> => {
   const { data } = await getRequest<FetchingBooking>(
-    `${process.env.REACT_APP_API_GET_OWN_BOOKINGS}`,
+    `${process.env.REACT_APP_API_GET_OWN_BOOKINGS}?page=1&limit=100`,
   );
 
   return data.data.bookings;

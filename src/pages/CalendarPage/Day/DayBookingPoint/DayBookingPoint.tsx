@@ -1,15 +1,22 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import cn from 'classnames';
+import { useAppDispatch } from 'hooks/reduxHooks';
 import moment from 'moment';
 import { FC } from 'react';
-import { OneTimeBooking } from 'types/dataTypes';
+import { toggleModalType } from 'store/modal';
+import { setSelectedBooking } from 'store/selectedBooking';
+import { Booking } from 'types/dataTypes';
 
 import styles from './DayBookingPoint.module.scss';
 
 interface DayBookingPointProps {
-  booking: OneTimeBooking;
+  booking: Booking;
 }
 
 const DayBookingPoint: FC<DayBookingPointProps> = ({ booking }) => {
+  const dispatch = useAppDispatch();
+
   const verticalPosition = () => {
     const start = moment(`${booking.meetingDate} ${booking.startTime}`);
     const end = moment(`${booking.meetingDate} ${booking.endTime}`);
@@ -25,12 +32,18 @@ const DayBookingPoint: FC<DayBookingPointProps> = ({ booking }) => {
     return pointStyle;
   };
 
+  const handleOpenBookingPoint = () => {
+    dispatch(setSelectedBooking(booking));
+    dispatch(toggleModalType('BookingInfo'));
+  };
+
   return (
     <div
       style={verticalPosition()}
       className={cn('bookingPoint', styles.bookingPoint)}
+      onClick={handleOpenBookingPoint}
     >
-      <h3 className={styles.roomName}>{booking.room.name}</h3>
+      <h3 className={styles.bookingTitle}>{booking.title}</h3>
       <div className={styles.period}>
         {booking.startTime.substring(0, 5)}
         -

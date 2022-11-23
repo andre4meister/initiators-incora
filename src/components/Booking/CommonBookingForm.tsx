@@ -16,17 +16,20 @@ import Select from 'react-select';
 import { BookingFormValues, SubmitBookingFormValues } from 'types/FormTypes';
 import moment, { now } from 'moment';
 import yupPattern from 'utils/yupPattern';
+import BookingService from 'services/bookingService';
 import InputError from 'components/InputError/InputError';
 import * as Yup from 'yup';
+import { User } from 'types/dataTypes';
 import { validateBookingTime } from 'utils/bookingUtils';
 import { createOneTimeBooking, createRecurringBooking } from 'store/booking';
 import { weekDays } from 'utils/commonConstants';
 import styles from './Booking.module.scss';
 import './Booking.scss';
-
-const users = [
-  { value: 'incora_initiators@meta.ua', label: 'incora_initiators@meta.ua' },
-];
+// temporary, i couldn`t make it in AsyncSelect
+let users = [] as User[];
+BookingService.getAllAccounts().then((res) => {
+  users = res.data;
+});
 
 const CommonBookingForm: FC = () => {
   const {
@@ -242,7 +245,7 @@ const CommonBookingForm: FC = () => {
                 }}
               />
               {errors.daysOfWeek && touched.daysOfWeek && (
-              <InputError message={errors.daysOfWeek} />
+                <InputError message={errors.daysOfWeek} />
               )}
             </div>
           )}
@@ -254,10 +257,12 @@ const CommonBookingForm: FC = () => {
           <div className={styles.inputContainer}>
             <Select
               options={users}
+              getOptionLabel={(guest) => guest.email}
+              getOptionValue={(guest) => guest.email}
               onChange={(guests) => {
                 setFieldValue(
                   'guests',
-                  guests.map((guest) => guest.value),
+                  guests.map((guest) => guest.email),
                 );
               }}
               className={styles.picker}

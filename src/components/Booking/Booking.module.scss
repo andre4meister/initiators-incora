@@ -1,53 +1,55 @@
 @import '../../styles/variables.module.scss';
 
 .formContainer {
-    max-height: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form_item {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-    padding: 10px;
-    border-bottom: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
 
-    p {
-        padding-left: 10px;
-    }
+  p {
+    padding-left: 10px;
+  }
 }
 .content {
-    display: grid;
-    grid-template-columns: 100%;
-    justify-content: center;
-    grid-gap: 10px;
-    position: relative;
+  display: grid;
+  grid-template-columns: 100%;
+  justify-content: center;
+  grid-gap: 10px;
+  position: relative;
 }
 
 .checkbox {
-    display: flex;
-    flex-direction: row;
-    min-width: 100%;
-    justify-content: center;
-    margin: $indent-small;
-    p {
-        padding-left: $indent-xsmall;
-    }
+  display: flex;
+  margin: $indent-small;
+
+  p {
+    padding-left: $indent-xsmall;
+  }
 }
 .icon svg {
-    width: 32px;
-    height: 32px;
-    margin-right: 5px;
-    fill: var(--currentText);
+  width: 32px;
+  height: 32px;
+  margin-right: 5px;
+  fill: var(--currentText);
 }
 .picker input {
+  color: var(--currentText);
+  &::placeholder {
     color: var(--currentText);
-    &::placeholder {
-        color: var(--currentText);
-    }
+  }
 }
 
 .picker, 
@@ -72,9 +74,9 @@ input[type="time"] {
     border: 1px solid lightgray;
     box-shadow: none;
 
-    &:hover {
-        border: 1px solid gray;
-    }
+  &:hover {
+    border: 1px solid gray;
+  }
 
     &:focus {
         // border: 1px solid $color-blue;
@@ -84,9 +86,9 @@ input[type="time"] {
     }
 }
 .button_submit {
-    margin: $indent-small 0;
-    width: 300px;
-    font-size: $fontSize-small;
+  margin: $indent-small 0;
+  width: 300px;
+  font-size: $fontSize-small;
 }
 .users__value-container {
     max-height: 60px;

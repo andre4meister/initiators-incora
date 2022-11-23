@@ -5,6 +5,7 @@ import { AxiosResponse } from 'axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import BookingService, { DeleteBookingResponse } from 'services/bookingService';
 import { addNotification } from 'store/alert';
+import { toggleModal } from 'store/modal';
 import { OneTimeBookingCreateResponse, RecurringBookingCreateResponse } from 'types/dataTypes';
 import { SubmitBookingFormValues, UpdateBookingFormValues } from 'types/FormTypes';
 
@@ -30,6 +31,7 @@ function* workerCreateOneTimeBooking({
 
     if (response.status === 201) {
       yield put(addNotification({ message: 'Booking was created', type: 'success' }));
+      yield put(toggleModal(false));
     }
 
     if (response.status === 400) {
@@ -53,9 +55,8 @@ function* workerCreateRecurringBooking({
     );
 
     if (response.status === 201) {
-      yield put(
-        addNotification({ message: 'Booking was created', type: 'success' }),
-      );
+      yield put(addNotification({ message: 'Booking was created', type: 'success' }));
+      yield put(toggleModal(false));
     }
 
     if (response.status === 400) {
@@ -78,6 +79,7 @@ function* workerUpdateBooking({ payload }: PayloadAction<UpdateBookingType>) {
       payload.bookingData,
     );
     if (response.status === 201) {
+      yield put(toggleModal(false));
       yield put(
         addNotification({ message: 'Booking was updated', type: 'success' }),
       );

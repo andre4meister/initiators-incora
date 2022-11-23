@@ -1,15 +1,16 @@
 /* eslint-disable no-param-reassign */
+import { v4 as uuidv4 } from 'uuid';
 import { FC, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import moment from 'moment';
-import { OneTimeBooking } from 'types/dataTypes';
+import { Booking } from 'types/dataTypes';
 import DayBookingPoint from './DayBookingPoint/DayBookingPoint';
 
 import styles from './Day.module.scss';
 
 interface DayProps {
   selectedDate: moment.Moment;
-  bookings: OneTimeBooking[];
+  bookings: Booking[];
 }
 
 const Day: FC<DayProps> = ({ selectedDate, bookings }) => {
@@ -17,7 +18,7 @@ const Day: FC<DayProps> = ({ selectedDate, bookings }) => {
   const timelineRef = useRef<HTMLDivElement>(null);
 
   function renderBookingsInLine(): JSX.Element[] {
-    const bookingAtDay: OneTimeBooking[] = [];
+    const bookingAtDay: Booking[] = [];
 
     bookings.forEach((booking) => {
       if (selectedDate.isSame(moment(booking.meetingDate), 'day')) {
@@ -26,7 +27,7 @@ const Day: FC<DayProps> = ({ selectedDate, bookings }) => {
     });
 
     return bookingAtDay.map((booking) => (
-      <DayBookingPoint booking={booking} />
+      <DayBookingPoint key={uuidv4()} booking={booking} />
     ));
   }
 

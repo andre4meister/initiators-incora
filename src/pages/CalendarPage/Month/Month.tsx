@@ -2,14 +2,18 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import cn from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
+import { useAppDispatch } from 'hooks/reduxHooks';
 import moment from 'moment';
 import { FC, WheelEvent } from 'react';
-import { OneTimeBooking } from 'types/dataTypes';
+import { toggleModalType } from 'store/modal';
+import { setSelectedBooking } from 'store/selectedBooking';
+import { Booking } from 'types/dataTypes';
 
 import styles from './Month.module.scss';
 
 interface MonthProps {
-  bookings: OneTimeBooking[];
+  bookings: Booking[];
   selectedDate: moment.Moment;
   setSelectedDate: React.Dispatch<React.SetStateAction<moment.Moment>>;
   getPrevMonth: () => moment.Moment[];
@@ -25,6 +29,8 @@ const Month: FC<MonthProps> = ({
   getMonthByDay,
   bookings,
 }) => {
+  const dispatch = useAppDispatch();
+
   const horizontalScrollChangeMonth = (e: WheelEvent<HTMLDivElement>) => {
     if (e.deltaY > 0) {
       getNextMonth();
@@ -35,16 +41,29 @@ const Month: FC<MonthProps> = ({
 
   function setBookingAtDay(day: moment.Moment) {
     return bookings.map((booking) => {
-      if (day.format('DDD') !== moment(booking.meetingDate).format('DDD')) return;
+      if (day.format('DDD') !== moment(booking.meetingDate).format('DDD')) { return; }
 
-      const start = moment(`${booking.meetingDate} ${booking.startTime}`).hour();
+      const start = moment(
+        `${booking.meetingDate} ${booking.startTime}`,
+      ).hour();
+
+      const handleOpenBookingPoint = () => {
+        dispatch(setSelectedBooking(booking));
+        dispatch(toggleModalType('BookingInfo'));
+      };
 
       return (
-        <li key={booking.id} className={styles.bookingListItem}>
+        <li
+          key={uuidv4()}
+          className={styles.bookingListItem}
+          onClick={handleOpenBookingPoint}
+        >
           <div className={styles.bookingListItemInfo}>
-            <span className={styles.bookingListItemTime}>{start < 12 ? `${start}am` : `${start - 12}pm`}</span>
+            <span className={styles.bookingListItemTime}>
+              {start < 12 ? `${start}am` : `${start - 12}pm`}
+            </span>
             &nbsp;
-            <span className={styles.bookingListItemRoom}>{booking.room.name}</span>
+            <span className={styles.bookingListItemTitle}>{booking.title}</span>
           </div>
         </li>
       );
@@ -66,8 +85,13 @@ const Month: FC<MonthProps> = ({
             day.isSame(selectedDate, 'day') && styles.selected,
           )}
         >
-          <h2 onClick={() => handleSelectDate(day)} className={styles.dayNum}>{day.date()}</h2>
-          <ul onWheel={(e) => e.stopPropagation()} className={styles.bookingList}>
+          <h2 onClick={() => handleSelectDate(day)} className={styles.dayNum}>
+            {day.date()}
+          </h2>
+          <ul
+            onWheel={(e) => e.stopPropagation()}
+            className={styles.bookingList}
+          >
             {setBookingAtDay(day)}
           </ul>
         </div>

@@ -3,6 +3,7 @@ import { AxiosResponse } from 'axios';
 import {
   OneTimeBookingCreateResponse,
   RecurringBookingCreateResponse,
+  User,
 } from 'types/dataTypes';
 import { SubmitBookingFormValues, UpdateBookingFormValues } from 'types/FormTypes';
 import deleteRequest from 'utils/deleteRequest';
@@ -84,6 +85,13 @@ export default class BookingService {
     RecurringBookingCreateResponse | OneTimeBookingCreateResponse
     >(`${apiEndPoint}/${id}`, JSON.stringify(bookingData));
 
+    return response;
+  }
+
+  static async getAllAccounts(): Promise<AxiosResponse<User[]>> {
+    const response = getRequest<User[]>(
+      `${process.env.REACT_APP_API_ACCOUNTS}`,
+    );
     return response;
   }
 }

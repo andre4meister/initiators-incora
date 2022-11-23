@@ -10,13 +10,14 @@ export interface User {
 
 export interface FetchingBooking {
   data: {
-    bookings: OneTimeBooking[];
+    bookings: Booking[];
     limit: number;
     page: number;
     totalCount: number;
   };
 }
-
+// Next types are very similar and it`s duplicatingk
+// but it was the fastest way to make new functions work and don`t break previous things
 export interface OneTimeBooking {
   id: number;
   createdAt: string;
@@ -51,6 +52,21 @@ export interface RecurringBookingCreateResponse {
   tttle: string;
   room: Pick<Room, 'id'>;
   owner: Pick<User, 'id'>;
+}
+export interface Booking {
+  title: string;
+  daysOfWeek: number[];
+  startDate: string;
+  endDate: string;
+  id: number;
+  createdAt: string;
+  isRecurring: boolean;
+  meetingDate: string;
+  startTime: string;
+  endTime: string;
+  room: Omit<Room, 'soonestBookings'>;
+  guests: User[];
+  owner: User;
 }
 
 export interface Room {
