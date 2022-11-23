@@ -6,7 +6,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import RoomService, {
   FetchRoomsProps,
   FetchRoomsType,
-} from 'services/roomService';
+} from 'services/RoomService';
 import { addNotification } from 'store/alert';
 import { setRooms } from 'store/booking';
 
@@ -21,7 +21,7 @@ function* workerGetRooms({ payload }: PayloadAction<FetchRoomsProps>) {
     );
 
     const { data } = response.data;
-    yield put(setRooms(data.data.rooms));
+    yield put(setRooms(data.rooms));
   } catch (err) {
     const result = (err as Error).message;
     yield put(addNotification({ message: result, type: 'error' }));
