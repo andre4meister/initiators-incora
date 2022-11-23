@@ -7,8 +7,9 @@ import getRequest from 'utils/getRequest';
 export interface FetchRoomsType {
   data: {
     rooms: RoomType[];
-  };
+  }
 }
+
 export interface FetchRoomsProps {
   officeId: number;
   soonestBookingsDays: number;

@@ -41,14 +41,11 @@
     color: var(--currentEditionalColor);
   }
 
-  .menuItemHome::before {
-    content: 'Home';
+  .menuItemDashboard::before {
+    content: 'Dashboard';
   }
   .menuItemCalendar::before {
     content: 'Calendar';
-  }
-  .menuItemMap::before {
-    content: 'Map';
   }
 
   @media (any-hover: hover) {

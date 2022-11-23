@@ -2,10 +2,8 @@
 import cn from 'classnames';
 import { FC, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { UserOutlined, SettingOutlined } from '@ant-design/icons';
+import { SettingOutlined, LogoutOutlined, BulbOutlined } from '@ant-design/icons';
 import AuthService from 'services/authService';
-import Toggle from 'components/UI/Toggle/Toggle';
-import Button from 'components/UI/Button/Button';
 import { useAppSelector } from 'hooks/reduxHooks';
 import { useTheme } from '../../hoc/ThemeProvider';
 import styles from './Sidebar.module.scss';
@@ -33,16 +31,16 @@ const Sidebar: FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.user}>
-        <NavLink className={({ isActive }) => cn(styles.settings, isActive && styles.settings_active)} to="settings"><SettingOutlined /></NavLink>
         <div className={styles.avatar}><img alt="user photo" src="https://vjoy.cc/wp-content/uploads/2020/10/0eb3a788b4c27f0fc56931421e810eea.jpg" /></div>
-        <h2 className={styles.name}>{user && `${user.firstName} ${user.lastName}`}</h2>
-      </div>
-
-      <div className={styles.mockPanel}>
-        <div>
-          <Toggle isToggle={toggle} handleOnChange={handleChangeTheme} />
+        <div className={styles.userContrlos}>
+          <NavLink className={({ isActive }) => cn(styles.settings, isActive && styles.settings_active)} to="settings"><SettingOutlined /></NavLink>
+          <LogoutOutlined className={styles.logout} onClick={handleLogout} />
+          <BulbOutlined className={styles.theme} onClick={handleChangeTheme} />
         </div>
-        <Button classes={styles.button} handleOnClick={handleLogout}>Logout</Button>
+        <div className={styles.fullName}>
+          <div className={styles.firstName}>{user && user.firstName}</div>
+          <div className={styles.lastName}>{user && user.lastName}</div>
+        </div>
       </div>
     </div>
   );

@@ -13,12 +13,13 @@ import { Booking } from 'types/dataTypes';
 import styles from './Month.module.scss';
 
 interface MonthProps {
-  bookings: Booking[];
-  selectedDate: moment.Moment;
-  setSelectedDate: React.Dispatch<React.SetStateAction<moment.Moment>>;
-  getPrevMonth: () => moment.Moment[];
-  getNextMonth: () => moment.Moment[];
-  getMonthByDay: () => moment.Moment[];
+  bookings: Booking[]
+  selectedDate: moment.Moment
+  setSelectedDate: React.Dispatch<React.SetStateAction<moment.Moment>>
+  getPrevMonth: () => moment.Moment[]
+  getNextMonth: () => moment.Moment[]
+  getMonthByDay: () => moment.Moment[]
+  selectedRoom: string
 }
 
 const Month: FC<MonthProps> = ({
@@ -28,6 +29,7 @@ const Month: FC<MonthProps> = ({
   getNextMonth,
   getMonthByDay,
   bookings,
+  selectedRoom,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -39,9 +41,17 @@ const Month: FC<MonthProps> = ({
     }
   };
 
+  function sortBookingsByRooms() {
+    return bookings.filter((booking) => {
+      if (selectedRoom === 'allRooms') return booking;
+      if (booking.room.name === selectedRoom) return booking;
+      return false;
+    });
+  }
+
   function setBookingAtDay(day: moment.Moment) {
-    return bookings.map((booking) => {
-      if (day.format('DDD') !== moment(booking.meetingDate).format('DDD')) { return; }
+    return sortBookingsByRooms().map((booking) => {
+      if (day.format('DDD') !== moment(booking.meetingDate).format('DDD')) return;
 
       const start = moment(
         `${booking.meetingDate} ${booking.startTime}`,
