@@ -1,8 +1,13 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { TokenInterface } from 'store/sagas/userSaga';
 import { User } from 'types/dataTypes';
-import { InitialRegistrationFormValues } from 'types/FormTypes';
+import {
+  InitialRegistrationFormValues,
+  ChangePasswordValues,
+  InitialNewPasswordLoginValues,
+  InitialGetAccessValues,
+} from 'types/FormTypes';
 import getRequest from 'utils/getRequest';
 import postRequest from 'utils/postRequest';
 
@@ -39,6 +44,56 @@ export default class AuthService {
       `${process.env.REACT_APP_API_REGISTRATION}`,
       JSON.stringify(values),
     );
+    return response;
+  }
+
+  static async changePassword(values: ChangePasswordValues) {
+    const data = JSON.stringify(values);
+    const token = JSON.parse(localStorage.getItem('token') || '') as string;
+
+    const response = axios.put(
+      `${process.env.REACT_APP_API_CHANGE_PASSWORD}`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    return response;
+  }
+
+  static async resetPassword(values: InitialGetAccessValues) {
+    const data = JSON.stringify(values);
+    const response = axios.put(
+      `${process.env.REACT_APP_API_RESET_PASSWORD}`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+
+    return response;
+  }
+
+  static async loginNewPassword(values: InitialNewPasswordLoginValues) {
+    const data = JSON.stringify(values);
+    const token = JSON.parse(localStorage.getItem('token') || '') as string;
+    const response = axios.put(
+      `${process.env.REACT_APP_API_RESET_PASSWORD_APPROVE}`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
     return response;
   }
 
