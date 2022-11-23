@@ -40,12 +40,12 @@
         .imageContainer {
             transition: $transition;
             filter: grayscale(0.24);
-            transform: scale(1.01);
         }
     }
     .roomFeatures {
-        padding: 0 10px;
+        padding: 0 $indent-small;
         transition: 0.2s ease-in-out;
+        font-size: $fontSize-small;
     }
 }
 
@@ -125,8 +125,8 @@
     margin: 3px;
     cursor: pointer;
     svg {
-            width: 18.2px;
-            height: 18.2px;
+            width: 24px;
+            height: 24px;
             fill: var(--currentText);
         }
 }
@@ -143,15 +143,42 @@
     -webkit-font-smoothing: antialiased;
     cursor: pointer;
     svg {
-        width: 18.2px;
-        height: 18.2px;
+        width: 24px;
+        height: 24px;
         fill: var(--currentText);
+    }
+}
+
+.closeContainer {
+    background-color: var(--currentTheme);
+    position: absolute;
+    right: $indent-small;
+    top: $indent-small;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $indent-small;
+}
+
+.closeIcon {
+    cursor: pointer;
+    svg {
+        padding: 2px;
+        width: 25px;
+        height: 22px;
+        transition: $transition;
+        fill: var(--);
+        &:hover {
+            fill:var(--currentExtraColor);
+        }
     }
 }
 .info {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: $indent-small;
+    right: $indent-small;
 }
 
 .mainInfoContainer {
@@ -187,14 +214,22 @@
 }
 
 .fullInfoIcon {
-    margin: $indent-xsmall;
+    margin-right: $indent-medium;
+    svg {
+        width: 40px;
+        height: 40px;
+    }
 }
-
+.infoBookingBlock {
+    padding: $indent-small $indent-medium;
+    display: flex;
+    align-items: center;
+}
 .soonestBookings {
     height: fit-content;
     max-height: 100%;
     width: 100%;
-    padding: 0 10px;
+    padding: 0 $indent-small;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -221,7 +256,7 @@
 }
 
 .reserveRoomButton {
-    margin: 10px auto;
+    margin: $indent-xsmall auto $indent-small auto;
     min-width: 115px;
     width: 60%;
     max-width: 300px;
@@ -229,8 +264,8 @@
 
 .availableicon {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: $indent-small;
+    left: $indent-small;
     svg {
         width: 24px;
         height: 24px;

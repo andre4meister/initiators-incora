@@ -9,8 +9,8 @@ import DayBookingPoint from './DayBookingPoint/DayBookingPoint';
 import styles from './Day.module.scss';
 
 interface DayProps {
-  selectedDate: moment.Moment
-  bookings: Booking[]
+  selectedDate: moment.Moment;
+  bookings: Booking[];
 }
 
 const Day: FC<DayProps> = ({ selectedDate, bookings }) => {

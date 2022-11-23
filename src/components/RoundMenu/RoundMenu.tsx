@@ -9,7 +9,6 @@ const RoundMenu: FC = () => {
 
   const onClick = () => {
     dispatch(toggleModalType('RoundMenuBooking'));
-    dispatch(toggleModal(true));
   };
 
   return (

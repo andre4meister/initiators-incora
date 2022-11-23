@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react-hooks/exhaustive-deps */
-import cn, { Argument } from 'classnames';
+import cn from 'classnames';
 import React, {
   FC, ReactNode, useCallback, useRef, useEffect, useState,
 } from 'react';
@@ -33,7 +33,7 @@ const Modal: FC<ModalProps> = ({ children, headerText = '', classes }) => {
     setShowModal(false);
     setTimeout(() => {
       dispatch(toggleModal(false));
-    }, 800);
+    }, 500);
   }, [dispatch]);
 
   const onCancel = useCallback(
@@ -88,15 +88,15 @@ const Modal: FC<ModalProps> = ({ children, headerText = '', classes }) => {
         role="none"
       >
         <CSSTransition
-          timeout={800}
+          timeout={500}
           in={showModal}
           onExit={() => setEnterModal(false)}
           onEnter={() => setEnterModal(true)}
           classNames={{
             enterActive:
-              'animate__animated animate__backInRight animate__fast',
+              'animate__animated animate__backInRight animate__faster',
             exitActive:
-              'animate__animated animate__backOutRight animate__fast',
+              'animate__animated animate__backOutRight animate__faster',
           }}
           mountOnEnter
           unmountOnExit
@@ -134,8 +134,8 @@ const GlobalModal = () => {
       );
     case 'RoundMenuBooking':
       return (
-        <Modal headerText="Testing">
-          <TestPage />
+        <Modal headerText="Creating meeting">
+          <Booking />
         </Modal>
       );
     case 'BookingInfo':

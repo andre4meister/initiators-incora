@@ -11,8 +11,8 @@ import WeekBookingPoint from './WeekBookingPoint/WeekBookingPoint';
 import styles from './Week.module.scss';
 
 interface WeekProps {
-  selectedDate: moment.Moment
-  bookings: Booking[]
+  selectedDate: moment.Moment;
+  bookings: Booking[];
 }
 
 const Week: FC<WeekProps> = ({ selectedDate, bookings }) => {
