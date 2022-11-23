@@ -11,16 +11,25 @@ import styles from './Day.module.scss';
 interface DayProps {
   selectedDate: moment.Moment
   bookings: Booking[]
+  selectedRoom: string
 }
 
-const Day: FC<DayProps> = ({ selectedDate, bookings }) => {
+const Day: FC<DayProps> = ({ selectedDate, bookings, selectedRoom }) => {
   const hours = Array.from(Array(24).keys());
   const timelineRef = useRef<HTMLDivElement>(null);
+
+  function sortBookingsByRooms() {
+    return bookings.filter((booking) => {
+      if (selectedRoom === 'allRooms') return booking;
+      if (booking.room.name === selectedRoom) return booking;
+      return false;
+    });
+  }
 
   function renderBookingsInLine(): JSX.Element[] {
     const bookingAtDay: Booking[] = [];
 
-    bookings.forEach((booking) => {
+    sortBookingsByRooms().forEach((booking) => {
       if (selectedDate.isSame(moment(booking.meetingDate), 'day')) {
         bookingAtDay.push(booking);
       }
@@ -75,7 +84,7 @@ const Day: FC<DayProps> = ({ selectedDate, bookings }) => {
 
   useEffect(() => {
     checkPosition();
-  }, [selectedDate, bookings]);
+  }, [selectedDate, bookings, selectedRoom]);
 
   return (
     <div className={styles.container}>

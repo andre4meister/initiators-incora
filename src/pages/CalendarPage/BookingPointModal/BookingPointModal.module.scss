@@ -6,6 +6,8 @@
   gap: $indent-small 0;
   padding: $indent-medium 0;
   overflow-y: auto;
+  background-color: var(--currentTheme);
+  // border-radius: $borderRadius;
 
   .pointModalHeader {
     padding: 0 $indent-medium;

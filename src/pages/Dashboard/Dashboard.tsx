@@ -10,17 +10,21 @@ import { AxiosResponse } from 'axios';
 import styles from './Dashboard.module.scss';
 
 interface DeferedData {
-  rooms: RoomType[];
+  data: {
+    data: {
+      rooms: RoomType[];
+    }
+  }
 }
 
 const Dashboard: FC = () => {
-  const { rooms } = useLoaderData() as DeferedData;
+  const { data } = useLoaderData() as DeferedData;
 
   return (
     <div id="dashboard" className={styles.container}>
       <Suspense fallback={<Loader />}>
-        <Await resolve={rooms} errorElement={<Error />}>
-          {(resolvedRooms: AxiosResponse<AxiosResponse<FetchRoomsType>>) => (
+        <Await resolve={data} errorElement={<Error />}>
+          {(resolvedRooms: DeferedData) => (
             <>
               {resolvedRooms.data.data.rooms.map((room) => (
                 <DashboardRoom room={room} key={room.id} />
@@ -34,7 +38,7 @@ const Dashboard: FC = () => {
 };
 
 export const dashboardLoader = () => defer({
-  rooms: DashboardService.fetchRooms({ officeId: 1, soonestBookingsDays: 5 }),
+  data: DashboardService.fetchRooms({ officeId: 1, soonestBookingsDays: 5 }),
 });
 
 export default Dashboard;

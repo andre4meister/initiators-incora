@@ -5,7 +5,9 @@ import { RoomType } from 'types/CommonTypes';
 import getRequest from 'utils/getRequest';
 
 export interface FetchRoomsType {
-  rooms: RoomType[];
+  data: {
+    rooms: RoomType[];
+  }
 }
 export interface FetchRoomsProps {
   officeId: number;

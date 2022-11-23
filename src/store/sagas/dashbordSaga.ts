@@ -20,8 +20,8 @@ function* workerGetRooms({ payload }: PayloadAction<FetchRoomsProps>) {
       },
     );
 
-    const { rooms } = response.data.data;
-    yield put(setRooms(rooms));
+    const { data } = response.data;
+    yield put(setRooms(data.data.rooms));
   } catch (err) {
     const result = (err as Error).message;
     yield put(addNotification({ message: result, type: 'error' }));
