@@ -11,7 +11,7 @@ import OfficeOutlined from 'assets/Icons/OfficeSVG';
 import Button from 'components/UI/Button/Button';
 import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Select from 'react-select';
 import { BookingFormValues, SubmitBookingFormValues } from 'types/FormTypes';
 import moment, { now } from 'moment';
@@ -26,10 +26,6 @@ import { weekDays } from 'utils/commonConstants';
 import styles from './Booking.module.scss';
 import './Booking.scss';
 // temporary, i couldn`t make it in AsyncSelect
-let users = [] as User[];
-BookingService.getAllAccounts().then((res) => {
-  users = res.data;
-});
 
 const CommonBookingForm: FC = () => {
   const {
@@ -114,6 +110,13 @@ const CommonBookingForm: FC = () => {
     touched.endTime,
     setFieldError,
   ]);
+
+  const [users, setUsers] = useState<User[]>([]);
+  useEffect(() => {
+    BookingService.getAllAccounts().then((res) => {
+      setUsers(res.data);
+    });
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
