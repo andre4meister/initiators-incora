@@ -2,10 +2,17 @@
 @import '../../styles//variables.module.scss';
 
 .container {
-  margin-top: 5%;
+  // margin-top: 10%;
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: absolute;
+  top: 10%;
+  left: 25%;
+}
+
+.container img {
+  max-width: 100%;
 }
 
 .text {
