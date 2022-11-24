@@ -63,16 +63,15 @@ const InviteUser: FC = () => {
             value={formik.values.email}
             handleOnChange={formik.handleChange}
           />
-          <div className={styles.error}>
-            {formik.touched.email && formik.errors.email ? (
-              <InputError message={formik.errors.email} />
-            ) : null}
-          </div>
           <Button type="button" handleOnClick={formik.handleSubmit}>
             Add email
           </Button>
         </div>
-
+        <div className={styles.error}>
+          {formik.touched.email && formik.errors.email ? (
+            <InputError message={formik.errors.email} />
+          ) : null}
+        </div>
         <div className={styles.inviteList}>
           {addedEmails.map((email) => (
             <div key={email} className={styles.inviteListItem}>
