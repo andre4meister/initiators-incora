@@ -1,0 +1,31 @@
+@import '../../../../styles/variables.module.scss';
+
+.timelinePoint {
+  position: absolute;
+  height: calc(100% - 3px);
+  top: 2px;
+  border: 1px solid var(--currentText);
+  background-color: var(--secondTheme);
+  border-radius: $borderRadius;
+
+  overflow: hidden;
+  font-size: $fontSize-xxsmall;
+  padding-left: 4px;
+
+  transition: border $transition;
+  cursor: pointer;
+
+  .bookingTitle {
+    line-height: 100%;
+    font-weight: $fontWeight-bold;
+  }
+
+  .period {
+  }
+}
+
+@media (any-hover: hover) {
+  .timelinePoint:hover {
+    border: 1px solid $color-orange;
+  }
+}

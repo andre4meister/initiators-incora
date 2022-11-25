@@ -34,21 +34,18 @@
   }
 
   .menuItem_active svg {
-    fill: $color-orange;
+    fill: var(--currentEditionalColor);
   }
 
   .menuItem_active:before {
-    color: $color-orange;
+    color: var(--currentEditionalColor);
   }
 
-  .menuItemHome::before {
-    content: 'Home';
+  .menuItemDashboard::before {
+    content: 'Dashboard';
   }
   .menuItemCalendar::before {
     content: 'Calendar';
-  }
-  .menuItemMap::before {
-    content: 'Map';
   }
 
   @media (any-hover: hover) {

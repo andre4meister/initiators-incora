@@ -1,29 +1,33 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { FC, Suspense } from 'react';
 import { Await, defer, useLoaderData } from 'react-router-dom';
 import DashboardRoom from 'components/DashboardRoom/DashboardRoom';
 import Loader from 'components/UI/Loader/Loader';
-import getRequest from 'utils/getRequest';
 import { RoomType } from 'types/CommonTypes';
-import { AxiosPromise } from 'axios';
+import Error from 'components/Error/Error';
+import RoomService from 'services/RoomService';
+import useGetRoomWithInterval from 'hooks/useGetRoomsInterval';
 import styles from './Dashboard.module.scss';
 
 interface DeferedData {
-  rooms: RoomType[];
+  data: {
+    data: {
+      rooms: RoomType[];
+    }
+  }
 }
 
 const Dashboard: FC = () => {
-  const { rooms } = useLoaderData() as DeferedData;
+  const { data } = useLoaderData() as DeferedData;
+  useGetRoomWithInterval();
 
   return (
-    <div
-      id="dashboard"
-      className={styles.container}
-    >
+    <div id="dashboard" className={styles.container}>
       <Suspense fallback={<Loader />}>
-        <Await resolve={rooms}>
-          {(resovedRooms: RoomType[]) => (
+        <Await resolve={data} errorElement={<Error />}>
+          {(resolvedRooms: DeferedData) => (
             <>
-              {resovedRooms.map((room) => (
+              {resolvedRooms.data.data.rooms.map((room) => (
                 <DashboardRoom room={room} key={room.id} />
               ))}
             </>
@@ -34,16 +38,8 @@ const Dashboard: FC = () => {
   );
 };
 
-const getRooms = async () => {
-  const response = await getRequest<AxiosPromise<{ rooms: RoomType[] }>>(
-    'https://initiators-ua.herokuapp.com/rooms?officeId=1&soonestBookingsDays=5',
-  );
-  const body = (await response.data).data.rooms;
-  return body;
-};
-
 export const dashboardLoader = () => defer({
-  rooms: getRooms(),
+  data: RoomService.fetchRooms({ officeId: 1, soonestBookingsDays: 5 }),
 });
 
 export default Dashboard;

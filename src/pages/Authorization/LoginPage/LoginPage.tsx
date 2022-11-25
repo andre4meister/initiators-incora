@@ -10,6 +10,7 @@ import { InitialLoginValues } from 'types/FormTypes';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { FC } from 'react';
 import { loginPending } from 'store/user';
+import InputError from 'components/InputError/InputError';
 import style from '../Authorization.module.scss';
 
 const LoginPage: FC = () => {
@@ -47,11 +48,9 @@ const LoginPage: FC = () => {
               handleOnChange={handleChange}
               value={values.email}
             />
-            <div className={style.error_container}>
-              {touched.email && errors.email ? (
-                <div className={style.error}>{errors.email}</div>
-              ) : null}
-            </div>
+            {touched.email && errors.email ? (
+              <InputError message={errors.email} />
+            ) : null}
           </div>
           <div className={style.form_item}>
             <Input
@@ -62,18 +61,12 @@ const LoginPage: FC = () => {
               handleOnChange={handleChange}
               value={values.password}
             />
-            <div className={style.error_container}>
-              {touched.password && errors.password ? (
-                <div className={style.error}>{errors.password}</div>
-              ) : null}
-            </div>
+            {touched.password && errors.password ? (
+              <InputError message={errors.password} />
+            ) : null}
           </div>
         </div>
-        <Button
-          type="submit"
-          classes={style.button_submit}
-          handleOnClick={handleSubmit}
-        >
+        <Button type="submit" classes={style.button_submit}>
           Submit
         </Button>
         <NavLink className={style.forgot} to="/forgot">

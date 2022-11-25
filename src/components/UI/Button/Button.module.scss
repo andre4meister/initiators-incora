@@ -20,6 +20,6 @@
 
 @media (any-hover: hover) {
   .button:hover {
-    color: $color-orange;
+    color: var(--currentExtraColor);
   }
 }

@@ -40,8 +40,10 @@
     border-radius: $borderRadiusBigger;
 
     .text {
+      color: var(--currentText);
       font-family: $fontFamily;
-      font-size: $fontSize-large;
+      // font-family: 'Oswald', sans-serif;
+      font-size: 40px;
       font-weight: $fontWeight-normal;
       margin-bottom: $indent-large;
     }
@@ -58,6 +60,10 @@
         display: flex;
         align-items: flex-start;
         margin-bottom: $indent-small;
+      }
+
+      input {
+        width: 300px;
       }
     }
 
@@ -84,18 +90,7 @@
     }
 
     .forgot:hover {
-      color: rgb(0, 0, 0);
+      color: var(--currentEditionalColor);
     }
   }
-}
-
-.forgot_page_text {
-  margin-bottom: 7px;
-  text-align: left;
-  width: $size-sidebarWidth;
-  font-size: $fontSize-xxsmall;
-}
-
-.forgot_page_item {
-  margin-bottom: $indent-large;
 }

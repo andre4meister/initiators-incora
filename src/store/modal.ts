@@ -4,7 +4,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export type ModalType =
   | 'BookingFromDashboard'
   | 'RoundMenuBooking'
-  | 'BookingFromCalendar';
+  | 'BookingInfo';
 
 export const initialState = {
   modalIsOpen: false,
@@ -23,7 +23,9 @@ const modal = createSlice({
       state.modalIsLocked = action.payload;
     },
     toggleModalType: (state, action: PayloadAction<ModalType>) => {
+      state.modalIsOpen = true;
       state.modalType = action.payload;
+      state.modalIsOpen = true;
     },
   },
 });

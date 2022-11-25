@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import moment, { now } from 'moment';
 import * as Yup from 'yup';
 
@@ -23,7 +24,7 @@ const yupPattern = (validate: string) => {
     case 'password':
       return Yup.string()
         .required('No password provided.')
-        .min(8, 'Password must contain 8 or more characters.');
+        .min(6, 'Password must contain 6 or more characters.');
     case 'confirmPassword':
       return Yup.string()
         .required('Required')
@@ -33,7 +34,7 @@ const yupPattern = (validate: string) => {
         .required('Required')
         .min(moment(now()).format('YYYY-MM-DD'));
     case 'daysOfWeek':
-      return Yup.number().required('Required').lessThan(8).moreThan(0);
+      return Yup.array().required('Required').min(1, 'Choose at least one day');
     case 'startDate':
       return Yup.date()
         .required('Required')

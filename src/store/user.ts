@@ -1,9 +1,12 @@
-// This rule disabled for changing extraredusers states
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from 'types/dataTypes';
 import { NavigateFunction } from 'react-router-dom';
-import { InitialRegistrationFormValues } from 'types/FormTypes';
+import {
+  ChangePasswordValues,
+  InitialGetAccessValues,
+  InitialRegistrationFormValues,
+} from 'types/FormTypes';
 
 type LoadingType = 'pending' | 'succses' | 'failure' | null;
 
@@ -21,13 +24,21 @@ export type LoginValues = {
   navigate: NavigateFunction | (() => void)
 };
 
+export type NewLoginValues = {
+  values: {
+    email: string;
+    newPassword: string;
+  };
+  navigate: NavigateFunction | (() => void);
+};
+
 export type RegistrationValues = {
   values: InitialRegistrationFormValues
   navigate: NavigateFunction | (() => void)
 };
 
 const initialState: FetchUser = {
-  userData: JSON.parse(localStorage.getItem('userData') || 'null') as User,
+  userData: JSON.parse(localStorage.getItem('user') || 'null') as User,
   loading: null,
   error: '',
 };
@@ -38,6 +49,7 @@ const user = createSlice({
   reducers: {
     loginPending: (state, action) => {
       state.loading = 'pending';
+      state.error = '';
     },
     loginSuccess: (state, action: PayloadAction<User>) => {
       state.userData = action.payload;
@@ -52,7 +64,11 @@ const user = createSlice({
     registration: (state, action) => {
       state.loading = 'pending';
     },
-    getProfile: (_, action) => { },
+    getProfile: (_, action) => {},
+    resetPassword: (_, action: PayloadAction<InitialGetAccessValues>) => {},
+    changePassword: (_, action: PayloadAction<ChangePasswordValues>) => {},
+    loginNewPassword: (_, action: PayloadAction<NewLoginValues>) => {},
+    inviteUsers: (_, action: PayloadAction<string[]>) => {},
   },
 });
 
@@ -62,6 +78,10 @@ export const {
   loginFailure,
   registration,
   getProfile,
+  changePassword,
+  loginNewPassword,
+  resetPassword,
+  inviteUsers,
 } = user.actions;
 
 export default user.reducer;

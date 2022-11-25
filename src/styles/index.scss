@@ -8,6 +8,9 @@
   --currentBoxShadowInset: #{$boxShadowLightInset};
   --currentDashboardBoxShadow: #{$boxShadowDashboardLight};
   --currentDashboardTheme: #{$colorDashboardLight};
+  --currentLoader: #{$loader-light};
+  --currentEditionalColor: #{$color-violet};
+  --currentExtraColor: #{$color-blue};
 }
 
 *,
@@ -29,13 +32,14 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 14px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--currentText);
-  border-radius: 3px;
+  border: 2px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-track {

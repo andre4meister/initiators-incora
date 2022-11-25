@@ -1,0 +1,101 @@
+@import '../../../styles/variables.module.scss';
+
+.container {
+  width: 100%;
+  height: calc(100vh - 20px);
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+
+  background-color: var(--secondTheme);
+  gap: 1px;
+  padding: 1px;
+
+  .day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--currentTheme);
+    overflow: hidden;
+
+    .dayNum {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 24px;
+      height: 24px;
+      user-select: none;
+      cursor: pointer;
+      font-size: $fontSize-xxsmall;
+      border-radius: 50%;
+      transition: $transition;
+    }
+
+    .bookingList {
+      width: 100%;
+      font-size: $fontSize-xxsmall;
+      overflow-y: auto;
+      list-style: none;
+
+      .bookingListItem {
+        width: 100%;
+        border-radius: 6px;
+        margin-bottom: 2px;
+        cursor: pointer;
+        transition: $transition;
+
+        padding-left: 10px;
+
+        .bookingListItemInfo {
+          display: flex;
+          overflow: hidden;
+
+          .bookingListItemTime {
+          }
+          .bookingListItemTitle {
+            font-weight: $fontWeight-bold;
+            white-space: nowrap;
+          }
+        }
+      }
+
+      .bookingListItem:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .bookingList::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    @media (any-hover: hover) {
+      .dayNum:not(.today .dayNum):hover {
+        background-color: var(--secondTheme);
+      }
+
+      .bookingList .bookingListItem:hover {
+        background-color: var(--secondTheme);
+      }
+    }
+  }
+
+  .today.selected {
+    .dayNum {
+      background-color: var(--currentExtraColor);
+    }
+  }
+
+  .today {
+    .dayNum {
+      width: 23px;
+      height: 23px;
+      border: 1px solid var(--currentExtraColor);
+    }
+  }
+
+  .selected {
+    .dayNum {
+      background-color: var(--currentEditionalColor);
+    }
+  }
+}

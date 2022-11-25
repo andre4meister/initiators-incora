@@ -1,56 +1,72 @@
 @import '../../styles/variables.module.scss';
 
 .formContainer {
-    max-height: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form_item {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-    padding: 10px;
-    border-bottom: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
 
-    p {
-        padding-left: 10px;
-    }
+  p {
+    padding-left: 10px;
+  }
 }
 .content {
-    display: grid;
-    grid-template-columns: 100%;
-    justify-content: center;
-    grid-gap: 10px;
-    position: relative;
+  display: grid;
+  grid-template-columns: 100%;
+  justify-content: center;
+  grid-gap: 10px;
+  position: relative;
 }
 
 .checkbox {
-    display: flex;
-    flex-direction: row;
-    min-width: 100%;
-    justify-content: center;
-    margin: $indent-small;
-    p {
-        padding-left: $indent-xsmall;
-    }
+  display: flex;
+  margin: $indent-small;
+
+  p {
+    padding-left: $indent-xsmall;
+    font-size: 20px;
+    font-weight: 560;
+  }
 }
 .icon svg {
-    width: 32px;
-    height: 32px;
-    margin-right: 5px;
-    fill: var(--currentText);
+  width: 32px;
+  height: 32px;
+  margin-right: 5px;
+  fill: var(--currentText);
 }
 .picker input {
+  color: var(--currentText);
+  &::placeholder {
     color: var(--currentText);
-    &::placeholder {
-        color: var(--currentText);
-    }
+  }
 }
-
+.inputContainer {
+  min-height: fit-content;
+}
+.picker {
+  width: 300px;
+  min-height: 38px;
+  height: fit-content;
+  input {
+    color: var(--currentText) !important;
+  }
+}
+.in
 .picker, 
+.titleInput,
 input[type="date"], 
 input[type="time"] {
     width: 300px;
@@ -62,30 +78,49 @@ input[type="time"] {
     transition: $transition;
     text-align: start;
     font-size: $fontSize-small;
+
+   &::-webkit-inner-spin-button,
+   &::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);  
+    width: 25px;
+    height: 25px;    
+  }
 }
 
+.titleInput, 
 input[type="date"],
 input[type="time"] {
-    padding: $indent-small;
-    border: 1px solid lightgray;
-    box-shadow: none;
+    display: block;
+    width: 300px;
+    font-weight: $fontWeight-bold;
+    background-clip: padding-box;
+    color: var(--currentText);
+    outline: none;
+    border: none;
+    background-color: var(--currentTheme);
+    padding: $indent-small $indent-medium;
+    box-shadow: var(--currentBoxShadowInset);
+    border-radius: $borderRadius;
 
-    &:hover {
-        border: 1px solid gray;
-    }
-
-    &:focus {
-        border: 1px solid $color-blue;
-        box-shadow: 0 0 0 1px $color-blue;
+    &::placeholder {
+      font-weight: $fontWeight-bold;
     }
 }
 .button_submit {
-    margin: $indent-small 0;
-    width: 300px;
-    font-size: $fontSize-small;
+  margin: $indent-small 0;
+  width: 300px;
+  font-size: $fontSize-small;
 }
-.users__value-container {
-    max-height: 60px;
-    overflow-y: scroll;
-    background-color: red !important;
+
+.inputTitle {
+  width: 300px !important;
+  input {
+    font-size: large;
+    font-weight: 600;
+    padding: 10px !important; 
+  }
+  input::placeholder {
+    padding: 0 !important;
+    font-size: $fontSize-small;
+  }
 }

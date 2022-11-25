@@ -1,0 +1,117 @@
+@import '../../styles//variables.module.scss';
+
+.container { 
+    position: fixed;
+    bottom: 10px;
+    right: 15px;
+    height: 10px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;    
+    z-index: 51;
+}
+
+.notifications {
+    width: 300px;
+}
+.notification {
+    display: flex;
+    min-width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+    max-height: fit-content;
+    max-width: 280px;
+    margin: $indent-small 0;
+    border-radius: $borderRadius;
+    position: relative;
+}
+
+.messageIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30px;
+    min-height: 30px;
+    margin: 4px;
+    svg {
+        padding: 2px;
+    }
+}
+
+.success {
+    border: 2px solid $successBorderColor;
+    background-color: $successBackgroundColor;
+}
+
+.successIcon {
+    background-color: $successTextColor;
+    border-radius: $borderRadius;
+    
+    svg {
+        background-color: white;
+        border-radius: $circle;
+        fill: $successTextColor;
+    }
+}
+
+.infoIcon {
+    background-color: $infoTextColor;
+    border-radius: $borderRadius;
+
+    svg {
+        background-color: white;
+        border-radius: $circle;
+        fill: $infoTextColor;
+    }
+}
+
+.errorIcon {
+    background-color: $errorTextColor;
+    border-radius: $borderRadius;
+
+    svg {
+        background-color: $errorTextColor;
+        fill: white;
+    }
+}
+
+.info {
+    border: 2px solid $infoBorderColor;
+    background-color: $infoBackgroundColor;
+}
+
+.error {
+    border: 2px solid $errorBorderColor;
+    background-color: $errorBackgroundColor;
+}
+
+.messageText {
+    font-size: $fontSize-xsmall;
+    color: $color-textLight;
+    text-align: center;
+}
+
+.icon {
+    margin: 0 5px;
+    border-radius: $borderRadius;
+}
+
+.closeIcon {
+    cursor: pointer;
+    svg {
+        padding: 3px;
+        width: 20px;
+        height: 20px;
+        fill: $color-textLight;
+    }
+
+    border-radius: 4px;
+    &:hover {
+        background-color: #ffffff;
+        svg {
+            transition: $transition;
+        }
+    }
+}

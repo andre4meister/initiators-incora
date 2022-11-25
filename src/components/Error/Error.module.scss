@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+@import '../../styles//variables.module.scss';
+
+.container {
+  // margin-top: 10%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 10%;
+  left: 25%;
+}
+
+.container img {
+  max-width: 100%;
+}
+
+.text {
+  margin-top: 20px;
+  font-family: 'Silkscreen', cursive;
+  font-size: 60px;
+  letter-spacing: 12px;
+  color: var(--currentText);
+}

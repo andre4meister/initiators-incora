@@ -1,9 +1,9 @@
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 type UseCaledarType = {
   today: moment.Moment,
-  getMonthByDay: (selectedDay: moment.Moment | string) => moment.Moment[]
+  getMonthByDay: (selectedDay?: moment.Moment | string) => moment.Moment[]
   getPrevMonth: () => moment.Moment[],
   getNextMonth: () => moment.Moment[],
   getWeekByDay: (currentDay: moment.Moment | string) => moment.Moment[],
@@ -15,22 +15,25 @@ function useCalendar(): UseCaledarType {
   const [today, setToday] = useState<moment.Moment>(moment());
   const [calendar, setCalendar] = useState<moment.Moment[]>([]);
 
-  const getMonthByDay = (selectedDay: moment.Moment | string): moment.Moment[] => {
-    const newCalendar: moment.Moment[] = [];
-    const startDay = moment(selectedDay).clone().startOf('month').startOf('week');
-    const endDay = startDay.clone().add(41, 'day');
+  const getMonthByDay = useCallback(
+    (selectedDay: moment.Moment | string = today): moment.Moment[] => {
+      const newCalendar: moment.Moment[] = [];
+      const startDay = moment(selectedDay).clone().startOf('month').startOf('week');
+      const endDay = startDay.clone().add(41, 'day');
 
-    while (!startDay.isAfter(endDay)) {
-      newCalendar.push(startDay.clone());
-      startDay.add(1, 'd');
-    }
+      while (!startDay.isAfter(endDay)) {
+        newCalendar.push(startDay.clone());
+        startDay.add(1, 'd');
+      }
 
-    return newCalendar;
-  };
+      return newCalendar;
+    },
+    [today],
+  );
 
   useEffect(() => {
     setCalendar(() => getMonthByDay(today));
-  }, [today]);
+  }, [getMonthByDay, today]);
 
   const getPrevMonth = () => {
     setToday((prev) => prev.clone().subtract(1, 'month'));

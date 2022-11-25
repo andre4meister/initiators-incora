@@ -1,33 +1,179 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable no-param-reassign */
-import { ClockCircleOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+import {
+  ClockCircleOutlined,
+  FormOutlined,
+  UsergroupAddOutlined,
+} from '@ant-design/icons';
 import OfficeOutlined from 'assets/Icons/OfficeSVG';
 import Button from 'components/UI/Button/Button';
 import { useFormik } from 'formik';
-import { useAppSelector } from 'hooks/reduxHooks';
-import { FC, useEffect } from 'react';
-import Select from 'react-select';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
+import React, { FC, useEffect, useState } from 'react';
+import Select, { SingleValue, StylesConfig } from 'react-select';
 import { BookingFormValues, SubmitBookingFormValues } from 'types/FormTypes';
 import moment, { now } from 'moment';
 import yupPattern from 'utils/yupPattern';
+import BookingService from 'services/bookingService';
+import InputError from 'components/InputError/InputError';
 import * as Yup from 'yup';
-import {
-  validateBookingTime,
-} from 'utils/bookingUtils';
-import weekDays from 'utils/commonConstants';
+import { User } from 'types/dataTypes';
+import { RoomType } from 'types/CommonTypes';
+import Input from 'components/UI/Input/Input';
+import { validateBookingTime } from 'utils/bookingUtils';
+import { createOneTimeBooking, createRecurringBooking } from 'store/booking';
+import { weekDays } from 'utils/commonConstants';
 import styles from './Booking.module.scss';
-import './Booking.scss';
 
-const users = [
-  { value: 1, label: 'doter@incorainc.com' },
-  { value: 2, label: 'andrii@incorainc.com' },
-  { value: 3, label: 'max@incorainc.com' },
-  { value: 4, label: 'slavik@incorainc.com' },
-  { value: 5, label: 'roma@incorainc.com' },
-  { value: 6, label: 'bodya@incorainc.com' },
-  { value: 7, label: 'rover@incorainc.com' },
-  { value: 8, label: 'freshman@incorainc.com' },
-];
+const selectRoomStyles: StylesConfig<RoomType> = {
+  option: (provided, { isFocused, isSelected }) => ({
+    ...provided,
+    color: isSelected ? '#ba2d0b' : '#var(--currentText)',
+    fontWeight: '700',
+    backgroundColor: isFocused ? 'grey' : 'transparent',
+  }),
+  control: (provided) => ({
+    ...provided,
+    fontWeight: '700',
+    borderRadius: '10px',
+    boxShadow: 'var(--currentBoxShadowInset)',
+    backgroundColor: 'var(--currentTheme)',
+    border: 'none',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: 'var(--currentText)',
+  }),
+  container: (provided) => ({
+    ...provided,
+    minWidth: '100%',
+  }),
+  indicatorSeparator: () => ({
+    display: 'none',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '12px',
+    backgroundColor: '#ffffff',
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    minWidth: '100%',
+    padding: '0px',
+    borderRadius: '10px',
+    position: 'absolute',
+    backgroundColor: 'var(--secondTheme)',
+  }),
+};
+
+const selectUserStyles: StylesConfig<User> = {
+  option: (provided, { isFocused, isSelected }) => ({
+    ...provided,
+    color: isSelected ? '#ba2d0b' : '#var(--currentText)',
+    fontWeight: '700',
+    backgroundColor: isFocused ? 'grey' : 'transparent',
+  }),
+  control: (provided) => ({
+    ...provided,
+    width: '300px',
+    height: 'fit-content',
+    maxHeight: '300px',
+    position: 'relative',
+    fontWeight: '700',
+    borderRadius: '10px',
+    boxShadow: 'var(--currentBoxShadowInset)',
+    backgroundColor: 'var(--currentTheme)',
+    border: 'none',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: 'var(--currentText)',
+  }),
+  container: (provided) => ({
+    ...provided,
+    minWidth: '100%',
+    position: 'relative',
+  }),
+  indicatorSeparator: () => ({
+    display: 'none',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '12px',
+    backgroundColor: '#ffffff',
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    minWidth: '100%',
+    padding: '0px',
+    borderRadius: '10px',
+    position: 'absolute',
+    backgroundColor: 'var(--secondTheme)',
+  }),
+  multiValueRemove: (provided) => ({
+    ...provided,
+    svg: {
+      fill: '#18191a',
+    },
+  }),
+};
+
+const selecDaysOfWeekStyles: StylesConfig<{ label: string; value: number }> = {
+  input: (provided) => ({
+    ...provided,
+    color: '#var(--currentText)',
+  }),
+  option: (provided, { isFocused, isSelected }) => ({
+    ...provided,
+    color: isSelected ? '#ba2d0b' : '#var(--currentText)',
+    fontWeight: '700',
+    backgroundColor: isFocused ? 'grey' : 'transparent',
+  }),
+  control: (provided) => ({
+    ...provided,
+    width: '300px',
+    height: 'max-content',
+    maxHeight: '300px',
+    position: 'relative',
+    fontWeight: '700',
+    borderRadius: '10px',
+    boxShadow: 'var(--currentBoxShadowInset)',
+    backgroundColor: 'var(--currentTheme)',
+    border: 'none',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: 'var(--currentText)',
+  }),
+  container: (provided) => ({
+    ...provided,
+    minWidth: '100%',
+    position: 'relative',
+  }),
+  indicatorSeparator: () => ({
+    display: 'none',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '12px',
+    backgroundColor: '#ffffff',
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    minWidth: '100%',
+    padding: '0px',
+    borderRadius: '10px',
+    position: 'absolute',
+    backgroundColor: 'var(--secondTheme)',
+  }),
+  multiValueRemove: (provided) => ({
+    ...provided,
+    svg: {
+      fill: '#18191a',
+    },
+  }),
+};
 
 const CommonBookingForm: FC = () => {
   const {
@@ -41,24 +187,30 @@ const CommonBookingForm: FC = () => {
     rooms,
   } = useAppSelector((state) => state.booking);
 
+  const myEmail = useAppSelector((state) => state.user.userData?.email);
+
+  const dispatch = useAppDispatch();
+
   const formik = useFormik({
     initialValues: {
       id: Math.floor(Math.random() * 10001),
+      title: '',
+      guests: [],
       accoundId: 41,
       roomId: chosenRoom,
       startTime: chosenStartTime || moment(now()).format('HH:mm'),
       endTime:
         chosenEndTime || moment(now()).add(30, 'minutes').format('HH:mm'),
-      createdAt: '',
       startDate: chosenStartDate || moment(now()).format('YYYY-MM-DD'),
       endDate:
         chosenEndDate || moment(now()).add(1, 'weeks').format('YYYY-MM-DD'),
       meetingDate: chosenMeetingDate || moment(now()).format('YYYY-MM-DD'),
-      daysOfWeek: [moment(now()).get('weekday')] as number[],
+      daysOfWeek: [] as number[],
     },
     validationSchema: Yup.object({
       startTime: yupPattern('startTime'),
       endTime: yupPattern('endTime'),
+      title: yupPattern('firstName'),
       ...(isReccuring
         ? {
           startDate: yupPattern('startDate'),
@@ -67,17 +219,16 @@ const CommonBookingForm: FC = () => {
         }
         : { meetingDate: yupPattern('meetingDate') }),
     }),
-    onSubmit: (values: BookingFormValues) => {
-      values.createdAt = moment(now()).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+    onSubmit: (values: Omit<BookingFormValues, 'createdAt'>) => {
       const submitValues: SubmitBookingFormValues = { ...values };
       if (isReccuring) {
         delete submitValues.meetingDate;
-        console.log(JSON.stringify(submitValues));
-      } else {
+        dispatch(createRecurringBooking(submitValues));
         delete submitValues.startDate;
+      } else {
         delete submitValues.endDate;
         delete submitValues.daysOfWeek;
-        console.log(JSON.stringify(submitValues));
+        dispatch(createOneTimeBooking(submitValues));
       }
     },
   });
@@ -101,7 +252,6 @@ const CommonBookingForm: FC = () => {
       touched.endTime,
       setFieldError,
     );
-    console.log(errors);
   }, [
     errors,
     values.endTime,
@@ -111,22 +261,50 @@ const CommonBookingForm: FC = () => {
     setFieldError,
   ]);
 
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    BookingService.getAllAccounts().then((res) => {
+      setUsers(res.data.filter((user) => user.email !== myEmail));
+    });
+  }, [myEmail]);
+
+  const handleRoomChange = (value: SingleValue<RoomType>) => {
+    setFieldValue('roomId', value?.id);
+  };
+
   return (
     <form onSubmit={handleSubmit}>
+      <div className={styles.form_item}>
+        <FormOutlined className={styles.icon} />
+        <div className={styles.inputContainer}>
+          <Input
+            placeholder="Title"
+            classes={styles.inputTitle}
+            handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => setFieldValue('title', e.currentTarget.value)}
+            name="title"
+            type="text"
+            value={values.title}
+          />
+          {touched.title && errors.title ? (
+            <InputError message={errors.title} />
+          ) : null}
+        </div>
+      </div>
       <div className={styles.form_item}>
         <OfficeOutlined />
         <div className={styles.content}>
           <Select
             id="roomId"
             value={rooms.find((room) => room.id === values.roomId)}
-            onChange={(value) => {
-              setFieldValue('roomId', value?.id);
-            }}
+            onChange={handleRoomChange}
             options={rooms}
+            isMulti={false}
             getOptionLabel={(room) => room.name}
             getOptionValue={(room) => room.id.toString()}
             className={styles.picker}
             maxMenuHeight={100}
+            styles={selectRoomStyles}
           />
         </div>
       </div>
@@ -135,83 +313,126 @@ const CommonBookingForm: FC = () => {
         <div className={styles.content}>
           {isReccuring ? (
             <>
-              <input
-                type="date"
-                id="startDate"
-                value={values.startDate?.toString()}
-                onChange={handleChange}
-                className={styles.picker}
-              />
-              <input
-                type="date"
-                id="endDate"
-                value={values.endDate?.toString()}
-                onChange={handleChange}
-                className={styles.picker}
-              />
+              <div className={styles.inputContainer}>
+                <input
+                  type="date"
+                  id="startDate"
+                  value={values.startDate?.toString()}
+                  onChange={handleChange}
+                  className={styles.picker}
+                />
+                {touched.startDate && errors.startDate ? (
+                  <InputError message={errors.startDate} />
+                ) : null}
+              </div>
+              <div className={styles.inputContainer}>
+                <input
+                  type="date"
+                  id="endDate"
+                  value={values.endDate?.toString()}
+                  onChange={handleChange}
+                  className={styles.picker}
+                />
+                {touched.endDate && errors.endDate ? (
+                  <InputError message={errors.endDate} />
+                ) : null}
+              </div>
             </>
           ) : null}
           {!isReccuring ? (
-            <input
-              type="date"
-              name="meetingDate"
-              id="meetingDate"
-              value={values.meetingDate.toString()}
-              onChange={handleChange}
-              className={styles.picker}
-            />
+            <div className={styles.inputContainer}>
+              <input
+                type="date"
+                name="meetingDate"
+                id="meetingDate"
+                value={values.meetingDate.toString()}
+                onChange={handleChange}
+                className={styles.picker}
+              />
+              {touched.meetingDate && errors.meetingDate ? (
+                <InputError message={errors.meetingDate} />
+              ) : null}
+            </div>
           ) : null}
-          <input
-            type="time"
-            value={values.startTime.toString()}
-            onChange={(value: React.ChangeEvent<HTMLInputElement>) => {
-              setFieldValue('startTime', value.target.value);
-            }}
-            className={styles.picker}
-            max="22:00"
-            min="08:00"
-          />
-          <input
-            type="time"
-            value={values.endTime.toString()}
-            onChange={(value: React.ChangeEvent<HTMLInputElement>) => {
-              setFieldValue('endTime', value.target.value);
-            }}
-            className={styles.picker}
-            max="22:00"
-            min="08:00"
-          />
-          {isReccuring && (
-            <Select
-              placeholder="Choose days of week"
-              options={weekDays}
-              className={styles.picker}
-              name="daysOfWeek"
-              maxMenuHeight={70}
-              menuPlacement="bottom"
-              classNamePrefix="users"
-              isMulti
-              onChange={(days) => {
-                setFieldValue(
-                  'daysOfWeek',
-                  days.map((day) => day.value),
-                );
+          <div className={styles.inputContainer}>
+            <input
+              type="time"
+              value={values.startTime.toString()}
+              onChange={(value: React.ChangeEvent<HTMLInputElement>) => {
+                setFieldValue('startTime', value.target.value);
               }}
+              className={styles.picker}
+              max="22:00"
+              min="08:00"
             />
+            {errors.startTime && touched.startTime && (
+              <InputError message={errors.startTime} />
+            )}
+          </div>
+          <div className={styles.inputContainer}>
+            <input
+              type="time"
+              value={values.endTime.toString()}
+              onChange={(value: React.ChangeEvent<HTMLInputElement>) => {
+                setFieldValue('endTime', value.target.value);
+              }}
+              className={styles.picker}
+              max="22:00"
+              min="08:00"
+            />
+            {errors.endTime && touched.endTime && (
+              <InputError message={errors.endTime} />
+            )}
+          </div>
+          {isReccuring && (
+            <div className={styles.inputContainer}>
+              <Select
+                placeholder="Choose days of week"
+                options={weekDays}
+                className={styles.picker}
+                styles={selecDaysOfWeekStyles}
+                name="daysOfWeek"
+                menuPlacement="bottom"
+                classNamePrefix="users"
+                isMulti
+                onChange={(days) => {
+                  setFieldValue(
+                    'daysOfWeek',
+                    days.map((day) => day.value),
+                  );
+                }}
+              />
+              {errors.daysOfWeek && touched.daysOfWeek && (
+                <InputError message={errors.daysOfWeek} />
+              )}
+            </div>
           )}
         </div>
       </div>
       <div className={styles.form_item}>
         <UsergroupAddOutlined className={styles.icon} />
         <div className={styles.content}>
-          <Select
-            options={users}
-            className={styles.picker}
-            isMulti
-            maxMenuHeight={70}
-            menuPlacement="bottom"
-            classNamePrefix="users"
-          />
+          <div className={styles.inputContainer}>
+            <Select
+              options={users}
+              getOptionLabel={(guest) => guest.email}
+              getOptionValue={(guest) => guest.email}
+              onChange={(guests) => {
+                setFieldValue(
+                  'guests',
+                  guests.map((guest) => guest.email),
+                );
+              }}
+              className={styles.picker}
+              isMulti
+              styles={selectUserStyles}
+              menuPlacement="bottom"
+              classNamePrefix="users"
+            />
+            {errors.guests && touched.guests && (
+              <InputError message={errors.guests?.toString()} />
+            )}
+          </div>
         </div>
       </div>
       <Button classes={styles.button_submit} handleOnClick={handleSubmit}>
