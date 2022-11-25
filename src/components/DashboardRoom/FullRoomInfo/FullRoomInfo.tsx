@@ -37,7 +37,7 @@ const FullRoomInfo: FC<FullRoomInfoProps> = ({ booking }) => {
         {timeFromTo}
       </div>
       <div>
-        <GuestsSelect guests={booking.guests} classes={styles.dashboardIcon} />
+        <GuestsSelect booking={booking} classes={styles.dashboardIcon} />
       </div>
     </div>
   );

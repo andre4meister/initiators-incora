@@ -90,7 +90,7 @@ const BookingPointModal: FC = () => {
           </div>
         </div>
       </abbr>
-      <GuestsSelect guests={guests} />
+      <GuestsSelect booking={booking} />
     </div>
   );
 };

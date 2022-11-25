@@ -7,6 +7,9 @@
   bottom: 0;
   width: $size-sidebarWidth;
   padding: $indent-small;
+  display: flex;
+  flex-direction: column;
+  gap: $indent-medium;
 
   .user {
     position: relative;
@@ -83,16 +86,86 @@
     }
   }
 
-  .mockPanel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: $indent-medium;
+  .nearestsBookings {
     padding: $indent-small;
-
     box-shadow: var(--currentBoxShadowOutline);
     border-radius: $borderRadius;
-    height: 200px;
+
+    .nearestsBookingsList {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: $indent-small;
+
+      .nearestsBookingsListItem {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        cursor: pointer;
+        font-size: $fontSize-xsmall;
+
+        .itemIcon {
+          margin-right: $indent-small;
+
+          svg {
+            width: 30px;
+            height: 30px;
+          }
+        }
+
+        .itemIconVerySoon svg {
+          fill: $color-orange;
+        }
+
+        .itemIconSoon svg {
+          fill: $color-yellow;
+        }
+
+        .itemIconNotSoon svg {
+          fill: $color-blue;
+        }
+
+        .itemData {
+          width: 100%;
+
+          .title {
+            font-weight: $fontWeight-bold;
+          }
+          .allDate {
+            position: relative;
+            height: 20px;
+
+            .date {
+              position: absolute;
+              left: 0;
+              top: 0;
+              opacity: 1;
+              transition: $transition;
+            }
+            .dateIn {
+              position: absolute;
+              left: 0;
+              top: 0;
+              opacity: 0;
+              transition: $transition;
+            }
+          }
+        }
+      }
+
+      @media (any-hover: hover) {
+        .nearestsBookingsListItem:hover {
+          // border: 1px solid $color-orange;
+          .allDate {
+            .date {
+              opacity: 0;
+            }
+            .dateIn {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
   }
 }
