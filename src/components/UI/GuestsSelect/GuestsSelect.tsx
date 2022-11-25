@@ -1,6 +1,7 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import cn from 'classnames';
 import {
@@ -9,16 +10,17 @@ import {
 import {
   FC, useEffect, useRef, useState,
 } from 'react';
-import { User } from 'types/dataTypes';
+import { Booking } from 'types/dataTypes';
+import { CommonMeetingType } from 'types/CommonTypes';
 
 import styles from './GuestsSelect.module.scss';
 
 interface GuestsSelectProps {
-  guests: User[];
+  booking: Booking | CommonMeetingType;
   classes?: string;
 }
 
-const GuestsSelect: FC<GuestsSelectProps> = ({ guests, classes = '' }) => {
+const GuestsSelect: FC<GuestsSelectProps> = ({ booking, classes = '' }) => {
   const [guestsSelectIsOpen, setGuestsSelectIsOpen] = useState<boolean>(false);
   const guestsSelectListRef = useRef<HTMLDivElement>(null);
 
@@ -40,6 +42,7 @@ const GuestsSelect: FC<GuestsSelectProps> = ({ guests, classes = '' }) => {
       className={cn(
         styles.guestsSelect,
         guestsSelectIsOpen && styles.guestsSelectOpen,
+        booking.guests.length === 0 && styles.noGuests,
       )}
     >
       <div
@@ -49,13 +52,27 @@ const GuestsSelect: FC<GuestsSelectProps> = ({ guests, classes = '' }) => {
         <div className={cn(styles.guestsSelectHeaderLeft, styles.modalPoint)}>
           <TeamOutlined className={cn(styles.modalPointIcon, classes)} />
           <div className={styles.guestsSelectHeaderInfo}>
-            {`${guests.length} guests`}
+            {booking.guests.length ? `${booking.guests.length} guests` : 'No guests'}
           </div>
         </div>
-        <UpOutlined className={styles.guestsSelectHeaderArrow} />
+        <div className={styles.guestsSelectHeaderRight}>
+          {booking.guests.length > 1 && (
+            <a
+              className={styles.userDataMailLink}
+              href={`mailto: ${booking.guests[0].email}
+              ?subject=${booking.title} - ${moment(`${booking.meetingDate} ${booking.startTime}`).format('D MMMM H:mm')}&cc=${[...booking.guests].map((guest) => guest.email).splice(1).join(',')}`}
+            >
+              <MailOutlined
+                onClick={(e) => e.stopPropagation()}
+                className={styles.guestsSelectHeaderMails}
+              />
+            </a>
+          )}
+          {booking.guests.length > 0 && <UpOutlined className={styles.guestsSelectHeaderArrow} />}
+        </div>
       </div>
       <div ref={guestsSelectListRef} className={styles.guestsSelectList}>
-        {guests.map((guest) => (
+        {booking.guests.map((guest) => (
           <div key={uuidv4()} className={styles.guestsSelectListItem}>
             <div key={guest.id} className={styles.userData}>
               <div className={styles.userDataLeft}>
@@ -69,7 +86,7 @@ const GuestsSelect: FC<GuestsSelectProps> = ({ guests, classes = '' }) => {
               </div>
               <a
                 className={styles.userDataMailLink}
-                href={`mailto: ${guest.email}`}
+                href={`mailto: ${guest.email}?subject=${booking.title} - ${moment(`${booking.meetingDate} ${booking.startTime}`).format('D MMMM H:mm')}`}
               >
                 <MailOutlined />
               </a>

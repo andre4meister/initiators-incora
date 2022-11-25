@@ -47,14 +47,13 @@ const selectStyles: StylesConfig<{ value: string; label: string }> = {
   menu: (provided) => ({
     ...provided,
     borderRadius: '12px',
-    backgroundColor: '#ffffff',
   }),
   menuList: (provided) => ({
     ...provided,
     padding: '0px',
     borderRadius: '10px',
-    position: 'absolute',
     backgroundColor: 'var(--secondTheme)',
+    width: '100%',
   }),
 };
 
