@@ -82,7 +82,7 @@ const NearestBooking: FC<NearestBookingProps> = ({ booking }) => {
             {date.format('H:mm')}
           </div>
           <div className={styles.dateIn}>
-            {`in ${date.diff(moment(), 'day') > 1 ? `${date.diff(moment(), 'day')} days` : ''} ${subtract.format('HH:mm')}`}
+            {`in ${date.diff(moment(), 'day') > 0 ? `${date.diff(moment(), 'day')} days` : ''} ${subtract.format('HH:mm')}`}
           </div>
         </div>
       </div>
