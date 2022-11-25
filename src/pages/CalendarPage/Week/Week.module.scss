@@ -12,16 +12,26 @@
   .day {
     position: relative;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
+    cursor: pointer;
 
-    // .weekDayName {
-    // }
+    .dayDecorContainer {
+      width: 50%;
+      border-radius: $borderRadius;
+      transition: $transition;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-    .dayNumOfMonth {
-      font-weight: $fontWeight-bold;
+      // .weekDayName {
+      // }
+
+      .dayNumOfMonth {
+        font-weight: $fontWeight-bold;
+      }
     }
   }
 
@@ -38,6 +48,12 @@
 
   .day:first-child:before {
     display: none;
+  }
+
+  @media (any-hover: hover) {
+    .day:hover .dayDecorContainer {
+      background-color: var(--secondTheme);
+    }
   }
 }
 

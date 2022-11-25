@@ -79,11 +79,11 @@
     }
   }
 
-  .today.selected {
-    .dayNum {
-      background-color: var(--currentExtraColor);
-    }
-  }
+  // .today.selected {
+  //   .dayNum {
+  //     background-color: var(--currentExtraColor);
+  //   }
+  // }
 
   .today {
     .dayNum {
@@ -93,9 +93,9 @@
     }
   }
 
-  .selected {
-    .dayNum {
-      background-color: var(--currentEditionalColor);
-    }
-  }
+  // .selected {
+  //   .dayNum {
+  //     background-color: var(--currentEditionalColor);
+  //   }
+  // }
 }
