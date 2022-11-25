@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { addNotification } from 'store/alert';
 import store from 'store/store';
 import { loginFailure } from 'store/user';
 
@@ -29,6 +30,25 @@ async function postRequest<T>(url: string, data: string): Promise<AxiosResponse<
       }
     },
   );
+  // Don`t work :(
+  // axiosInstance.interceptors.response.use(
+  //   (response) => response,
+  //   (error: AxiosError<{ message: string | string[], statusCode: number}>) => {
+  //     if (error.response?.status === 400) {
+  //       store.dispatch(addNotification({
+  //         message: error.response.data.message.toString(),
+  //         type: 'error',
+  //       }));
+  //     } else {
+  //       store.dispatch(
+  //         addNotification({
+  //           message: error.response ? error.response.data.message.toString() : 'SIFIIIDF',
+  //           type: 'error',
+  //         }),
+  //       );
+  //     }
+  //   },
+  // );
 
   const response = await axiosInstance.post<T>(url, data);
   return response;

@@ -46,6 +46,10 @@
         padding: 0 $indent-small;
         transition: 0.2s ease-in-out;
         font-size: $fontSize-small;
+        & > div {
+            font-weight: 900;
+            font-size: $fontSize-small;
+        }
     }
 }
 
