@@ -156,7 +156,7 @@ const Week: FC<WeekProps> = ({
   }, [selectedDate, bookings, checkPosition, selectedRoom]);
 
   const goToDay = (day: moment.Moment) => {
-    setViewMode('day');
+    setViewMode('Day');
     setSelectedDate(day);
   };
 

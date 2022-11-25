@@ -84,7 +84,7 @@ const Month: FC<MonthProps> = ({
   }
 
   const handleSelectDate = (day: moment.Moment) => {
-    setViewMode('day');
+    setViewMode('Day');
     setSelectedDate(day);
   };
 
