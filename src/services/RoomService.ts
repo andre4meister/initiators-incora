@@ -14,6 +14,7 @@ export interface FetchRoomsProps {
   officeId: number;
   soonestBookingsDays: number;
 }
+
 export default class RoomService {
   static async fetchRooms({
     officeId = 1,
