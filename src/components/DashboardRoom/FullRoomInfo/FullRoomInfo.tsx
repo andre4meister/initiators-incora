@@ -19,16 +19,12 @@ const FullRoomInfo: FC<FullRoomInfoProps> = ({ booking }) => {
   return (
     <div className={styles.bookingContainer}>
       <div className={styles.firstLine}>
-        <div>
-          <div className={styles.id}>{booking.title}</div>
-        </div>
+        <div className={styles.id}>{booking.title}</div>
         <div className={styles.createdAt}>{editedCreatedAt}</div>
       </div>
       <div className={styles.infoBookingBlock}>
         <CalendarOutlined className={styles.fullInfoIcon} />
-        {`${moment.weekdays(booking.meetingDate).toString()}, ${moment(
-          booking.meetingDate,
-        )
+        {`${moment(`${booking.meetingDate} ${booking.startTime}`).format('dddd')}, ${moment(booking.meetingDate)
           .startOf('month')
           .format('MMM')} ${moment(booking.meetingDate).get('date')}`}
       </div>

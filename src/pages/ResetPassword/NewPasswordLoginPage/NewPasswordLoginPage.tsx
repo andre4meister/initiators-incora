@@ -6,20 +6,22 @@ import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import Input from 'components/UI/Input/Input';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/UI/Button/Button';
-import { loginPending } from 'store/user';
-import {
-  InitialNewPasswordLoginValues,
-  InitialLoginValues,
-} from 'types/FormTypes';
+import { loginNewPassword } from 'store/user';
 import Loader from 'components/UI/Loader/Loader';
 import { FC } from 'react';
 import style from 'pages/Authorization/Authorization.module.scss';
-import AuthService from 'services/authService';
+import InputError from 'components/InputError/InputError';
+
+export interface NewLoginType {
+  email: string,
+  newPassword: string,
+}
 
 const ResetPasswordPage: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -29,19 +31,12 @@ const ResetPasswordPage: FC = () => {
       email: yupPattern('email'),
       newPassword: yupPattern('password'),
     }),
-    onSubmit: async (newPasswordLoginValues: InitialNewPasswordLoginValues) => {
-      try {
-        await AuthService.loginNewPassword(newPasswordLoginValues);
-        const values: InitialLoginValues = {
-          email: newPasswordLoginValues.email,
-          password: newPasswordLoginValues.newPassword,
-        };
-        dispatch(loginPending({ values, navigate }));
-      } catch (err) {
-        console.log(err);
-      }
+    onSubmit: (values: NewLoginType) => {
+      const data = JSON.stringify(values);
+      dispatch(loginNewPassword({ values, navigate }));
     },
   });
+
   const {
     handleSubmit, handleChange, values, errors, touched,
   } = formik;
@@ -50,7 +45,7 @@ const ResetPasswordPage: FC = () => {
     <div className={style.container}>
       {user.loading === 'pending' && <Loader />}
       <form className={style.form} onSubmit={handleSubmit}>
-        <h1 className={style.text}>Login</h1>
+        <h1 className={style.text}>Reseting</h1>
         <div className={style.form_items}>
           <div className={style.form_item}>
             <Input
@@ -61,11 +56,9 @@ const ResetPasswordPage: FC = () => {
               handleOnChange={handleChange}
               value={values.email}
             />
-            <div className={style.error_container}>
-              {touched.email && errors.email ? (
-                <div className={style.error}>{errors.email}</div>
-              ) : null}
-            </div>
+            {touched.email && errors.email ? (
+              <InputError message={errors.email} />
+            ) : null}
           </div>
           <div className={style.form_item}>
             <Input
@@ -76,11 +69,9 @@ const ResetPasswordPage: FC = () => {
               handleOnChange={handleChange}
               value={values.newPassword}
             />
-            <div className={style.error_container}>
-              {touched.newPassword && errors.newPassword ? (
-                <div className={style.error}>{errors.newPassword}</div>
-              ) : null}
-            </div>
+            {touched.newPassword && errors.newPassword ? (
+              <InputError message={errors.newPassword} />
+            ) : null}
           </div>
         </div>
         <Button type="submit" classes={style.button_submit}>

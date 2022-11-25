@@ -49,11 +49,11 @@ const ForgotPasswordPage: FC = () => {
     <div className={style.container}>
       <form className={style.form} onSubmit={handleSubmit}>
         <h1 className={style.text}>
-          Forgot your password
+          Forgot password
           <FrownOutlined className={style.sadSmileIcon} />
         </h1>
         <h5 className={style.forgot_page_text}>
-          Please enter your working email adress, where we can send you reset
+          Please enter your email adress, we will send you reset
           password information
         </h5>
         <div className={style.forgot_page_item}>

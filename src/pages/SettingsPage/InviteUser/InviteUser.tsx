@@ -9,11 +9,14 @@ import AuthService from 'services/authService';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
 import Loader from 'components/UI/Loader/Loader';
+import { useAppDispatch } from 'hooks/reduxHooks';
+import { inviteUsers } from 'store/user';
 import InputError from 'components/InputError/InputError';
-
 import styles from './InviteUser.module.scss';
 
 const InviteUser: FC = () => {
+  const dispatch = useAppDispatch();
+
   const [inviteStatus, setInviteStatus] = useState<string>('');
   const [addedEmails, setAddedEmails] = useState<string[]>([]);
 
@@ -27,7 +30,7 @@ const InviteUser: FC = () => {
       await AuthService.invite(addedEmails);
       setAddedEmails([]);
       setInviteStatus('success');
-      alert('The invitations were sent');
+      dispatch(inviteUsers(addedEmails));
     } catch (err) {
       setInviteStatus('failure');
     }

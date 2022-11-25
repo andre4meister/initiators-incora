@@ -3,7 +3,6 @@
 /* eslint-disable no-param-reassign */
 import {
   ClockCircleOutlined,
-  ExclamationCircleOutlined,
   FormOutlined,
   UsergroupAddOutlined,
 } from '@ant-design/icons';
@@ -11,8 +10,8 @@ import OfficeOutlined from 'assets/Icons/OfficeSVG';
 import Button from 'components/UI/Button/Button';
 import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
-import { FC, useEffect, useState } from 'react';
-import Select from 'react-select';
+import React, { FC, useEffect, useState } from 'react';
+import Select, { SingleValue, StylesConfig } from 'react-select';
 import { BookingFormValues, SubmitBookingFormValues } from 'types/FormTypes';
 import moment, { now } from 'moment';
 import yupPattern from 'utils/yupPattern';
@@ -20,12 +19,161 @@ import BookingService from 'services/bookingService';
 import InputError from 'components/InputError/InputError';
 import * as Yup from 'yup';
 import { User } from 'types/dataTypes';
+import { RoomType } from 'types/CommonTypes';
+import Input from 'components/UI/Input/Input';
 import { validateBookingTime } from 'utils/bookingUtils';
 import { createOneTimeBooking, createRecurringBooking } from 'store/booking';
 import { weekDays } from 'utils/commonConstants';
 import styles from './Booking.module.scss';
-import './Booking.scss';
-// temporary, i couldn`t make it in AsyncSelect
+
+const selectRoomStyles: StylesConfig<RoomType> = {
+  option: (provided, { isFocused, isSelected }) => ({
+    ...provided,
+    color: isSelected ? '#ba2d0b' : '#var(--currentText)',
+    fontWeight: '700',
+    backgroundColor: isFocused ? 'grey' : 'transparent',
+  }),
+  control: (provided) => ({
+    ...provided,
+    fontWeight: '700',
+    borderRadius: '10px',
+    boxShadow: 'var(--currentBoxShadowInset)',
+    backgroundColor: 'var(--currentTheme)',
+    border: 'none',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: 'var(--currentText)',
+  }),
+  container: (provided) => ({
+    ...provided,
+    minWidth: '100%',
+  }),
+  indicatorSeparator: () => ({
+    display: 'none',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '12px',
+    backgroundColor: '#ffffff',
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    minWidth: '100%',
+    padding: '0px',
+    borderRadius: '10px',
+    position: 'absolute',
+    backgroundColor: 'var(--secondTheme)',
+  }),
+};
+
+const selectUserStyles: StylesConfig<User> = {
+  option: (provided, { isFocused, isSelected }) => ({
+    ...provided,
+    color: isSelected ? '#ba2d0b' : '#var(--currentText)',
+    fontWeight: '700',
+    backgroundColor: isFocused ? 'grey' : 'transparent',
+  }),
+  control: (provided) => ({
+    ...provided,
+    width: '300px',
+    height: 'fit-content',
+    maxHeight: '300px',
+    position: 'relative',
+    fontWeight: '700',
+    borderRadius: '10px',
+    boxShadow: 'var(--currentBoxShadowInset)',
+    backgroundColor: 'var(--currentTheme)',
+    border: 'none',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: 'var(--currentText)',
+  }),
+  container: (provided) => ({
+    ...provided,
+    minWidth: '100%',
+    position: 'relative',
+  }),
+  indicatorSeparator: () => ({
+    display: 'none',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '12px',
+    backgroundColor: '#ffffff',
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    minWidth: '100%',
+    padding: '0px',
+    borderRadius: '10px',
+    position: 'absolute',
+    backgroundColor: 'var(--secondTheme)',
+  }),
+  multiValueRemove: (provided) => ({
+    ...provided,
+    svg: {
+      fill: '#18191a',
+    },
+  }),
+};
+
+const selecDaysOfWeekStyles: StylesConfig<{ label: string; value: number }> = {
+  input: (provided) => ({
+    ...provided,
+    color: '#var(--currentText)',
+  }),
+  option: (provided, { isFocused, isSelected }) => ({
+    ...provided,
+    color: isSelected ? '#ba2d0b' : '#var(--currentText)',
+    fontWeight: '700',
+    backgroundColor: isFocused ? 'grey' : 'transparent',
+  }),
+  control: (provided) => ({
+    ...provided,
+    width: '300px',
+    height: 'max-content',
+    maxHeight: '300px',
+    position: 'relative',
+    fontWeight: '700',
+    borderRadius: '10px',
+    boxShadow: 'var(--currentBoxShadowInset)',
+    backgroundColor: 'var(--currentTheme)',
+    border: 'none',
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: 'var(--currentText)',
+  }),
+  container: (provided) => ({
+    ...provided,
+    minWidth: '100%',
+    position: 'relative',
+  }),
+  indicatorSeparator: () => ({
+    display: 'none',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '12px',
+    backgroundColor: '#ffffff',
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    minWidth: '100%',
+    padding: '0px',
+    borderRadius: '10px',
+    position: 'absolute',
+    backgroundColor: 'var(--secondTheme)',
+  }),
+  multiValueRemove: (provided) => ({
+    ...provided,
+    svg: {
+      fill: '#18191a',
+    },
+  }),
+};
 
 const CommonBookingForm: FC = () => {
   const {
@@ -38,6 +186,8 @@ const CommonBookingForm: FC = () => {
     isReccuring,
     rooms,
   } = useAppSelector((state) => state.booking);
+
+  const myEmail = useAppSelector((state) => state.user.userData?.email);
 
   const dispatch = useAppDispatch();
 
@@ -112,21 +262,26 @@ const CommonBookingForm: FC = () => {
   ]);
 
   const [users, setUsers] = useState<User[]>([]);
+
   useEffect(() => {
     BookingService.getAllAccounts().then((res) => {
-      setUsers(res.data);
+      setUsers(res.data.filter((user) => user.email !== myEmail));
     });
-  }, []);
+  }, [myEmail]);
+
+  const handleRoomChange = (value: SingleValue<RoomType>) => {
+    setFieldValue('roomId', value?.id);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.form_item}>
         <FormOutlined className={styles.icon} />
         <div className={styles.inputContainer}>
-          <input
+          <Input
             placeholder="Title"
-            className={styles.titleInput}
-            onChange={(e) => setFieldValue('title', e.currentTarget.value)}
+            classes={styles.inputTitle}
+            handleOnChange={(e: React.ChangeEvent<HTMLInputElement>) => setFieldValue('title', e.currentTarget.value)}
             name="title"
             type="text"
             value={values.title}
@@ -142,14 +297,14 @@ const CommonBookingForm: FC = () => {
           <Select
             id="roomId"
             value={rooms.find((room) => room.id === values.roomId)}
-            onChange={(value) => {
-              setFieldValue('roomId', value?.id);
-            }}
+            onChange={handleRoomChange}
             options={rooms}
+            isMulti={false}
             getOptionLabel={(room) => room.name}
             getOptionValue={(room) => room.id.toString()}
             className={styles.picker}
             maxMenuHeight={100}
+            styles={selectRoomStyles}
           />
         </div>
       </div>
@@ -235,8 +390,8 @@ const CommonBookingForm: FC = () => {
                 placeholder="Choose days of week"
                 options={weekDays}
                 className={styles.picker}
+                styles={selecDaysOfWeekStyles}
                 name="daysOfWeek"
-                maxMenuHeight={70}
                 menuPlacement="bottom"
                 classNamePrefix="users"
                 isMulti
@@ -270,7 +425,7 @@ const CommonBookingForm: FC = () => {
               }}
               className={styles.picker}
               isMulti
-              maxMenuHeight={70}
+              styles={selectUserStyles}
               menuPlacement="bottom"
               classNamePrefix="users"
             />

@@ -37,6 +37,8 @@ form {
 
   p {
     padding-left: $indent-xsmall;
+    font-size: 20px;
+    font-weight: 560;
   }
 }
 .icon svg {
@@ -51,7 +53,18 @@ form {
     color: var(--currentText);
   }
 }
-
+.inputContainer {
+  min-height: fit-content;
+}
+.picker {
+  width: 300px;
+  min-height: 38px;
+  height: fit-content;
+  input {
+    color: var(--currentText) !important;
+  }
+}
+.in
 .picker, 
 .titleInput,
 input[type="date"], 
@@ -65,24 +78,32 @@ input[type="time"] {
     transition: $transition;
     text-align: start;
     font-size: $fontSize-small;
+
+   &::-webkit-inner-spin-button,
+   &::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);  
+    width: 25px;
+    height: 25px;    
+  }
 }
 
 .titleInput, 
 input[type="date"],
 input[type="time"] {
-    padding: $indent-small;
-    border: 1px solid lightgray;
-    box-shadow: none;
+    display: block;
+    width: 300px;
+    font-weight: $fontWeight-bold;
+    background-clip: padding-box;
+    color: var(--currentText);
+    outline: none;
+    border: none;
+    background-color: var(--currentTheme);
+    padding: $indent-small $indent-medium;
+    box-shadow: var(--currentBoxShadowInset);
+    border-radius: $borderRadius;
 
-  &:hover {
-    border: 1px solid gray;
-  }
-
-    &:focus {
-        // border: 1px solid $color-blue;
-        // box-shadow: 0 0 0 1px $color-blue;
-        border: 1px solid #2684ff;
-        box-shadow: 0 0 0 1px#2684ff;
+    &::placeholder {
+      font-weight: $fontWeight-bold;
     }
 }
 .button_submit {
@@ -90,7 +111,16 @@ input[type="time"] {
   width: 300px;
   font-size: $fontSize-small;
 }
-.users__value-container {
-    max-height: 60px;
-    overflow-y: scroll;
+
+.inputTitle {
+  width: 300px !important;
+  input {
+    font-size: large;
+    font-weight: 600;
+    padding: 10px !important; 
+  }
+  input::placeholder {
+    padding: 0 !important;
+    font-size: $fontSize-small;
+  }
 }

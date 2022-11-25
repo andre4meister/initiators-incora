@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/unbound-method */
 import { PayloadAction } from '@reduxjs/toolkit';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { call, put, takeEvery } from 'redux-saga/effects';
 import BookingService, { DeleteBookingResponse } from 'services/bookingService';
 import { addNotification } from 'store/alert';
@@ -28,20 +28,33 @@ function* workerCreateOneTimeBooking({
       BookingService.createOneTimeBooking,
       payload,
     );
-
     if (response.status === 201) {
       yield put(addNotification({ message: 'Booking was created', type: 'success' }));
       yield put(toggleModal(false));
     }
-
-    if (response.status === 400) {
-      throw new Error(response.statusText);
-    } else if (response.status === 404) {
-      throw new Error(response.statusText);
-    }
   } catch (err) {
-    const result = (err as Error).message;
-    yield put(addNotification({ message: result, type: 'error' }));
+    const result = err as AxiosError<{ statusCode: number; message: string }>;
+
+    if (axios.isAxiosError(err)) {
+      if (result.message) {
+        yield put(
+          addNotification({
+            message: result.message,
+            type: 'error',
+          }),
+        );
+      }
+      if (result.response) {
+        yield put(
+          addNotification({
+            message: result.response.data.message,
+            type: 'error',
+          }),
+        );
+      }
+    } else {
+      yield put(addNotification({ message: 'Error, this time is reserved by other meeting', type: 'error' }));
+    }
   }
 }
 
@@ -53,20 +66,29 @@ function* workerCreateRecurringBooking({
       BookingService.createRecurringBooking,
       payload,
     );
-
     if (response.status === 201) {
       yield put(addNotification({ message: 'Booking was created', type: 'success' }));
       yield put(toggleModal(false));
     }
-
-    if (response.status === 400) {
-      throw new Error(response.statusText);
-    } else if (response.status === 404) {
-      throw new Error(response.statusText);
-    }
   } catch (err) {
-    const result = (err as Error).message;
-    yield put(addNotification({ message: result, type: 'error' }));
+    const result = err as AxiosError<{ statusCode: number; message: string }>;
+    if (axios.isAxiosError(err)) {
+      if (result.response) {
+        yield put(
+          addNotification({
+            message: result.response.data.message,
+            type: 'error',
+          }),
+        );
+      }
+    } else {
+      yield put(
+        addNotification({
+          message: 'Error, this time is reserved by other meeting',
+          type: 'error',
+        }),
+      );
+    }
   }
 }
 

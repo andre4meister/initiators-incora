@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
+import { NewLoginType } from 'pages/ResetPassword/NewPasswordLoginPage/NewPasswordLoginPage';
 import { TokenInterface } from 'store/sagas/userSaga';
 import { User } from 'types/dataTypes';
 import {
   InitialRegistrationFormValues,
   ChangePasswordValues,
-  InitialNewPasswordLoginValues,
   InitialGetAccessValues,
 } from 'types/FormTypes';
 import getRequest from 'utils/getRequest';
 import postRequest from 'utils/postRequest';
+import putRequest from '../utils/putRequest';
 
 export default class AuthService {
   static async login(email: string, password: string): Promise<AxiosResponse> {
@@ -32,7 +33,7 @@ export default class AuthService {
   }
 
   static async invite(emails: string[]) {
-    const response = await postRequest(
+    const response = await postRequest<Omit<User, 'firstName' | 'lastName'>[]>(
       `${process.env.REACT_APP_API_INVITATION}`,
       JSON.stringify(emails),
     );
@@ -51,15 +52,9 @@ export default class AuthService {
     const data = JSON.stringify(values);
     const token = JSON.parse(localStorage.getItem('token') || '') as string;
 
-    const response = axios.put(
+    const response = await putRequest<Pick<TokenInterface, 'token'>>(
       `${process.env.REACT_APP_API_CHANGE_PASSWORD}`,
       data,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      },
     );
 
     return response;
@@ -67,33 +62,21 @@ export default class AuthService {
 
   static async resetPassword(values: InitialGetAccessValues) {
     const data = JSON.stringify(values);
-    const response = axios.put(
+    const response = await putRequest<Pick<TokenInterface, 'token'>>(
       `${process.env.REACT_APP_API_RESET_PASSWORD}`,
       data,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
     );
 
     return response;
   }
 
-  static async loginNewPassword(values: InitialNewPasswordLoginValues) {
+  static async loginNewPassword(values: NewLoginType) {
     const data = JSON.stringify(values);
-    const token = JSON.parse(localStorage.getItem('token') || '') as string;
-    const response = axios.put(
+
+    const response = await putRequest<Pick<TokenInterface, 'token'>>(
       `${process.env.REACT_APP_API_RESET_PASSWORD_APPROVE}`,
       data,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      },
     );
-
     return response;
   }
 
