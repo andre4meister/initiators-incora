@@ -25,7 +25,6 @@ import { validateBookingTime } from 'utils/bookingUtils';
 import { createOneTimeBooking, createRecurringBooking } from 'store/booking';
 import { weekDays } from 'utils/commonConstants';
 import styles from './Booking.module.scss';
-import './Booking.scss';
 
 const selectRoomStyles: StylesConfig<RoomType> = {
   option: (provided, { isFocused, isSelected }) => ({

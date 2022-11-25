@@ -1,34 +1,31 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { FC, useState } from 'react';
 import { CloseCircleOutlined } from '@ant-design/icons';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { InitialGetAccessValues } from 'types/FormTypes';
+import yupPattern from 'utils/yupPattern';
 import AuthService from 'services/authService';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
 import Loader from 'components/UI/Loader/Loader';
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { inviteUsers } from 'store/user';
+import InputError from 'components/InputError/InputError';
+
 import styles from './InviteUser.module.scss';
 
 const InviteUser: FC = () => {
   const dispatch = useAppDispatch();
 
   const [inviteStatus, setInviteStatus] = useState<string>('');
-  const [inviteInput, setInviteInput] = useState<string>('');
   const [addedEmails, setAddedEmails] = useState<string[]>([]);
-
-  const handleSetEmails = () => {
-    if (addedEmails.includes(inviteInput)) return;
-    if (inviteInput === '') return;
-
-    setAddedEmails((prev) => [...prev, inviteInput]);
-    setInviteInput('');
-  };
 
   const handleRemoveEmail = (email: string) => {
     setAddedEmails((prev) => prev.filter((item) => item !== email));
   };
 
-  const handleSendInvute = async () => {
+  const handleSendInvite = async () => {
     setInviteStatus('pending');
     try {
       await AuthService.invite(addedEmails);
@@ -40,6 +37,22 @@ const InviteUser: FC = () => {
     }
   };
 
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+    },
+    validationSchema: Yup.object({
+      email: yupPattern('email'),
+    }),
+    onSubmit: (values: InitialGetAccessValues) => {
+      if (addedEmails.includes(values.email)) return;
+      if (values.email === '') return;
+
+      setAddedEmails((prev) => [...prev, values.email]);
+      formik.resetForm();
+    },
+  });
+
   return (
     <div className={styles.container}>
       {inviteStatus === 'pending' && <Loader />}
@@ -50,17 +63,19 @@ const InviteUser: FC = () => {
             classes={styles.input}
             placeholder="User email"
             type="email"
-            value={inviteInput}
-            handleOnChange={(e) => setInviteInput(e.target.value.trim())}
+            name="email"
+            value={formik.values.email}
+            handleOnChange={formik.handleChange}
           />
-
-          <Button
-            handleOnClick={handleSetEmails}
-          >
+          <Button type="button" handleOnClick={formik.handleSubmit}>
             Add email
           </Button>
         </div>
-
+        <div className={styles.error}>
+          {formik.touched.email && formik.errors.email ? (
+            <InputError message={formik.errors.email} />
+          ) : null}
+        </div>
         <div className={styles.inviteList}>
           {addedEmails.map((email) => (
             <div key={email} className={styles.inviteListItem}>
@@ -70,7 +85,7 @@ const InviteUser: FC = () => {
           ))}
         </div>
 
-        <Button handleOnClick={handleSendInvute}>Send invite</Button>
+        <Button handleOnClick={handleSendInvite}>Send invite</Button>
       </div>
     </div>
   );
