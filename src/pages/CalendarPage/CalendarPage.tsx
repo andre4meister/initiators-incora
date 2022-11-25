@@ -57,7 +57,7 @@ const selectStyles: StylesConfig<{ value: string; label: string }> = {
   }),
 };
 
-type ViewModeType = 'month' | 'week' | 'day';
+export type ViewModeType = 'month' | 'week' | 'day';
 
 interface DeferedData {
   bookings: Booking[];
@@ -114,6 +114,9 @@ const CalendarPage: FC = () => {
                     options={selecOptions}
                     onChange={handleSetViewMode}
                     styles={selectStyles}
+                    value={{
+                      value: viewMode, label: viewMode,
+                    }}
                   />
                   {
                     selectOptionsRooms.length > 0 && (
@@ -137,10 +140,25 @@ const CalendarPage: FC = () => {
                   todayProp={today}
                 />
               </div>
-              {viewMode === 'day' && <Day selectedRoom={selectedRoom} bookings={resolvedBookings} selectedDate={selectedDate} />}
-              {viewMode === 'week' && <Week selectedRoom={selectedRoom} bookings={resolvedBookings} selectedDate={selectedDate} />}
+              {viewMode === 'day' && (
+                <Day
+                  selectedRoom={selectedRoom}
+                  bookings={resolvedBookings}
+                  selectedDate={selectedDate}
+                />
+              )}
+              {viewMode === 'week' && (
+                <Week
+                  setViewMode={setViewMode}
+                  selectedRoom={selectedRoom}
+                  bookings={resolvedBookings}
+                  selectedDate={selectedDate}
+                  setSelectedDate={setSelectedDate}
+                />
+              )}
               {viewMode === 'month' && (
                 <Month
+                  setViewMode={setViewMode}
                   selectedRoom={selectedRoom}
                   selectedDate={selectedDate}
                   setSelectedDate={setSelectedDate}
