@@ -9,6 +9,7 @@ import { FC, WheelEvent } from 'react';
 import { toggleModalType } from 'store/modal';
 import { setSelectedBooking } from 'store/selectedBooking';
 import { Booking } from 'types/dataTypes';
+import { ViewModeType } from '../CalendarPage';
 
 import styles from './Month.module.scss';
 
@@ -20,6 +21,7 @@ interface MonthProps {
   getNextMonth: () => moment.Moment[]
   getMonthByDay: () => moment.Moment[]
   selectedRoom: string
+  setViewMode: React.Dispatch<React.SetStateAction<ViewModeType>>
 }
 
 const Month: FC<MonthProps> = ({
@@ -30,6 +32,7 @@ const Month: FC<MonthProps> = ({
   getMonthByDay,
   bookings,
   selectedRoom,
+  setViewMode,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -81,6 +84,7 @@ const Month: FC<MonthProps> = ({
   }
 
   const handleSelectDate = (day: moment.Moment) => {
+    setViewMode('Day');
     setSelectedDate(day);
   };
 

@@ -57,7 +57,7 @@ const selectStyles: StylesConfig<{ value: string; label: string }> = {
   }),
 };
 
-type ViewModeType = 'month' | 'week' | 'day';
+export type ViewModeType = 'Month' | 'Week' | 'Day';
 
 interface DeferedData {
   bookings: Booking[];
@@ -73,11 +73,11 @@ const CalendarPage: FC = () => {
     getMonthByDay, getNextMonth, getPrevMonth, today,
   } = useCalendar();
 
-  const [viewMode, setViewMode] = useState<ViewModeType>('week');
+  const [viewMode, setViewMode] = useState<ViewModeType>('Week');
   const selecOptions = [
-    { value: 'month', label: 'Month' },
-    { value: 'week', label: 'Week' },
-    { value: 'day', label: 'Day' },
+    { value: 'Month', label: 'Month' },
+    { value: 'Week', label: 'Week' },
+    { value: 'Day', label: 'Day' },
   ];
 
   const getRoomsForSelect = async () => {
@@ -110,10 +110,13 @@ const CalendarPage: FC = () => {
                   <Select
                     isMulti={false}
                     isSearchable={false}
-                    defaultValue={{ value: 'week', label: 'Week' }}
+                    defaultValue={{ value: 'Week', label: 'Week' }}
                     options={selecOptions}
                     onChange={handleSetViewMode}
                     styles={selectStyles}
+                    value={{
+                      value: viewMode, label: viewMode,
+                    }}
                   />
                   {
                     selectOptionsRooms.length > 0 && (
@@ -137,10 +140,25 @@ const CalendarPage: FC = () => {
                   todayProp={today}
                 />
               </div>
-              {viewMode === 'day' && <Day selectedRoom={selectedRoom} bookings={resolvedBookings} selectedDate={selectedDate} />}
-              {viewMode === 'week' && <Week selectedRoom={selectedRoom} bookings={resolvedBookings} selectedDate={selectedDate} />}
-              {viewMode === 'month' && (
+              {viewMode === 'Day' && (
+                <Day
+                  selectedRoom={selectedRoom}
+                  bookings={resolvedBookings}
+                  selectedDate={selectedDate}
+                />
+              )}
+              {viewMode === 'Week' && (
+                <Week
+                  setViewMode={setViewMode}
+                  selectedRoom={selectedRoom}
+                  bookings={resolvedBookings}
+                  selectedDate={selectedDate}
+                  setSelectedDate={setSelectedDate}
+                />
+              )}
+              {viewMode === 'Month' && (
                 <Month
+                  setViewMode={setViewMode}
                   selectedRoom={selectedRoom}
                   selectedDate={selectedDate}
                   setSelectedDate={setSelectedDate}

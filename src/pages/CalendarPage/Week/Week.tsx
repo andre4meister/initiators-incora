@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-param-reassign */
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
@@ -7,6 +9,7 @@ import {
 import useCalendar from 'hooks/useCalendar';
 import { Booking } from 'types/dataTypes';
 import WeekBookingPoint from './WeekBookingPoint/WeekBookingPoint';
+import { ViewModeType } from '../CalendarPage';
 
 import styles from './Week.module.scss';
 
@@ -14,9 +17,17 @@ interface WeekProps {
   selectedDate: moment.Moment
   bookings: Booking[]
   selectedRoom: string
+  setViewMode: React.Dispatch<React.SetStateAction<ViewModeType>>
+  setSelectedDate: React.Dispatch<React.SetStateAction<moment.Moment>>
 }
 
-const Week: FC<WeekProps> = ({ selectedDate, bookings, selectedRoom }) => {
+const Week: FC<WeekProps> = ({
+  selectedDate,
+  bookings,
+  selectedRoom,
+  setViewMode,
+  setSelectedDate,
+}) => {
   const mondayRef = useRef<HTMLDivElement>(null);
   const tuesdayRef = useRef<HTMLDivElement>(null);
   const wednesdayRef = useRef<HTMLDivElement>(null);
@@ -144,6 +155,11 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings, selectedRoom }) => {
     checkPosition(sundayRef.current);
   }, [selectedDate, bookings, checkPosition, selectedRoom]);
 
+  const goToDay = (day: moment.Moment) => {
+    setViewMode('Day');
+    setSelectedDate(day);
+  };
+
   return (
     <>
       <div className={styles.days}>
@@ -151,9 +167,12 @@ const Week: FC<WeekProps> = ({ selectedDate, bookings, selectedRoom }) => {
           <div
             key={day.format('DDD')}
             className={styles.day}
+            onClick={() => goToDay(day)}
           >
-            <div className={styles.weekDayName}>{moment.weekdaysShort(day.day())}</div>
-            <div className={styles.dayNumOfMonth}>{day.date()}</div>
+            <div className={styles.dayDecorContainer}>
+              <div className={styles.weekDayName}>{moment.weekdaysShort(day.day())}</div>
+              <div className={styles.dayNumOfMonth}>{day.date()}</div>
+            </div>
           </div>
         ))}
       </div>
