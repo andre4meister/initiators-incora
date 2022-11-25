@@ -1,16 +1,18 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable object-curly-newline */
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { ChangePasswordValues } from 'types/FormTypes';
 import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
-import AuthService from 'services/authService';
+import { useAppDispatch } from 'hooks/reduxHooks';
+import { changePassword } from 'store/user';
 import style from './ChangePassword.module.scss';
 
 const ChangePassword = () => {
+  const dispatch = useAppDispatch();
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -22,18 +24,16 @@ const ChangePassword = () => {
       oldPassword: yupPattern('password'),
       newPassword: yupPattern('password'),
     }),
-    onSubmit: async (values: ChangePasswordValues) => {
-      try {
-        await AuthService.changePassword(values);
-        formik.resetForm();
-        alert('Password was changed☻');
-      } catch (err) {
-        console.log(err);
-      }
+    onSubmit: (values: ChangePasswordValues) => {
+      dispatch(changePassword(values));
+      formik.resetForm();
     },
   });
 
-  const { handleSubmit, handleChange, values, errors, touched } = formik;
+  const {
+    handleSubmit, handleChange, values, errors, touched,
+  } = formik;
+
   return (
     <form className={style.container} onSubmit={handleSubmit}>
       <div className={style.input}>

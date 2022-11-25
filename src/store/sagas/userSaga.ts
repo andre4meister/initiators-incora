@@ -12,8 +12,11 @@ import {
   LoginValues,
   RegistrationValues,
   getProfile,
+  NewLoginValues,
+  loginPending,
 } from 'store/user';
 import { User } from 'types/dataTypes';
+import { ChangePasswordValues, InitialGetAccessValues } from 'types/FormTypes';
 
 export interface TokenInterface {
   token: string
@@ -39,7 +42,7 @@ function* workerUserLogin({ payload }: PayloadAction<LoginValues>) {
       } else yield put(addNotification({ message: result.message, type: 'error' }));
     }
     yield put(loginFailure(result.message));
-    yield put(addNotification({ message: 'Unaftorize', type: 'error' }));
+    yield put(addNotification({ message: 'Unauthorized', type: 'error' }));
   }
 }
 
@@ -61,7 +64,33 @@ function* workerUserRegistration({ payload }: PayloadAction<RegistrationValues>)
       } else yield put(addNotification({ message: result.message, type: 'error' }));
     }
     yield put(loginFailure(result.message));
-    yield put(addNotification({ message: 'Unaftorize', type: 'error' }));
+    yield put(addNotification({ message: 'Unauthorized', type: 'error' }));
+  }
+}
+
+function* workerInviteUsers({
+  payload,
+}: PayloadAction<string[]>) {
+  try {
+    const { data, statusText }: AxiosResponse<Omit<User, 'firstName' | 'lastName'>[]> = yield call(
+      AuthService.invite,
+      payload,
+    );
+    yield put(addNotification({ message: 'Users were invated', type: 'success' }));
+  } catch (err) {
+    const result = err as AxiosError<{ statusCode: number; message: string }>;
+    if (axios.isAxiosError(err)) {
+      if (result.response) {
+        yield put(
+          addNotification({
+            message: result.response.data.message,
+            type: 'error',
+          }),
+        );
+      } else { yield put(addNotification({ message: result.message, type: 'error' })); }
+    }
+    yield put(loginFailure(result.message));
+    yield put(addNotification({ message: 'Unauthorized', type: 'error' }));
   }
 }
 
@@ -84,7 +113,103 @@ function* workerGetProfile({ payload }: PayloadAction<TokenInterface>) {
       } else yield put(addNotification({ message: result.message, type: 'error' }));
     }
     yield put(loginFailure(result.message));
-    yield put(addNotification({ message: 'Unaftorize', type: 'error' }));
+    yield put(addNotification({ message: 'Unauthorized', type: 'error' }));
+  }
+}
+
+function* workerResetPassword({
+  payload,
+}: PayloadAction<InitialGetAccessValues>) {
+  try {
+    const response: AxiosResponse<User> = yield call(AuthService.resetPassword, payload);
+    if (response.status === 200 || response.status === 201) {
+      yield put(addNotification({ message: response.statusText, type: 'success' }));
+    }
+  } catch (err) {
+    const result = err as AxiosError<{ statusCode: number; message: string }>;
+    if (axios.isAxiosError(err)) {
+      if (result.response) {
+        yield put(
+          addNotification({
+            message: result.response.data.message,
+            type: 'error',
+          }),
+        );
+      }
+    } else {
+      yield put(
+        addNotification({ message: 'Error has occured', type: 'error' }),
+      );
+    }
+  }
+}
+
+function* workerChangePassword({
+  payload,
+}: PayloadAction<ChangePasswordValues>) {
+  try {
+    const response: AxiosResponse<Pick<TokenInterface, 'token'>> = yield call(
+      AuthService.changePassword,
+      payload,
+    );
+    if (response.status === 200 || response.status === 201) {
+      yield put(
+        addNotification({ message: 'Password was succesfully changed', type: 'success' }),
+      );
+    }
+  } catch (err) {
+    const result = err as AxiosError<{ statusCode: number; message: string }>;
+    if (axios.isAxiosError(err)) {
+      if (result.response) {
+        yield put(
+          addNotification({
+            message: result.response.data.message,
+            type: 'error',
+          }),
+        );
+      }
+    } else {
+      yield put(
+        addNotification({ message: 'Error has occured', type: 'error' }),
+      );
+    }
+  }
+}
+
+function* workerLoginNewPassword({
+  payload,
+}: PayloadAction<NewLoginValues>) {
+  try {
+    const response: AxiosResponse<Pick<TokenInterface, 'token'>> = yield call(
+      AuthService.loginNewPassword,
+      payload.values,
+    );
+
+    localStorage.setItem('token', JSON.stringify(response.data.token));
+    yield put(getProfile({ navigate: payload.navigate }));
+
+    if (response.status === 200 || response.status === 201) {
+      yield put(
+        addNotification({ message: response.statusText, type: 'success' }),
+      );
+      payload.navigate('/');
+    }
+  } catch (err) {
+    const result = err as AxiosError<{ statusCode: number; message: string }>;
+    if (axios.isAxiosError(err)) {
+      if (result.response) {
+        yield put(
+          addNotification({
+            message: result.response.data.message,
+            type: 'error',
+          }),
+        );
+      }
+    } else {
+      yield put(
+        addNotification({ message: 'Error has occured', type: 'error' }),
+      );
+    }
   }
 }
 
@@ -92,6 +217,10 @@ function* watchUserSaga() {
   yield takeEvery('user/loginPending', workerUserLogin);
   yield takeEvery('user/registration', workerUserRegistration);
   yield takeEvery('user/getProfile', workerGetProfile);
+  yield takeEvery('user/resetPassword', workerResetPassword);
+  yield takeEvery('user/changePassword', workerChangePassword);
+  yield takeEvery('user/loginNewPassword', workerLoginNewPassword);
+  yield takeEvery('user/inviteUsers', workerInviteUsers);
 }
 
 export default watchUserSaga;
