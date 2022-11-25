@@ -1,5 +1,6 @@
 {
   "name": "asm-incora",
+  "homepage": "https://andre4meister.github.io/initiators-incora/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
