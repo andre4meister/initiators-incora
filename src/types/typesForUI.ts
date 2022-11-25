@@ -10,6 +10,7 @@ export interface InputProps extends Partial<UIPropsType> {
   value: string;
   name?: string;
   type: InputTypes;
+  autofill?: boolean;
   handleOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
   required?: boolean;

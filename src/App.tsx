@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import {
   Route,
-  createBrowserRouter,
+  createHashRouter,
   createRoutesFromElements,
   RouterProvider,
 } from 'react-router-dom';
@@ -17,7 +17,7 @@ import CalendarPage, { calendarLoader } from 'pages/CalendarPage/CalendarPage';
 import NotFoundPage from 'pages/NotFoundPage/NotFoundPage';
 import styles from './styles/App.module.scss';
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<MainLayaut />}>
@@ -45,7 +45,6 @@ const router = createBrowserRouter(
       <Route path="new-password" element={<NewPasswordLoginPage />} />
       <Route path="forgot" element={<ForgotPasswordPage />} />
       <Route path="*" element={<NotFoundPage />} />
-      ,
     </Route>,
   ),
 );

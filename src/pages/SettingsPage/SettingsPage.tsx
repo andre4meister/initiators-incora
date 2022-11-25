@@ -44,6 +44,7 @@ const SettingsPage: FC = () => {
           <Input
             placeholder=""
             classes="input"
+            autofill={false}
             name="firstName"
             type="text"
             handleOnChange={handleChange}
@@ -60,6 +61,7 @@ const SettingsPage: FC = () => {
             placeholder=""
             classes="input"
             name="lastName"
+            autofill={false}
             type="text"
             handleOnChange={handleChange}
             value={values.lastName}

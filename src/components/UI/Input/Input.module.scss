@@ -12,7 +12,7 @@
   background-clip: padding-box;
   outline: none;
   border: none;
-  background-color: var(--currentTheme);
+  background-color: var(--currentTheme) !important;
   padding: $indent-small $indent-medium;
   box-shadow: var(--currentBoxShadowInset);
   border-radius: $borderRadius;

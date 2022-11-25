@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import Input from 'components/UI/Input/Input';
 import { useNavigate } from 'react-router-dom';
 import Button from 'components/UI/Button/Button';
-import { loginNewPassword } from 'store/user';
+import { loginPending } from 'store/user';
 import Loader from 'components/UI/Loader/Loader';
 import { FC } from 'react';
 import style from 'pages/Authorization/Authorization.module.scss';
@@ -14,7 +14,7 @@ import InputError from 'components/InputError/InputError';
 
 export interface NewLoginType {
   email: string,
-  newPassword: string,
+  password: string,
 }
 
 const ResetPasswordPage: FC = () => {
@@ -25,15 +25,14 @@ const ResetPasswordPage: FC = () => {
   const formik = useFormik({
     initialValues: {
       email: '',
-      newPassword: '',
+      password: '',
     },
     validationSchema: Yup.object({
       email: yupPattern('email'),
-      newPassword: yupPattern('password'),
+      password: yupPattern('password'),
     }),
     onSubmit: (values: NewLoginType) => {
-      const data = JSON.stringify(values);
-      dispatch(loginNewPassword({ values, navigate }));
+      dispatch(loginPending({ values, navigate }));
     },
   });
 
@@ -63,14 +62,14 @@ const ResetPasswordPage: FC = () => {
           <div className={style.form_item}>
             <Input
               placeholder="Enter code"
-              name="newPassword"
+              name="password"
               classes="input"
               type="password"
               handleOnChange={handleChange}
-              value={values.newPassword}
+              value={values.password}
             />
-            {touched.newPassword && errors.newPassword ? (
-              <InputError message={errors.newPassword} />
+            {touched.password && errors.password ? (
+              <InputError message={errors.password} />
             ) : null}
           </div>
         </div>

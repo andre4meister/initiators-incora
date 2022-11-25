@@ -176,42 +176,42 @@ function* workerChangePassword({
   }
 }
 
-function* workerLoginNewPassword({
-  payload,
-}: PayloadAction<NewLoginValues>) {
-  try {
-    const response: AxiosResponse<Pick<TokenInterface, 'token'>> = yield call(
-      AuthService.loginNewPassword,
-      payload.values,
-    );
+// function* workerLoginNewPassword({
+//   payload,
+// }: PayloadAction<NewLoginValues>) {
+//   try {
+//     const response: AxiosResponse<Pick<TokenInterface, 'token'>> = yield call(
+//       AuthService.loginNewPassword,
+//       payload.values,
+//     );
 
-    localStorage.setItem('token', JSON.stringify(response.data.token));
-    yield put(getProfile({ navigate: payload.navigate }));
+//     localStorage.setItem('token', JSON.stringify(response.data.token));
+//     yield put(getProfile({ navigate: payload.navigate }));
 
-    if (response.status === 200 || response.status === 201) {
-      yield put(
-        addNotification({ message: response.statusText, type: 'success' }),
-      );
-      payload.navigate('/');
-    }
-  } catch (err) {
-    const result = err as AxiosError<{ statusCode: number; message: string }>;
-    if (axios.isAxiosError(err)) {
-      if (result.response) {
-        yield put(
-          addNotification({
-            message: result.response.data.message,
-            type: 'error',
-          }),
-        );
-      }
-    } else {
-      yield put(
-        addNotification({ message: 'Error has occured', type: 'error' }),
-      );
-    }
-  }
-}
+//     if (response.status === 200 || response.status === 201) {
+//       yield put(
+//         addNotification({ message: response.statusText, type: 'success' }),
+//       );
+//       payload.navigate('/');
+//     }
+//   } catch (err) {
+//     const result = err as AxiosError<{ statusCode: number; message: string }>;
+//     if (axios.isAxiosError(err)) {
+//       if (result.response) {
+//         yield put(
+//           addNotification({
+//             message: result.response.data.message,
+//             type: 'error',
+//           }),
+//         );
+//       }
+//     } else {
+//       yield put(
+//         addNotification({ message: 'Error has occured', type: 'error' }),
+//       );
+//     }
+//   }
+// }
 
 function* watchUserSaga() {
   yield takeEvery('user/loginPending', workerUserLogin);
@@ -219,7 +219,7 @@ function* watchUserSaga() {
   yield takeEvery('user/getProfile', workerGetProfile);
   yield takeEvery('user/resetPassword', workerResetPassword);
   yield takeEvery('user/changePassword', workerChangePassword);
-  yield takeEvery('user/loginNewPassword', workerLoginNewPassword);
+  // yield takeEvery('user/loginNewPassword', workerLoginNewPassword);
   yield takeEvery('user/inviteUsers', workerInviteUsers);
 }
 
