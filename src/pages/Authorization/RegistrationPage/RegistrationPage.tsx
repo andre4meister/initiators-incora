@@ -16,13 +16,14 @@ const RegisterPage: FC = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   const navigate = useNavigate();
+  const params = new URLSearchParams(window.location.search);
 
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
       password: '',
-      email: user.userData?.email || '',
+      email: params.get('mail') || '',
     },
     validationSchema: Yup.object({
       firstName: yupPattern('firstName'),
@@ -115,7 +116,6 @@ const RegisterPage: FC = () => {
         <Button
           type="submit"
           classes={styles.button_submit}
-          // handleOnClick={handleSubmit}
         >
           Submit
         </Button>

@@ -3,6 +3,7 @@
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { ChangePasswordValues } from 'types/FormTypes';
+import InputError from 'components/InputError/InputError';
 import yupPattern from 'utils/yupPattern';
 import Input from 'components/UI/Input/Input';
 import Button from 'components/UI/Button/Button';
@@ -67,9 +68,16 @@ const ChangePassword = () => {
           value={values.newPassword}
         />
       </div>
-      {touched.newPassword && errors.newPassword ? (
-        <div className="error">{errors.newPassword}</div>
-      ) : null}
+      <div className={style.error}>
+        {touched.newPassword && errors.newPassword ? (
+          <InputError message={errors.newPassword} />
+        ) : null}
+      </div>
+      <div className={style.error}>
+        {touched.email && errors.email ? (
+          <InputError message={errors.email} />
+        ) : null}
+      </div>
       <Button type="submit">Submit</Button>
     </form>
   );

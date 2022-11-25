@@ -12,7 +12,6 @@ import Loader from 'components/UI/Loader/Loader';
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { inviteUsers } from 'store/user';
 import InputError from 'components/InputError/InputError';
-
 import styles from './InviteUser.module.scss';
 
 const InviteUser: FC = () => {
