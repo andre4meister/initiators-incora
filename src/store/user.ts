@@ -2,7 +2,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from 'types/dataTypes';
 import { NavigateFunction } from 'react-router-dom';
-import { InitialRegistrationFormValues } from 'types/FormTypes';
+import {
+  ChangePasswordValues,
+  InitialGetAccessValues,
+  InitialRegistrationFormValues,
+} from 'types/FormTypes';
 
 type LoadingType = 'pending' | 'succses' | 'failure' | null;
 
@@ -18,6 +22,14 @@ export type LoginValues = {
     password: string
   }
   navigate: NavigateFunction | (() => void)
+};
+
+export type NewLoginValues = {
+  values: {
+    email: string;
+    newPassword: string;
+  };
+  navigate: NavigateFunction | (() => void);
 };
 
 export type RegistrationValues = {
@@ -52,7 +64,11 @@ const user = createSlice({
     registration: (state, action) => {
       state.loading = 'pending';
     },
-    getProfile: (_, action) => { },
+    getProfile: (_, action) => {},
+    resetPassword: (_, action: PayloadAction<InitialGetAccessValues>) => {},
+    changePassword: (_, action: PayloadAction<ChangePasswordValues>) => {},
+    loginNewPassword: (_, action: PayloadAction<NewLoginValues>) => {},
+    inviteUsers: (_, action: PayloadAction<string[]>) => {},
   },
 });
 
@@ -62,6 +78,10 @@ export const {
   loginFailure,
   registration,
   getProfile,
+  changePassword,
+  loginNewPassword,
+  resetPassword,
+  inviteUsers,
 } = user.actions;
 
 export default user.reducer;

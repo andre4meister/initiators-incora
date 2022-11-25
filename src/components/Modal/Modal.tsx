@@ -137,7 +137,7 @@ const GlobalModal = () => {
       );
     case 'RoundMenuBooking':
       return (
-        <Modal headerText="Creating meeting">
+        <Modal headerText="Creating meeting" classes={styles.modalForm}>
           <Booking />
         </Modal>
       );

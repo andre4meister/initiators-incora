@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import moment, { now } from 'moment';
 import * as Yup from 'yup';
 
@@ -33,7 +34,7 @@ const yupPattern = (validate: string) => {
         .required('Required')
         .min(moment(now()).format('YYYY-MM-DD'));
     case 'daysOfWeek':
-      return Yup.number().required('Required').lessThan(8).moreThan(0);
+      return Yup.array().required('Required').min(1, 'Choose at least one day');
     case 'startDate':
       return Yup.date()
         .required('Required')
