@@ -18,9 +18,6 @@ const Input: FC<InputProps> = ({
   return (
     <div className={cn(styles.inputContainer, classes)}>
       <input
-        // autoComplete="off"
-        // autoCorrect="off"
-        // spellCheck={autofill}
         maxLength={type === 'password' ? 30 : 700}
         name={name}
         placeholder={placeholder}

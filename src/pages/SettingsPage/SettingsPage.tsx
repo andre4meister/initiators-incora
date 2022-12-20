@@ -33,6 +33,7 @@ const SettingsPage: FC = () => {
   });
 
   const { handleSubmit, handleChange, values, errors, touched } = formik;
+
   return (
     <div className={style.container}>
       <h1 className={style.text}>Account settings</h1>

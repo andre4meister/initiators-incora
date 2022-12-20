@@ -10,32 +10,33 @@ import {
 
 type LoadingType = 'pending' | 'succses' | 'failure' | null;
 
-export interface FetchUser {
-  userData: User | null
-  loading: LoadingType
-  error: string
+interface NavigateType {
+  navigate: NavigateFunction | (() => void);
 }
 
-export type LoginValues = {
-  values: {
-    email: string
-    password: string
-  }
-  navigate: NavigateFunction | (() => void)
-};
+export interface FetchUser {
+  userData: User | null;
+  loading: LoadingType;
+  error: string;
+}
 
-export type NewLoginValues = {
+export interface LoginValues extends NavigateType {
+  values: {
+    email: string;
+    password: string;
+  };
+}
+
+export interface NewLoginValues extends NavigateType {
   values: {
     email: string;
     newPassword: string;
   };
-  navigate: NavigateFunction | (() => void);
-};
+}
 
-export type RegistrationValues = {
-  values: InitialRegistrationFormValues
-  navigate: NavigateFunction | (() => void)
-};
+export interface RegistrationValues extends NavigateType {
+  values: InitialRegistrationFormValues;
+}
 
 const initialState: FetchUser = {
   userData: JSON.parse(localStorage.getItem('user') || 'null') as User,

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable no-param-reassign */
 import {
   ClockCircleOutlined,
   FormOutlined,
@@ -11,7 +10,7 @@ import Button from 'components/UI/Button/Button';
 import { useFormik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import React, { FC, useEffect, useState } from 'react';
-import Select, { SingleValue, StylesConfig } from 'react-select';
+import Select, { SingleValue } from 'react-select';
 import { BookingFormValues, SubmitBookingFormValues } from 'types/FormTypes';
 import moment, { now } from 'moment';
 import yupPattern from 'utils/yupPattern';
@@ -25,155 +24,7 @@ import { validateBookingTime } from 'utils/bookingUtils';
 import { createOneTimeBooking, createRecurringBooking } from 'store/booking';
 import { weekDays } from 'utils/commonConstants';
 import styles from './Booking.module.scss';
-
-const selectRoomStyles: StylesConfig<RoomType> = {
-  option: (provided, { isFocused, isSelected }) => ({
-    ...provided,
-    color: isSelected ? '#ba2d0b' : '#var(--currentText)',
-    fontWeight: '700',
-    backgroundColor: isFocused ? 'grey' : 'transparent',
-  }),
-  control: (provided) => ({
-    ...provided,
-    fontWeight: '700',
-    borderRadius: '10px',
-    boxShadow: 'var(--currentBoxShadowInset)',
-    backgroundColor: 'var(--currentTheme)',
-    border: 'none',
-  }),
-  singleValue: (provided) => ({
-    ...provided,
-    color: 'var(--currentText)',
-  }),
-  container: (provided) => ({
-    ...provided,
-    minWidth: '100%',
-  }),
-  indicatorSeparator: () => ({
-    display: 'none',
-  }),
-  menu: (provided) => ({
-    ...provided,
-    borderRadius: '12px',
-    backgroundColor: '#ffffff',
-  }),
-  menuList: (provided) => ({
-    ...provided,
-    minWidth: '100%',
-    padding: '0px',
-    borderRadius: '10px',
-    position: 'absolute',
-    backgroundColor: 'var(--secondTheme)',
-  }),
-};
-
-const selectUserStyles: StylesConfig<User> = {
-  option: (provided, { isFocused, isSelected }) => ({
-    ...provided,
-    color: isSelected ? '#ba2d0b' : '#var(--currentText)',
-    fontWeight: '700',
-    backgroundColor: isFocused ? 'grey' : 'transparent',
-  }),
-  control: (provided) => ({
-    ...provided,
-    width: '300px',
-    height: 'fit-content',
-    maxHeight: '300px',
-    position: 'relative',
-    fontWeight: '700',
-    borderRadius: '10px',
-    boxShadow: 'var(--currentBoxShadowInset)',
-    backgroundColor: 'var(--currentTheme)',
-    border: 'none',
-  }),
-  singleValue: (provided) => ({
-    ...provided,
-    color: 'var(--currentText)',
-  }),
-  container: (provided) => ({
-    ...provided,
-    minWidth: '100%',
-    position: 'relative',
-  }),
-  indicatorSeparator: () => ({
-    display: 'none',
-  }),
-  menu: (provided) => ({
-    ...provided,
-    borderRadius: '12px',
-    backgroundColor: '#ffffff',
-  }),
-  menuList: (provided) => ({
-    ...provided,
-    minWidth: '100%',
-    padding: '0px',
-    borderRadius: '10px',
-    position: 'absolute',
-    backgroundColor: 'var(--secondTheme)',
-  }),
-  multiValueRemove: (provided) => ({
-    ...provided,
-    svg: {
-      fill: '#18191a',
-    },
-  }),
-};
-
-const selecDaysOfWeekStyles: StylesConfig<{ label: string; value: number }> = {
-  input: (provided) => ({
-    ...provided,
-    color: '#var(--currentText)',
-  }),
-  option: (provided, { isFocused, isSelected }) => ({
-    ...provided,
-    color: isSelected ? '#ba2d0b' : '#var(--currentText)',
-    fontWeight: '700',
-    backgroundColor: isFocused ? 'grey' : 'transparent',
-  }),
-  control: (provided) => ({
-    ...provided,
-    width: '300px',
-    height: 'max-content',
-    maxHeight: '300px',
-    position: 'relative',
-    fontWeight: '700',
-    borderRadius: '10px',
-    boxShadow: 'var(--currentBoxShadowInset)',
-    backgroundColor: 'var(--currentTheme)',
-    border: 'none',
-  }),
-  singleValue: (provided) => ({
-    ...provided,
-    color: 'var(--currentText)',
-  }),
-  container: (provided) => ({
-    ...provided,
-    minWidth: '100%',
-    position: 'relative',
-  }),
-  indicatorSeparator: () => ({
-    display: 'none',
-  }),
-  menu: (provided) => ({
-    ...provided,
-    borderRadius: '12px',
-    backgroundColor: '#ffffff',
-  }),
-  menuList: (provided) => ({
-    ...provided,
-    minWidth: '100%',
-    padding: '0px',
-    borderRadius: '10px',
-    position: 'absolute',
-    backgroundColor: 'var(--secondTheme)',
-  }),
-  multiValueRemove: (provided) => ({
-    ...provided,
-    svg: {
-      fill: '#18191a',
-    },
-  }),
-};
+import { selecDaysOfWeekStyles, selectRoomStyles, selectUserStyles } from './formInputStyles';
 
 const CommonBookingForm: FC = () => {
   const {

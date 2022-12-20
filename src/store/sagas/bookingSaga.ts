@@ -15,7 +15,7 @@ export interface UpdateBookingType {
   isRecurring: boolean;
 }
 
-export interface DeleteType {
+export interface DeleteBookingType {
   id: number;
   isRecurring: boolean;
 }
@@ -118,7 +118,7 @@ function* workerUpdateBooking({ payload }: PayloadAction<UpdateBookingType>) {
   }
 }
 
-function* workerDeleteBooking({ payload }: PayloadAction<DeleteType>) {
+function* workerDeleteBooking({ payload }: PayloadAction<DeleteBookingType>) {
   try {
     const response: AxiosResponse<DeleteBookingResponse> = yield call(
       BookingService.deleteBooking,
